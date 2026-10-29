@@ -1,0 +1,6 @@
+# examples/pong.py
+## host balance (tests/host/pong_balance.py, 20 games each): speed 1.5-2.4 px/tick -> user wins 0-3/20; speed >= 3 -> user wins 20/20
+## board: a game with the user paddle following the ball (2.4 px/tick), ticks driven from the REPL
+ticks 6840 points user-MCU [7, 2] state over 'You win!\nTap to play' ball outside top/bottom 0
+on_tick avg 664 us, worst 9101 us
+underruns 0 mem_free 208736
