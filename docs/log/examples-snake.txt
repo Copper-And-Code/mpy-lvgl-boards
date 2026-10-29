@@ -1,0 +1,8 @@
+# examples/snake.py on the board: simulated play (steps driven from the REPL)
+grid 17 x 15 state idle 'Snake\nTap to start'
+start body [(2, 7), (3, 7), (4, 7)] food (9, 8)
+length 43 score 40 period 90 ms, last step 21110 us, objects 43
+mem_free with 43 segments 202912
+after the wall: over 'Game over\nScore 40\nTap to play' Score 40   Best 40
+crash sound done: True buzzer duty 0
+underruns 0

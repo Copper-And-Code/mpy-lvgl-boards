@@ -10,6 +10,7 @@ the board as `main.py` (`mpremote cp examples/<name>.py :main.py`).
 | [animation.py](animation.py) | LVGL animations (no tearing: double buffered) |
 | [backlight.py](backlight.py) | a slider setting the backlight with `rgbpanel.backlight()` |
 | [simon.py](simon.py) | a game: repeat the growing sequence of colours (LVGL timer, buzzer on GPIO1) |
+| [snake.py](snake.py) | a game: snake controlled by tapping on the side to turn to (LVGL objects reused as segments) |
 | [tictactoe.py](tictactoe.py) | a game: you (X) against the microcontroller (O, minimax: it never loses) |
 
 The display is 240x240 for LVGL (the 480x480 panel shows each pixel as 2x2, see the
