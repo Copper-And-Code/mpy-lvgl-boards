@@ -49,7 +49,8 @@ Pixel check vs the unix port still 64/64 tiles identical (`log/phase6-crc-double
   KeyboardInterrupt (Ctrl-C, or the Ctrl-C `mpremote` sends before every command) landing
   inside it is printed and swallowed by the binding, `flush_ready()` is never called, and
   LVGL's next refresh waits for the flush forever: the board hung (USB up, REPL dead,
-  power cycle needed). Reproduced 3/3 with the Python flush + double buffer; with the C flush
+  power cycle needed). With the Python flush + double buffer the board hung in 2 of 3
+  soft-reset sequences (the third passed by timing luck); with the C flush
   6/6 soft resets with LVGL live were clean (`log/phase6-softreset-debug.txt`).
 - **Ctrl-C reaches the program**: `lv.timer_handler()` takes most of the CPU, so a
   KeyboardInterrupt usually lands in display_driver's callbacks; there it now stops the
