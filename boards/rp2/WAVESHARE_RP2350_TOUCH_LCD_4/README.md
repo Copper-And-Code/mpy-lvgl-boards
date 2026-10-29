@@ -82,6 +82,8 @@ btn.center()
 lv.label(btn).set_text("Hello")
 ```
 
+More in [`examples/`](../../../examples/) (hello, touch button, animation, backlight).
+
 `display_driver` runs `lv.timer_handler()` from a 5 ms timer, so a script can end and the
 UI keeps running (put it in `main.py` to start at boot). It sets up:
 
@@ -166,7 +168,5 @@ high. Names from `pins.csv` are available as `machine.Pin("LCD_BL")` etc.
 - Dr Jon Durrant (DrJonEA), `RP2350Touch4-Exp`: reference for the board header.
 - PyDevices: `lvgl-micropython` and `lvgl-bindings`.
 - MicroPython: `WAVESHARE_RP2350B_CORE` board definition as starting point.
-
-Examples: [`examples/`](../../../examples/).
 
 Details and provenance in [`docs/CREDITS.md`](../../../docs/CREDITS.md).
