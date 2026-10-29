@@ -6,3 +6,4 @@ underruns 0 mem_free 202960 elapsed 9662 ms
 
 # tick time alone (display_driver timer stopped)
 on_tick avg 616 us, worst 9194 us over 2000 ticks; bricks broken 15
+Nunzio, by touch (65f71c0): works well.
