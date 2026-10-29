@@ -78,7 +78,8 @@ Scene: sweeping bar animation, spinner, label updated 5x/s, list/string churn,
 - The `min_free` column printed by the test is not meaningful: its starting value is
   `gc.mem_free()` before the first `gc.collect()` and no later sample went below it.
 - The Python loop ran ~44 % fewer iterations with double buffering (allocation count):
-  LVGL now waits for the end of the panel frame on every refresh, which leaves less CPU
+  most likely because the flush busy-waits for the end of the panel frame on every refresh,
+  which leaves less CPU
   to the main loop at 150 MHz.
 
 ## Changing `machine.freq()`
