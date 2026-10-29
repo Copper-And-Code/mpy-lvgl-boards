@@ -1,0 +1,39 @@
+# Phase 7 diag: which widget of the 'all widgets' fixture makes LVGL allocate too much (all hidden first, then one visible at a time; WDT 8 s)
+warning: display is 240x240, the UI was designed for 800x480
+all hidden: rendered ok, mem_free 65328
+list_widget            obj        x=50 y=50 w=200 h=300 ok
+menu_widget            obj        x=50 y=50 w=250 h=300 ok
+arc_widget             arc        x=50 y=50 w=100 h=100 ok
+image_gif              image      x=50 y=50 w=100 h=100 ok
+switch_widget          switch     x=50 y=50 w=60 h=30 ok
+image_same_asset       image      x=50 y=50 w=100 h=100 ok
+calendar_widget        calendar   x=50 y=50 w=230 h=230 ok
+spinner_widget         arc        x=50 y=50 w=50 h=50 ok
+image_from_file        image      x=50 y=50 w=100 h=100 ok
+bar_widget             bar        x=50 y=50 w=200 h=20 ok
+tileview_widget        tileview   x=50 y=50 w=300 h=250 ok
+label_widget           label      x=50 y=50 w=120 h=30 ok
+span_widget            spangroup  x=50 y=50 w=200 h=60 ok
+dropdown_widget        dropdown   x=50 y=50 w=150 h=40 ok
+scale_widget           scale      x=50 y=50 w=200 h=60 ok
+win_widget             obj        x=50 y=50 w=300 h=250 ok
+table_widget           table      x=50 y=50 w=300 h=200 ok
+image_widget           image      x=50 y=50 w=100 h=100 ok
+chart_widget           chart      x=50 y=50 w=250 h=150 ok
+buttonmatrix_widget    buttonmatrix x=50 y=50 w=250 h=120 ok
+slider_widget          slider     x=50 y=50 w=200 h=20 ok
+checkbox_widget        checkbox   x=50 y=50 w=101 h=20 ok
+tabview_widget         tabview    x=50 y=50 w=300 h=250 ok
+span_expand            spangroup  x=50 y=50 w=230 h=18 ok
+button_widget          button     x=0 y=100 w=0 h=100 ok
+roller_widget          roller     x=50 y=50 w=100 h=100 ok
+imagebutton_widget     imagebutton x=50 y=50 w=120 h=5 ok
+textarea_widget        textarea   x=50 y=50 w=200 h=36 ok
+spinbox_widget         spinbox    x=50 y=50 w=120 h=40 ok
+panel_widget           obj        x=50 y=50 w=200 h=150 MemoryError memory allocation failed, allocating 146163 bytes
+msgbox_widget          Traceback (most recent call last):
+OSError: [Errno 5] Input/output error
+
+
+OSError: [Errno 5] Input/output error
+exit=1

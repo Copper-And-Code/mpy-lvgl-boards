@@ -1,0 +1,20 @@
+# Phase 7 diag: 'all widgets' fixture, timer stopped, manual lv.timer_handler(), WDT 8 s
+after display_driver: mem_free 164192
+warning: display is 240x240, the UI was designed for 800x480
+before init: mem_free 112208
+stack: 428 out of 12032
+GC: total: 357056, used: 244848, free: 112208
+ No. of 1-blocks: 168, 2-blocks: 54, max blk sz: 7681, max free sz: 4511
+after init (widgets built): mem_free 76592
+stack: 428 out of 12032
+GC: total: 357056, used: 280464, free: 76592
+ No. of 1-blocks: 741, 2-blocks: 137, max blk sz: 7681, max free sz: 4501
+timer_handler 0: MemoryError memory allocation failed, allocating 146163 bytes, mem_free 76192
+stack: 428 out of 12032
+GC: total: 357056, used: 281008, free: 76048
+ No. of 1-blocks: 746, 2-blocks: 138, max blk sz: 7681, max free sz: 4501
+retry 0 ok
+retry 1 ok
+retry 2 ok
+DIAG_DONE mem_free 76224
+exit=0

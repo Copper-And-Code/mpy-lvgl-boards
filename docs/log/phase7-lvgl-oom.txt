@@ -1,0 +1,71 @@
+# Phase 7: LVGL out of memory while rendering (tests/hil/t07_lvgl_oom.py, ~70 KB free), 3 runs
+== run 1
+mem_free 69968 layer needs about 160000
+render 0: MemoryError memory allocation failed, allocating 176403 bytes
+render 1: ok
+render 2: ok
+delete the object, add a labelTraceback (most recent call last):
+
+
+== run 2
+mem_free 69968 layer needs about 160000
+render 0: MemoryError memory allocation failed, allocating 176403 bytes
+render 1: ok
+render 2: ok
+delete the object, add a labelTraceback (most recent call last):
+
+
+== run 3
+mem_free 69968 layer needs about 160000
+render 0: MemoryError memory allocation failed, allocating 176403 bytes
+render 1: ok
+render 2: ok
+delete the object, add a labelTraceback (most recent call last):
+
+
+mem_free 69968 layer needs about 160000
+render 0: MemoryError memory allocation failed, allocating 176403 bytes
+render 1: ok
+render 2: ok
+delete the object, add a labelTraceback (most recent call last):
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/mpremote/main.py", line 614, in main
+    handler_func(state, args)
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/mpremote/commands.py", line 515, in do_run
+    _do_execbuffer(state, buf, args.follow)
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/mpremote/commands.py", line 489, in _do_execbuffer
+    ret, ret_err = state.transport.follow(timeout=None, data_consumer=stdout_write_bytes)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/mpremote/transport_serial.py", line 204, in follow
+    data = self.read_until(1, b"\x04", timeout=timeout, data_consumer=data_consumer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/mpremote/transport_serial.py", line 143, in read_until
+    elif self.serial.inWaiting() > 0:
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/serial/serialutil.py", line 594, in inWaiting
+    return self.in_waiting
+           ^^^^^^^^^^^^^^^
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/serial/serialposix.py", line 549, in in_waiting
+    s = fcntl.ioctl(self.fd, TIOCINQ, TIOCM_zero_str)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 5] Input/output error
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/nunzio/anaconda3/bin/mpremote", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/mpremote/main.py", line 636, in main
+    do_disconnect(state)
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/mpremote/commands.py", line 89, in do_disconnect
+    state.transport.close()
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/mpremote/transport_serial.py", line 118, in close
+    raise er
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/mpremote/transport_serial.py", line 111, in close
+    self.serial.rts = False
+    ^^^^^^^^^^^^^^^
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/serial/serialutil.py", line 463, in rts
+    self._update_rts_state()
+  File "/home/nunzio/anaconda3/lib/python3.11/site-packages/serial/serialposix.py", line 708, in _update_rts_state
+    fcntl.ioctl(self.fd, TIOCMBIC, TIOCM_RTS_str)
+OSError: [Errno 5] Input/output error

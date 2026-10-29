@@ -98,6 +98,22 @@ After `machine.freq(f)` call `rgbpanel.init(pclk_hz=...)` with a PCLK that divid
 `f / 2` exactly (e.g. 15 MHz at 150 MHz, 20 MHz at 200 or 240 MHz). Otherwise the panel
 clock follows the system clock and may go out of the panel's range.
 
+### Memory limits (no PSRAM)
+
+About 210 KB of heap is free after `import display_driver`; LVGL objects, styles, fonts
+and images loaded at run time, and the application all share it. Tested with
+lvgl-mpy-builder output: a 3-page, 21-widget UI runs with 205 KB free; its 34-widget
+"all widgets" test project builds but leaves only ~70 KB free.
+
+**Avoid opacity (`style_opa` < 255), transforms (`style_transform_rotation`/`_scale`)
+and blend modes on large widgets.** LVGL draws those through a separate ARGB8888 layer
+allocated in one piece (4 bytes per pixel of the widget): a 200x150 rotated panel asked for
+146 KB. If that allocation fails, LVGL is left half-way through the refresh: the
+`MemoryError` is printed, the screen stops updating, and the next change to a widget hangs
+the board (power cycle needed). This is LVGL/binding behaviour, not specific to this
+board (`docs/upstream/pydevices-issue-oom-render.md`); with PSRAM there is more room
+but the rule stays.
+
 ### `rgbpanel` (lower level)
 
 | | |

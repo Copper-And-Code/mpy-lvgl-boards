@@ -1,0 +1,9 @@
+# Phase 7: same OOM test on the unix port (tests/host/t07_lvgl_oom_unix.py with tests' display stub; PyDevices build-lvgl, -X heapsize=1M; lv_malloc_core = gc_alloc, returns NULL); timeout 15 s
+== run 1
+mem_free 69952 layer needs about 160000
+render 0: 
+rc=124 (124 = killed by timeout)
+== run 2
+mem_free 69952 layer needs about 160000
+render 0: 
+rc=124 (124 = killed by timeout)

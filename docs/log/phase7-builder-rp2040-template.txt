@@ -1,0 +1,6 @@
+# Phase 7: lvgl-mpy-builder rp2040 template, 'all widgets' fixture (800x480 design, 34 widgets) run on the board
+warning: display is 240x240, the UI was designed for 800x480
+Traceback (most recent call last):
+  File "display_driver.py", line 74, in _task
+MemoryError: memory allocation failed, allocating 146163 bytes
+exit=124

@@ -1,0 +1,4 @@
+# Phase 7: lvgl-mpy-builder rp2040 template, 'hostile' fixture (3 pages 480x320, 21 widgets) on the board
+warning: display is 240x240, the UI was designed for 480x320
+RUN_OK 21 mem_free 204736 underruns 0
+exit=0
