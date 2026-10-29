@@ -4,3 +4,4 @@
 ticks 6840 points user-MCU [7, 2] state over 'You win!\nTap to play' ball outside top/bottom 0
 on_tick avg 664 us, worst 9101 us
 underruns 0 mem_free 208736
+Nunzio, by touch (7311547): works well.
