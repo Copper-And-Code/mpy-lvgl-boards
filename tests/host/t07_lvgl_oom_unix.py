@@ -1,8 +1,6 @@
-# Phase 7: what happens when LVGL runs out of memory while rendering.
-# A rotated, semi-transparent object is drawn through a full ARGB8888 layer,
-# allocated at once; it is made larger than the free heap. Then LVGL renders
-# a plain label. Watchdog 8 s: if LVGL hangs, the board resets by itself.
-# Run with: mpremote run tests/hil/t07_lvgl_oom.py
+# Phase 7, unix port: tests/hil/t07_lvgl_oom.py without the watchdog, with the
+# display stub in this directory (240x240, DIRECT). Run from this directory:
+#   timeout 15 micropython-lvgl -X heapsize=1M t07_lvgl_oom_unix.py
 import gc
 import time
 import lvgl as lv

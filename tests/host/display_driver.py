@@ -1,3 +1,4 @@
+# Unix stand-in for the board display_driver (tests/host only).
 # Unix stand-in for the board's display_driver: 240x240 RGB565, DIRECT, two buffers.
 import lvgl as lv
 WIDTH = HEIGHT = 240
