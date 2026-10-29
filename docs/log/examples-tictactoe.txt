@@ -1,0 +1,5 @@
+# examples/tictactoe.py (opening book) on the board: MCU reply times in reachable positions, simulated game
+user starts: worst MCU reply 99 ms over 63 positions
+MCU starts: worst MCU reply 357 ms over 8 positions
+game: board ['X', 'O', 'X', '', 'O', '', '', 'O', 'X'] status: I win! | You 0  MCU 1  = 0
+underruns 0 mem_free 201280
