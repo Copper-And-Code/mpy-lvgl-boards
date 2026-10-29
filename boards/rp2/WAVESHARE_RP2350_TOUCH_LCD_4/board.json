@@ -1,0 +1,24 @@
+{
+    "deploy": [
+        "../deploy.md"
+    ],
+    "docs": "",
+    "features": [
+        "Dual-core",
+        "External Flash",
+        "Display",
+        "Touch",
+        "RTC",
+        "IMU",
+        "CAN",
+        "SDCard",
+        "USB-C"
+    ],
+    "images": [],
+    "mcu": "rp2350",
+    "product": "RP2350-Touch-LCD-4",
+    "thumbnail": "",
+    "url": "https://www.waveshare.com/wiki/RP2350-Touch-LCD-4",
+    "variants": {},
+    "vendor": "Waveshare"
+}
