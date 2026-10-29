@@ -1,0 +1,1 @@
+t=    0s frames=      4 fps=4.00 underruns=0 mem_free=210224 min_free=83888 allocs=40 errors=0

@@ -22,7 +22,7 @@ for i in range(5):
     times.append(time.ticks_diff(time.ticks_us(), t0))
 print("refr_now full screen us:", times)
 
-fb = rgbpanel.framebuffer()
+fb = rgbpanel.framebuffer(rgbpanel.shown())  # the buffer LVGL rendered last
 crcs = scene_static.tile_crcs(bytes(fb), display_driver.WIDTH, display_driver.HEIGHT)
 print("CRCS", " ".join("%08x" % c for c in crcs))
 display_driver.start()

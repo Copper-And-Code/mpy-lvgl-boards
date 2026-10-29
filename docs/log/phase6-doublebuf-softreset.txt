@@ -1,0 +1,4 @@
+### soft reset 1
+after soft reset: buffers 1 shown 0 running True
+### soft reset 2
+### soft reset 3

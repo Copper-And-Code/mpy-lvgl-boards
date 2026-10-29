@@ -4,9 +4,11 @@
 # lvgl-mpy-builder) needs: it starts LVGL on the rgbpanel framebuffer and
 # runs lv.timer_handler() periodically, so the application has no main loop.
 #
-# LVGL renders straight into the framebuffer that the PIO/DMA scan-out reads
-# (DIRECT mode, one buffer, no copy). The framebuffer is rgbpanel.WIDTH x
-# rgbpanel.HEIGHT: 240x240 shown as 2x2 pixels when the board has no PSRAM.
+# LVGL renders in DIRECT mode straight into rgbpanel framebuffers (no copy).
+# With two buffers (default when the heap has room) LVGL draws into the hidden
+# one and the flush callback (in C) shows it at the end of a frame: no tearing. With one
+# buffer LVGL draws into the buffer being scanned out. The framebuffer is
+# rgbpanel.WIDTH x rgbpanel.HEIGHT: 240x240 shown as 2x2 pixels without PSRAM.
 #
 # The GT911 touch controller is registered as LVGL pointer device (touch, indev).
 #
@@ -26,23 +28,19 @@ PERIOD_MS = 5
 WIDTH = rgbpanel.WIDTH
 HEIGHT = rgbpanel.HEIGHT
 
-rgbpanel.init()
+BUFFERS = 2
+
+try:
+    rgbpanel.init(buffers=BUFFERS)
+except MemoryError:
+    BUFFERS = 1
+    rgbpanel.init(buffers=1)
 lv.init()
 rgbpanel.lv_tick_install()
 
-_fb = rgbpanel.framebuffer()
-
-disp = lv.display_create(WIDTH, HEIGHT)
-disp.set_color_format(lv.COLOR_FORMAT.RGB565)
-disp.set_buffers(_fb, None, len(_fb) * 2, lv.DISPLAY_RENDER_MODE.DIRECT)
-
-
-def _flush(d, area, px):
-    # Already rendered into the scanned-out framebuffer.
-    d.flush_ready()
-
-
-disp.set_flush_cb(_flush)
+# Display on the framebuffer(s), flush callback in C (see rgbpanel.c).
+rgbpanel.lv_display_create()
+disp = lv.display_get_default()
 
 # Touch (GT911 on I2C1). Coordinates are scaled to the framebuffer.
 try:
@@ -58,6 +56,15 @@ _timer = None
 _busy = False
 
 
+# Ctrl-C while a program runs: lv.timer_handler() takes most of the CPU, so the
+# KeyboardInterrupt usually lands in these callbacks, where it would be lost
+# and the program would never stop. Stop the timer instead: the next Ctrl-C
+# (mpremote sends several) reaches the program. display_driver.start() resumes.
+def _interrupted():
+    stop()
+    print("display_driver: stopped by Ctrl-C (display_driver.start() resumes)")
+
+
 def _task(_):
     global _busy
     if _busy:
@@ -65,6 +72,8 @@ def _task(_):
     _busy = True
     try:
         lv.timer_handler()
+    except KeyboardInterrupt:
+        _interrupted()
     finally:
         _busy = False
 
@@ -74,6 +83,8 @@ def _tick(_):
         micropython.schedule(_task, None)
     except RuntimeError:
         pass  # schedule queue full: the next tick will catch up
+    except KeyboardInterrupt:
+        _interrupted()
 
 
 def start():

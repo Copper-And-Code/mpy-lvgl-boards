@@ -1,0 +1,55 @@
+### A1 fresh session: display_driver + 3 refresh
+A1 ok shown 1 buffers 2
+rc=0
+### A2 soft reset, rgbpanel state
+A2 ok 1 0 True
+rc=0
+### A3 init(buffers=2)
+A3 ok 2 0
+rc=0
+### A4 lv.init + tick
+A4 ok
+rc=0
+### A5 swap() alone x4
+A5 [True, True, True, True] 0
+rc=0
+### A6 import display_driver
+A6 ok
+rc=0
+### A7 refresh
+A7 ok shown 1
+rc=0
+### B1 soft reset + display_driver + labels + refresh (no Ctrl-C)
+rc=124
+### B2 soft reset + display_driver + labels + refresh (no Ctrl-C)
+rc=124
+### B3 soft reset + display_driver + labels + refresh (no Ctrl-C)
+rc=124
+=== after C flush_cb fix
+### C0 fresh: display_driver + refresh
+C0 ok shown 1 buffers 2
+rc=0
+### C1 soft reset + display_driver + labels + refresh
+a 1 0
+ok shown 1 mem_free 211040 underruns 0
+rc=0
+### C2 soft reset + display_driver + labels + refresh
+a 1 0
+ok shown 1 mem_free 211040 underruns 0
+rc=0
+### C3 soft reset + display_driver + labels + refresh
+a 1 0
+ok shown 0 mem_free 211136 underruns 0
+rc=0
+### C4 soft reset + display_driver + labels + refresh
+a 1 0
+ok shown 0 mem_free 211232 underruns 0
+rc=0
+### C5 soft reset + display_driver + labels + refresh
+a 1 0
+ok shown 0 mem_free 211040 underruns 0
+rc=0
+### C6 soft reset + display_driver + labels + refresh
+a 1 0
+ok shown 0 mem_free 210944 underruns 0
+rc=0

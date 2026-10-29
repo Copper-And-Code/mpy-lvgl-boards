@@ -1,0 +1,6 @@
+sys 150 MHz pclk 15.0 MHz: fps 57.67 (nominal 57.73), refr_now us min 9205 avg 9234, underruns run 0 flash 0
+sys 200 MHz pclk 20.0 MHz: fps 76.67 (nominal 76.97), refr_now us min 7695 avg 7862, underruns run 0 flash 0
+sys 240 MHz pclk 20.0 MHz: fps 76.67 (nominal 76.97), refr_now us min 7161 avg 7253, underruns run 0 flash 0
+sys 150 MHz pclk 15.0 MHz: fps 57.67 (nominal 57.73), refr_now us min 9160 avg 9248, underruns run 0 flash 0
+200 MHz / 15 MHz refused: pclk_hz must divide sys clock/2 exactly (sys=200000000)
+back to 150000000 15000000 running True

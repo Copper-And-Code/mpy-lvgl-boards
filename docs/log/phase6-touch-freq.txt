@@ -1,0 +1,2 @@
+240 MHz: gt911 product id 911 read (False, 0, 0) i2c I2C(1, freq=400000, scl=7, sda=6, timeout=50000)
+150 MHz: gt911 product id 911 read (False, 0, 0) i2c I2C(1, freq=400000, scl=7, sda=6, timeout=50000)

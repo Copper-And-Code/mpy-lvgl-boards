@@ -1,0 +1,292 @@
+make: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2»
+Use make V=1 or set BUILD_VERBOSE in your environment to increase build verbosity.
+make[1]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[2]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  0%] Built target bs2_default
+[  1%] Built target usermod_rgbpanel_rgbpanel_pio_h
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  1%] Built target bs2_default_library
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  1%] Built target BUILD_VERSION_HEADER
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  2%] Generating genhdr/qstr.i.last
+[  2%] Generating genhdr/qstr.split
+[  2%] Generating genhdr/root_pointers.split
+[  2%] Generating genhdr/root_pointers.collected
+[  2%] Generating genhdr/qstrdefs.collected.h
+Root pointer registrations not updated
+QSTR updated
+[  2%] Generating genhdr/qstrdefs.preprocessed.h
+[  2%] Generating genhdr/qstrdefs.generated.h
+MPY display_driver.py
+GEN /opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4/frozen_content.c
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  2%] Built target BUILD_FROZEN_CONTENT
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  3%] Generating genhdr/root_pointers.collected
+[  3%] Generating genhdr/moduledefs.split
+[  3%] Generating genhdr/compressed.split
+Root pointer registrations not updated
+[  3%] Generating genhdr/moduledefs.collected
+[  3%] Generating genhdr/compressed.collected
+Module registrations not updated
+Compressed data not updated
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  3%] Generating genhdr/compressed.collected
+[  3%] Generating genhdr/root_pointers.collected
+[  3%] Generating genhdr/moduledefs.collected
+Module registrations not updated
+Root pointer registrations not updated
+Compressed data not updated
+[  3%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/argcheck.c.o
+[  3%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/asmrv32.c.o
+[  3%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/asmbase.c.o
+[  3%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/asmxtensa.c.o
+[  3%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/bc.c.o
+[  3%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/binary.c.o
+[  3%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/builtinhelp.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/builtinevex.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/asmthumb.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/builtinimport.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/compile.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/cstack.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/emitbc.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/emitcommon.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/emitglue.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/emitinlinerv32.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/emitinlinethumb.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/emitnthumb.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/emitinlinextensa.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/emitnx86.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/frozenmod.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/formatfloat.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/gc.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modbuiltins.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modarray.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/lexer.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/malloc.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/map.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modgc.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modcmath.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modcollections.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modio.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modmath.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modmicropython.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modstring.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modstruct.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modsys.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modthread.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/moderrno.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/modweakref.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/mpprint.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/mpstate.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nativeglue.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlr.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlraarch64.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrloong64.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrmips.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrpowerpc.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrrv32.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrrv64.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrsetjmp.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrthumb.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrx64.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrx86.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/nlrxtensa.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objarray.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/obj.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objattrtuple.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objbool.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objcode.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objboundmeth.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objcell.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objclosure.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objcomplex.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objdeque.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objdict.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objenumerate.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objexcept.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objfilter.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objfloat.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objfun.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objgenerator.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objgetitemiter.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objint_mpz.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objint_longlong.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objint.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objlist.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objmap.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objmodule.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objnone.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objnamedtuple.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objobject.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objpolyiter.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objrange.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objproperty.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objreversed.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objringio.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objset.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objsingleton.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objslice.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objstr.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objstringio.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objstrunicode.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objtemplate.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objtype.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objtuple.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/objzip.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/opmethods.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/pairheap.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/parse.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/parsenum.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/persistentcode.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/profile.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/pystack.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/qstr.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/runtime.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/repl.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/reader.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/runtime_utils.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/scheduler.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/scope.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/sequence.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/showbc.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/stackctrl.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/stream.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/vm.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/vstr.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/py/warning.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/libc/printf.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/libc/abort_.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_adc.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/btstack/modbluetooth_btstack.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_adc_block.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_bitstream.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_can.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_i2c.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_i2c_target.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_i2s.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_mem.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_pulse.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_pwm.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_signal.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_spi.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_uart.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_usb_device.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/machine_wdt.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modbluetooth.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modframebuf.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modlwip.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modmachine.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modmarshal.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modnetwork.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modasyncio.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modonewire.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modbinascii.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modcryptolib.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/moductypes.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/moddeflate.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modhashlib.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modheapq.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modos.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modjson.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modplatform.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modrandom.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modselect.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modre.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modsocket.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modtls_axtls.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modvfs.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modtime.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modwebsocket.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/modwebrepl.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/network_cyw43.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/network_lwip.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/network_ninaw10.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/network_usbd_ncm.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/network_ppp_lwip.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/network_wiznet5k.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/os_dupterm.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_blockdev.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_fat.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_fat_diskio.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_lfs.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_fat_file.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_rom.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_rom_file.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_posix.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_posix_file.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/virtpin.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/vfs_reader.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/extmod/nimble/modbluetooth_nimble.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/netutils/dhcpserver.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/netutils/netutils.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/netutils/trace.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/readline/readline.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/runtime/gchelper_native.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/runtime/interrupt_char.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/runtime/mpirq.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/runtime/pyexec.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/runtime/stdout_helpers.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/runtime/softtimer.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/runtime/sys_stdio_mphal.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/timeutils/timeutils.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/tinyusb/mp_usbd.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/tinyusb/mp_usbd_cdc.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/tinyusb/mp_usbd_descriptor.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/shared/tinyusb/mp_usbd_runtime.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/drivers/bus/softspi.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/micropython/drivers/dht/dht.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/datetime_patch.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/fatfs_port.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/help.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/machine_pin.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/machine_i2c.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/machine_bitstream.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/machine_rtc.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/machine_spi.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/machine_timer.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/main.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/modrp2.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/mphalport.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/mpnetworkport.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/mpthreadport.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/rp2_flash.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/rp2_pio.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/rp2_dma.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/uart.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/usbd.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/mbedtls/mbedtls_port.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/pins_WAVESHARE_RP2350_TOUCH_LCD_4.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/frozen_content.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/lvgl-bindings/generated/lvgl_micropython.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/lvgl-micropython/src/lvgl_micropython_build.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/lvgl-micropython/src/lv_mem_core_micropython.c.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/waveshare-rp2350/work/mpy-lvgl-boards/modules/rgbpanel/rgbpanel.c.o
+[ 28%] Linking CXX executable firmware.elf
+Memory region         Used Size  Region Size  %age Used
+           FLASH:     1073568 B         4 MB     25.60%
+     FLASH_ROMFS:           0 B          0 B
+        FLASH_FS:           0 B        12 MB      0.00%
+           PSRAM:           0 B          0 B
+         XIP_RAM:           0 B        16 KB      0.00%
+             RAM:      156784 B       512 KB     29.90%
+       SCRATCH_X:           0 B          0 B
+       SCRATCH_Y:          8 KB         8 KB    100.00%
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[100%] Built target firmware
+make[2]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[1]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2»

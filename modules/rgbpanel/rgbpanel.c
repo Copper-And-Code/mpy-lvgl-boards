@@ -14,6 +14,11 @@
 // programs and DMA channels are claimed through the pico-sdk directly, not
 // through rp2.PIO / rp2.DMA. State is in .bss, which a soft reset keeps.
 //
+// Double buffering (init(buffers=2)): a second framebuffer with its own list
+// of control blocks lives on the GC heap. The rewind block reads the list to
+// use for the next frame from rgbpanel_cb_top, so changing that pointer swaps
+// buffers exactly at the end of a frame, in hardware.
+//
 // The framebuffer is RGBPANEL_WIDTH x RGBPANEL_HEIGHT; with
 // MICROPY_HW_RGBPANEL_SCALE = 2 it is 240x240 and every pixel is shown as
 // 2x2 panel pixels (horizontal doubling in PIO, vertical doubling by DMA).
@@ -97,8 +102,16 @@ typedef struct {
 
 static uint16_t rgbpanel_fb[FB_W * FB_H] __attribute__((aligned(4)));
 static rgbpanel_cb_t rgbpanel_cb[NUM_DATA_CB + 1] __attribute__((aligned(16)));
-static uint32_t rgbpanel_cb_top;          // &rgbpanel_cb[0], read by DMA
+static volatile uint32_t rgbpanel_cb_top; // list for the next frame, read by DMA
 static volatile uint32_t rgbpanel_frame_sink;
+
+// Second buffer for double buffering, on the GC heap (16-byte aligned blocks):
+// control blocks first, then the pixels.
+typedef struct {
+    rgbpanel_cb_t cb[NUM_DATA_CB + 1];
+    uint16_t fb[FB_W * FB_H];
+} rgbpanel_buf2_t;
+MP_REGISTER_ROOT_POINTER(void *rgbpanel_buf2);
 
 static struct {
     bool running;
@@ -110,6 +123,8 @@ static struct {
     uint32_t sys_hz;
     uint backlight;
     uint32_t underruns;
+    uint32_t data_ctrl, rewind_ctrl, txf;
+    uint shown;                 // buffer being scanned out: 0 = static, 1 = rgbpanel_buf2
 } rgbpanel_state;
 
 /******************************************************************************/
@@ -218,6 +233,71 @@ static uint32_t line_half_periods(void) {
 
 static uint32_t frame_lines(void) {
     return (lcd_vsync_VFP + 1) + (lcd_vsync_VSW + 1) + (lcd_vsync_VBP + 1) + PANEL_H;
+}
+
+static rgbpanel_buf2_t *buf2(void) {
+    return MP_STATE_PORT(rgbpanel_buf2);
+}
+
+static rgbpanel_cb_t *cb_list(uint i) {
+    return i ? buf2()->cb : rgbpanel_cb;
+}
+
+static uint16_t *fb_of(uint i) {
+    return i ? buf2()->fb : rgbpanel_fb;
+}
+
+static void build_cb_list(rgbpanel_cb_t *cb, const uint16_t *fb) {
+    #if SCALE == 1
+    cb[0] = (rgbpanel_cb_t) { rgbpanel_state.data_ctrl, (uint32_t)fb, rgbpanel_state.txf, FB_W * FB_H / 2 };
+    #else
+    for (uint i = 0; i < NUM_DATA_CB; ++i) {
+        cb[i] = (rgbpanel_cb_t) { rgbpanel_state.data_ctrl, (uint32_t)&fb[(i / SCALE) * FB_W], rgbpanel_state.txf, FB_W / 2 };
+    }
+    #endif
+    cb[NUM_DATA_CB] = (rgbpanel_cb_t) {
+        rgbpanel_state.rewind_ctrl, (uint32_t)&rgbpanel_cb_top, (uint32_t)&dma_hw->ch[rgbpanel_state.dma_ctrl].read_addr, 1
+    };
+}
+
+// Scan out buffer i from the next frame on, and wait until the control channel
+// reads from its list: from then on the other buffer is no longer read.
+static bool select_buffer(uint i, uint32_t timeout_us, bool handle_events) {
+    rgbpanel_cb_t *cb = cb_list(i);
+    rgbpanel_cb_top = (uint32_t)cb;
+    if (rgbpanel_state.running) {
+        uint32_t lo = (uint32_t)cb;
+        uint32_t hi = (uint32_t)(cb + NUM_DATA_CB + 1);
+        uint32_t t0 = time_us_32();
+        for (;;) {
+            uint32_t ra = dma_hw->ch[rgbpanel_state.dma_ctrl].read_addr;
+            if (ra >= lo && ra <= hi) {
+                break;
+            }
+            if (time_us_32() - t0 > timeout_us) {
+                return false;
+            }
+            if (handle_events) {
+                mp_event_handle_nowait();
+            }
+        }
+    }
+    rgbpanel_state.shown = i;
+    return true;
+}
+
+// Back to the static buffer only, keeping the image.
+static void drop_buf2(bool handle_events) {
+    if (buf2() == NULL) {
+        return;
+    }
+    if (rgbpanel_state.shown == 1) {
+        memcpy(rgbpanel_fb, buf2()->fb, sizeof(rgbpanel_fb));
+        select_buffer(0, 100000, handle_events);
+    }
+    rgbpanel_state.shown = 0;
+    rgbpanel_cb_top = (uint32_t)rgbpanel_cb;
+    MP_STATE_PORT(rgbpanel_buf2) = NULL;
 }
 
 static void scanout_stop(void) {
@@ -376,18 +456,15 @@ static void scanout_start(uint32_t pclk_hz) {
     channel_config_set_irq_quiet(&rc, true);
     uint32_t rewind_ctrl = channel_config_get_ctrl_value(&rc);
 
-    uint32_t txf = (uint32_t)&DATA_PIO->txf[sm_data];
-    #if SCALE == 1
-    rgbpanel_cb[0] = (rgbpanel_cb_t) { data_ctrl, (uint32_t)rgbpanel_fb, txf, FB_W * FB_H / 2 };
-    #else
-    for (uint i = 0; i < NUM_DATA_CB; ++i) {
-        rgbpanel_cb[i] = (rgbpanel_cb_t) { data_ctrl, (uint32_t)&rgbpanel_fb[(i / SCALE) * FB_W], txf, FB_W / 2 };
+    rgbpanel_state.data_ctrl = data_ctrl;
+    rgbpanel_state.rewind_ctrl = rewind_ctrl;
+    rgbpanel_state.txf = (uint32_t)&DATA_PIO->txf[sm_data];
+    build_cb_list(rgbpanel_cb, rgbpanel_fb);
+    if (buf2() != NULL) {
+        build_cb_list(buf2()->cb, buf2()->fb);
     }
-    #endif
-    rgbpanel_cb_top = (uint32_t)&rgbpanel_cb[0];
-    rgbpanel_cb[NUM_DATA_CB] = (rgbpanel_cb_t) {
-        rewind_ctrl, (uint32_t)&rgbpanel_cb_top, (uint32_t)&dma_hw->ch[dma_ctrl].read_addr, 1
-    };
+    // Keep showing the buffer that was shown before a restart.
+    rgbpanel_cb_top = (uint32_t)cb_list(rgbpanel_state.shown);
 
     dma_channel_config cc = dma_channel_get_default_config(dma_ctrl);
     channel_config_set_transfer_data_size(&cc, DMA_SIZE_32);
@@ -396,7 +473,7 @@ static void scanout_start(uint32_t pclk_hz) {
     channel_config_set_ring(&cc, true, 4); // wrap on the 4 alias-1 registers
     channel_config_set_high_priority(&cc, true);
     channel_config_set_irq_quiet(&cc, true);
-    dma_channel_configure(dma_ctrl, &cc, &dma_hw->ch[dma_data].al1_ctrl, &rgbpanel_cb[0], 4, false);
+    dma_channel_configure(dma_ctrl, &cc, &dma_hw->ch[dma_data].al1_ctrl, (void *)rgbpanel_cb_top, 4, false);
 
     dma_channel_config fc = dma_channel_get_default_config(dma_frame);
     channel_config_set_transfer_data_size(&fc, DMA_SIZE_32);
@@ -420,12 +497,15 @@ static void scanout_start(uint32_t pclk_hz) {
 /******************************************************************************/
 // Python API
 
-// init(pclk_hz=15_000_000, backlight=80): idempotent.
+// init(pclk_hz=15_000_000, backlight=80, *, buffers=None): idempotent.
+// buffers=2 adds a second framebuffer for double buffering, buffers=1 drops it;
+// None keeps the current setting (a plain init() never frees a buffer in use).
 static mp_obj_t rgbpanel_init(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
-    enum { ARG_pclk_hz, ARG_backlight };
+    enum { ARG_pclk_hz, ARG_backlight, ARG_buffers };
     static const mp_arg_t allowed_args[] = {
         { MP_QSTR_pclk_hz, MP_ARG_INT, {.u_int = 15000000} },
         { MP_QSTR_backlight, MP_ARG_INT, {.u_int = 80} },
+        { MP_QSTR_buffers, MP_ARG_KW_ONLY | MP_ARG_OBJ, {.u_rom_obj = MP_ROM_NONE} },
     };
     mp_arg_val_t args[MP_ARRAY_SIZE(allowed_args)];
     mp_arg_parse_all(n_args, pos_args, kw_args, MP_ARRAY_SIZE(allowed_args), allowed_args, args);
@@ -453,6 +533,23 @@ static mp_obj_t rgbpanel_init(size_t n_args, const mp_obj_t *pos_args, mp_map_t 
         }
         DATA_PIO->fdebug = 1u << (PIO_FDEBUG_TXSTALL_LSB + rgbpanel_state.sm_data);
     }
+
+    mp_int_t buffers = args[ARG_buffers].u_obj == mp_const_none ? 0 : mp_obj_get_int(args[ARG_buffers].u_obj);
+    if (buffers != 0 && buffers != 1 && buffers != 2) {
+        mp_raise_ValueError(MP_ERROR_TEXT("buffers must be 1 or 2"));
+    }
+    if (buffers == 2 && buf2() == NULL) {
+        rgbpanel_buf2_t *b = m_malloc(sizeof(rgbpanel_buf2_t));
+        if ((uintptr_t)b & 15) {
+            m_free(b);
+            mp_raise_msg(&mp_type_OSError, MP_ERROR_TEXT("rgbpanel: second buffer not 16-byte aligned"));
+        }
+        memcpy(b->fb, rgbpanel_fb, sizeof(rgbpanel_fb));
+        MP_STATE_PORT(rgbpanel_buf2) = b;
+        build_cb_list(b->cb, b->fb);
+    } else if (buffers == 1) {
+        drop_buf2(true);
+    }
     backlight_set(args[ARG_backlight].u_int);
     return mp_const_none;
 }
@@ -464,10 +561,34 @@ static mp_obj_t rgbpanel_deinit(void) {
 }
 static MP_DEFINE_CONST_FUN_OBJ_0(rgbpanel_deinit_obj, rgbpanel_deinit);
 
-static mp_obj_t rgbpanel_framebuffer(void) {
-    return mp_obj_new_memoryview('H' | MP_OBJ_ARRAY_TYPECODE_FLAG_RW, FB_W * FB_H, rgbpanel_fb);
+// framebuffer(i=0): memoryview of buffer i (1 only with init(buffers=2)).
+static mp_obj_t rgbpanel_framebuffer(size_t n_args, const mp_obj_t *args) {
+    mp_int_t i = n_args > 0 ? mp_obj_get_int(args[0]) : 0;
+    if (i < 0 || i > 1 || (i == 1 && buf2() == NULL)) {
+        mp_raise_ValueError(MP_ERROR_TEXT("no such framebuffer"));
+    }
+    return mp_obj_new_memoryview('H' | MP_OBJ_ARRAY_TYPECODE_FLAG_RW, FB_W * FB_H, fb_of(i));
 }
-static MP_DEFINE_CONST_FUN_OBJ_0(rgbpanel_framebuffer_obj, rgbpanel_framebuffer);
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(rgbpanel_framebuffer_obj, 0, 1, rgbpanel_framebuffer);
+
+// shown(): index of the buffer being scanned out.
+static mp_obj_t rgbpanel_shown(void) {
+    return MP_OBJ_NEW_SMALL_INT(rgbpanel_state.shown);
+}
+static MP_DEFINE_CONST_FUN_OBJ_0(rgbpanel_shown_obj, rgbpanel_shown);
+
+// swap(timeout_ms=100): show the other buffer from the next frame on; returns
+// once the previously shown buffer is no longer read (False on timeout).
+static mp_obj_t rgbpanel_swap(size_t n_args, const mp_obj_t *args) {
+    mp_int_t timeout_ms = n_args > 0 ? mp_obj_get_int(args[0]) : 100;
+    if (buf2() == NULL) {
+        mp_raise_msg(&mp_type_OSError, MP_ERROR_TEXT("rgbpanel: init(buffers=2) first"));
+    }
+    bool ok = select_buffer(1 - rgbpanel_state.shown, timeout_ms * 1000, false);
+    poll_underrun();
+    return mp_obj_new_bool(ok);
+}
+static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(rgbpanel_swap_obj, 0, 1, rgbpanel_swap);
 
 static mp_obj_t rgbpanel_backlight(size_t n_args, const mp_obj_t *args) {
     if (n_args == 0) {
@@ -529,12 +650,46 @@ static mp_obj_t rgbpanel_lv_tick_install(void) {
     return mp_const_none;
 }
 static MP_DEFINE_CONST_FUN_OBJ_0(rgbpanel_lv_tick_install_obj, rgbpanel_lv_tick_install);
+
+// Flush in C: no Python code runs between LVGL handing over a frame and
+// lv_display_flush_ready(), so a KeyboardInterrupt (Ctrl-C, or mpremote
+// starting a command) can never leave LVGL waiting forever for the flush.
+static void lv_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map) {
+    (void)area;
+    (void)px_map;
+    if (buf2() != NULL && lv_display_flush_is_last(disp)) {
+        select_buffer(1 - rgbpanel_state.shown, 100000, false);
+    }
+    lv_display_flush_ready(disp);
+}
+
+// lv_display_create(): create the LVGL display on the rgbpanel framebuffer(s),
+// DIRECT render mode, flush in C. With two buffers LVGL first draws into the
+// hidden one and each completed refresh swaps them at the end of a frame.
+// Returns None: get the display with lv.display_get_default().
+static mp_obj_t rgbpanel_lv_display_create(void) {
+    lv_display_t *disp = lv_display_create(FB_W, FB_H);
+    lv_display_set_color_format(disp, LV_COLOR_FORMAT_RGB565);
+    if (buf2() != NULL) {
+        lv_display_set_buffers(disp, fb_of(1 - rgbpanel_state.shown), fb_of(rgbpanel_state.shown),
+            sizeof(rgbpanel_fb), LV_DISPLAY_RENDER_MODE_DIRECT);
+    } else {
+        lv_display_set_buffers(disp, rgbpanel_fb, NULL, sizeof(rgbpanel_fb), LV_DISPLAY_RENDER_MODE_DIRECT);
+    }
+    lv_display_set_flush_cb(disp, lv_flush_cb);
+    lv_display_set_default(disp);
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_0(rgbpanel_lv_display_create_obj, rgbpanel_lv_display_create);
 #endif
 
-// Board soft-reset hook (MICROPY_BOARD_END_SOFT_RESET). LVGL keeps its global
+// Board soft-reset hook (MICROPY_BOARD_END_SOFT_RESET). The image is moved to
+// the static framebuffer if the GC one was shown. LVGL keeps its global
 // state in GC memory behind root pointers that a soft reset does not clear:
 // without this, lv.init() after Ctrl-D would reuse freed memory and hang.
 void rgbpanel_board_end_soft_reset(void) {
+    // The second framebuffer is GC memory that is about to be discarded.
+    drop_buf2(false);
     #if RGBPANEL_LVGL
     mp_lv_deinit_gc();
     #endif
@@ -554,6 +709,8 @@ static mp_obj_t rgbpanel_info(void) {
     dict_store(d, MP_QSTR_fb_addr, mp_obj_new_int_from_uint((uint32_t)rgbpanel_fb));
     dict_store(d, MP_QSTR_fb_bytes, mp_obj_new_int_from_uint(sizeof(rgbpanel_fb)));
     dict_store(d, MP_QSTR_backlight, MP_OBJ_NEW_SMALL_INT(rgbpanel_state.backlight));
+    dict_store(d, MP_QSTR_buffers, MP_OBJ_NEW_SMALL_INT(buf2() ? 2 : 1));
+    dict_store(d, MP_QSTR_shown, MP_OBJ_NEW_SMALL_INT(rgbpanel_state.shown));
     dict_store(d, MP_QSTR_frames, mp_obj_new_int_from_uint(frame_count()));
     dict_store(d, MP_QSTR_underruns, mp_obj_new_int_from_uint(rgbpanel_state.underruns));
     if (rgbpanel_state.running) {
@@ -582,6 +739,8 @@ static const mp_rom_map_elem_t rgbpanel_module_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR_init), MP_ROM_PTR(&rgbpanel_init_obj) },
     { MP_ROM_QSTR(MP_QSTR_deinit), MP_ROM_PTR(&rgbpanel_deinit_obj) },
     { MP_ROM_QSTR(MP_QSTR_framebuffer), MP_ROM_PTR(&rgbpanel_framebuffer_obj) },
+    { MP_ROM_QSTR(MP_QSTR_shown), MP_ROM_PTR(&rgbpanel_shown_obj) },
+    { MP_ROM_QSTR(MP_QSTR_swap), MP_ROM_PTR(&rgbpanel_swap_obj) },
     { MP_ROM_QSTR(MP_QSTR_backlight), MP_ROM_PTR(&rgbpanel_backlight_obj) },
     { MP_ROM_QSTR(MP_QSTR_frame_count), MP_ROM_PTR(&rgbpanel_frame_count_obj) },
     { MP_ROM_QSTR(MP_QSTR_underruns), MP_ROM_PTR(&rgbpanel_underruns_obj) },
@@ -589,6 +748,7 @@ static const mp_rom_map_elem_t rgbpanel_module_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR_info), MP_ROM_PTR(&rgbpanel_info_obj) },
     #if RGBPANEL_LVGL
     { MP_ROM_QSTR(MP_QSTR_lv_tick_install), MP_ROM_PTR(&rgbpanel_lv_tick_install_obj) },
+    { MP_ROM_QSTR(MP_QSTR_lv_display_create), MP_ROM_PTR(&rgbpanel_lv_display_create_obj) },
     #endif
     { MP_ROM_QSTR(MP_QSTR_WIDTH), MP_ROM_INT(FB_W) },
     { MP_ROM_QSTR(MP_QSTR_HEIGHT), MP_ROM_INT(FB_H) },

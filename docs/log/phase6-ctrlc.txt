@@ -1,0 +1,3 @@
+interrupted ok, shown 1 underruns 0
+interrupted ok, shown 0 underruns 0
+interrupted ok, shown 0 underruns 0
