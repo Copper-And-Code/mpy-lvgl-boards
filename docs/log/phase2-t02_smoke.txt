@@ -1,0 +1,20 @@
+### run 1
+mem_free before: 472112
+clicked
+Hello from LVGL - drew 240 px wide refr_now 7148 us
+mem_free after scene: 406608
+mem_free after deinit: 472112
+clicked
+Hello from LVGL - drew 240 px wide refr_now 7129 us
+OK
+### run 2 after soft reset
+mem_free before: 472112
+clicked
+Hello from LVGL - drew 240 px wide refr_now 7121 us
+mem_free after scene: 406608
+mem_free after deinit: 472112
+clicked
+Hello from LVGL - drew 240 px wide refr_now 7146 us
+OK
+### import after soft reset
+- 472576

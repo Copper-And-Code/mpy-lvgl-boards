@@ -1,0 +1,5 @@
+Waveshare RP2350B Core with RP2350
+150000000 474496
+
+# Upstream WAVESHARE_RP2350B_CORE firmware on the RP2350-Touch-LCD-4, 2026-10-29.
+# gc.mem_free() = 474496 at 150 MHz -> SRAM heap only: no PSRAM (U9 not fitted, confirmed by eye).

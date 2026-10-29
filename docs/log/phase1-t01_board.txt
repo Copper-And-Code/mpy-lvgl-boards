@@ -1,0 +1,9 @@
+uname: (sysname='rp2', nodename='rp2', release='1.29.0', version='v1.29.0 on 2026-10-29 (GNU 15.2.1 MinSizeRel)', machine='Waveshare RP2350-Touch-LCD-4 with RP2350')
+freq: 150000000
+mem_free: 471872 mem_alloc: 5376
+i2c: I2C(1, freq=400000, scl=7, sda=6, timeout=50000)
+i2c scan: ['0x51', '0x5d', '0x6b']
+  0x51 PCF85063 RTC
+  0x5D GT911 (addr 0x5D)
+  0x6B QMI8658 IMU (0x6B)
+fs total: 12582912 free: 12574720
