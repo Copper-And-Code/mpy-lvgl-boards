@@ -11,3 +11,4 @@ underruns 0 mem_free 173632
 error sound (freq, duty) every 50 ms: [(310, 0), (973, 32768), (920, 32768), (920, 0), (813, 32768), (760, 0), (760, 0), (600, 32768), (600, 0), (466, 32768), (440, 0), (333, 32768), (280, 32768), (280, 0), (280, 0), (280, 0)]
 end: over 'Score 0\nBest 0\nTap' buzzer duty 0
 Nunzio, by touch and ear (before this change): different notes per pad, game works by touch; the 90 Hz error buzz sounded too much like the notes -> replaced.
+Nunzio, by ear (after 667f92d): the error siren is clearly distinct from the pad notes.
