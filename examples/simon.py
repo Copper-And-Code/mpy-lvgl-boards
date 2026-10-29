@@ -23,7 +23,7 @@ PADS = (
     (0x706000, 0xFFF040, 252),  # yellow, bottom left
     (0x000070, 0x4060FF, 209),  # blue, bottom right
 )
-ERROR_NOTE = 90
+ERROR_MS = 600  # error sound: a broken siren falling from 1000 to 200 Hz
 
 # --- sound ---
 buzzer = None
@@ -129,7 +129,6 @@ def game_over():
     state = "over"
     best = max(best, len(sequence) - 1)
     set_centre("Score %d\nBest %d\nTap" % (len(sequence) - 1, best))
-    tone(ERROR_NOTE)
     for i in range(4):
         light(i, False)
 
@@ -139,10 +138,13 @@ def on_tick(timer):
     if state == "over" and wait == 0:
         return
     wait = max(0, wait - TICK)
-    if wait:
+    if state == "over":  # error sound, then silence
+        if wait and (wait // 60) % 2:
+            tone(200 + 800 * wait // ERROR_MS)
+        else:
+            quiet()
         return
-    if state == "over":  # end of the error buzz
-        quiet()
+    if wait:
         return
     if state != "show":
         return
@@ -171,7 +173,7 @@ def on_pad(e, i):
         return
     quiet()  # RELEASED
     if i != sequence[pos]:
-        wait = 600  # length of the error buzz
+        wait = ERROR_MS
         game_over()
         return
     pos += 1
