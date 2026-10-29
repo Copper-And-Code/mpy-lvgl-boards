@@ -82,7 +82,7 @@ btn.center()
 lv.label(btn).set_text("Hello")
 ```
 
-More in [`examples/`](../../../examples/) (hello, touch button, animation, backlight, Simon, Snake, tic-tac-toe).
+More in [`examples/`](../../../examples/) (hello, touch button, animation, backlight, Breakout, Simon, Snake, tic-tac-toe).
 
 `display_driver` runs `lv.timer_handler()` from a 5 ms timer, so a script can end and the
 UI keeps running (put it in `main.py` to start at boot). It sets up:

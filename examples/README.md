@@ -9,6 +9,7 @@ the board as `main.py` (`mpremote cp examples/<name>.py :main.py`).
 | [button.py](button.py) | touch: a button counting taps |
 | [animation.py](animation.py) | LVGL animations (no tearing: double buffered) |
 | [backlight.py](backlight.py) | a slider setting the backlight with `rgbpanel.backlight()` |
+| [breakout.py](breakout.py) | a game: drag the paddle, break the bricks (ball physics in an LVGL timer, buzzer) |
 | [simon.py](simon.py) | a game: repeat the growing sequence of colours (LVGL timer, buzzer on GPIO1) |
 | [snake.py](snake.py) | a game: snake controlled by tapping on the side to turn to (LVGL objects reused as segments) |
 | [tictactoe.py](tictactoe.py) | a game: you (X) against the microcontroller (O, minimax: it never loses) |

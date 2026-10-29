@@ -1,0 +1,8 @@
+# examples/breakout.py on the board: automatic play (paddle follows the ball), ticks driven from the REPL
+bricks 5 x 8 size 27 x 10 paddle 48 state serve
+ticks 6000 level 1 score 48 lives 3 bricks left 22 ball outside the field 0 worst tick 29578 us
+after missing: over lives 0 'Game over\nScore 77\nTap to play'
+underruns 0 mem_free 202960 elapsed 9662 ms
+
+# tick time alone (display_driver timer stopped)
+on_tick avg 616 us, worst 9194 us over 2000 ticks; bricks broken 15
