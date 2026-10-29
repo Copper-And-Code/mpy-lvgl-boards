@@ -167,4 +167,6 @@ high. Names from `pins.csv` are available as `machine.Pin("LCD_BL")` etc.
 - PyDevices: `lvgl-micropython` and `lvgl-bindings`.
 - MicroPython: `WAVESHARE_RP2350B_CORE` board definition as starting point.
 
+Examples: [`examples/`](../../../examples/).
+
 Details and provenance in [`docs/CREDITS.md`](../../../docs/CREDITS.md).

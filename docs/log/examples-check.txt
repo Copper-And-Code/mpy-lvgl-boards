@@ -1,0 +1,10 @@
+# examples/: run each on the board, then check from the REPL (resume, no reset)
+== hello
+frames/s 60 underruns 0 mem_free 209248
+== animation
+frames/s 59 underruns 0 mem_free 204656
+== button
+label: Taps: 2
+== backlight
+backlight 30 label: Backlight 30 %
+backlight 80 label: Backlight 80 %

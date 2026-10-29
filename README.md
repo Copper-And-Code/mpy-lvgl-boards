@@ -24,6 +24,7 @@ scripts/build_rp2.sh [BOARD]     # pinned sources and toolchain in .work/, firmw
 boards/<port>/<BOARD>/   board definitions (BOARD_DIR)
 modules/                 user C modules (rgbpanel: RGB panel scan-out with PIO + DMA)
 python/                  frozen drivers (display_driver.py, gt911.py)
+examples/                small LVGL examples to run with mpremote
 scripts/                 build scripts
 tests/hil/               tests run on the board with mpremote; tests/host/ on the unix port
 docs/                    measurements, logs (docs/log/), credits, drafts
