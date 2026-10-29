@@ -1,0 +1,6 @@
+product id: 911 addr 0x5d
+read() avg us: 186
+touch now: corners and centre
+UP   x=0 y=0
+status 0x80
+INT -> 1

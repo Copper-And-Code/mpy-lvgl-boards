@@ -1,0 +1,58 @@
+make: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2»
+Use make V=1 or set BUILD_VERBOSE in your environment to increase build verbosity.
+make[1]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[2]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  1%] Built target usermod_rgbpanel_rgbpanel_pio_h
+[  1%] Built target bs2_default
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  1%] Built target bs2_default_library
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  1%] Built target BUILD_VERSION_HEADER
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  1%] Generating genhdr/root_pointers.collected
+Root pointer registrations not updated
+MPY gt911.py
+GEN /opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4/frozen_content.c
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  2%] Built target BUILD_FROZEN_CONTENT
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  2%] Generating genhdr/compressed.collected
+[  2%] Generating genhdr/moduledefs.collected
+[  2%] Generating genhdr/root_pointers.collected
+Module registrations not updated
+Root pointer registrations not updated
+Compressed data not updated
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[3]: ingresso nella directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[  2%] Generating genhdr/compressed.collected
+[  2%] Generating genhdr/root_pointers.collected
+[  2%] Generating genhdr/moduledefs.collected
+Root pointer registrations not updated
+Compressed data not updated
+Module registrations not updated
+[  2%] Building C object CMakeFiles/firmware.dir/frozen_content.c.o
+[  2%] Linking CXX executable firmware.elf
+Memory region         Used Size  Region Size  %age Used
+           FLASH:     1072432 B         4 MB     25.57%
+     FLASH_ROMFS:           0 B          0 B
+        FLASH_FS:           0 B        12 MB      0.00%
+           PSRAM:           0 B          0 B
+         XIP_RAM:           0 B        16 KB      0.00%
+             RAM:      156764 B       512 KB     29.90%
+       SCRATCH_X:           0 B          0 B
+       SCRATCH_Y:          8 KB         8 KB    100.00%
+make[3]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+[100%] Built target firmware
+make[2]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make[1]: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2/build-TLCD4»
+make: uscita dalla directory «/opt/devel/waveshare-rp2350/work/micropython/ports/rp2»

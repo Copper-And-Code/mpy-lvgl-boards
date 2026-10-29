@@ -1,0 +1,3 @@
+gt911 read() avg us: 236
+tap the button
+done, clicks: 0

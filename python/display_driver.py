@@ -8,6 +8,8 @@
 # (DIRECT mode, one buffer, no copy). The framebuffer is rgbpanel.WIDTH x
 # rgbpanel.HEIGHT: 240x240 shown as 2x2 pixels when the board has no PSRAM.
 #
+# The GT911 touch controller is registered as LVGL pointer device (touch, indev).
+#
 # Importing again (or after a soft reset) is safe: the panel keeps running,
 # LVGL and the timer are set up once per MicroPython session.
 #
@@ -41,6 +43,16 @@ def _flush(d, area, px):
 
 
 disp.set_flush_cb(_flush)
+
+# Touch (GT911 on I2C1). Coordinates are scaled to the framebuffer.
+try:
+    import gt911
+
+    touch = gt911.GT911(scale=480 // WIDTH)
+    indev = touch.lv_register()
+except OSError as e:
+    touch = indev = None
+    print("display_driver: no touch:", e)
 
 _timer = None
 _busy = False

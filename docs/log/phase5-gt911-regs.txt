@@ -1,0 +1,3 @@
+pid b'911\x00' fw 6010 xres/yres reg e001e001
+cfg ver 79 xmax 480 ymax 480 touches 5 mod1 35
+cmd 0x8040 ff status 00

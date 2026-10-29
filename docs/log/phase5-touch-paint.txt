@@ -1,0 +1,20 @@
+product id: 911 cmd 0x8040 = 00
+touch the 5 white squares
+UP   x=0 y=0
+DOWN x=0 y=0
+UP   x=0 y=0
+DOWN x=237 y=0
+UP   x=237 y=0
+DOWN x=0 y=239
+UP   x=0 y=239
+DOWN x=236 y=237
+DOWN x=235 y=236
+DOWN x=236 y=236
+DOWN x=234 y=236
+DOWN x=233 y=235
+DOWN x=231 y=235
+DOWN x=230 y=235
+UP   x=230 y=235
+DOWN x=122 y=118
+UP   x=122 y=118
+done, touches: 5
