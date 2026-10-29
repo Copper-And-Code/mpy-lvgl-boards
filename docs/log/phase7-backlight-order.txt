@@ -4,3 +4,4 @@ C PWM duty 10 %
 D PWM duty 90 %
 end: GPIO40 low
 Result (Nunzio, by eye): A brighter than B, C brighter than D -> backlight is active low (GPIO low = on, lower duty = brighter). Phase 1 conclusion was wrong; rgbpanel fixed.
+After the fix (5dee1e9), examples/backlight.py slider: right = brighter, left = darker (Nunzio, by touch and eye).
