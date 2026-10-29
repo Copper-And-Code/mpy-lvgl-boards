@@ -15,3 +15,9 @@
 - Pixel check vs the unix port (same binding, same lv_conf): static scene `tests/hil/scene_static.py`,
   CRC32 per 32x32 tile: **64/64 tiles identical** (`phase4-crc-target.txt`, `phase4-crc-unix.txt`).
 - `lv.refr_now()` full screen invalidated, 240x240, 150 MHz: 9426, 9330, 9125, 9119, 9123 us.
+
+Note: `mpremote exec/run` soft-resets the board first unless `resume` is given. A scene
+started with `mpremote run` keeps animating only until the next non-`resume` mpremote
+command: after that the soft reset stops LVGL and the panel keeps showing the last frame
+(seen during the hello test: "the spinner does not turn"). Use `mpremote resume exec ...`
+to inspect a running scene.
