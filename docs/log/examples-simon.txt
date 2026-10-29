@@ -1,0 +1,8 @@
+# examples/simon.py on the board: simulated play (3 correct rounds, then a wrong pad)
+start: idle 'Simon\nTap'
+round 1 sequence [2] shown in 1146 ms, state input 'Go!'
+round 2 sequence [2, 3] shown in 1687 ms, state input 'Go!'
+round 3 sequence [2, 3, 2] shown in 2329 ms, state input 'Go!'
+round 4 sequence [2, 3, 2, 2] shown in 2937 ms, state input 'Go!'
+end: over 'Score 3\nBest 3\nTap' buzzer duty 0
+underruns 0 mem_free 173632
