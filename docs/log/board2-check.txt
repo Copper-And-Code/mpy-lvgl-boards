@@ -1,0 +1,19 @@
+# Board 2 (chipid 0x04793f4c817cd6a3): factory backup backup/board2_factory_backup.bin (sha256 4f7646d2...), then our firmware
+The device was rebooted to start the application.
+/dev/ttyACM0
+uname: (sysname='rp2', nodename='rp2', release='1.29.0', version='v1.29.0 on 2026-10-29 (GNU 15.2.1 MinSizeRel)', machine='Waveshare RP2350-Touch-LCD-4 with RP2350')
+freq: 150000000
+mem_free: 351680 mem_alloc: 5376
+i2c: I2C(1, freq=400000, scl=7, sda=6, timeout=50000)
+i2c scan: ['0x51', '0x6b']
+  0x51 PCF85063 RTC
+  0x6B QMI8658 IMU (0x6B)
+  MISSING GT911
+fs total: 12582912 free: 12574720
+## GT911 reset sequence (both address selections), then scan
+INT 0 during reset -> expect 0x5d, scan: ['0x51', '0x6b']
+INT 1 during reset -> expect 0x14, scan: ['0x51', '0x6b']
+mem_free (no PSRAM if ~350 KB): 351280
+## display_driver without touch, examples/hello.py
+display_driver: no touch: [Errno 5] EIO
+touch None indev None frames/s 57 underruns 0

@@ -17,7 +17,7 @@ Measured on one board, without PSRAM. Logs and method in
 |---|---|
 | Display | Works. **240x240 framebuffer shown as 2x2 pixels** (see *PSRAM* below). 57.7 fps at the default 150 MHz, 0 underruns in 1 h and during flash writes |
 | LVGL | Works. Double buffered (no tearing), pixel output identical to the unix port (64/64 tiles CRC). Full-screen redraw 9.2 ms at 150 MHz |
-| Touch | Works (GT911, LVGL pointer device, no rotation needed) |
+| Touch | Works (GT911, LVGL pointer device, no rotation needed). A second unit we have has no touch controller: `display_driver` then runs without it (`display_driver.touch` is `None`) |
 | Soft reset, Ctrl-C | Work with LVGL running (the scan-out keeps going; LVGL restarts clean) |
 | Overclock | 200 and 240 MHz tested (PCLK 20 MHz, 76.7 fps), core voltage unchanged. Not the default |
 | Backlight | PWM, 0–100 % |
