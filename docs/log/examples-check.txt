@@ -8,3 +8,4 @@ label: Taps: 2
 == backlight
 backlight 30 label: Backlight 30 %
 backlight 80 label: Backlight 80 %
+Nunzio, by touch (backlight.py on screen): works.
