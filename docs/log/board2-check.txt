@@ -17,3 +17,4 @@ mem_free (no PSRAM if ~350 KB): 351280
 ## display_driver without touch, examples/hello.py
 display_driver: no touch: [Errno 5] EIO
 touch None indev None frames/s 57 underruns 0
+Nunzio, by eye: hello.py visible on board 2 (same panel/init as board 1).
