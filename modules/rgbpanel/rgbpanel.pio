@@ -1,0 +1,155 @@
+; RGB parallel panel scan-out for the Waveshare RP2350-Touch-LCD-4 (ST7701S, 480x480).
+;
+; PIO1: lcd_hsync (HSYNC + PCLK) and lcd_vsync (VSYNC).
+; PIO2: lcd_line (which lines are active) and lcd_data_x1 / lcd_data_x2 (DE + pixels).
+; The PIO2 programs follow the timing pins driven by PIO1. Pin numbers are
+; absolute GPIOs: both PIOs run with gpio_base 16 and the SDK adjusts the
+; "wait gpio" indexes when the programs are loaded.
+;
+; Timing derived from the Waveshare demo (pio_rgb.pio): per line HFP 10, HSW 8,
+; HBP 10 PCLK; per frame VFP 8, VSW 3, VBP 18 lines. The programs here are
+; rewritten: DE is driven by the data state machine together with the pixels,
+; line starts are signalled through PIO IRQ 4 and frames are counted through
+; the RX FIFO of lcd_vsync (drained by DMA), so no CPU interrupt is involved.
+
+.pio_version 1
+
+; GPIO20 DE, GPIO21 VSYNC, GPIO22 HSYNC, GPIO23 PCLK, GPIO24-39 data (RGB565).
+
+; ---------------------------------------------------------------------------
+; Runs at twice the PCLK frequency: every instruction is half a PCLK period.
+; Raises PIO1 IRQ 4 at the start of every HSYNC pulse.
+.program lcd_hsync
+.side_set 2                     ; bit 0 = HSYNC (GPIO22), bit 1 = PCLK (GPIO23)
+.define public HFP 9            ; front porch PCLKs - 1
+.define public HSW 7            ; sync pulse PCLKs - 1
+.define public HBP 9            ; back porch PCLKs - 1
+    pull block      side 0b01
+    mov y, osr      side 0b11   ; active pixels - 1
+.wrap_target
+    set x, HFP      side 0b11
+hfp:
+    nop             side 0b01
+    jmp x-- hfp     side 0b11
+    irq set 4       side 0b01   ; HSYNC pulse starts: one line for lcd_vsync
+    set x, HSW      side 0b10
+hsw:
+    nop             side 0b00
+    jmp x-- hsw     side 0b10
+    set x, HBP      side 0b01   ; HSYNC rises together with a PCLK falling edge
+hbp:
+    nop             side 0b11
+    jmp x-- hbp     side 0b01
+    mov x, y        side 0b11
+act:
+    nop             side 0b01
+    jmp x-- act     side 0b11
+.wrap
+
+; ---------------------------------------------------------------------------
+; Counts lines (IRQ 4 from lcd_hsync) and drives VSYNC. Pushes one word per
+; frame, at the end of the last active line: a DMA channel drains it and its
+; transfer count is the frame counter.
+.program lcd_vsync
+.side_set 1                     ; VSYNC (GPIO21)
+.define public VFP 7            ; front porch lines - 1
+.define public VSW 2            ; sync pulse lines - 1
+.define public VBP 17           ; back porch lines - 1
+    pull block      side 1
+    mov y, osr      side 1      ; active lines - 1
+.wrap_target
+    push noblock    side 1      ; frame done
+    set x, VFP      side 1
+vfp:
+    wait 1 irq 4    side 1
+    jmp x-- vfp     side 1
+    set x, VSW      side 0
+vsw:
+    wait 1 irq 4    side 0
+    jmp x-- vsw     side 0
+    set x, VBP      side 1
+vbp:
+    wait 1 irq 4    side 1
+    jmp x-- vbp     side 1
+    mov x, y        side 1
+act:
+    wait 1 irq 4    side 1
+    jmp x-- act     side 1
+.wrap
+
+; ---------------------------------------------------------------------------
+; Raises PIO2 IRQ 4 at the first pixel slot of every active line. Resyncs on
+; every VSYNC rising edge and signals exactly "active lines" lines per frame.
+.program lcd_line
+.define public VBP 17           ; HSYNC rising edges after VSYNC rises, minus 1
+.define public HBP 9            ; PCLK rising edges after HSYNC rises, minus 1
+    pull block                  ; OSR = active lines - 1, kept for every frame
+.wrap_target
+    mov y, osr
+    wait 0 gpio 21
+    wait 1 gpio 21              ; VSYNC rises: vertical back porch
+    set x, VBP
+vbp:
+    wait 0 gpio 22
+    wait 1 gpio 22
+    jmp x-- vbp
+line:
+    wait 0 gpio 22
+    wait 1 gpio 22              ; HSYNC rises: horizontal back porch
+    set x, HBP
+hbp:
+    wait 0 gpio 23
+    wait 1 gpio 23
+    jmp x-- hbp
+    irq set 4                   ; next PCLK rising edge is the first pixel
+    jmp y-- line
+.wrap
+
+; ---------------------------------------------------------------------------
+; Pixel output, one pixel per PCLK. Autopull 32 bits, shift right: each word
+; holds two pixels, the left one in the low half. A pixel changes just after
+; a PCLK rising edge and is sampled by the panel on the next one. DE (side-set)
+; changes together with the pixels.
+.program lcd_data_x1
+.side_set 1 opt                 ; DE (GPIO20)
+    pull block      side 0
+    mov y, osr                  ; words per line - 1
+    out null, 32                ; empty the OSR: pixels come from autopull
+.wrap_target
+    mov x, y        side 0      ; DE low after the last pixel was sampled
+    wait 1 irq 4
+px:
+    out pins, 16    side 1
+    wait 0 gpio 23
+    wait 1 gpio 23
+    out pins, 16
+    wait 0 gpio 23
+    wait 1 gpio 23
+    jmp x-- px
+.wrap
+
+; ---------------------------------------------------------------------------
+; As lcd_data_x1, but every pixel is held for two PCLK periods (horizontal
+; pixel doubling). Vertical doubling is done by the DMA, which sends every
+; framebuffer line twice.
+.program lcd_data_x2
+.side_set 1 opt                 ; DE (GPIO20)
+    pull block      side 0
+    mov y, osr                  ; words per line - 1
+    out null, 32
+.wrap_target
+    mov x, y        side 0
+    wait 1 irq 4
+px:
+    out pins, 16    side 1
+    wait 0 gpio 23
+    wait 1 gpio 23
+    wait 0 gpio 23
+    wait 1 gpio 23
+    out pins, 16
+    wait 0 gpio 23
+    wait 1 gpio 23
+    wait 0 gpio 23
+    wait 1 gpio 23
+    jmp x-- px
+.wrap

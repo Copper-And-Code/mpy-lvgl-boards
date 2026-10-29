@@ -1,0 +1,6 @@
+### before soft reset
+True 950 0 (4, 5, 8, 9) (0, 1, 2)
+### soft reset, then (no init)
+running True frames/s after soft reset 58 underruns 0 fb[0]=ffe0 fb[120*240+30]=f800
+### init() again after soft reset (idempotent)
+init returned, frames keep counting: True (4, 5, 8, 9) (0, 1, 2) underruns 0

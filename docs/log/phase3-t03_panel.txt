@@ -1,0 +1,8 @@
+info: {'backlight': 80, 'pclk': 15000000, 'running': True, 'width': 240, 'dma_channels': (0, 1, 2), 'fb_bytes': 115200, 'underruns': 0, 'sys_clk': 150000000, 'height': 240, 'frames': 3, 'fps_nominal': 57.726, 'scale': 2, 'fb_addr': 536909064, 'state_machines': (4, 5, 8, 9)}
+bars drawn in 983 ms
+frames 289 in 5000 ms -> 57.80 fps (nominal 57.73)
+underruns during 5 s: 0
+wrote 200 KB in 525 ms, frames 30 (expected ~30), underruns 0
+rp2.StateMachine(0) on PIO0: ok
+underruns total: 0 frames: 379
+mem_free: 345056

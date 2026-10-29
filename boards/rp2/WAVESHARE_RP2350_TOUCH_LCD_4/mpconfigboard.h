@@ -15,3 +15,9 @@
 
 // I2C1 (GT911 touch, PCF85063 RTC, QMI8658 IMU) is the default bus, on
 // GPIO6 SDA / GPIO7 SCL: see PICO_DEFAULT_I2C in waveshare_rp2350_touch_lcd_4.h.
+
+// RGB panel framebuffer scale (modules/rgbpanel): 2 = 240x240 framebuffer shown
+// as 2x2 pixels (no PSRAM fitted), 1 = full 480x480 (needs the heap in PSRAM).
+#ifndef MICROPY_HW_RGBPANEL_SCALE
+#define MICROPY_HW_RGBPANEL_SCALE (2)
+#endif
