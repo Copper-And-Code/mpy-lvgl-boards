@@ -100,6 +100,40 @@ def place(obj, cell):
     obj.set_pos(cell[0] * CELL + 1, cell[1] * CELL + 1)
 
 
+# The head: drawn over the head segment, round, with two eyes looking where
+# the snake goes.
+def disc(parent, size, color):
+    o = lv.obj(parent)
+    o.remove_style_all()
+    o.set_size(size, size)
+    o.set_style_bg_color(lv.color_hex(color), 0)
+    o.set_style_bg_opa(lv.OPA.COVER, 0)
+    o.set_style_radius(lv.RADIUS_CIRCLE, 0)
+    o.remove_flag(lv.obj.FLAG.CLICKABLE)
+    return o
+
+
+head_obj = disc(field, CELL + 2, 0x80FF60)
+head_obj.set_style_border_width(1, 0)
+head_obj.set_style_border_color(lv.color_hex(0x208020), 0)
+EYE, PUPIL = CELL // 3, CELL // 6
+eyes = [disc(head_obj, EYE, 0xFFFFFF) for _ in range(2)]
+pupils = [disc(e, PUPIL, 0x000000) for e in eyes]
+
+
+def place_head(cell, d):
+    head_obj.set_pos(cell[0] * CELL - 1, cell[1] * CELL - 1)
+    head_obj.move_foreground()
+    c = (CELL + 2) // 2
+    px, py = -d[1], d[0]  # perpendicular to the direction
+    for k, side in enumerate((-1, 1)):
+        ex = c + d[0] * (CELL // 6) + side * px * (CELL // 4) - EYE // 2
+        ey = c + d[1] * (CELL // 6) + side * py * (CELL // 4) - EYE // 2
+        eyes[k].set_pos(ex, ey)
+        m = (EYE - PUPIL) // 2  # the pupil looks forward
+        pupils[k].set_pos(m + d[0] * m, m + d[1] * m)
+
+
 # --- game ---
 # State: "idle", "run", "over". body[0] is the tail, body[-1] the head;
 # segs[k] is the object drawn at body[k].
@@ -151,6 +185,7 @@ def new_game():
         s.remove_flag(lv.obj.FLAG.HIDDEN)
     direction = (1, 0)
     turns.clear()
+    place_head(body[-1], direction)
     score, period, elapsed = 0, START_MS, 0
     new_food()
     show_score()
@@ -192,6 +227,7 @@ def step():
     segs.append(s)
     occupied.add(head)
     place(s, head)
+    place_head(head, direction)
     if eat and not new_food():
         crash()  # the field is full: you won
 
