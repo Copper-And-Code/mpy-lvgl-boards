@@ -1,0 +1,1 @@
+flash stress: 107 x 200 KB in 90409 ms, frames 5219 (57.73 fps), underruns 0

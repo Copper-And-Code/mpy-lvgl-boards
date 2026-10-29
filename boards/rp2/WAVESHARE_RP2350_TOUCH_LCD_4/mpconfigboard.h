@@ -21,3 +21,7 @@
 #ifndef MICROPY_HW_RGBPANEL_SCALE
 #define MICROPY_HW_RGBPANEL_SCALE (2)
 #endif
+
+// Soft reset: let modules/rgbpanel drop LVGL's state (see rgbpanel_board_end_soft_reset).
+void rgbpanel_board_end_soft_reset(void);
+#define MICROPY_BOARD_END_SOFT_RESET() rgbpanel_board_end_soft_reset()

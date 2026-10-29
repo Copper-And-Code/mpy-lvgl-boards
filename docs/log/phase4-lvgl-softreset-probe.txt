@@ -1,0 +1,4 @@
+### init + display + label, no deinit
+ok1 True
+### soft reset, then lv.init again
+rc=124

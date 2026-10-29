@@ -36,6 +36,15 @@
 #endif
 #include "st7701_init.h"
 
+#if __has_include("lvgl/lvgl.h")
+#define RGBPANEL_LVGL (1)
+#include "lvgl/lvgl.h"
+// From the lvgl-micropython binding: forgets LVGL's GC-allocated global state.
+void mp_lv_deinit_gc(void);
+#else
+#define RGBPANEL_LVGL (0)
+#endif
+
 #ifndef MICROPY_HW_RGBPANEL_SCALE
 #define MICROPY_HW_RGBPANEL_SCALE (2)
 #endif
@@ -505,6 +514,32 @@ static mp_obj_t rgbpanel_wait_vsync(size_t n_args, const mp_obj_t *args) {
 }
 static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(rgbpanel_wait_vsync_obj, 0, 1, rgbpanel_wait_vsync);
 
+/******************************************************************************/
+// LVGL glue (only when the firmware has the lvgl-micropython binding)
+
+#if RGBPANEL_LVGL
+static uint32_t lv_tick_ms(void) {
+    return mp_hal_ticks_ms();
+}
+
+// lv_tick_install(): make LVGL read the millisecond tick itself, so Python
+// never calls lv.tick_inc(). Call after lv.init() (lv.init() resets it).
+static mp_obj_t rgbpanel_lv_tick_install(void) {
+    lv_tick_set_cb(lv_tick_ms);
+    return mp_const_none;
+}
+static MP_DEFINE_CONST_FUN_OBJ_0(rgbpanel_lv_tick_install_obj, rgbpanel_lv_tick_install);
+#endif
+
+// Board soft-reset hook (MICROPY_BOARD_END_SOFT_RESET). LVGL keeps its global
+// state in GC memory behind root pointers that a soft reset does not clear:
+// without this, lv.init() after Ctrl-D would reuse freed memory and hang.
+void rgbpanel_board_end_soft_reset(void) {
+    #if RGBPANEL_LVGL
+    mp_lv_deinit_gc();
+    #endif
+}
+
 static void dict_store(mp_obj_t d, qstr key, mp_obj_t value) {
     mp_obj_dict_store(d, MP_OBJ_NEW_QSTR(key), value);
 }
@@ -552,6 +587,9 @@ static const mp_rom_map_elem_t rgbpanel_module_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR_underruns), MP_ROM_PTR(&rgbpanel_underruns_obj) },
     { MP_ROM_QSTR(MP_QSTR_wait_vsync), MP_ROM_PTR(&rgbpanel_wait_vsync_obj) },
     { MP_ROM_QSTR(MP_QSTR_info), MP_ROM_PTR(&rgbpanel_info_obj) },
+    #if RGBPANEL_LVGL
+    { MP_ROM_QSTR(MP_QSTR_lv_tick_install), MP_ROM_PTR(&rgbpanel_lv_tick_install_obj) },
+    #endif
     { MP_ROM_QSTR(MP_QSTR_WIDTH), MP_ROM_INT(FB_W) },
     { MP_ROM_QSTR(MP_QSTR_HEIGHT), MP_ROM_INT(FB_H) },
     { MP_ROM_QSTR(MP_QSTR_SCALE), MP_ROM_INT(SCALE) },
