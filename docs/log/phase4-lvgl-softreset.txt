@@ -1,0 +1,11 @@
+### init + display + label, no deinit
+ok1 True
+### soft reset 1, then display_driver again
+ok 50 331968
+rc=0
+### soft reset 2, then display_driver again
+ok 50 331968
+rc=0
+### soft reset 3, then display_driver again
+ok 50 331968
+rc=0
