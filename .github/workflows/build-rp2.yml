@@ -1,0 +1,38 @@
+# Build-only CI for the rp2 boards of this repo: no hardware, no release.
+# The pins (MicroPython, lvgl-micropython, toolchain) live in scripts/build_rp2.sh.
+name: build rp2
+
+on:
+  push:
+    paths: [boards/rp2/**, modules/**, python/**, scripts/build_rp2.sh, .github/workflows/build-rp2.yml]
+  pull_request:
+    paths: [boards/rp2/**, modules/**, python/**, scripts/build_rp2.sh, .github/workflows/build-rp2.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        board: [WAVESHARE_RP2350_TOUCH_LCD_4]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache toolchain
+        uses: actions/cache@v4
+        with:
+          path: .work/tools
+          key: xpack-arm-none-eabi-gcc-${{ hashFiles('scripts/build_rp2.sh') }}
+
+      - name: Build
+        run: scripts/build_rp2.sh ${{ matrix.board }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.board }}
+          path: dist/${{ matrix.board }}-*
+          if-no-files-found: error

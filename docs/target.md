@@ -32,6 +32,9 @@ work/
 
 ## Build commands
 
+`scripts/build_rp2.sh` does all of this with the pins above (sources in `.work/` unless
+`WORK_DIR` is set). By hand, in the workspace:
+
 ```bash
 export PATH=$PWD/tools/xpack-arm-none-eabi-gcc-15.2.1-1.1/bin:$PATH
 B=$PWD/mpy-lvgl-boards/boards/rp2/WAVESHARE_RP2350_TOUCH_LCD_4

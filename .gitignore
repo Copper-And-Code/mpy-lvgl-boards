@@ -2,3 +2,5 @@ build-*/
 *.uf2
 *.bin
 !docs/**
+.work/
+dist/
