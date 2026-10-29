@@ -9,6 +9,7 @@ the board as `main.py` (`mpremote cp examples/<name>.py :main.py`).
 | [button.py](button.py) | touch: a button counting taps |
 | [animation.py](animation.py) | LVGL animations (no tearing: double buffered) |
 | [backlight.py](backlight.py) | a slider setting the backlight with `rgbpanel.backlight()` |
+| [c64_keyboard.py](c64_keyboard.py) | typing on a C64-style keyboard (TCA8418 on connector H4, see `python/c64keyboard.py`); without it, says so |
 | [breakout.py](breakout.py) | a game: drag the paddle, break the bricks (ball physics in an LVGL timer, buzzer) |
 | [pong.py](pong.py) | a game: you against the microcontroller, drag your paddle up and down |
 | [simon.py](simon.py) | a game: repeat the growing sequence of colours (LVGL timer, buzzer on GPIO1) |

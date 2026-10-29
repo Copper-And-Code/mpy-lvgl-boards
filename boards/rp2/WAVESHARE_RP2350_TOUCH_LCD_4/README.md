@@ -158,6 +158,15 @@ but the rule stays.
 | UART1 TX / RX | 8 / 9 |
 | PSRAM CS (U9) | 47 |
 
+Connector H4 (10 pins): 1 VIN, 2 GND, 3/4 RS485 TX+/TX−, 5/6 CAN L/H, 7 I2C_VCC (3.3 V;
+5 V with the H3 solder pad), 8 GND, 9 SDA, 10 SCL. SDA/SCL are I2C1 (GPIO6/7, level
+shifted), shared with the touch (0x5D), RTC (0x51) and IMU (0x6B). No header has free
+GPIOs; test pads TP1/TP2 are GPIO46/45 (UART0 TX/RX).
+
+External keyboard: `tca8418.py` and `c64keyboard.py` (frozen) drive a TCA8418 keypad
+controller on H4 with a Commodore 64-style 8x8 matrix, as an LVGL keypad; see
+`examples/c64_keyboard.py`. Tested so far against a software model of the chip only.
+
 GPIO2/3 are shared by the LCD init SPI and the CAN controller: initialise CAN after the
 display (`rgbpanel.init()` only uses them during the panel init) and keep LCD_CS (GPIO18)
 high. Names from `pins.csv` are available as `machine.Pin("LCD_BL")` etc.

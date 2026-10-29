@@ -1,0 +1,27 @@
+# C64 keyboard driver (python/tca8418.py, python/c64keyboard.py), no TCA8418 hardware yet
+## host: CPython and unix port (tests/host/test_c64keyboard.py, software TCA8418)
+test_c64keyboard: OK
+test_c64keyboard: OK
+'Hello, C64!\nreadyX'
+test_c64keyboard_lvgl: OK
+## board: frozen modules present, I2C1 scan
+frozen: tca8418.py c64keyboard.py
+I2C1 scan: ['0x51', '0x5d', '0x6b']
+## board: examples/c64_keyboard.py without the chip
+status: 'No TCA8418 on H4:\nTCA8418 not found at 0x34' kb None
+## board: driver tests and LVGL test with the software TCA8418 (real display)
+cp tests/host/fake_tca8418.py :fake_tca8418.py
+test_c64keyboard: OK
+''
+Traceback (most recent call last):
+  File "<stdin>", line 55, in <module>
+AssertionError: 
+rm :fake_tca8418.py
+## board, after adding real sleeps to run() in the LVGL test
+cp tests/host/fake_tca8418.py :fake_tca8418.py
+'Hello, C64!\nreadyX'
+test_c64keyboard_lvgl: OK
+rm :fake_tca8418.py
+## host again
+'Hello, C64!\nreadyX'
+test_c64keyboard_lvgl: OK

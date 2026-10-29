@@ -4,3 +4,4 @@ build-*/
 !docs/**
 .work/
 dist/
+__pycache__/
