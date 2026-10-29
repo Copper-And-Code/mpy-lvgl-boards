@@ -4,3 +4,4 @@ MCU starts: worst MCU reply 357 ms over 8 positions
 game: board ['X', 'O', 'X', '', 'O', '', '', 'O', 'X'] status: I win! | You 0  MCU 1  = 0
 underruns 0 mem_free 201280
 Host check (CPython, AI code of examples/tictactoe.py, every user line of play): user starts {'X': 0, 'O': 368, 'draw': 153}, MCU starts {'X': 0, 'O': 82, 'draw': 10} -> the MCU never loses.
+Nunzio, by touch: game works, ended in a draw.
