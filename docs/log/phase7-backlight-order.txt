@@ -1,0 +1,6 @@
+A GPIO40 low
+B GPIO40 high
+C PWM duty 10 %
+D PWM duty 90 %
+end: GPIO40 low
+Result (Nunzio, by eye): A brighter than B, C brighter than D -> backlight is active low (GPIO low = on, lower duty = brighter). Phase 1 conclusion was wrong; rgbpanel fixed.

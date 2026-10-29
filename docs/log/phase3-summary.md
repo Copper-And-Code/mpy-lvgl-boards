@@ -4,7 +4,8 @@ Decision (Nunzio, 2026-10-29): no PSRAM (U9 not fitted) → option (b) now, PSRA
 Scale is a build option: `MICROPY_HW_RGBPANEL_SCALE` in `mpconfigboard.h` (2 now, 1 with PSRAM).
 
 Backlight polarity (Phase 1, by eye): PWM duty 0 % = **off** → normal polarity,
-unlike the demo's `100 - percent`.
+unlike the demo's `100 - percent`. **Wrong, corrected in Phase 7**: the backlight is
+active low, as in the demo (`phase7-backlight-order.txt`).
 
 ## Build
 - rc=0, no warnings (`phase3-build.log`). FLASH 1 070 360 B, RAM (static) 156 764 B

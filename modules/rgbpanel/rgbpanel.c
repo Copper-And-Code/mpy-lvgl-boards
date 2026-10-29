@@ -179,8 +179,10 @@ static void st7701_init_panel(void) {
 }
 
 /******************************************************************************/
-// Backlight on GPIO40. Duty 0 is off (checked on the board). Full on and off
-// use plain GPIO levels, so they survive the PWM shutdown of a soft reset.
+// Backlight on GPIO40, active low: GPIO low is full brightness, high is off,
+// a lower PWM duty is brighter (checked on the board, as in Waveshare's demo).
+// Full on and off use plain GPIO levels, so they survive the PWM shutdown of a
+// soft reset.
 
 static void backlight_set(uint pct) {
     if (pct > 100) {
@@ -190,7 +192,7 @@ static void backlight_set(uint pct) {
     if (pct == 0 || pct == 100) {
         gpio_init(PIN_BL);
         gpio_set_dir(PIN_BL, GPIO_OUT);
-        gpio_put(PIN_BL, pct == 100);
+        gpio_put(PIN_BL, pct == 0);
         return;
     }
     uint slice = pwm_gpio_to_slice_num(PIN_BL);
@@ -198,7 +200,7 @@ static void backlight_set(uint pct) {
     pwm_config_set_clkdiv(&c, (float)clock_get_hz(clk_sys) / (BL_PWM_FREQ * (BL_PWM_WRAP + 1)));
     pwm_config_set_wrap(&c, BL_PWM_WRAP);
     pwm_init(slice, &c, false);
-    pwm_set_gpio_level(PIN_BL, pct * (BL_PWM_WRAP + 1) / 100);
+    pwm_set_gpio_level(PIN_BL, (100 - pct) * (BL_PWM_WRAP + 1) / 100);
     pwm_set_enabled(slice, true);
     gpio_set_function(PIN_BL, GPIO_FUNC_PWM);
 }
