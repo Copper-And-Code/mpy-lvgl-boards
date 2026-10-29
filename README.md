@@ -28,3 +28,8 @@ scripts/                 build scripts
 tests/hil/               tests run on the board with mpremote; tests/host/ on the unix port
 docs/                    measurements, logs (docs/log/), credits, drafts
 ```
+
+## License
+
+MIT, see [LICENSE](LICENSE). Third-party data and provenance (e.g. the ST7701S init
+sequence from Waveshare's demo) are listed in [docs/CREDITS.md](docs/CREDITS.md).
