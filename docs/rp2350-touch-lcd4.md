@@ -63,12 +63,23 @@ Pixel check vs the unix port still 64/64 tiles identical (`log/phase6-crc-double
 
 ## Soak tests (150 MHz)
 
-| Configuration | Duration | Frames | fps | Underruns | Errors | Python allocations | Min GC free |
+| Configuration | Duration | Frames | fps | Underruns | Errors | Python allocations | GC free, per-minute samples (t ≥ 60 s) |
 |---|---|---|---|---|---|---|---|
-| single buffer, Python flush | 3600 s | 207 823 | 57.73 | 0 | 0 | 668 760 | 226 960 B |
+| single buffer, Python flush | 3600 s | 207 823 | 57.73 | 0 | 0 | 668 760 | 252 848 .. 270 912 B |
+| double buffer, C flush | 3600 s | 207 828 | 57.73 | 0 | 0 | 374 400 | 66 688 .. 147 952 B |
 
 Scene: sweeping bar animation, spinner, label updated 5x/s, list/string churn,
-`gc.collect()` every 10 s (`tests/hil/t06_soak.py`, `log/phase6-soak.txt`).
+`gc.collect()` every 10 s (`tests/hil/t06_soak.py`, `log/phase6-soak.txt`,
+`log/phase6-soak-doublebuf.txt`).
+
+- No leak: GC free has no trend over the hour in either run. The samples are taken
+  between collections, so they include garbage; the single 66 688 B sample in the double
+  buffer run is one such instant (the next minute is back at 139 840 B).
+- The `min_free` column printed by the test is not meaningful: its starting value is
+  `gc.mem_free()` before the first `gc.collect()` and no later sample went below it.
+- The Python loop ran ~44 % fewer iterations with double buffering (allocation count):
+  LVGL now waits for the end of the panel frame on every refresh, which leaves less CPU
+  to the main loop at 150 MHz.
 
 ## Changing `machine.freq()`
 
