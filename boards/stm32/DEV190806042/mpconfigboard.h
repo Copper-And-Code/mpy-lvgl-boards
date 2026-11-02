@@ -20,6 +20,24 @@
 #define MICROPY_HW_ENTER_BOOTLOADER_VIA_RESET   (0)
 #define MICROPY_HW_SDCARD_MOUNT_AT_BOOT         (0)
 
+// LTDC display (modules/st_ltdc): pins (port, pin, alternate function) checked
+// against boards/stm32h743_af.csv; framebuffers in the top MICROPY_HW_LTDC_FB_BYTES
+// of the SDRAM, kept out of the GC heap (see MICROPY_HEAP_END).
+#define MICROPY_HW_LTDC_FB_BYTES    (4 * 1024 * 1024)
+// 24-bit RGB on ports I, J, K.
+#define MICROPY_HW_LTDC_PINS \
+    ST_LTDC_PIN('I', 12, 14), ST_LTDC_PIN('I', 13, 14), ST_LTDC_PIN('I', 14, 14), \
+    ST_LTDC_PIN('I', 15, 14), ST_LTDC_PIN('J', 0, 14), ST_LTDC_PIN('J', 1, 14), \
+    ST_LTDC_PIN('J', 2, 14), ST_LTDC_PIN('J', 3, 14), ST_LTDC_PIN('J', 4, 14), \
+    ST_LTDC_PIN('J', 5, 14), ST_LTDC_PIN('J', 6, 14), ST_LTDC_PIN('J', 7, 14), \
+    ST_LTDC_PIN('J', 8, 14), ST_LTDC_PIN('J', 9, 14), ST_LTDC_PIN('J', 10, 14), \
+    ST_LTDC_PIN('J', 11, 14), ST_LTDC_PIN('J', 12, 14), ST_LTDC_PIN('J', 13, 14), \
+    ST_LTDC_PIN('J', 14, 14), ST_LTDC_PIN('J', 15, 14), ST_LTDC_PIN('K', 0, 14), \
+    ST_LTDC_PIN('K', 1, 14), ST_LTDC_PIN('K', 2, 14), ST_LTDC_PIN('K', 3, 14), \
+    ST_LTDC_PIN('K', 4, 14), ST_LTDC_PIN('K', 5, 14), ST_LTDC_PIN('K', 6, 14), \
+    ST_LTDC_PIN('K', 7, 14)
+#define MICROPY_HW_LTDC_BL          (pin_B5)
+
 // End of soft reset: clear LVGL's GC state (modules/st_ltdc/st_ltdc.c).
 struct _boardctrl_state_t;
 void st_ltdc_board_end_soft_reset(struct _boardctrl_state_t *state);
@@ -107,7 +125,7 @@ extern struct _spi_bdev_t spi_bdev;
 #define MICROPY_HW_SDRAM_STARTUP_TEST       (1)
 #define MICROPY_HW_SDRAM_TEST_FAIL_ON_ERROR (1)
 #define MICROPY_HEAP_START  ((sdram_valid) ? sdram_start() : &_heap_start)
-#define MICROPY_HEAP_END    ((sdram_valid) ? sdram_end() : &_heap_end)
+#define MICROPY_HEAP_END    ((sdram_valid) ? (void *)((uint8_t *)sdram_end() - MICROPY_HW_LTDC_FB_BYTES) : &_heap_end)
 
 // Timing configuration for SDRAM @120Mhz
 #define MICROPY_HW_SDRAM_TIMING_TMRD        (2)

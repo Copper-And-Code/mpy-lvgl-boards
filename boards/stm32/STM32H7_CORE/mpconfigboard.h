@@ -25,6 +25,35 @@
 #define MICROPY_HW_ENTER_BOOTLOADER_VIA_RESET   (0)
 #define MICROPY_HW_SDCARD_MOUNT_AT_BOOT         (1)
 
+// LTDC display (modules/st_ltdc): pins (port, pin, alternate function) checked
+// against boards/stm32h743_af.csv; framebuffers in the top MICROPY_HW_LTDC_FB_BYTES
+// of the SDRAM, kept out of the GC heap (see MICROPY_HEAP_END).
+#define MICROPY_HW_LTDC_FB_BYTES    (4 * 1024 * 1024)
+#define MICROPY_HW_LTDC_PINS_COMMON \
+    ST_LTDC_PIN('I', 9, 14), ST_LTDC_PIN('I', 10, 14), ST_LTDC_PIN('I', 0, 14), \
+    ST_LTDC_PIN('I', 1, 14), ST_LTDC_PIN('I', 2, 14), ST_LTDC_PIN('I', 5, 14), \
+    ST_LTDC_PIN('I', 6, 14), ST_LTDC_PIN('I', 7, 14), ST_LTDC_PIN('F', 10, 14), \
+    ST_LTDC_PIN('H', 9, 14), ST_LTDC_PIN('H', 10, 14), ST_LTDC_PIN('H', 11, 14), \
+    ST_LTDC_PIN('H', 12, 14), ST_LTDC_PIN('H', 13, 14), ST_LTDC_PIN('H', 15, 14), \
+    ST_LTDC_PIN('G', 6, 14), ST_LTDC_PIN('G', 7, 14), ST_LTDC_PIN('A', 8, 13)
+#if defined(BOARD_V10)
+// RGB565 wiring: R3-R7, G2-G7, B3-B7.
+#define MICROPY_HW_LTDC_PINS MICROPY_HW_LTDC_PINS_COMMON, \
+    ST_LTDC_PIN('G', 10, 9), ST_LTDC_PIN('G', 12, 9)
+#define MICROPY_HW_LTDC_BL          (pin_H6)
+#define MICROPY_HW_LTDC_RST         (pin_E2)
+#elif defined(BOARD_V13)
+// 24-bit RGB. R2 is on PH8 (schematic V1.3); the old driver used PH4, which is
+// LCD_G4 again and the SCL of I2C2.
+#define MICROPY_HW_LTDC_PINS MICROPY_HW_LTDC_PINS_COMMON, \
+    ST_LTDC_PIN('A', 2, 14), ST_LTDC_PIN('E', 5, 14), ST_LTDC_PIN('E', 6, 14), \
+    ST_LTDC_PIN('D', 6, 14), ST_LTDC_PIN('H', 8, 14), ST_LTDC_PIN('H', 14, 14), \
+    ST_LTDC_PIN('G', 12, 14), ST_LTDC_PIN('G', 13, 14), ST_LTDC_PIN('G', 14, 14), \
+    ST_LTDC_PIN('I', 4, 14)
+#define MICROPY_HW_LTDC_BL          (pin_D12)
+#define MICROPY_HW_LTDC_RST         (pin_D11)
+#endif
+
 // End of soft reset: clear LVGL's GC state (modules/st_ltdc/st_ltdc.c).
 struct _boardctrl_state_t;
 void st_ltdc_board_end_soft_reset(struct _boardctrl_state_t *state);
@@ -149,7 +178,7 @@ extern struct _spi_bdev_t spi_bdev;
 #define MICROPY_HW_SDRAM_STARTUP_TEST       (1)
 #define MICROPY_HW_SDRAM_TEST_FAIL_ON_ERROR (1)
 #define MICROPY_HEAP_START  ((sdram_valid) ? sdram_start() : &_heap_start)
-#define MICROPY_HEAP_END    ((sdram_valid) ? sdram_end() : &_heap_end)
+#define MICROPY_HEAP_END    ((sdram_valid) ? (void *)((uint8_t *)sdram_end() - MICROPY_HW_LTDC_FB_BYTES) : &_heap_end)
 
 // Timing configuration for SDRAM @120Mhz
 #define MICROPY_HW_SDRAM_TIMING_TMRD        (2)

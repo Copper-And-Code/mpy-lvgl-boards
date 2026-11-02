@@ -117,6 +117,13 @@ Weak points to fix in the rewrite (deduced from reading, not observed on hardwar
 5. `deinit()` requests a VBL reload and deinitialises at once without waiting for it.
 6. `lv_deinit()` in the soft-reset hook from C, not the binding's `mp_lv_deinit_gc()`:
    with PyDevices the binding's root pointers must be cleared too (RP2350 lesson).
+7. STM32H7_CORE V1.3 pin table: it sets PH4 to AF14, which is LCD_G4 a second time
+   (PH15 is G4 already) and is the SCL of the board's I2C2; LCD_R2 is never driven.
+   The V1.3 schematic puts LCD_R2 on PH8 (AF14 = LCD_R2). Found by checking every
+   pin against `stm32h743_af.csv` (the other three tables are complete: 24 bits on
+   DEV190806042 and FK743M5-XIH6, RGB565 wiring on V1.0).
+8. On MicroPython 1.29 the write-through MPU region 6 would not last: `dma.c`
+   reprograms and disables regions 6/7 around SD card reads (`d2e87fd16`).
 
 ## Old driver: `touch_i2c.c`
 
