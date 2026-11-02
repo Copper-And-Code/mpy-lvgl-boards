@@ -36,11 +36,13 @@ cfg = BOARDS.get(board, {})
 print("freq:", machine.freq())
 check("cpu 480 MHz", machine.freq()[0] == 480_000_000)
 
-# SDRAM heap: 32 MB minus what the runtime takes; the AXI SRAM heap would be < 512 KB.
+# SDRAM heap: 32 MB minus the 4 MB framebuffer zone (MICROPY_HW_LTDC_FB_BYTES) and the
+# GC block table (about 1/33): 28 687 744 B on STM32H7_CORE V1.3. The AXI SRAM fallback
+# heap would be < 512 KB.
 gc.collect()
 free = gc.mem_free()
 total = free + gc.mem_alloc()
-check("heap in SDRAM", total > 30 * 1024 * 1024, "total %d free %d" % (total, free))
+check("heap in SDRAM", total > 27 * 1024 * 1024, "total %d free %d" % (total, free))
 
 # QSPI filesystem (the flash itself is printed by machine.info() as well)
 fs = os.statvfs("/flash")

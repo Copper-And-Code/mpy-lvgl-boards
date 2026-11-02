@@ -1,0 +1,37 @@
+# STM32H7_CORE V1.3; the soft-reset runs here followed a hard reset (port open), see stm32-phase2-t02_softreset-V13.txt for the valid ones
+== t02_lvgl_smoke 
+mem_free before: 28684320
+clicked
+Hello from LVGL - drew 240 px wide refr_now 1467 us
+mem_free after scene: 28618816
+mem_free after deinit: 28684320
+clicked
+Hello from LVGL - drew 240 px wide refr_now 1466 us
+OK
+>rc=0
+== t02_lvgl_smoke --soft-reset
+mem_free before: 28684320
+clicked
+Hello from LVGL - drew 240 px wide refr_now 1472 us
+mem_free after scene: 28618816
+mem_free after deinit: 28684320
+clicked
+Hello from LVGL - drew 240 px wide refr_now 1468 us
+OK
+>rc=0
+== t02_lvgl_softreset run 1
+run: init+refr 3 ms, flushed [320], mem_free before 28684512 after 28523248, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>rc=0
+== t02_lvgl_softreset run 2
+run: init+refr 3 ms, flushed [320], mem_free before 28684512 after 28523248, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>rc=0
+== t02_lvgl_softreset run 3
+run: init+refr 4 ms, flushed [320], mem_free before 28684512 after 28523248, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>rc=0
+== t02_lvgl_softreset run 4
+run: init+refr 3 ms, flushed [320], mem_free before 28684512 after 28523248, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>rc=0

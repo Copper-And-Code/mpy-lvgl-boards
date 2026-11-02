@@ -66,6 +66,12 @@ static const st_ltdc_pin_t st_ltdc_pins[] = { MICROPY_HW_LTDC_PINS };
 #define FB_ALIGN (1024)   // framebuffer alignment, for the LTDC bursts
 #define MPU_REGION_LTDC (MPU_REGION_NUMBER15)
 
+// LTDC interrupts above IRQ_PRI_FLASH: spibdev.c raises BASEPRI to IRQ_PRI_FLASH
+// for a whole QSPI erase/program (tens of ms), which at IRQ_PRI_TIMX lost frames
+// from the counter and wait_vsync(). The handler only counts flags in RAM, so it
+// can run while the QSPI is busy. Same level as IRQ_PRI_DMA.
+#define IRQ_PRI_LTDC NVIC_EncodePriority(NVIC_PRIORITYGROUP_4, 5, 0)
+
 static struct {
     bool running;
     bool partial;         // LVGL display in PARTIAL mode
@@ -252,6 +258,7 @@ static void scanout_stop(void) {
     }
     LTDC->IER = 0;
     NVIC_DisableIRQ(LTDC_IRQn);
+    NVIC_DisableIRQ(LTDC_ER_IRQn);
     LTDC->GCR &= ~LTDC_GCR_LTDCEN;
     __HAL_RCC_LTDC_CLK_DISABLE();
     st.running = false;
@@ -293,11 +300,16 @@ static void scanout_start(void) {
     LTDC->SRCR = LTDC_SRCR_IMR;
 
     // Frame counter: line interrupt at the first line after the active area.
+    // On the H7 the line interrupt has its own vector (LTDC_IRQn) and FIFO
+    // underrun / transfer error another (LTDC_ER_IRQn): both go to one handler.
     LTDC->LIPCR = aah + 1;
     LTDC->ICR = LTDC_ICR_CLIF | LTDC_ICR_CFUIF | LTDC_ICR_CTERRIF;
     LTDC->IER = LTDC_IER_LIE | LTDC_IER_FUIE | LTDC_IER_TERRIE;
-    NVIC_SetPriority(LTDC_IRQn, IRQ_PRI_TIMX);
+    NVIC_SetPriority(LTDC_IRQn, IRQ_PRI_LTDC);
+    NVIC_SetPriority(LTDC_ER_IRQn, IRQ_PRI_LTDC);
+    NVIC_ClearPendingIRQ(LTDC_ER_IRQn);
     NVIC_EnableIRQ(LTDC_IRQn);
+    NVIC_EnableIRQ(LTDC_ER_IRQn);
 
     LTDC->GCR |= LTDC_GCR_LTDCEN;
     st.running = true;
@@ -315,6 +327,10 @@ void LTDC_IRQHandler(void) {
     if (isr & LTDC_ISR_TERRIF) {
         st.bus_errors += 1;
     }
+}
+
+void LTDC_ER_IRQHandler(void) {
+    LTDC_IRQHandler();
 }
 
 // Show framebuffer i from the next vertical blanking and wait until the LTDC

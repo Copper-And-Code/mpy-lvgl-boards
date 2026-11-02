@@ -1,0 +1,26 @@
+# STM32H7_CORE V1.3, one uart_run.py session (soft resets between runs); probe = reset_cause, ticks_ms, LTDC registers
+
+== tests/hil/stm32/t02_lvgl_softreset.py (1/6)
+run: init+refr 3 ms, flushed [320], mem_free before 28684496 after 28523232, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== /tmp/claude-1000/-opt-devel-mpy-lvgl-stm32/737c282d-19c4-4619-bec6-a69676c84dbb/scratchpad/probe.py (2/6)
+reset_cause 0 ticks_ms 6342 running False frames 0
+RCC_APB3ENR 00000000 LTDC_GCR 00000000 LTDC_CFBAR 00000000
+>
+== tests/hil/stm32/t02_lvgl_softreset.py (3/6)
+run: init+refr 4 ms, flushed [320], mem_free before 28684512 after 28523248, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== tests/hil/stm32/t02_lvgl_softreset.py (4/6)
+run: init+refr 3 ms, flushed [320], mem_free before 28684512 after 28523248, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== tests/hil/stm32/t02_lvgl_softreset.py (5/6)
+run: init+refr 3 ms, flushed [320], mem_free before 28684512 after 28523248, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== /tmp/claude-1000/-opt-devel-mpy-lvgl-stm32/737c282d-19c4-4619-bec6-a69676c84dbb/scratchpad/probe.py (6/6)
+reset_cause 0 ticks_ms 18113 running False frames 0
+RCC_APB3ENR 00000000 LTDC_GCR 00000000 LTDC_CFBAR 00000000
+>

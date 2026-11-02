@@ -1,0 +1,28 @@
+# STM32H7_CORE V1.3, one uart_run.py session (soft resets between runs); probe = reset_cause, ticks_ms, LTDC registers
+
+== tests/hil/stm32/t03_softreset.py (1/5)
+scan-out survived the soft reset: False frames 0 underruns 0
+init kept the scan-out (same timings): False
+LVGL refr_now 19 ms, shown buffer 1
+OK (left running on purpose) {'zone_bytes': 4194304, 'cpsr_y': 111, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 1, 'running': True, 'polarity': 8, 'frames': 3, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+>
+== /tmp/claude-1000/-opt-devel-mpy-lvgl-stm32/737c282d-19c4-4619-bec6-a69676c84dbb/scratchpad/probe.py (2/5)
+reset_cause 0 ticks_ms 6267 running True frames 160
+RCC_APB3ENR 00000008 LTDC_GCR 10002221 LTDC_CFBAR -3e2d4000
+>
+== tests/hil/stm32/t03_softreset.py (3/5)
+scan-out survived the soft reset: True frames 327 underruns 0
+init kept the scan-out (same timings): True
+LVGL refr_now 13 ms, shown buffer 0
+OK (left running on purpose) {'zone_bytes': 4194304, 'cpsr_y': 111, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 0, 'running': True, 'polarity': 8, 'frames': 330, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+>
+== tests/hil/stm32/t03_softreset.py (4/5)
+scan-out survived the soft reset: True frames 498 underruns 0
+init kept the scan-out (same timings): True
+LVGL refr_now 21 ms, shown buffer 1
+OK (left running on purpose) {'zone_bytes': 4194304, 'cpsr_y': 111, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 1, 'running': True, 'polarity': 8, 'frames': 502, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+>
+== /tmp/claude-1000/-opt-devel-mpy-lvgl-stm32/737c282d-19c4-4619-bec6-a69676c84dbb/scratchpad/probe.py (5/5)
+reset_cause 0 ticks_ms 14873 running True frames 662
+RCC_APB3ENR 00000008 LTDC_GCR 10002221 LTDC_CFBAR -3e2d4000
+>

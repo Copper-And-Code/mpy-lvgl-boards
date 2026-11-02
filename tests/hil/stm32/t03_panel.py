@@ -109,14 +109,15 @@ show("C 1-pixel checkerboard", checker)
 # D. swap cost
 bars(st_ltdc.framebuffer(1 - st_ltdc.shown()), invert=True)
 st_ltdc.swap()
-bars(st_ltdc.framebuffer(1 - st_ltdc.shown()))
+normal = 1 - st_ltdc.shown()
+bars(st_ltdc.framebuffer(normal))
 t0 = time.ticks_us()
 for i in range(20):
     st_ltdc.swap()
     time.sleep_ms(100)
 print("D 20 swaps: %d ms (incl. 20 x 100 ms sleep)" % (time.ticks_diff(time.ticks_us(), t0) // 1000))
-if st_ltdc.shown() != 0:
-    st_ltdc.swap()  # end on the normal bars
+if st_ltdc.shown() != normal:
+    st_ltdc.swap()  # end on the normal bars (the first version ended on the inverted ones)
 
 # Frame rate and underruns
 u0, f0 = st_ltdc.underruns(), st_ltdc.frame_count()

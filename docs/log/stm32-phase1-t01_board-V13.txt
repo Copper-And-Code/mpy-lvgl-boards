@@ -1,0 +1,49 @@
+# STM32H7_CORE V1.3, firmware STM32H7_CORE-V13-nolvgl-5e84035.hex, via scripts/uart_run.py
+uname: (sysname='pyboard', nodename='pyboard', release='1.29.0', version='0fd6c573ea on 2026-11-02', machine='STM32H7_CORE V1.3 with STM32H743')
+ok   known board STM32H7_CORE V1.3 with STM32H743
+freq: (480000000, 240000000, 120000000, 120000000)
+ok   cpu 480 MHz 
+ok   heap in SDRAM total 28687744 free 28679472
+ok   QSPI fs size 16742400 bytes (expected about 16 MB)
+mounts: ['flash']
+note SD not mounted: card inserted? (not counted as a failure)
+LED1 blinked 3 times
+LED2 blinked 3 times
+touch i2c: SoftI2C(scl=B12, sda=B13, freq=500000) ['0x5d']
+ok   GT911 on touch bus 
+ok   GT911 product id b'911\x00'
+
+ID=2e004100:09513330:35333736
+DEVID=0x0450
+REVID=0x2003
+S=480000000
+H=240000000
+P1=120000000
+P2=120000000
+_etext=80606a8
+_sidata=80606b0
+_sdata=24000000
+_edata=24000048
+_sbss=24000048
+_ebss=24003e5c
+_sstack=2407bff8
+_estack=2407fff8
+_ram_start=24000000
+_heap_start=24003e5c
+_heap_end=2407bff8
+_ram_end=24080000
+qstr:
+  n_pool=2
+  n_qstr=40
+  n_str_data_bytes=251
+  n_total_bytes=731
+GC:
+  28687744 total
+  9680 : 28678064
+  1=87 2=35 m=233
+SPI flash size: 16777216
+QSPI flash size: 16777216
+LFS free: 16543744 bytes
+
+RESULT: all 6 checks ok
+>

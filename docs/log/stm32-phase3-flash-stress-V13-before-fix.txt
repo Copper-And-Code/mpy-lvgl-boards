@@ -1,0 +1,6 @@
+# Before the LTDC IRQ fix (IRQ_PRI_TIMX, no LTDC_ER vector): frame counter blocked during QSPI writes
+panel IPS1024x600 targets ['/flash'] nominal 58.31 fps
+/flash: 11 files, 2200 KB in 32089 ms (69 KB/s, write + delete)
+frames 618 in 32089 ms -> 19.26 fps (nominal 58.31)
+underruns 0, info {'zone_bytes': 4194304, 'cpsr_y': 428, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 0, 'running': True, 'polarity': 8, 'frames': 1025, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+>
