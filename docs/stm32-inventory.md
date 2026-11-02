@@ -1,0 +1,188 @@
+# STM32H743 boards: inventory of the old port
+
+Written 2026-11-02 (phase 0 of the STM32 port). What the old port does, what changed
+in MicroPython since, and what is still to verify. Sources are read-only.
+
+## Sources
+
+| What | Where | Commits |
+|---|---|---|
+| Old boards (MicroPython 1.24.1 fork) | `/opt/github/lv_micropython`, branch `add-stm32h743-board-family`, `ports/stm32/boards/{DEV190806042,FK743M5-XIH6,STM32H7_CORE}` | `c3545d440` add the three boards; `a763dc856` V10 SD card on SDMMC2; `d84e00f8e` DEV190806042 linker script path (pointed to FK743M5-XIH6) |
+| Old LTDC + touch driver | `user_modules/lv_binding_micropython/driver/stm32/` in the same fork | `b244a99` driver added; `d31b3e7` harden init/deinit, validate config; `b6fce8e` review fix |
+| Not committed in the fork | `STM32H7_CORE/mpconfigboard.h`, `mpconfigvariant_VELXIO.mk`, Python layer | Velxio (Renode) variant, **not ported**. The same diff adds `render_mode` (`direct`, `direct_single`, `partial`) to `st_ltdc_utils.py`: general, worth keeping |
+| Upstream attempt, MicroPython ~1.29-preview | `/opt/github/micropython`, branch `add-STM32H7_CORE-board` (pushed to the Copper-And-Code fork) | `7d0f87a84` (2026-05-23) STM32H7_CORE only, no LTDC/LVGL; already in the 1.29 layout (`LD_FILES` with `common_basic.ld`, no `user_modules`). **Best starting point for phase 1** |
+| Schematics, photos | `/opt/github/stm32h7-boards-docs` | DEV190806042 (carrier + core), STM32H7_CORE V1.0 and V1.3; **FK743M5-XIH6: only the RGB043M2 panel sheet, no board schematic** |
+| Example code | `/opt/github/lv_micropython_code_and_tools/upython` | demos, games, `sdram_test.py`, terminal |
+
+## Boards
+
+All: STM32H743 (DEV190806042 and STM32H7_CORE: IIT6, LQFP176; FK743M5-XIH6: XIH6,
+TFBGA240), HSE 25 MHz, PLL1 M5/N192/P2 = 480 MHz, AHB/APB /2, flash latency 4,
+USB FS on OTG_FS with HSI48, 2 CDC + MSC + HID, REPL also on UART1 (A9/A10, 115200),
+RTC, RNG, ADC, DAC, servo, hardware I2C, SDRAM on FMC bank 1 at 0xC0000000 with the
+MicroPython heap in SDRAM (`MICROPY_HEAP_START = sdram_start()` if the startup test
+passes, else AXI SRAM), SDRAM timings for 120 MHz, QSPI flash as the filesystem
+(`bdev.c`, LFS2 + FAT, prescaler 2), `MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE (0)`
+(comment in the old file: enabling it "creates incorrect Option Bytes").
+Same `bdev.c`, `stm32h743.ld`, `stm32h7xx_hal_conf.h` (HSE 25 MHz, base conf) and
+`pins.csv` (all of PA..PI) for the three boards.
+
+| | DEV190806042 | FK743M5-XIH6 | STM32H7_CORE V1.0 | STM32H7_CORE V1.3 |
+|---|---|---|---|---|
+| SDRAM | 32-bit bus, 12 row bits, CAS 2, TRAS 6, NBL0-3, D0-D31 (H8-H15, I0-I10) | 16-bit, 13 row bits, CAS 3 | 16-bit, 13 row bits, CAS 3, SDNWE **H5** | same, SDNWE **C0** |
+| SDRAM control | SDNE0 C2, SDCKE0 C3 | SDNE0 H3, SDCKE0 H2 | H3 / H2 | H3 / H2 |
+| QSPI | W25Q256, 32 MB, CS G6, SCK F10 | W25Q64, 8 MB, CS G6, SCK F10 | W25Q128 (16 MB) in the code, **W25Q256JVEIQ on the schematic**, CS B6, SCK B2 | W25Q128JVSIQ, 16 MB, CS B6, SCK B2 |
+| SD card | no | SDMMC1 (C8-C12, D2) | **SDMMC2** (B14, B15, B3, B4, D6, D7) | SDMMC1 |
+| LED | B0 | C13 | C13 | B0 red, B1 green |
+| User switch | A0 | none | none | A1 (active high) |
+| I2C (machine) | I2C4 D12/D13 | I2C4 D12/D13 | I2C4 D12/D13 | I2C2 H4/H5 |
+| LTDC pins | ports I (12-15), J (0-15), K (0-7), AF14 | J, K, I12-15, plus G10 and H4 (AF9), H15 | I, F10, H, G6/G7, A8 (AF13), plus G10/G12 (AF9) | as V1.0 but A2, E5/E6, D6, H4/H14, G12-14, I4 instead of G10/G12 |
+| Backlight | B5 | H6 | H6 | D12 (`BL_CTR` on the schematic) |
+| LCD reset | — | — | E2 | D11 (`LCD_RST` on the schematic) |
+| Touch RST / INT | I8 / H7 | I10 / I11 | H7 / E3 | B14 / H7 |
+| Touch bus | SoftI2C SCL H6, SDA G7 | SoftI2C SCL G3, SDA G7 | hardware I2C4 | SoftI2C SCL B12, SDA B13 |
+
+PLL3 (pixel clock), same on all boards: M5, N40, R4 → 25 MHz / 5 × 40 / 4 = **50 MHz**
+(calculated). With the panel timings below this gives (calculated, to measure in
+phase 3): IPS1024x600 total 1344 × 638 → 58.3 Hz; RGB043M2 884 × 510 → 110.9 Hz.
+
+To verify on the schematics in phase 1 (deduced from text extraction, not yet checked
+by eye): the V1.0 QSPI part (W25Q256 on the drawing, 16 MB in the code); the FK743M5-XIH6
+pins (no schematic available: only the old code); DEV190806042 backlight B5 and touch
+SCL H6 (the same H6 is the backlight on FK743M5-XIH6 and V1.0, no conflict, different
+boards). A runtime check of the flash size is possible on 1.29 (`machine.info()` prints
+the SPI flash size since `ed4833d49`).
+
+Panels (old `panels.py`, polarity bits: 0 HS, 1 VS, 2 DE, 3 PCLK inverted):
+
+| Panel | Size | HSYNC/HBP/HFP | VSYNC/VBP/VFP | Polarity |
+|---|---|---|---|---|
+| IPS1024x600 (7") | 1024x600 | 7/164/149 | 5/22/11 | 0 |
+| RGB043M2 (4.3") | 800x480 | 4/40/40 | 4/13/13 | 8 (PCLK inverted) |
+
+Panel choice in the old port: `panel_config.py` on the filesystem (`PANEL = "..."`),
+default IPS1024x600; board and variant from a `board_config.py` generated by the
+`micropython.mk` at build time.
+
+## Old driver: `st_ltdc.c`
+
+Class `st_ltdc.LTDC(rst=, width=, height=, hsync=, hbp=, hfp=, vsync=, vbp=, vfp=,
+fb_addr=, bl=, polarity=)`, methods `init(disp)`, `deinit()`, `framebuffer(n)`,
+`flush` (a C function pointer passed to `disp.set_flush_cb`).
+
+- `init(disp)`: takes the `lv_display_t *` out of the binding object (buffer protocol),
+  registers a `LV_EVENT_DELETE` callback, reads the colour format (RGB565, RGB888,
+  ARGB8888), sets AXI QoS, allocates **both** framebuffers, sets the MPU, backlight
+  on, LCD reset pulse (100 ms low), `HAL_LTDC_Init` (→ `HAL_LTDC_MspInit` in the
+  board `bsp_ltdc.c`: PLL3 + pins + LTDC IRQ priority 5), layer 1, DMA2D init.
+- Framebuffers: `m_malloc(size + 1024)` on the **GC heap** (that is SDRAM), aligned to
+  1 KiB, kept alive by `MP_REGISTER_ROOT_POINTER(void *ltdc_fb[2])`.
+- MPU: region 6 (`MPU_REGION_DMA_UNCACHED_1`, higher priority than the SDRAM region 5)
+  set **write-through** from `fb_addr` (default 0xC0000000, the start of SDRAM) up to
+  the end of the framebuffers, rounded to 4/8/16/32 MB. No cache maintenance needed
+  for the LTDC. Side effect: the start of the GC heap is write-through too.
+- AXI QoS: SDRAM target port 5 limited to 1 outstanding transaction; LTDC 0x0F,
+  DMA2D 0x0E, CPU 0x0 (read and write).
+- Flush, DIRECT/FULL: with two buffers and the last area, `SetAddress_NoReload` +
+  `Reload(VERTICAL_BLANKING)` with the reload interrupt enabled;
+  `HAL_LTDC_ReloadEventCallback` calls `lv_display_flush_ready`. Otherwise
+  `flush_ready` at once (single buffer: renders into the buffer on screen).
+- Flush, PARTIAL: DMA2D memory-to-memory from the render buffer to `fb[0]` at the area
+  position, only the output offset register rewritten per call; `flush_ready` from the
+  DMA2D transfer-complete callback. Render buffers must be separate bytearrays.
+- `deinit()`: backlight off, layer alpha 0 with a VBL reload, `HAL_LTDC_DeInit`; the
+  IRQ callbacks see `current_ltdc_obj == NULL` and do nothing.
+- Soft reset: board hook `MICROPY_BOARD_START_SOFT_RESET(state)` →
+  `boardctrl_start_soft_reset(state); lv_deinit();` (LVGL's own `lv_deinit`, called
+  from C). The LTDC is **not** stopped.
+- `d31b3e7`: zero-initialise the object (stray `bl_pin`/`bl_led`), guard `deinit()`
+  when never initialised, validate width/height/hsync/vsync > 0 before computing the
+  register values (unsigned underflow), `ValueError` for an unknown board/panel.
+
+Weak points to fix in the rewrite (deduced from reading, not observed on hardware):
+
+1. After a soft reset the LTDC keeps scanning the old framebuffers, which are now free
+   GC heap: new objects get drawn on the panel until the next `init()`, and in DIRECT
+   mode LVGL may be rendering into memory that the GC reuses. Phase 3 must either stop
+   the LTDC in the end-of-soft-reset hook or keep the framebuffers outside the heap.
+2. PARTIAL mode: the render buffers are bytearrays somewhere in the heap; if they fall
+   outside the write-through region the DMA2D reads stale data (no
+   `SCB_CleanDCache_by_Addr` before the transfer).
+3. The write-through region starts at 0xC0000000 whatever the framebuffer address:
+   every heap object below the framebuffers is write-through (slower CPU writes).
+4. `framebuffer()`: error text says "(2-3)" but allows 4 bytes per pixel; an already
+   aligned block still moves by 1024 bytes (harmless).
+5. `deinit()` requests a VBL reload and deinitialises at once without waiting for it.
+6. `lv_deinit()` in the soft-reset hook from C, not the binding's `mp_lv_deinit_gc()`:
+   with PyDevices the binding's root pointers must be cleared too (RP2350 lesson).
+
+## Old driver: `touch_i2c.c`
+
+Class `touch_i2c.TP(device="GT911", i2c, addr=0x14, tp_max=5, tp_rst=, tp_int=)`,
+method `tp_read` (C read callback for `indev.set_read_cb`). Uses the `machine.I2C`
+protocol directly, so hardware `I2C(n)` and `SoftI2C` both work. Reset sequence with
+INT high on the RST rising edge (selects address 0x14), reads the product ID at
+0x8140 (first char must be `'9'`). Each read: **42 bytes** from 0x814E (status + 5
+points) then a write of 0 to the status register, also when nothing is touched; only
+the first point is reported. At 100 kHz SoftI2C that is roughly 4–5 ms per poll
+(calculated: ~47 bytes × 9 bits / 100 kHz). The RP2350 `python/gt911.py` reads the
+status byte first; phase 4 measures the latency.
+
+## Old Python layer
+
+`boards.py` (pins per board, table above), `panels.py` (timings), `display_conf.py`
+(board from the generated `board_config.py`, panel from `panel_config.py`),
+`st_ltdc_utils.init_display()` (lv.init, `lv_utils.event_loop`, LTDC object,
+`lv.display_create`, RGB565, buffers per render mode, touch with `SoftI2C` at 100 kHz
+or `I2C(n)`), `display_driver.py` (`disp, touch = init_display(...)`, render mode
+overridable from `__main__`).
+
+## MicroPython 1.24.1 → 1.29.0, stm32 port (291 commits on `ports/stm32`)
+
+Relevant to these boards:
+
+| Change | Commit(s) | Effect here |
+|---|---|---|
+| `LD_FILES` lists `common_basic.ld` itself (H7 boards upstream) | e.g. `9b73e344e` WeAct H743 | out-of-tree: `LD_FILES = $(BOARD_DIR)/stm32h743.ld boards/common_basic.ld`, drop the `INCLUDE` from our `.ld` (as in `7d0f87a84`) |
+| SDRAM refresh count from `MICROPY_HW_SDRAM_FREQUENCY_KHZ` / `_REFRESH_CYCLES` (was a fixed 90 MHz) | `sdram.c` | the old boards already define both; refresh count now right for 120 MHz |
+| MPU: `MPU_REGION_DMA_UNCACHED_1/2` still regions 6/7 on H7; `MPU_ATTRIBUTES_NUMBER0` reused | `182763128` | old `configure_fb_mpu_wt()` still applies |
+| `MICROPY_BOARD_END_SOFT_RESET(state)` / `START_SOFT_RESET(state)` take a `boardctrl_state_t *`, defaults `boardctrl_end/start_soft_reset` | `boardctrl.h` | our hook must call the default |
+| TinyUSB stack available, default still the ST stack (`MICROPY_HW_TINYUSB_STACK 0`) | `9bb266e31`, `faae8e73e` | no change needed; option for later |
+| ROMFS (`vfs.rom_ioctl`), on internal or QSPI flash (memory-mapped) | `bea7645b2`, `1d83c8175`, `aa0945698` | a way to move frozen Python out of the 2 MB internal flash (phase 2 size risk) |
+| QSPI flash size can be decided at runtime; `machine.info()` shows it | `aa0945698`, `ed4833d49` | checks the V1.0 QSPI question |
+| Split heap via a `.gc.blocks.table` linker section | `cbe50635e`, `c7ddf0c54` | AXI SRAM could be added as a second GC area next to SDRAM |
+| `machine.SDCard` when the board has `pyb.SDCard`; SD high speed on H7; DMA protection on reads; USB IRQs off during SD ops | `b5ca38553`, `bc7d264e8`, `d2e87fd16`, `2c57e9df6` | SD gets faster; check SD + LTDC together (flash stress, phase 3) |
+| UART FIFO on H7, RX/TX invert | `2a46759fe`, `4efc5e12b` | none |
+| `mp_cstack_init_with_top`, `MP_NORETURN` | `d6c673f28`, `boardctrl.c` | only if our C code uses the old names (`NORETURN`, `STATIC`: the old `st_ltdc.c` defines `STATIC` itself) |
+| `board.json` vendor/product consistency | `3e33d0567` | follow the new fields (`7d0f87a84` already does) |
+| New H7 boards to compare with | WEACTSTUDIO_MINI_STM32H743 (QSPI ROMFS + SPI flash FS), STM32H747I_DISCO (LTDC panel board), NUCLEO_H753ZI, VCC_GND_H743VI (already in 1.24) | templates for phase 1 |
+
+## Firmware size, first numbers
+
+| Firmware | `firmware.bin` / text | Source |
+|---|---|---|
+| Old fork, LVGL 9.3 + MicroPython 1.24.1, custom `lv_conf.h` | 1 810 800 – 1 839 692 B (DEV 1 831 456, FK 1 838 928, V10 1 839 136, V13 1 839 692) | measured, `/opt/github/lv_micropython/ports/stm32/build-*/firmware.bin` |
+| MicroPython 1.29.0, upstream WEACTSTUDIO_MINI_STM32H743, no LVGL | text 408 492 B | measured, `docs/log/stm32-phase0-upstream-h743-build.txt` |
+
+Internal flash: 2 MB (2 097 152 B). The LVGL part of the old firmware is therefore
+about 1.4 MB (deduced: old total minus a plain build, different MicroPython versions).
+
+## Entering DFU
+
+STM32H743 system bootloader (USB DFU on PA11/PA12, OTG_FS): hold **BOOT0** high and
+reset (or plug USB), then `dfu-util --alt 0 -D firmware.dfu`. From a running
+MicroPython: `machine.bootloader()` (or `mpremote bootloader`) jumps straight to the
+system bootloader, since these boards set `MICROPY_HW_ENTER_BOOTLOADER_VIA_RESET (0)`.
+Where the BOOT0 button/jumper sits on each board: to be confirmed by Nunzio and noted
+here in phase 1. ST-Link (SWD) works on all boards and is used for the backups.
+
+## Backups
+
+| Board | Internal flash (2 MB) | sha256 | QSPI files | UID |
+|---|---|---|---|---|
+| DEV190806042 | pending | | | |
+| FK743M5-XIH6 | pending | | | |
+| STM32H7_CORE V1.0 | pending | | | |
+| STM32H7_CORE V1.3 | pending | | | |
+
+Files in `/opt/devel/mpy-lvgl-stm32/backup/` (outside the repo).
