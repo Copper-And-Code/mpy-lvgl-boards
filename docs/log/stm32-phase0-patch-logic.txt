@@ -1,0 +1,10 @@
+ok   clean clone: both patches applied
+ok   already applied: nothing to do
+ok   first applied only: second applied
+ok   foreign change: stop
+ok   stray untracked file: stop
+ok   staged change: stop
+ok   patch does not apply to new upstream: stop
+ok   no patches, clean clone
+ok   no patches, dirty clone: stop
+9/9 passed

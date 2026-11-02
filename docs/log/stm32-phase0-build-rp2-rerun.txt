@@ -1,0 +1,108 @@
+
+== sources in /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work
+micropython 0fd6c573ea81 ok
+lvgl-micropython 3e287e725886 ok
+lvgl-bindings 7740c2fae0da ok (beside lvgl-micropython)
+
+== patches
+toolchain: arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203
+
+== submodules
+PICO_SDK_PATH is /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk
+Target board (PICO_BOARD) is 'waveshare_rp2350_touch_lcd_4'.
+Using board configuration from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/boards/rp2/WAVESHARE_RP2350_TOUCH_LCD_4/waveshare_rp2350_touch_lcd_4.h
+Pico Platform (PICO_PLATFORM) is 'rp2350-arm-s'.
+Build type is MinSizeRel
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/tools/Findpicotool.cmake:30 (message):
+  No installed picotool with version 2.3.0 found - building from source
+
+  It is recommended to build and install picotool separately, or to set
+  PICOTOOL_FETCH_FROM_GIT_PATH to a common directory for all your SDK
+  projects
+Call Stack (most recent call first):
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/tools/CMakeLists.txt:180 (find_package)
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/cmake/on_device.cmake:54 (pico_init_picotool)
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2350/boot_stage2/CMakeLists.txt:62 (pico_add_dis_output)
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2350/boot_stage2/CMakeLists.txt:103 (pico_define_boot_stage2)
+
+
+Downloading Picotool
+Using picotool from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/submodules/_deps/picotool/picotool
+TinyUSB available at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/hw/bsp/rp2040; enabling build support for USB.
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_btstack/CMakeLists.txt:15 (message):
+  PICO_BTSTACK_PATH specified but content not present.
+
+
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_lwip/CMakeLists.txt:15 (message):
+  PICO_LWIP_PATH specified but content not present.
+
+
+C library type is newlib
+Found User C Module(s): 
+Updating submodules: lib/mbedtls lib/tinyusb lib/micropython-lib
+
+== mpy-cross
+
+== firmware WAVESHARE_RP2350_TOUCH_LCD_4
+make: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2»
+Use make V=1 or set BUILD_VERBOSE in your environment to increase build verbosity.
+make[1]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+PICO_SDK_PATH is /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk
+Target board (PICO_BOARD) is 'waveshare_rp2350_touch_lcd_4'.
+Using board configuration from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/boards/rp2/WAVESHARE_RP2350_TOUCH_LCD_4/waveshare_rp2350_touch_lcd_4.h
+Pico Platform (PICO_PLATFORM) is 'rp2350-arm-s'.
+Build type is MinSizeRel
+Using picotool from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool/picotool
+TinyUSB available at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/hw/bsp/rp2040; enabling build support for USB.
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_btstack/CMakeLists.txt:15 (message):
+  PICO_BTSTACK_PATH specified but content not present.
+
+
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_lwip/CMakeLists.txt:15 (message):
+  PICO_LWIP_PATH specified but content not present.
+
+
+C library type is newlib
+Including User C Module(s) from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-micropython/micropython.cmake
+lvgl-micropython: no jpegio in this build -- lv.image will not draw a JPEG. jpegio owns the TJpgDec decoder; PNG and LVGL BIN still decode. Name jpegio as well for JPEG (build_mp.py --modules jpegio,lvgl-micropython).
+Including User C Module(s) from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/modules/rgbpanel/micropython.cmake
+Found User C Module(s): lv_micropython, lvgl, usermod_rgbpanel
+-- Configuring done (0.6s)
+-- Generating done (0.3s)
+-- Build files have been written to: /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4
+make[2]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  1%] Built target usermod_rgbpanel_rgbpanel_pio_h
+[  1%] Built target bs2_default
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  1%] Built target bs2_default_library
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  1%] Built target BUILD_VERSION_HEADER
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  2%] Built target BUILD_FROZEN_CONTENT
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[100%] Built target firmware
+make[2]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[1]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2»
+
+== done
+/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/dist/WAVESHARE_RP2350_TOUCH_LCD_4-9050f8c-dirty.uf2
+  micropython v1.29.0, lvgl-micropython 3e287e7, lvgl-bindings 7740c2f
+   text	   data	    bss	    dec	    hex	filename
+1087768	      0	 136208	1223976	 12ad28	/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/firmware.elf
+
+real	0m3,910s
+user	0m2,955s
+sys	0m1,176s

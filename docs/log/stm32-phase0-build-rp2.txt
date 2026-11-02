@@ -1,0 +1,1283 @@
+
+== sources in /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work
+micropython 0fd6c573ea81 ok
+lvgl-micropython 3e287e725886 ok
+
+== clone lvgl-bindings 7740c2fae0daa10992f5f8fe54acf670a70e2d3b (from /opt/devel/waveshare-rp2350/work/lvgl-bindings)
+Sto migrando la directory Git di 'lvgl' da
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/.git' a
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/.git/modules/lvgl'
+lvgl-bindings 7740c2fae0da ok (beside lvgl-micropython)
+Sto migrando la directory Git di 'lib/berkeley-db-1.xx' da
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/berkeley-db-1.xx/.git' a
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/.git/modules/lib/berkeley-db-1.xx'
+micropython/lib/berkeley-db-1.xx copied from the reference
+Sto migrando la directory Git di 'lib/mbedtls' da
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/.git' a
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/.git/modules/lib/mbedtls'
+micropython/lib/mbedtls copied from the reference
+Sto migrando la directory Git di 'lib/micropython-lib' da
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/micropython-lib/.git' a
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/.git/modules/lib/micropython-lib'
+micropython/lib/micropython-lib copied from the reference
+Sto migrando la directory Git di 'lib/pico-sdk' da
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/.git' a
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/.git/modules/lib/pico-sdk'
+micropython/lib/pico-sdk copied from the reference
+Sto migrando la directory Git di 'lib/tinyusb' da
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/.git' a
+'/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/.git/modules/lib/tinyusb'
+micropython/lib/tinyusb copied from the reference
+
+== patches
+
+== download xpack-arm-none-eabi-gcc-15.2.1-1.1-linux-x64.tar.gz
+toolchain: arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203
+
+== submodules
+PICO_SDK_PATH is /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk
+Target board (PICO_BOARD) is 'waveshare_rp2350_touch_lcd_4'.
+Using board configuration from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/boards/rp2/WAVESHARE_RP2350_TOUCH_LCD_4/waveshare_rp2350_touch_lcd_4.h
+Pico Platform (PICO_PLATFORM) is 'rp2350-arm-s'.
+Defaulting compiler (PICO_COMPILER) to 'pico_arm_cortex_m33_gcc' since not specified or detected.
+Configuring toolchain based on PICO_COMPILER 'pico_arm_cortex_m33_gcc'
+Defaulting PICO_GCC_TRIPLE to 'arm-none-eabi'
+Build type is MinSizeRel
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/tools/Findpicotool.cmake:30 (message):
+  No installed picotool with version 2.3.0 found - building from source
+
+  It is recommended to build and install picotool separately, or to set
+  PICOTOOL_FETCH_FROM_GIT_PATH to a common directory for all your SDK
+  projects
+Call Stack (most recent call first):
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/tools/CMakeLists.txt:180 (find_package)
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/cmake/on_device.cmake:54 (pico_init_picotool)
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2350/boot_stage2/CMakeLists.txt:62 (pico_add_dis_output)
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2350/boot_stage2/CMakeLists.txt:103 (pico_define_boot_stage2)
+
+
+Downloading Picotool
+Using picotool from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/submodules/_deps/picotool/picotool
+TinyUSB available at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/hw/bsp/rp2040; enabling build support for USB.
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_btstack/CMakeLists.txt:15 (message):
+  PICO_BTSTACK_PATH specified but content not present.
+
+
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_lwip/CMakeLists.txt:15 (message):
+  PICO_LWIP_PATH specified but content not present.
+
+
+C library type is newlib
+Found User C Module(s): 
+Updating submodules: lib/mbedtls lib/tinyusb lib/micropython-lib
+
+== mpy-cross
+
+== firmware WAVESHARE_RP2350_TOUCH_LCD_4
+make: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2»
+Use make V=1 or set BUILD_VERBOSE in your environment to increase build verbosity.
+PICO_SDK_PATH is /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk
+Target board (PICO_BOARD) is 'waveshare_rp2350_touch_lcd_4'.
+Using board configuration from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/boards/rp2/WAVESHARE_RP2350_TOUCH_LCD_4/waveshare_rp2350_touch_lcd_4.h
+Pico Platform (PICO_PLATFORM) is 'rp2350-arm-s'.
+Defaulting compiler (PICO_COMPILER) to 'pico_arm_cortex_m33_gcc' since not specified or detected.
+Configuring toolchain based on PICO_COMPILER 'pico_arm_cortex_m33_gcc'
+Defaulting PICO_GCC_TRIPLE to 'arm-none-eabi'
+-- The C compiler identification is GNU 15.2.1
+-- The CXX compiler identification is GNU 15.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/tools/xpack-arm-none-eabi-gcc-15.2.1-1.1/bin/arm-none-eabi-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/tools/xpack-arm-none-eabi-gcc-15.2.1-1.1/bin/arm-none-eabi-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- The ASM compiler identification is GNU
+-- Found assembler: /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/tools/xpack-arm-none-eabi-gcc-15.2.1-1.1/bin/arm-none-eabi-gcc
+Build type is MinSizeRel
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/tools/Findpicotool.cmake:30 (message):
+  No installed picotool with version 2.3.0 found - building from source
+
+  It is recommended to build and install picotool separately, or to set
+  PICOTOOL_FETCH_FROM_GIT_PATH to a common directory for all your SDK
+  projects
+Call Stack (most recent call first):
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/tools/CMakeLists.txt:180 (find_package)
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/cmake/on_device.cmake:54 (pico_init_picotool)
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2350/boot_stage2/CMakeLists.txt:62 (pico_add_dis_output)
+  /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2350/boot_stage2/CMakeLists.txt:103 (pico_define_boot_stage2)
+
+
+Downloading Picotool
+Using picotool from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool/picotool
+-- Found Python3: /home/nunzio/anaconda3/bin/python3 (found version "3.11.7") found components: Interpreter 
+-- Detected emulated TLS (__emutls_get_address)
+TinyUSB available at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/hw/bsp/rp2040; enabling build support for USB.
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_btstack/CMakeLists.txt:15 (message):
+  PICO_BTSTACK_PATH specified but content not present.
+
+
+CMake Warning at /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_lwip/CMakeLists.txt:15 (message):
+  PICO_LWIP_PATH specified but content not present.
+
+
+C library type is newlib
+Including User C Module(s) from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-micropython/micropython.cmake
+lvgl-micropython: no jpegio in this build -- lv.image will not draw a JPEG. jpegio owns the TJpgDec decoder; PNG and LVGL BIN still decode. Name jpegio as well for JPEG (build_mp.py --modules jpegio,lvgl-micropython).
+Including User C Module(s) from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/modules/rgbpanel/micropython.cmake
+Found User C Module(s): lv_micropython, lvgl, usermod_rgbpanel
+-- Configuring done (3.2s)
+-- Generating done (0.3s)
+-- Build files have been written to: /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4
+make[1]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[2]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  0%] Creating directories for 'pioasmBuild'
+[  0%] Built target picotoolForceReconfigure
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  0%] No download step for 'pioasmBuild'
+[  0%] Creating directories for 'picotoolBuild'
+[  0%] No update step for 'pioasmBuild'
+[  0%] No download step for 'picotoolBuild'
+GEN /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/genhdr/mpversion.h
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  1%] No update step for 'picotoolBuild'
+[  1%] No patch step for 'pioasmBuild'
+[  1%] Built target BUILD_VERSION_HEADER
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  1%] No patch step for 'picotoolBuild'
+[  1%] Performing configure step for 'pioasmBuild'
+[  2%] Generating genhdr/pins.h, pins_WAVESHARE_RP2350_TOUCH_LCD_4.c
+Not searching for unused variables given on the command line.
+loading initial cache file /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pico-sdk/src/rp2_common/pico_status_led/pioasm/tmp/pioasmBuild-cache-MinSizeRel.cmake
+[  2%] Performing configure step for 'picotoolBuild'
+[  2%] Generating genhdr/qstr.i.last
+Not searching for unused variables given on the command line.
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Configuring done (0.3s)
+-- Detecting C compile features - done
+-- Generating done (0.0s)
+-- Build files have been written to: /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm
+-- Detecting CXX compiler ABI info
+[  2%] Performing build step for 'pioasmBuild'
+make[4]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+make[5]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Using the single-header code from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-src/lib/nlohmann_json/single_include/
+lib/mbedtls submodule needs to be initialized for bintool hashing/signing
+mbedtls not found - no signing/hashing support will be built
+PICOTOOL_NO_LIBUSB is set - no USB support will be built
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build
+[  2%] Performing build step for 'picotoolBuild'
+make[4]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[5]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 10%] Built target unreadable_rom_data
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+Using precompiled enc_bootloader.elf
+-- Configuring done (0.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build/enc_bootloader
+make[7]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build/enc_bootloader»
+make[7]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build/enc_bootloader»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 37%] Built target enc_bootloader
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 41%] Built target embedded_data_no_libusb
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 48%] Built target errors
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 55%] Built target model
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 62%] Built target elf
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+[100%] Built target pioasm
+make[5]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+make[4]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+[  2%] Performing install step for 'pioasmBuild'
+make[4]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+make[5]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+[100%] Built target pioasm
+make[5]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+Install the project...
+-- Install configuration: "Release"
+make[4]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/pioasm»
+[  2%] Completed 'pioasmBuild'
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  2%] Built target pioasmBuild
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Generating rgbpanel.pio.h
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Built target usermod_rgbpanel_rgbpanel_pio_h
+[  3%] Generating genhdr/root_pointers.split
+[  3%] Generating genhdr/qstr.split
+[  3%] Generating genhdr/root_pointers.collected
+[  3%] Generating genhdr/qstrdefs.collected.h
+Root pointer registrations updated
+QSTR updated
+[  3%] Generating genhdr/root_pointers.h
+[  3%] Generating genhdr/qstrdefs.preprocessed.h
+[  3%] Generating genhdr/qstrdefs.generated.h
+MPY rp2.py
+MPY _boot.py
+MPY _boot_fat.py
+MPY asyncio/__init__.py
+MPY asyncio/core.py
+MPY asyncio/event.py
+MPY asyncio/funcs.py
+MPY asyncio/lock.py
+MPY asyncio/stream.py
+MPY uasyncio.py
+MPY onewire.py
+MPY ds18x20.py
+MPY dht.py
+MPY neopixel.py
+MPY fs_driver.py
+MPY display_driver.py
+MPY gt911.py
+MPY tca8418.py
+MPY c64keyboard.py
+GEN /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/frozen_content.c
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Built target BUILD_FROZEN_CONTENT
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 68%] Built target elf2uf2
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 75%] Built target bintool
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[100%] Built target picotool
+make[5]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[4]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[  3%] Performing install step for 'picotoolBuild'
+make[4]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[5]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[7]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build/enc_bootloader»
+[ 10%] Built target unreadable_rom_data
+[ 17%] Built target errors
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[7]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build/enc_bootloader»
+[ 24%] Built target model
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 31%] Built target elf
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 58%] Built target enc_bootloader
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[ 65%] Built target elf2uf2
+[ 72%] Built target bintool
+[ 75%] Built target embedded_data_no_libusb
+make[6]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+make[6]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[100%] Built target picotool
+make[5]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+Install the project...
+-- Install configuration: "Release"
+make[4]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/_deps/picotool-build»
+[  3%] Performing test step for 'picotoolBuild'
+picotool v2.3.0 (Linux, GNU-13.3.0, Release)
+
+This version of picotool was compiled without USB support. Some commands are not available.
+[  3%] Completed 'picotoolBuild'
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Built target picotoolBuild
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Building ASM object pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default.dir/compile_time_choice.S.o
+[  3%] Linking ASM executable bs2_default.elf
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Built target bs2_default
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Generating bs2_default.bin
+[  3%] Generating bs2_default_padded.S
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Building ASM object pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_library.dir/bs2_default_padded.S.o
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Built target bs2_default_library
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  3%] Generating genhdr/moduledefs.split
+[  3%] Generating genhdr/compressed.split
+[  3%] Generating genhdr/moduledefs.collected
+[  3%] Generating genhdr/compressed.collected
+Module registrations updated
+Compressed data updated
+[  4%] Generating genhdr/moduledefs.h
+[  4%] Generating genhdr/compressed.data.h
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[3]: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/argcheck.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/asmarm.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/asmbase.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/asmthumb.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/asmxtensa.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/asmrv32.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/asmx86.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/bc.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/binary.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/builtinevex.c.o
+[  4%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/builtinimport.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/asmx64.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitcommon.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/compile.c.o
+[  5%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitglue.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/cstack.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/builtinhelp.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitnarm.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitinlinextensa.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitbc.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitinlinethumb.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitnthumb.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitinlinerv32.c.o
+[  6%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitnx64.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitnrv32.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitnx86.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitndebug.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitnxtensa.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/formatfloat.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/emitnxtensawin.c.o
+[  7%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/frozenmod.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/lexer.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/gc.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modarray.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/malloc.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/map.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modcollections.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modbuiltins.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modgc.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modcmath.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modstruct.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modio.c.o
+[  8%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modmicropython.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modstring.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modmath.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modsys.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modthread.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/moderrno.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/modweakref.c.o
+[  9%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/mpprint.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/mpstate.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/mpz.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlr.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nativeglue.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlraarch64.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrloong64.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrmips.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrpowerpc.c.o
+[ 10%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrrv32.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrrv64.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrsetjmp.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrthumb.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrx64.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrx86.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/nlrxtensa.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/obj.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objarray.c.o
+[ 11%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objattrtuple.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objbool.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objboundmeth.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objcell.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objcode.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objclosure.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objcomplex.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objdeque.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objexcept.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objenumerate.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objdict.c.o
+[ 12%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objfloat.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objfilter.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objgenerator.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objfun.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objgetitemiter.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objint.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objint_longlong.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objint_mpz.c.o
+[ 13%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objlist.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objmap.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objmodule.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objnamedtuple.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objnone.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objobject.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objpolyiter.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objproperty.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objrange.c.o
+[ 14%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objreversed.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objringio.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objset.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objsingleton.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objslice.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objstr.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objstrunicode.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objstringio.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objtemplate.c.o
+[ 15%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objtuple.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objtype.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/objzip.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/opmethods.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/pairheap.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/parse.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/parsenum.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/parsenumbase.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/persistentcode.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/profile.c.o
+[ 16%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/qstr.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/pystack.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/reader.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/repl.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/ringbuf.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/runtime.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/runtime_utils.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/scheduler.c.o
+[ 17%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/scope.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/sequence.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/smallint.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/showbc.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/stackctrl.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/stream.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/unicode.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/vm.c.o
+[ 18%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/vstr.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/py/warning.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/libc/abort_.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/libc/printf.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_adc.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/btstack/modbluetooth_btstack.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_adc_block.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_bitstream.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_can.c.o
+[ 19%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_i2c.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_i2c_target.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_i2s.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_mem.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_pulse.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_pwm.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_spi.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_signal.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_uart.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_usb_device.c.o
+[ 20%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/machine_wdt.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modbluetooth.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modframebuf.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modlwip.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modmachine.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modmarshal.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modnetwork.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modonewire.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modasyncio.c.o
+[ 21%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modbinascii.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modcryptolib.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/moductypes.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/moddeflate.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modhashlib.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modheapq.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modjson.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modos.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modplatform.c.o
+[ 22%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modrandom.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modre.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modsocket.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modselect.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modtls_axtls.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modtime.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modtls_mbedtls.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modvfs.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modwebsocket.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/modwebrepl.c.o
+[ 23%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/network_cyw43.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/network_lwip.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/network_ninaw10.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/network_ppp_lwip.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/network_usbd_ncm.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/network_wiznet5k.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/os_dupterm.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_blockdev.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_fat.c.o
+[ 24%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_fat_file.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_fat_diskio.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_lfs.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_rom_file.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_rom.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_posix.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_posix_file.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/vfs_reader.c.o
+[ 25%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/virtpin.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/nimble/modbluetooth_nimble.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/extmod/mbedtls/mbedtls_alt.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/littlefs/lfs1.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/littlefs/lfs1_util.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/littlefs/lfs2_util.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/littlefs/lfs2.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/oofatfs/ff.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/oofatfs/ffunicode.c.o
+[ 26%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/netutils/dhcpserver.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/netutils/netutils.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/netutils/trace.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/readline/readline.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/runtime/gchelper_native.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/runtime/mpirq.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/runtime/interrupt_char.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/runtime/pyexec.c.o
+[ 27%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/runtime/stdout_helpers.c.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/runtime/sys_stdio_mphal.c.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/runtime/softtimer.c.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/timeutils/timeutils.c.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/tinyusb/mp_usbd.c.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/tinyusb/mp_usbd_cdc.c.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/tinyusb/mp_usbd_descriptor.c.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/tinyusb/mp_usbd_runtime.c.o
+[ 28%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/shared/runtime/gchelper_thumb1.s.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/drivers/bus/softspi.c.o
+[ 28%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/drivers/dht/dht.c.o
+[ 29%] Building C object CMakeFiles/firmware.dir/clocks_extra.c.o
+[ 29%] Building C object CMakeFiles/firmware.dir/help.c.o
+[ 29%] Building C object CMakeFiles/firmware.dir/fatfs_port.c.o
+[ 29%] Building C object CMakeFiles/firmware.dir/machine_bitstream.c.o
+[ 29%] Building C object CMakeFiles/firmware.dir/datetime_patch.c.o
+[ 29%] Building C object CMakeFiles/firmware.dir/machine_i2c.c.o
+[ 29%] Building C object CMakeFiles/firmware.dir/machine_pin.c.o
+[ 29%] Building C object CMakeFiles/firmware.dir/machine_rtc.c.o
+[ 29%] Building C object CMakeFiles/firmware.dir/machine_spi.c.o
+[ 30%] Building C object CMakeFiles/firmware.dir/main.c.o
+[ 30%] Building C object CMakeFiles/firmware.dir/machine_timer.c.o
+[ 30%] Building C object CMakeFiles/firmware.dir/modrp2.c.o
+[ 30%] Building C object CMakeFiles/firmware.dir/mphalport.c.o
+[ 30%] Building C object CMakeFiles/firmware.dir/mpnetworkport.c.o
+[ 30%] Building C object CMakeFiles/firmware.dir/mpthreadport.c.o
+[ 30%] Building C object CMakeFiles/firmware.dir/mutex_extra.c.o
+[ 30%] Building C object CMakeFiles/firmware.dir/pendsv.c.o
+[ 30%] Building C object CMakeFiles/firmware.dir/rp2_flash.c.o
+[ 31%] Building C object CMakeFiles/firmware.dir/rp2_pio.c.o
+[ 31%] Building C object CMakeFiles/firmware.dir/rp2_dma.c.o
+[ 31%] Building C object CMakeFiles/firmware.dir/uart.c.o
+[ 31%] Building C object CMakeFiles/firmware.dir/usbd.c.o
+[ 31%] Building C object CMakeFiles/firmware.dir/msc_disk.c.o
+[ 31%] Building C object CMakeFiles/firmware.dir/mbedtls/mbedtls_port.c.o
+[ 31%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls_errors/mp_mbedtls_errors.c.o
+[ 31%] Building C object CMakeFiles/firmware.dir/frozen_content.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/aes.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/pins_WAVESHARE_RP2350_TOUCH_LCD_4.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/aesni.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/asn1parse.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/asn1write.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/base64.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/bignum_core.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/bignum_mod.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/bignum_mod_raw.c.o
+[ 32%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/bignum.c.o
+[ 33%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/camellia.c.o
+[ 33%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ccm.c.o
+[ 33%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/chacha20.c.o
+[ 33%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/chachapoly.c.o
+[ 33%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/cipher.c.o
+[ 33%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/cipher_wrap.c.o
+[ 33%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/nist_kw.c.o
+[ 33%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/aria.c.o
+[ 33%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/cmac.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/mps_trace.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/mps_reader.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ctr_drbg.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/debug.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/des.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/dhm.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ecdh.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ecdsa.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ecjpake.c.o
+[ 34%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ecp.c.o
+[ 35%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ecp_curves.c.o
+[ 35%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/entropy.c.o
+[ 35%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/entropy_poll.c.o
+[ 35%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/gcm.c.o
+[ 35%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/hmac_drbg.c.o
+[ 35%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/md5.c.o
+[ 35%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/md.c.o
+[ 35%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/oid.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/pem.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/pk.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/pkcs12.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/padlock.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/pkcs5.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/pkparse.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/pk_ecc.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/pk_wrap.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/platform.c.o
+[ 36%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/pkwrite.c.o
+[ 37%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/platform_util.c.o
+[ 37%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/poly1305.c.o
+[ 37%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ripemd160.c.o
+[ 37%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/rsa.c.o
+[ 37%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/rsa_alt_helpers.c.o
+[ 37%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/sha1.c.o
+[ 37%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/sha256.c.o
+[ 37%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/sha512.c.o
+[ 37%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_cache.c.o
+[ 38%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_ciphersuites.c.o
+[ 38%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_tls12_client.c.o
+[ 38%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_tls12_server.c.o
+[ 38%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_client.c.o
+[ 38%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_cookie.c.o
+[ 38%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_debug_helpers_generated.c.o
+[ 38%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_msg.c.o
+[ 38%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_ticket.c.o
+[ 38%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/ssl_tls.c.o
+[ 39%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/timing.c.o
+[ 39%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/constant_time.c.o
+[ 39%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/x509.c.o
+[ 39%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/x509_create.c.o
+[ 39%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/x509_crl.c.o
+[ 39%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/x509_csr.c.o
+[ 39%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/x509_crt.c.o
+[ 39%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/x509write_crt.c.o
+[ 39%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/mbedtls/library/x509write_csr.c.o
+[ 40%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/generated/lvgl_micropython.c.o
+[ 40%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-micropython/src/lvgl_micropython_build.c.o
+[ 40%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_group.c.o
+[ 40%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj.c.o
+[ 40%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_class.c.o
+[ 40%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_draw.c.o
+[ 40%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_event.c.o
+[ 40%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_id_builtin.c.o
+[ 40%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_pos.c.o
+[ 41%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_property.c.o
+[ 41%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_style.c.o
+[ 41%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_scroll.c.o
+[ 41%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_style_gen.c.o
+[ 41%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_obj_tree.c.o
+[ 41%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_observer.c.o
+[ 41%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/core/lv_refr.c.o
+[ 41%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/debugging/monkey/lv_monkey.c.o
+[ 41%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/debugging/sysmon/lv_sysmon.c.o
+[ 42%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/debugging/test/lv_test_display.c.o
+[ 42%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/debugging/test/lv_test_fs.c.o
+[ 42%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/debugging/test/lv_test_helpers.c.o
+[ 42%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/debugging/test/lv_test_indev.c.o
+[ 42%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/debugging/test/lv_test_indev_gesture.c.o
+[ 42%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/debugging/test/lv_test_screenshot_compare.c.o
+[ 42%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/debugging/vg_lite_tvg/vg_lite_matrix.c.o
+[ 42%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/display/lv_display.c.o
+[ 42%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/convert/helium/lv_draw_buf_convert_helium.c.o
+[ 43%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/convert/lv_draw_buf_convert.c.o
+[ 43%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/convert/neon/lv_draw_buf_convert_neon.c.o
+[ 43%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/dma2d/lv_draw_dma2d.c.o
+[ 43%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/dma2d/lv_draw_dma2d_fill.c.o
+[ 43%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/dma2d/lv_draw_dma2d_img.c.o
+[ 43%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/espressif/ppa/lv_draw_ppa.c.o
+[ 43%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/espressif/ppa/lv_draw_ppa_buf.c.o
+[ 43%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/espressif/ppa/lv_draw_ppa_fill.c.o
+[ 43%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/espressif/ppa/lv_draw_ppa_img.c.o
+[ 44%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/eve/lv_draw_eve.c.o
+[ 44%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/eve/lv_draw_eve_arc.c.o
+[ 44%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/eve/lv_draw_eve_fill.c.o
+[ 44%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/eve/lv_draw_eve_image.c.o
+[ 44%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/eve/lv_draw_eve_letter.c.o
+[ 44%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/eve/lv_draw_eve_line.c.o
+[ 44%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/eve/lv_draw_eve_ram_g.c.o
+[ 44%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/eve/lv_draw_eve_triangle.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_3d.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/eve/lv_eve.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_blur.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_buf.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_image.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_arc.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_line.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_label.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_mask.c.o
+[ 45%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_rect.c.o
+[ 46%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_triangle.c.o
+[ 46%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_draw_vector.c.o
+[ 46%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/lv_image_decoder.c.o
+[ 46%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg.c.o
+[ 46%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_3d.c.o
+[ 46%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_arc.c.o
+[ 46%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_border.c.o
+[ 46%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_box_shadow.c.o
+[ 46%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_fill.c.o
+[ 47%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_grad.c.o
+[ 47%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_image.c.o
+[ 47%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_label.c.o
+[ 47%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_layer.c.o
+[ 47%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_line.c.o
+[ 47%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_mask_rect.c.o
+[ 47%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_triangle.c.o
+[ 47%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_draw_nanovg_vector.c.o
+[ 47%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_nanovg_fbo_cache.c.o
+[ 48%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_nanovg_image_cache.c.o
+[ 48%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nanovg/lv_nanovg_utils.c.o
+[ 48%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx.c.o
+[ 48%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_arc.c.o
+[ 48%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_fill.c.o
+[ 48%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_img.c.o
+[ 48%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_border.c.o
+[ 48%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_label.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_line.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_layer.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_stm32_hal.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_triangle.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_utils.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_draw_nema_gfx_vector.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nema_gfx/lv_nema_gfx_path.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/g2d/lv_draw_buf_g2d.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/g2d/lv_draw_g2d.c.o
+[ 49%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/g2d/lv_draw_g2d_fill.c.o
+[ 50%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/g2d/lv_draw_g2d_img.c.o
+[ 50%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/g2d/lv_g2d_buf_map.c.o
+[ 50%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/g2d/lv_g2d_utils.c.o
+[ 50%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/pxp/lv_draw_buf_pxp.c.o
+[ 50%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/pxp/lv_draw_pxp.c.o
+[ 50%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/pxp/lv_draw_pxp_img.c.o
+[ 50%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/pxp/lv_draw_pxp_layer.c.o
+[ 50%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/pxp/lv_draw_pxp_fill.c.o
+[ 50%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/pxp/lv_pxp_cfg.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/pxp/lv_pxp_osa.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/nxp/pxp/lv_pxp_utils.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_arc.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_fill.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_border.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_label.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_image.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_line.c.o
+[ 51%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_triangle.c.o
+[ 52%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_mask_rectangle.c.o
+[ 52%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/renesas/dave2d/lv_draw_dave2d_utils.c.o
+[ 52%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sdl/lv_draw_sdl.c.o
+[ 52%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/snapshot/lv_snapshot.c.o
+[ 52%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend.c.o
+[ 52%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_a8.c.o
+[ 52%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c.o
+[ 52%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c.o
+[ 53%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888_premultiplied.c.o
+[ 53%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c.o
+[ 53%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c.o
+[ 53%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c.o
+[ 53%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/neon/lv_draw_sw_blend_neon_to_rgb565.c.o
+[ 53%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565_swapped.c.o
+[ 53%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/neon/lv_draw_sw_blend_neon_to_rgb888.c.o
+[ 53%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/blend/riscv_v/lv_draw_sw_blend_riscv_v_to_rgb888.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_arc.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_blur.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_border.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_box_shadow.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_fill.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_grad.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_img.c.o
+[ 54%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_letter.c.o
+[ 55%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_line.c.o
+[ 55%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_mask.c.o
+[ 55%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_mask_rect.c.o
+[ 55%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_transform.c.o
+[ 55%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_triangle.c.o
+[ 55%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_utils.c.o
+[ 55%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/sw/lv_draw_sw_vector.c.o
+[ 55%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_buf_vg_lite.c.o
+[ 55%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_arc.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_box_shadow.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_border.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_fill.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c.o
+[ 56%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c.o
+[ 57%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_draw_vg_lite_vector.c.o
+[ 57%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_vg_lite_bitmap_font_cache.c.o
+[ 57%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_vg_lite_decoder.c.o
+[ 57%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_vg_lite_grad.c.o
+[ 57%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_vg_lite_math.c.o
+[ 57%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_vg_lite_path.c.o
+[ 57%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_vg_lite_stroke.c.o
+[ 57%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_vg_lite_pending.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/drm/lv_linux_drm_common.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/drm/lv_linux_drm.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/draw/vg_lite/lv_vg_lite_utils.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/fb/lv_linux_fbdev.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/drm/lv_linux_drm_egl.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/ft81x/lv_ft81x.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/ili9341/lv_ili9341.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/lcd/lv_lcd_generic_mipi.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/nv3007/lv_nv3007.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/st7735/lv_st7735.c.o
+[ 58%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/nxp_elcdif/lv_nxp_elcdif.c.o
+[ 59%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/renesas_glcdc/lv_renesas_glcdc.c.o
+[ 59%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/st7789/lv_st7789.c.o
+[ 59%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/st7796/lv_st7796.c.o
+[ 59%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/display/st_ltdc/lv_st_ltdc.c.o
+[ 59%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/drivers/draw/eve/lv_draw_eve_display.c.o
+[ 59%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/binfont_loader/lv_binfont_loader.c.o
+[ 59%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/fmt_txt/lv_font_fmt_txt.c.o
+[ 59%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/font_manager/lv_font_manager.c.o
+[ 60%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/font_manager/lv_font_manager_recycle.c.o
+[ 60%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font.c.o
+[ 60%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/imgfont/lv_imgfont.c.o
+[ 60%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c.o
+[ 60%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_10.c.o
+[ 60%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_14.c.o
+[ 60%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_12.c.o
+[ 60%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_14_aligned.c.o
+[ 60%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_16.c.o
+[ 61%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_18.c.o
+[ 61%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_20.c.o
+[ 61%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_22.c.o
+[ 61%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_24.c.o
+[ 61%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_26.c.o
+[ 61%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_28.c.o
+[ 61%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_28_compressed.c.o
+[ 61%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_30.c.o
+[ 61%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_32.c.o
+[ 62%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_34.c.o
+[ 62%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_36.c.o
+[ 62%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_38.c.o
+[ 62%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_40.c.o
+[ 62%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_42.c.o
+[ 62%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_44.c.o
+[ 62%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_46.c.o
+[ 62%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_48.c.o
+[ 62%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_montserrat_8.c.o
+[ 63%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_source_han_sans_sc_14_cjk.c.o
+[ 63%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_source_han_sans_sc_16_cjk.c.o
+[ 63%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_unscii_16.c.o
+[ 63%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/font/lv_font_unscii_8.c.o
+[ 63%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/indev/lv_gridnav.c.o
+[ 63%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/indev/lv_indev.c.o
+[ 63%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/indev/lv_indev_gesture.c.o
+[ 63%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/indev/lv_indev_scroll.c.o
+[ 63%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/layouts/flex/lv_flex.c.o
+[ 64%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/layouts/grid/lv_grid.c.o
+[ 64%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/layouts/lv_layout.c.o
+[ 64%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/FT800-FT813/EVE_commands.c.o
+[ 64%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/FT800-FT813/EVE_supplemental.c.o
+[ 64%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/barcode/lv_barcode.c.o
+[ 64%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/barcode/code128.c.o
+[ 64%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/bin_decoder/lv_bin_decoder.c.o
+[ 64%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/bmp/lv_bmp.c.o
+[ 64%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/ffmpeg/lv_ffmpeg.c.o
+[ 65%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/freetype/lv_freetype.c.o
+[ 65%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/freetype/lv_freetype_glyph.c.o
+[ 65%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/freetype/lv_freetype_image.c.o
+[ 65%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/freetype/lv_freetype_outline.c.o
+[ 65%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/freetype/lv_ftsystem.c.o
+[ 65%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/frogfs/src/frogfs.c.o
+[ 65%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/frogfs/src/decomp_raw.c.o
+[ 65%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/fsdrv/lv_fs_fatfs.c.o
+[ 65%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/fsdrv/lv_fs_cbfs.c.o
+[ 66%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/fsdrv/lv_fs_frogfs.c.o
+[ 66%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/fsdrv/lv_fs_littlefs.c.o
+[ 66%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/fsdrv/lv_fs_posix.c.o
+[ 66%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/fsdrv/lv_fs_memfs.c.o
+[ 66%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/fsdrv/lv_fs_stdio.c.o
+[ 66%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/fsdrv/lv_fs_uefi.c.o
+[ 66%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/fsdrv/lv_fs_win32.c.o
+[ 66%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/gif/gif.c.o
+[ 66%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/gltf/gltf_environment/lv_gltf_ibl_sampler.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/gltf/gltf_view/assets/chromatic.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/gltf/gltf_view/assets/lv_gltf_view_shader.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/gltf/math/lv_3dmath.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/gstreamer/lv_gstreamer.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/libjpeg_turbo/lv_libjpeg_turbo.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/libwebp/lv_libwebp.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/libpng/lv_libpng.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/lodepng/lodepng.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/lodepng/lv_lodepng.c.o
+[ 67%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/lz4/lz4.c.o
+[ 68%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/nanovg/nanovg.c.o
+[ 68%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/qrcode/lv_qrcode.c.o
+[ 68%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/qrcode/qrcodegen.c.o
+[ 68%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/rle/lv_rle.c.o
+[ 68%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/rlottie/lv_rlottie.c.o
+[ 68%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/svg/lv_svg.c.o
+[ 68%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/svg/lv_svg_decoder.c.o
+[ 68%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/svg/lv_svg_parser.c.o
+[ 68%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/svg/lv_svg_render.c.o
+[ 69%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/svg/lv_svg_token.c.o
+[ 69%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/tiny_ttf/lv_tiny_ttf.c.o
+[ 69%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/tjpgd/lv_tjpgd.c.o
+[ 69%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/tjpgd/tjpgd.c.o
+[ 69%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite.c.o
+[ 69%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_image.c.o
+[ 69%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_matrix.c.o
+[ 69%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_path.c.o
+[ 69%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/vg_lite_driver/VGLite/vg_lite_stroke.c.o
+[ 70%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/vg_lite_driver/VGLiteKernel/vg_lite_kernel.c.o
+[ 70%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/vg_lite_driver/lv_vg_lite_hal/lv_vg_lite_hal.c.o
+[ 70%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/libs/vg_lite_driver/lv_vg_lite_hal/vg_lite_os.c.o
+[ 70%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/lv_init.c.o
+[ 70%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/cache/class/lv_cache_lru_ll.c.o
+[ 70%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/cache/class/lv_cache_lru_rb.c.o
+[ 70%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/cache/class/lv_cache_sc_da.c.o
+[ 70%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/cache/instance/lv_image_cache.c.o
+[ 70%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/cache/instance/lv_image_header_cache.c.o
+[ 71%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/cache/lv_cache.c.o
+[ 71%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/cache/lv_cache_entry.c.o
+[ 71%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_anim_timeline.c.o
+[ 71%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_anim.c.o
+[ 71%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_area.c.o
+[ 71%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_array.c.o
+[ 71%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_async.c.o
+[ 71%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_bidi.c.o
+[ 71%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_circle_buf.c.o
+[ 72%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_color.c.o
+[ 72%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_color_op.c.o
+[ 72%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_event.c.o
+[ 72%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_fs.c.o
+[ 72%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_grad.c.o
+[ 72%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_iter.c.o
+[ 72%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_ll.c.o
+[ 72%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_log.c.o
+[ 72%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_lru.c.o
+[ 73%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_math.c.o
+[ 73%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_matrix.c.o
+[ 73%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_palette.c.o
+[ 73%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_pending.c.o
+[ 73%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_profiler_builtin.c.o
+[ 73%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_profiler_builtin_posix.c.o
+[ 73%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_rb.c.o
+[ 73%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_style.c.o
+[ 73%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_style_gen.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_templ.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_text.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_text_ap.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_timer.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_tree.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/misc/lv_utils.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_cmsis_rtos2.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_freertos.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_linux.c.o
+[ 74%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_os.c.o
+[ 75%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_mqx.c.o
+[ 75%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_os_none.c.o
+[ 75%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_pthread.c.o
+[ 75%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_rtthread.c.o
+[ 75%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_windows.c.o
+[ 75%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/osal/lv_sdl2.c.o
+[ 75%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/others/file_explorer/lv_file_explorer.c.o
+[ 75%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/others/fragment/lv_fragment.c.o
+[ 76%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/others/fragment/lv_fragment_manager.c.o
+[ 76%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/others/translation/lv_translation.c.o
+[ 76%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/builtin/lv_mem_core_builtin.c.o
+[ 76%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c.o
+[ 76%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/builtin/lv_string_builtin.c.o
+[ 76%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/builtin/lv_tlsf.c.o
+[ 76%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/clib/lv_mem_core_clib.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/lv_mem.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/clib/lv_string_clib.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/clib/lv_sprintf_clib.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/micropython/lv_mem_core_micropython.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/rtthread/lv_mem_core_rtthread.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/rtthread/lv_sprintf_rtthread.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/rtthread/lv_string_rtthread.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/stdlib/uefi/lv_mem_core_uefi.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/themes/mono/lv_theme_mono.c.o
+[ 77%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/themes/lv_theme.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/themes/simple/lv_theme_simple.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/themes/default/lv_theme_default.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/tick/lv_tick.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/animimage/lv_animimage.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/3dtexture/lv_3dtexture.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/arc/lv_arc.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/arclabel/lv_arclabel.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/bar/lv_bar.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/button/lv_button.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/buttonmatrix/lv_buttonmatrix.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/calendar/lv_calendar.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/calendar/lv_calendar_header_arrow.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/calendar/lv_calendar_header_dropdown.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/canvas/lv_canvas.c.o
+[ 78%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/chart/lv_chart.c.o
+[ 79%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/calendar/lv_calendar_chinese.c.o
+[ 79%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/checkbox/lv_checkbox.c.o
+[ 79%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/dropdown/lv_dropdown.c.o
+[ 79%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/gif/lv_gif.c.o
+[ 79%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/image/lv_image.c.o
+[ 80%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/imagebutton/lv_imagebutton.c.o
+[ 80%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/ime/lv_ime_pinyin.c.o
+[ 80%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/keyboard/lv_keyboard.c.o
+[ 80%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/label/lv_label.c.o
+[ 80%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/led/lv_led.c.o
+[ 80%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/line/lv_line.c.o
+[ 80%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/list/lv_list.c.o
+[ 80%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/lottie/lv_lottie.c.o
+[ 80%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/menu/lv_menu.c.o
+[ 81%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/msgbox/lv_msgbox.c.o
+[ 81%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/objx_templ/lv_objx_templ.c.o
+[ 81%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_animimage_properties.c.o
+[ 81%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_arc_properties.c.o
+[ 81%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_bar_properties.c.o
+[ 81%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_buttonmatrix_properties.c.o
+[ 81%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_chart_properties.c.o
+[ 81%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_checkbox_properties.c.o
+[ 81%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_dropdown_properties.c.o
+[ 82%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_image_properties.c.o
+[ 82%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_label_properties.c.o
+[ 82%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_keyboard_properties.c.o
+[ 82%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_led_properties.c.o
+[ 82%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_line_properties.c.o
+[ 82%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_menu_properties.c.o
+[ 82%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_obj_properties.c.o
+[ 82%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_roller_properties.c.o
+[ 82%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_scale_properties.c.o
+[ 83%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_slider_properties.c.o
+[ 83%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_span_properties.c.o
+[ 83%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_spinbox_properties.c.o
+[ 83%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_spinner_properties.c.o
+[ 83%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_style_properties.c.o
+[ 83%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_switch_properties.c.o
+[ 83%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_table_properties.c.o
+[ 83%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_tabview_properties.c.o
+[ 83%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/property/lv_textarea_properties.c.o
+[ 84%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/roller/lv_roller.c.o
+[ 84%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/scale/lv_scale.c.o
+[ 84%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/slider/lv_slider.c.o
+[ 84%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/span/lv_span.c.o
+[ 84%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/spinbox/lv_spinbox.c.o
+[ 84%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/spinner/lv_spinner.c.o
+[ 84%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/switch/lv_switch.c.o
+[ 84%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/table/lv_table.c.o
+[ 84%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/tabview/lv_tabview.c.o
+[ 85%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/textarea/lv_textarea.c.o
+[ 85%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/tileview/lv_tileview.c.o
+[ 85%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-bindings/lvgl/src/widgets/win/lv_win.c.o
+[ 85%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-micropython/src/lv_mem_core_micropython.c.o
+[ 85%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/modules/rgbpanel/rgbpanel.c.o
+[ 85%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_adc/adc.c.o
+[ 85%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2350/pico_platform/platform.c.o
+[ 85%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_platform_common/common.c.o
+[ 85%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_platform_panic/panic.c.o
+[ 86%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_platform_panic/custom_panic_function.S.o
+[ 86%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/hardware_claim/claim.c.o
+[ 86%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_sync/sync.c.o
+[ 86%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o
+[ 86%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.o
+[ 86%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_irq/irq.c.o
+[ 86%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.o
+[ 86%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_sync/lock_core.c.o
+[ 86%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_sync/sem.c.o
+[ 87%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_sync/mutex.c.o
+[ 87%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_sync/critical_section.c.o
+[ 87%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_time/time.c.o
+[ 87%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_time/timeout_helper.c.o
+[ 87%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_timer/timer.c.o
+[ 87%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_util/datetime.c.o
+[ 87%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_util/fixed_bitset.c.o
+[ 87%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_util/pheap.c.o
+[ 87%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/common/pico_util/queue.c.o
+[ 88%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_boot_lock/boot_lock.c.o
+[ 88%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_clocks/clocks.c.o
+[ 88%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.o
+[ 88%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_pll/pll.c.o
+[ 88%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_watchdog/watchdog.c.o
+[ 88%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_ticks/ticks.c.o
+[ 88%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.o
+[ 88%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_bootrom/bootrom_lock.c.o
+[ 88%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_flash/flash.c.o
+[ 89%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.o
+[ 89%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_dma/dma.c.o
+[ 89%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_flash/flash.c.o
+[ 89%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_xip_cache/xip_cache.c.o
+[ 89%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_pio/pio.c.o
+[ 89%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.o
+[ 89%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_spi/spi.c.o
+[ 89%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_uart/uart.c.o
+[ 89%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_aon_timer/aon_timer.c.o
+[ 90%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_multicore/multicore.c.o
+[ 90%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_powman/powman.c.o
+[ 90%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_rand/rand.c.o
+[ 90%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.o
+[ 90%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_runtime/runtime.c.o
+[ 90%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init.c.o
+[ 90%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o
+[ 90%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_runtime_init/runtime_init_stack_guard.c.o
+[ 90%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.o
+[ 90%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_divider/divider_compiler.c.o
+[ 91%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_double/double_math.c.o
+[ 91%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_double/double_fma_dcp.S.o
+[ 91%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_double/double_aeabi_dcp.S.o
+[ 91%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_double/double_sci_m33.S.o
+[ 91%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_double/double_conv_m33.S.o
+[ 91%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/asinfacosf.c.o
+[ 91%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/acoshf.c.o
+[ 91%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/asinhf.c.o
+[ 91%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/atan2f.c.o
+[ 92%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/atanf.c.o
+[ 92%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/atanhf.c.o
+[ 92%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/ef_rem_pio2.c.o
+[ 92%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/erf_lgamma.c.o
+[ 92%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/fmodf.c.o
+[ 92%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/kf_cos.c.o
+[ 92%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/kf_rem_pio2.c.o
+[ 92%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/kf_tan.c.o
+[ 92%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/kf_sin.c.o
+[ 93%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/log1pf.c.o
+[ 93%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/math.c.o
+[ 93%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/nearbyintf.c.o
+[ 93%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/roundf.c.o
+[ 93%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/sf_cos.c.o
+[ 93%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/sf_erf.c.o
+[ 93%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/sf_frexp.c.o
+[ 93%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/sf_ldexp.c.o
+[ 93%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/sf_modf.c.o
+[ 94%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/sf_sin.c.o
+[ 94%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/sf_tan.c.o
+[ 94%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/wf_lgamma.c.o
+[ 94%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/wf_tgamma.c.o
+[ 94%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/libm/ef_sqrt.c.o
+[ 94%] Building C object CMakeFiles/firmware.dir/libm_extra.c.o
+[ 94%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_float/float_aeabi_dcp.S.o
+[ 94%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_malloc/malloc.c.o
+[ 94%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_float/float_common_m33.S.o
+[ 95%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_atomic/atomic.c.o
+[ 95%] Building CXX object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_cxx_options/new_delete.cpp.o
+[ 95%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o
+[ 95%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_printf/printf.c.o
+[ 95%] Building ASM object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_crt0/crt0.S.o
+[ 95%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_clib_interface/newlib_interface.c.o
+[ 95%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_clib_interface/cxa_guard.c.o
+[ 95%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_stdio/stdio.c.o
+[ 95%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.o
+[ 95%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.o
+[ 96%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_thread_local/thread_local.c.o
+[ 96%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_divider/divider.c.o
+[ 96%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/tusb.c.o
+[ 96%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/common/tusb_fifo.c.o
+[ 96%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o
+[ 96%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o
+[ 96%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/device/usbd.c.o
+[ 96%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/audio/audio_device.c.o
+[ 97%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/cdc/cdc_device.c.o
+[ 97%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/dfu/dfu_rt_device.c.o
+[ 97%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/dfu/dfu_device.c.o
+[ 97%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/midi/midi_device.c.o
+[ 97%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/hid/hid_device.c.o
+[ 97%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/midi/midi2_device.c.o
+[ 97%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/msc/msc_device.c.o
+[ 97%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/mtp/mtp_device.c.o
+[ 97%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/net/ecm_rndis_device.c.o
+[ 98%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/net/ncm_device.c.o
+[ 98%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/printer/printer_device.c.o
+[ 98%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.o
+[ 98%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/vendor/vendor_device.c.o
+[ 98%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/tinyusb/src/class/video/video_device.c.o
+[ 98%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.o
+[ 98%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RP2350/Source/system_RP2350.c.o
+[ 98%] Building C object CMakeFiles/firmware.dir/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/lib/pico-sdk/src/rp2_common/hardware_psram/psram.c.o
+[ 98%] Linking CXX executable firmware.elf
+Memory region         Used Size  Region Size  %age Used
+           FLASH:     1077528 B         4 MB     25.69%
+     FLASH_ROMFS:           0 B          0 B
+        FLASH_FS:           0 B        12 MB      0.00%
+           PSRAM:           0 B          0 B
+         XIP_RAM:           0 B        16 KB      0.00%
+             RAM:      156784 B       512 KB     29.90%
+       SCRATCH_X:           0 B          0 B
+       SCRATCH_Y:          8 KB         8 KB    100.00%
+make[3]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+[100%] Built target firmware
+make[2]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make[1]: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4»
+make: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2»
+
+== done
+/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/dist/WAVESHARE_RP2350_TOUCH_LCD_4-9050f8c-dirty.uf2
+  micropython v1.29.0, lvgl-micropython 3e287e7, lvgl-bindings 7740c2f
+   text	   data	    bss	    dec	    hex	filename
+1087768	      0	 136208	1223976	 12ad28	/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/rp2/build-WAVESHARE_RP2350_TOUCH_LCD_4/firmware.elf
+
+real	1m15,702s
+user	6m39,378s
+sys	1m27,747s
