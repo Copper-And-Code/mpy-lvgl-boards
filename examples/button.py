@@ -6,11 +6,13 @@
 # widgets react to the finger with no extra code.
 import lvgl as lv
 import display_driver
+import ui
 
 scr = lv.obj()
+scr.set_style_text_font(ui.font(16), 0)
 
 btn = lv.button(scr)
-btn.set_size(140, 60)
+btn.set_size(ui.px(140), ui.px(60))
 btn.center()
 
 label = lv.label(btn)

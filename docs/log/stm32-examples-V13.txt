@@ -1,0 +1,22 @@
+# STM32H7_CORE V1.3 + IPS1024x600 (ui.UNIT 2.5): every example run for 4 s after building its screen, one session with soft resets; no exception printed. Played by hand: breakout (ok by Nunzio).
+
+== examples/hello.py (1/10)
+ALIVE hello unit 2.50 font14 True mem_free 28404416 underruns 0
+== examples/button.py (2/10)
+ALIVE button unit 2.50 font14 True mem_free 28405824 underruns 0
+== examples/animation.py (3/10)
+ALIVE animation unit 2.50 font14 True mem_free 28399328 underruns 0
+== examples/backlight.py (4/10)
+ALIVE backlight unit 2.50 font14 True mem_free 28404272 underruns 0
+== examples/c64_keyboard.py (5/10)
+ALIVE c64_keyboard unit 2.50 font14 True mem_free 28402864 underruns 0
+== examples/breakout.py (6/10)
+ALIVE breakout unit 2.50 font14 True mem_free 28382832 underruns 0
+== examples/pong.py (7/10)
+ALIVE pong unit 2.50 font14 True mem_free 28360224 underruns 0
+== examples/simon.py (8/10)
+ALIVE simon unit 2.50 font14 True mem_free 28393232 underruns 0
+== examples/snake.py (9/10)
+ALIVE snake unit 2.50 font14 True mem_free 28369968 underruns 0
+== examples/tictactoe.py (10/10)
+ALIVE tictactoe unit 2.50 font14 True mem_free 28393680 underruns 0

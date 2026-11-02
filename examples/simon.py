@@ -3,16 +3,17 @@
 #   mpremote run examples/simon.py
 #
 # Tap the centre to start. The microcontroller plays the sequence (pads light
-# up, the buzzer on GPIO1 plays a note for each colour); then tap the pads in
+# up, the board's buzzer, if any, plays a note for each colour); then tap the pads in
 # the same order. A mistake ends the game. The sequence gets faster as it grows.
 #
 # Timing runs from an LVGL timer, so the screen and touch stay responsive.
 import random
 import lvgl as lv
+import buzzer
 import display_driver
-from machine import Pin, PWM
+import ui
 
-SOUND = True  # buzzer on GPIO1 (PWM)
+SOUND = True  # the board's buzzer, if it has one (buzzer.py)
 
 W, H = display_driver.WIDTH, display_driver.HEIGHT
 
@@ -25,23 +26,14 @@ PADS = (
 )
 ERROR_MS = 600  # error sound: a broken siren falling from 1000 to 200 Hz
 
-# --- sound ---
-buzzer = None
-
-
+# --- sound (silent on boards without a buzzer) ---
 def tone(freq):
-    global buzzer
-    if not SOUND:
-        return
-    if buzzer is None:
-        buzzer = PWM(Pin(1), freq=freq, duty_u16=0)
-    buzzer.freq(freq)
-    buzzer.duty_u16(32768)
+    if SOUND:
+        buzzer.tone(freq)
 
 
 def quiet():
-    if buzzer is not None:
-        buzzer.duty_u16(0)
+    buzzer.off()
 
 
 # --- screen ---
@@ -77,6 +69,7 @@ centre.set_style_shadow_width(0, 0)
 centre_label = lv.label(centre)
 centre_label.set_style_text_color(lv.color_hex(0xFFFFFF), 0)
 centre_label.set_style_text_align(lv.TEXT_ALIGN.CENTER, 0)
+centre_label.set_style_text_font(ui.font(14), 0)
 centre_label.center()
 
 

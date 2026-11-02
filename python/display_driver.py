@@ -87,6 +87,13 @@ def _tick(_):
         _interrupted()
 
 
+def backlight(percent=None):
+    """Set the backlight (0-100, PWM) or, with no argument, read it."""
+    if percent is None:
+        return rgbpanel.backlight()
+    rgbpanel.backlight(percent)
+
+
 def start():
     global _timer
     if _timer is None:

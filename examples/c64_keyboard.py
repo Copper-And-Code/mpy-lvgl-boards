@@ -5,17 +5,21 @@
 # Needs a TCA8418 keypad controller on connector H4 (pin 7 I2C_VCC 3.3 V,
 # 8 GND, 9 SDA, 10 SCL) wired to a C64-style 8x8 matrix: see
 # python/c64keyboard.py. The bottom line shows the last key and the
-# modifiers held. Without the TCA8418 the screen says so.
+# modifiers held. Without the TCA8418 (or on a board whose firmware does not
+# have c64keyboard, such as the STM32 ones) the screen says so.
+import os
+
 import lvgl as lv
 import display_driver
-import c64keyboard
+import ui
 
 BORDER, SCREEN, TEXT = 0x352879, 0x6C5EB5, 0xA59EFF  # C64 palette, approx.
 
 scr = lv.obj()
 scr.set_style_bg_color(lv.color_hex(SCREEN), 0)
 scr.set_style_border_color(lv.color_hex(BORDER), 0)
-scr.set_style_border_width(10, 0)
+scr.set_style_border_width(ui.px(10), 0)
+scr.set_style_text_font(ui.font(14), 0)
 scr.remove_flag(lv.obj.FLAG.SCROLLABLE)
 
 status = lv.label(scr)
@@ -23,8 +27,10 @@ status.set_style_text_color(lv.color_hex(TEXT), 0)
 status.align(lv.ALIGN.BOTTOM_LEFT, 0, 0)
 
 try:
+    import c64keyboard
+
     kb = c64keyboard.C64Keyboard()
-except OSError as e:
+except (ImportError, OSError) as e:
     kb = None
     status.set_text("No TCA8418 on H4:\n%s" % e)
     status.align(lv.ALIGN.CENTER, 0, 0)
@@ -40,7 +46,7 @@ if kb is not None:
     ta.set_style_text_color(lv.color_hex(TEXT), 0)
     ta.set_style_bg_color(lv.color_hex(TEXT), lv.PART.CURSOR)  # block cursor
     ta.set_style_bg_opa(lv.OPA.COVER, lv.PART.CURSOR)
-    ta.set_text("**** RP2350 MICROPYTHON ****\n\nREADY.\n")
+    ta.set_text("**** %s MICROPYTHON ****\n\nREADY.\n" % os.uname().machine.split(" with ")[-1].upper())
     lv.group_focus_obj(ta)
 
     # Bottom line: the last key and the modifiers held

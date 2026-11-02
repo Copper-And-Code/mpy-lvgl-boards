@@ -8,6 +8,7 @@
 import time
 import lvgl as lv
 import display_driver
+import ui
 
 W, H = display_driver.WIDTH, display_driver.HEIGHT
 
@@ -82,18 +83,19 @@ def mcu_move():
 scr = lv.obj()
 scr.set_style_bg_color(lv.color_hex(0x202020), 0)
 scr.remove_flag(lv.obj.FLAG.SCROLLABLE)
+scr.set_style_text_font(ui.font(14), 0)
 
 status = lv.label(scr)
 status.set_style_text_color(lv.color_hex(0xFFFFFF), 0)
-status.align(lv.ALIGN.TOP_LEFT, 8, 4)
+status.align(lv.ALIGN.TOP_LEFT, ui.px(8), ui.px(4))
 
 points = lv.label(scr)
 points.set_style_text_color(lv.color_hex(0xA0A0A0), 0)
-points.align(lv.ALIGN.TOP_RIGHT, -8, 4)
+points.align(lv.ALIGN.TOP_RIGHT, -ui.px(8), ui.px(4))
 
-top = 24
-side = min(W, H - top) - 8
-gap = 4
+top = ui.px(24)
+side = min(W, H - top) - ui.px(8)
+gap = ui.px(4)
 cell = (side - 2 * gap) // 3
 x0 = (W - (3 * cell + 2 * gap)) // 2
 cells = []
@@ -119,10 +121,10 @@ for i in range(9):
     c.set_size(cell, cell)
     c.set_pos(x0 + (i % 3) * (cell + gap), top + (i // 3) * (cell + gap))
     c.set_style_bg_color(lv.color_hex(0xEEEEEE), 0)
-    c.set_style_radius(6, 0)
+    c.set_style_radius(ui.px(6), 0)
     c.set_style_shadow_width(0, 0)
     m = lv.label(c)
-    m.set_style_text_font(lv.font_montserrat_24, 0)
+    m.set_style_text_font(ui.font(24), 0)
     m.center()
     c.add_event_cb(lambda e, i=i: on_cell(e, i), lv.EVENT.CLICKED, None)
     cells.append(c)

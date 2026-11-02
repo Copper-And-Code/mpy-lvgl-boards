@@ -11,14 +11,17 @@
 # the new head, so the cost per step does not grow with the length.
 import random
 import lvgl as lv
+import buzzer
 import display_driver
-from machine import Pin, PWM
+import ui
 
-SOUND = True  # buzzer on GPIO1 (PWM)
+SOUND = True  # the board's buzzer, if it has one (buzzer.py)
 
+# Sizes for a 240 px display, scaled by ui.px(): the field keeps about the same
+# number of cells per side, more columns on a wide display.
 W, H = display_driver.WIDTH, display_driver.HEIGHT
-TOP = 18                       # score bar
-CELL = 14
+TOP = ui.px(18)                # score bar
+CELL = ui.px(14)
 COLS = W // CELL
 ROWS = (H - TOP) // CELL
 X0 = (W - COLS * CELL) // 2
@@ -27,29 +30,21 @@ Y0 = TOP + (H - TOP - ROWS * CELL) // 2
 START_MS, MIN_MS = 220, 90     # step period: from START_MS down to MIN_MS
 CRASH_MS = 600
 
-# --- sound ---
-buzzer = None
-
-
+# --- sound (silent on boards without a buzzer) ---
 def tone(freq):
-    global buzzer
-    if not SOUND:
-        return
-    if buzzer is None:
-        buzzer = PWM(Pin(1), freq=freq, duty_u16=0)
-    buzzer.freq(freq)
-    buzzer.duty_u16(32768)
+    if SOUND:
+        buzzer.tone(freq)
 
 
 def quiet():
-    if buzzer is not None:
-        buzzer.duty_u16(0)
+    buzzer.off()
 
 
 # --- screen ---
 scr = lv.obj()
 scr.set_style_bg_color(lv.color_hex(0x101010), 0)
 scr.remove_flag(lv.obj.FLAG.SCROLLABLE)
+scr.set_style_text_font(ui.font(14), 0)
 
 field = lv.obj(scr)
 field.remove_style_all()
@@ -61,7 +56,7 @@ field.remove_flag(lv.obj.FLAG.CLICKABLE)
 
 score_label = lv.label(scr)
 score_label.set_style_text_color(lv.color_hex(0xFFFFFF), 0)
-score_label.align(lv.ALIGN.TOP_LEFT, 6, 1)
+score_label.align(lv.ALIGN.TOP_LEFT, ui.px(6), ui.px(1))
 
 msg = lv.label(scr)
 msg.set_style_text_color(lv.color_hex(0xFFFF60), 0)
@@ -72,11 +67,12 @@ body_style = lv.style_t()
 body_style.init()
 body_style.set_bg_color(lv.color_hex(0x40E040))
 body_style.set_bg_opa(lv.OPA.COVER)
-body_style.set_radius(3)
+body_style.set_radius(ui.px(3))
 
 food = lv.obj(field)
 food.remove_style_all()
-food.set_size(CELL - 2, CELL - 2)
+SEG = CELL - ui.px(2)          # a segment, with a gap around it
+food.set_size(SEG, SEG)
 food.set_style_bg_color(lv.color_hex(0xFF4040), 0)
 food.set_style_bg_opa(lv.OPA.COVER, 0)
 food.set_style_radius(lv.RADIUS_CIRCLE, 0)
@@ -90,14 +86,14 @@ def segment(i):
         s = lv.obj(field)
         s.remove_style_all()
         s.add_style(body_style, 0)
-        s.set_size(CELL - 2, CELL - 2)
+        s.set_size(SEG, SEG)
         s.remove_flag(lv.obj.FLAG.CLICKABLE)
         pool.append(s)
     return pool[i]
 
 
 def place(obj, cell):
-    obj.set_pos(cell[0] * CELL + 1, cell[1] * CELL + 1)
+    obj.set_pos(cell[0] * CELL + (CELL - SEG) // 2, cell[1] * CELL + (CELL - SEG) // 2)
 
 
 # The head: drawn over the head segment, round, with two eyes looking where
@@ -113,8 +109,9 @@ def disc(parent, size, color):
     return o
 
 
-head_obj = disc(field, CELL + 2, 0x80FF60)
-head_obj.set_style_border_width(1, 0)
+HEAD = CELL + ui.px(2)         # the head is a bit larger than a cell
+head_obj = disc(field, HEAD, 0x80FF60)
+head_obj.set_style_border_width(ui.px(1), 0)
 head_obj.set_style_border_color(lv.color_hex(0x208020), 0)
 EYE, PUPIL = CELL // 3, CELL // 6
 eyes = [disc(head_obj, EYE, 0xFFFFFF) for _ in range(2)]
@@ -122,9 +119,9 @@ pupils = [disc(e, PUPIL, 0x000000) for e in eyes]
 
 
 def place_head(cell, d):
-    head_obj.set_pos(cell[0] * CELL - 1, cell[1] * CELL - 1)
+    head_obj.set_pos(cell[0] * CELL - (HEAD - CELL) // 2, cell[1] * CELL - (HEAD - CELL) // 2)
     head_obj.move_foreground()
-    c = (CELL + 2) // 2
+    c = HEAD // 2
     px, py = -d[1], d[0]  # perpendicular to the direction
     for k, side in enumerate((-1, 1)):
         ex = c + d[0] * (CELL // 6) + side * px * (CELL // 4) - EYE // 2

@@ -7,57 +7,44 @@
 # send it sideways. 3 lives; every cleared wall comes back faster.
 import math
 import lvgl as lv
+import buzzer
 import display_driver
-from machine import Pin, PWM
+import ui
 
-SOUND = True  # buzzer on GPIO1 (PWM)
+SOUND = True  # the board's buzzer, if it has one (buzzer.py)
 
+# Sizes for a 240 px display, scaled by ui.px(); the wall gets more columns on
+# a wide display, speeds scale with the display.
 W, H = display_driver.WIDTH, display_driver.HEIGHT
-TOP = 18                       # score bar
+px_ = ui.px
+TOP = px_(18)                  # score bar
 TICK = 20                      # ms, period of the game timer
 
-COLS, ROWS = 8, 5
-MARGIN, GAP = 4, 2
+COLS, ROWS = max(8, int(8 * W / H + 0.5)), 5
+MARGIN, GAP = px_(4), px_(2)
 BW = (W - 2 * MARGIN - (COLS - 1) * GAP) // COLS
-BH = 10
+BH = px_(10)
 BX0 = (W - (COLS * BW + (COLS - 1) * GAP)) // 2
-BY0 = TOP + 14
+BY0 = TOP + px_(14)
 ROW_COLORS = (0xF44336, 0xFF9800, 0xFFEB3B, 0x4CAF50, 0x2196F3)
 ROW_NOTES = (880, 784, 659, 587, 523)
 
-PW, PH = W // 5, 6             # paddle
-PY = H - 16
-BALL = 6
-SPEED0 = 2.6                   # px per tick at level 1
+PW, PH = W // 5, px_(6)        # paddle
+PY = H - px_(16)
+BALL = px_(6)
+SPEED0 = 2.6 * ui.UNIT         # px per tick at level 1
 
-# --- sound ---
-buzzer = None
-beep_left = 0
-
-
+# --- sound (silent on boards without a buzzer) ---
 def beep(freq, ms=40):
-    global buzzer, beep_left
-    if not SOUND:
-        return
-    if buzzer is None:
-        buzzer = PWM(Pin(1), freq=freq, duty_u16=0)
-    buzzer.freq(freq)
-    buzzer.duty_u16(32768)
-    beep_left = ms
-
-
-def sound_tick():
-    global beep_left
-    if beep_left > 0:
-        beep_left -= TICK
-        if beep_left <= 0 and buzzer is not None:
-            buzzer.duty_u16(0)
+    if SOUND:
+        buzzer.beep(freq, ms)
 
 
 # --- screen ---
 scr = lv.obj()
 scr.set_style_bg_color(lv.color_hex(0x000010), 0)
 scr.remove_flag(lv.obj.FLAG.SCROLLABLE)
+scr.set_style_text_font(ui.font(14), 0)
 
 
 def box(w, h, color, radius=2):
@@ -66,14 +53,14 @@ def box(w, h, color, radius=2):
     o.set_size(w, h)
     o.set_style_bg_color(lv.color_hex(color), 0)
     o.set_style_bg_opa(lv.OPA.COVER, 0)
-    o.set_style_radius(radius, 0)
+    o.set_style_radius(px_(radius) if radius != lv.RADIUS_CIRCLE else radius, 0)
     o.remove_flag(lv.obj.FLAG.CLICKABLE)
     return o
 
 
 score_label = lv.label(scr)
 score_label.set_style_text_color(lv.color_hex(0xFFFFFF), 0)
-score_label.align(lv.ALIGN.TOP_LEFT, 6, 1)
+score_label.align(lv.ALIGN.TOP_LEFT, px_(6), px_(1))
 
 msg = lv.label(scr)
 msg.set_style_text_color(lv.color_hex(0xFFFF60), 0)
@@ -113,7 +100,7 @@ def show_score():
 def show_msg(text):
     if text:
         msg.set_text(text)
-        msg.align(lv.ALIGN.CENTER, 0, 30)
+        msg.align(lv.ALIGN.CENTER, 0, px_(30))
         msg.remove_flag(lv.obj.FLAG.HIDDEN)
     else:
         msg.add_flag(lv.obj.FLAG.HIDDEN)
@@ -171,7 +158,6 @@ def brick_at(x, y):
 def on_tick(timer):
     global bx, by, vx, vy, state, score, lives, level, speed, left
     global over_wait
-    sound_tick()
     over_wait = max(0, over_wait - TICK)
     if state != "play":
         return

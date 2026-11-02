@@ -89,6 +89,14 @@ def _tick(_):
         _interrupted()
 
 
+def backlight(percent=None):
+    """Set the backlight (0-100) or, with no argument, read it. On/off on the
+    STM32 boards for now (GPIO), so any percent above 0 is full brightness."""
+    if percent is None:
+        return st_ltdc.backlight()
+    st_ltdc.backlight(percent)
+
+
 def start():
     global _timer
     if _timer is None:

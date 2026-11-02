@@ -11,44 +11,29 @@
 import math
 import random
 import lvgl as lv
+import buzzer
 import display_driver
-from machine import Pin, PWM
+import ui
 
-SOUND = True  # buzzer on GPIO1 (PWM)
+SOUND = True  # the board's buzzer, if it has one (buzzer.py)
 
+# Sizes and speeds for a 240 px display, scaled by ui.px() / ui.UNIT.
 W, H = display_driver.WIDTH, display_driver.HEIGHT
+px_ = ui.px
 TICK = 20                      # ms, period of the game timer
 WIN = 7                        # points to win
 
-PW, PH = 6, H // 5             # paddles
-PX_USER, PX_MCU = 8, W - 8 - PW
-BALL = 6
-SPEED0, SPEED_MAX = 2.8, 6.0   # px per tick
-MCU_SPEED = 2.4                # px per tick, top speed of the MCU paddle
+PW, PH = px_(6), H // 5        # paddles
+PX_USER, PX_MCU = px_(8), W - px_(8) - PW
+BALL = px_(6)
+SPEED0, SPEED_MAX = 2.8 * ui.UNIT, 6.0 * ui.UNIT   # px per tick
+MCU_SPEED = 2.4 * ui.UNIT      # px per tick, top speed of the MCU paddle
 MCU_ERROR = PH // 3            # px, aim error
 
-# --- sound ---
-buzzer = None
-beep_left = 0
-
-
+# --- sound (silent on boards without a buzzer) ---
 def beep(freq, ms=40):
-    global buzzer, beep_left
-    if not SOUND:
-        return
-    if buzzer is None:
-        buzzer = PWM(Pin(1), freq=freq, duty_u16=0)
-    buzzer.freq(freq)
-    buzzer.duty_u16(32768)
-    beep_left = ms
-
-
-def sound_tick():
-    global beep_left
-    if beep_left > 0:
-        beep_left -= TICK
-        if beep_left <= 0 and buzzer is not None:
-            buzzer.duty_u16(0)
+    if SOUND:
+        buzzer.beep(freq, ms)
 
 
 # --- screen ---
@@ -63,20 +48,20 @@ def box(w, h, color, radius=0):
     o.set_size(w, h)
     o.set_style_bg_color(lv.color_hex(color), 0)
     o.set_style_bg_opa(lv.OPA.COVER, 0)
-    o.set_style_radius(radius, 0)
+    o.set_style_radius(px_(radius) if radius != lv.RADIUS_CIRCLE else radius, 0)
     o.remove_flag(lv.obj.FLAG.CLICKABLE)
     return o
 
 
-for y in range(0, H, 12):      # dashed centre line
-    box(2, 6, 0x404040).set_pos(W // 2 - 1, y + 3)
+for y in range(0, H, px_(12)):  # dashed centre line
+    box(px_(2), px_(6), 0x404040).set_pos(W // 2 - px_(1), y + px_(3))
 
 
 def score_label(x_offset):
     lbl = lv.label(scr)
     lbl.set_style_text_color(lv.color_hex(0x808080), 0)
-    lbl.set_style_text_font(lv.font_montserrat_24, 0)
-    lbl.align(lv.ALIGN.TOP_MID, x_offset, 6)
+    lbl.set_style_text_font(ui.font(24), 0)
+    lbl.align(lv.ALIGN.TOP_MID, x_offset, px_(6))
     return lbl
 
 
@@ -86,6 +71,7 @@ mcu_label = score_label(W // 6)
 msg = lv.label(scr)
 msg.set_style_text_color(lv.color_hex(0xFFFF60), 0)
 msg.set_style_text_align(lv.TEXT_ALIGN.CENTER, 0)
+msg.set_style_text_font(ui.font(14), 0)
 
 user_paddle = box(PW, PH, 0x40C0FF, 2)
 mcu_paddle = box(PW, PH, 0xFF6040, 2)
@@ -163,7 +149,6 @@ def move_mcu():
 
 def on_tick(timer):
     global state, bx, by, vx, vy, wait
-    sound_tick()
     wait = max(0, wait - TICK)
     if state == "wait":
         if wait == 0:  # serve, 30 degrees up or down

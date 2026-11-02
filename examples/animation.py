@@ -6,6 +6,7 @@
 # buffered, so moving objects do not tear.
 import lvgl as lv
 import display_driver
+import ui
 
 W, H = display_driver.WIDTH, display_driver.HEIGHT
 
@@ -13,7 +14,8 @@ scr = lv.obj()
 scr.set_style_bg_color(lv.color_hex(0x000000), 0)
 
 bar = lv.obj(scr)
-bar.set_size(16, H)
+BAR = ui.px(16)
+bar.set_size(BAR, H)
 bar.set_style_bg_color(lv.color_hex(0x00C0FF), 0)
 bar.set_style_border_width(0, 0)
 bar.set_style_radius(0, 0)
@@ -21,7 +23,7 @@ bar.set_style_radius(0, 0)
 a = lv.anim_t()
 a.init()
 a.set_var(bar)
-a.set_values(0, W - 16)
+a.set_values(0, W - BAR)
 a.set_duration(1500)
 a.set_reverse_duration(1500)
 a.set_repeat_count(lv.ANIM_REPEAT_INFINITE)
@@ -30,7 +32,10 @@ a.set_custom_exec_cb(lambda anim, v: bar.set_x(v))
 a.start()
 
 arc = lv.arc(scr)
-arc.set_size(120, 120)
+arc.set_size(ui.px(120), ui.px(120))
+arc.set_style_arc_width(ui.px(12), 0)
+arc.set_style_arc_width(ui.px(12), lv.PART.INDICATOR)
+arc.set_style_pad_all(ui.px(4), lv.PART.KNOB)
 arc.center()
 arc.remove_flag(lv.obj.FLAG.CLICKABLE)
 
