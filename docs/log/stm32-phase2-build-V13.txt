@@ -1,0 +1,40 @@
+
+== sources in /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work
+micropython 0fd6c573ea81 ok
+lvgl-micropython 3e287e725886 ok
+lvgl-bindings 7740c2fae0da ok (beside lvgl-micropython)
+
+== patches
+toolchain: arm-none-eabi-gcc (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203
+
+== submodules
+
+== mpy-cross
+
+== firmware STM32H7_CORE-V13
+make: ingresso nella directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/stm32»
+Use make V=1 or set BUILD_VERBOSE in your environment to increase build verbosity.
+Including User C Module from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/lvgl-micropython
+lvgl-micropython: no jpegio in this build -- lv.image will not draw a JPEG.
+jpegio owns the TJpgDec decoder; PNG and LVGL BIN still decode.
+Name jpegio as well for JPEG (build_mp.py --modules jpegio,lvgl-micropython).
+Including User C Module from /opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/modules/st_ltdc
+CC ../../lib/libm/math.c
+LINK build-STM32H7_CORE-V13/firmware.elf
+   text	   data	    bss	    dec	    hex	filename
+1126464	   1308	 296480	1424252	 15bb7c	build-STM32H7_CORE-V13/firmware.elf
+GEN build-STM32H7_CORE-V13/firmware.bin
+GEN build-STM32H7_CORE-V13/firmware.hex
+GEN build-STM32H7_CORE-V13/firmware.dfu
+make: uscita dalla directory «/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/stm32»
+
+== done
+/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/dist/STM32H7_CORE-V13-9989095-dirty.dfu
+/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/dist/STM32H7_CORE-V13-9989095-dirty.hex
+  micropython v1.29.0, lvgl-micropython 3e287e7, lvgl-bindings 7740c2f
+   text	   data	    bss	    dec	    hex	filename
+1126464	   1308	 296480	1424252	 15bb7c	/opt/devel/mpy-lvgl-stm32/mpy-lvgl-boards/.work/micropython/ports/stm32/build-STM32H7_CORE-V13/firmware.elf
+
+real	0m4,411s
+user	0m3,704s
+sys	0m1,107s

@@ -20,6 +20,11 @@
 #define MICROPY_HW_ENTER_BOOTLOADER_VIA_RESET   (0)
 #define MICROPY_HW_SDCARD_MOUNT_AT_BOOT         (1)
 
+// End of soft reset: clear LVGL's GC state (modules/st_ltdc/st_ltdc.c).
+struct _boardctrl_state_t;
+void st_ltdc_board_end_soft_reset(struct _boardctrl_state_t *state);
+#define MICROPY_BOARD_END_SOFT_RESET st_ltdc_board_end_soft_reset
+
 // The board has a 25MHz HSE, the following gives 480MHz CPU speed
 #define MICROPY_HW_CLK_PLLM         (5)
 #define MICROPY_HW_CLK_PLLN         (192)

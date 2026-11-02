@@ -22,7 +22,9 @@
 #                     Default: arm-none-eabi-gcc from PATH if it is the pinned version,
 #                     else the pinned xPack release, downloaded into $WORK_DIR/tools.
 #   JOBS              parallel jobs (default: nproc).
-#   FROZEN_MANIFEST   passed to make if set (e.g. a board's manifest_nolvgl.py).
+#   FROZEN_MANIFEST   passed to make if set (e.g. a board's manifest_nolvgl.py); a
+#                     manifest other than the board's manifest.py adds its name to the
+#                     build directory and the output (manifest_nolvgl.py: -nolvgl).
 #
 # Output: dist/<BOARD>[-<VARIANT>]-<this repo commit>.<ext> and .sha256 files
 # (rp2: .uf2; stm32: .dfu and .hex).
@@ -192,13 +194,19 @@ echo "toolchain: $(arm-none-eabi-gcc --version | head -1)"
 
 # --- build ---
 MPY=$WORK_DIR/micropython
-NAME=$BOARD${VARIANT:+-$VARIANT}
-BUILD=build-$NAME
-MAKE_ARGS=(BOARD_DIR="$BOARD_DIR" BUILD="$BUILD")
-[[ -n $VARIANT ]] && MAKE_ARGS+=(BOARD_VARIANT="$VARIANT")
 # Taken out of the environment: make would pass it to the mpy-cross build too.
 FROZEN=${FROZEN_MANIFEST:-}
 unset FROZEN_MANIFEST
+NAME=$BOARD${VARIANT:+-$VARIANT}
+# Another manifest gets its own build directory and output name:
+# manifest_nolvgl.py -> <BOARD>[-<VARIANT>]-nolvgl.
+if [[ -n $FROZEN && $FROZEN != "$BOARD_DIR/manifest.py" ]]; then
+    m=$(basename "$FROZEN" .py)
+    NAME=$NAME-${m#manifest_}
+fi
+BUILD=build-$NAME
+MAKE_ARGS=(BOARD_DIR="$BOARD_DIR" BUILD="$BUILD")
+[[ -n $VARIANT ]] && MAKE_ARGS+=(BOARD_VARIANT="$VARIANT")
 [[ -n $FROZEN ]] && MAKE_ARGS+=(FROZEN_MANIFEST="$FROZEN")
 export LVMP_DIR=$WORK_DIR/lvgl-micropython
 

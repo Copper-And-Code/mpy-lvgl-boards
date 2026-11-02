@@ -166,8 +166,24 @@ Relevant to these boards:
 | Old fork, LVGL 9.3 + MicroPython 1.24.1, custom `lv_conf.h` | 1 810 800 – 1 839 692 B (DEV 1 831 456, FK 1 838 928, V10 1 839 136, V13 1 839 692) | measured, `/opt/github/lv_micropython/ports/stm32/build-*/firmware.bin` |
 | MicroPython 1.29.0, upstream WEACTSTUDIO_MINI_STM32H743, no LVGL | text 408 492 B | measured, `docs/log/stm32-phase0-upstream-h743-build.txt` |
 
-Internal flash: 2 MB (2 097 152 B). The LVGL part of the old firmware is therefore
-about 1.4 MB (deduced: old total minus a plain build, different MicroPython versions).
+Internal flash: 2 MB (2 097 152 B).
+
+Phase 2, MicroPython 1.29.0 + PyDevices binding (LVGL 9.5, its fixed `lv_conf.h`),
+`firmware.bin` measured (`docs/log/stm32-phase2-build.txt`):
+
+| Configuration | with LVGL | without LVGL | LVGL + binding | free of 2 MB |
+|---|---|---|---|---|
+| DEV190806042 | 1 121 176 | 384 284 | 736 892 | 975 976 (953 KiB) |
+| FK743M5-XIH6 | 1 128 560 | 391 684 | 736 876 | 968 592 (945 KiB) |
+| STM32H7_CORE V10 | 1 127 440 | 390 564 | 736 876 | 969 712 (946 KiB) |
+| STM32H7_CORE V13 | 1 127 772 | 390 872 | 736 900 | 969 380 (946 KiB) |
+
+It fits with a wide margin: no stop needed. Why the old firmware was 0.7 MB bigger
+(deduced, not measured symbol by symbol): its `lv_conf.h` enables 24 Montserrat font
+sizes, the PyDevices one 5; the largest symbols of the old firmware are font
+`glyph_bitmap` arrays of 65–92 KB each. The same image decoders (LodePNG, TJPGD, GIF,
+QR code, barcode) are on in both. So larger fonts for the 1024x600 panel would be the
+first thing to miss; there is room to add some (frozen font files or ROMFS).
 
 ## Entering DFU
 

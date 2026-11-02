@@ -5,6 +5,8 @@ USE_MBOOT ?= 0
 MCU_SERIES = h7
 CMSIS_MCU = STM32H743xx
 MICROPY_FLOAT_IMPL = double
+# LVGL also needs a few float functions (sinf, ...): see this file.
+include $(BOARD_DIR)/../lvgl_libm.mk
 AF_FILE = boards/stm32h743_af.csv
 
 ifeq ($(USE_MBOOT),1)
@@ -21,3 +23,13 @@ endif
 MICROPY_VFS_LFS2 = 1
 
 FROZEN_MANIFEST ?= $(BOARD_DIR)/manifest.py
+
+# lvgl-micropython (PyDevices) checkout, used as $(LVMP_DIR) in manifest.py.
+# Default: $LVMP_DIR from the environment (scripts/build.sh sets it), else the
+# workspace layout, with lvgl-micropython beside mpy-lvgl-boards.
+# Its lvgl-bindings is found by lvgl-micropython itself (BINDINGS_DIR or beside it).
+ifneq ($(LVMP_DIR),)
+MICROPY_MANIFEST_LVMP_DIR ?= $(LVMP_DIR)
+else
+MICROPY_MANIFEST_LVMP_DIR ?= $(abspath $(BOARD_DIR)/../../../../lvgl-micropython)
+endif
