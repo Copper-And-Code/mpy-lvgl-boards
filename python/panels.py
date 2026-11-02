@@ -7,7 +7,10 @@
 # old driver ran both panels at 50 MHz (PLL3 M5 N40 R4); the refresh rates in the
 # comments are calculated from it, see st_ltdc.info()["refresh_mhz"].
 # polarity bits: st_ltdc.POL_HS (1) HSYNC active high, POL_VS (2) VSYNC active
-# high, POL_DE (4) DE active high, POL_PC (8) pixel clock inverted.
+# high, POL_DE (4) DE active high, POL_PC (8) pixel clock inverted (LTDC GCR.PCPOL).
+# The old driver applied bit 3 the other way round (set -> LTDC_PCPOLARITY_IPC,
+# which is PCPOL = 0), so its panels.py said 0 for the IPS and 8 for the RGB043M2:
+# the values below give the panels the same PCPOL as the old driver did on hardware.
 
 PANELS = {
     # 7" IPS 1024x600: total 1344 x 638, 58.3 Hz at 50 MHz.
@@ -20,7 +23,7 @@ PANELS = {
         "vsync": 5,
         "vbp": 22,
         "vfp": 11,
-        "polarity": 0,
+        "polarity": 8,  # PCPOL = 1, as the old driver set it
         "pclk_hz": 50_000_000,
     },
     # 4.3" RGB043M2 800x480: total 884 x 510, 110.9 Hz at 50 MHz.
@@ -33,7 +36,7 @@ PANELS = {
         "vsync": 4,
         "vbp": 13,
         "vfp": 13,
-        "polarity": 8,
+        "polarity": 0,  # PCPOL = 0, as the old driver set it
         "pclk_hz": 50_000_000,
     },
 }
