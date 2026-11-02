@@ -1,0 +1,9 @@
+gt911 read() no touch, avg us: 229
+tap the button 5 times
+clicked 1
+clicked 2
+clicked 3
+clicked 4
+clicked 5
+done, clicks: 5 read_cb {'max_us': 446, 'down': 17, 'calls': 281} frames 572 underruns 0
+>

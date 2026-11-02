@@ -1,0 +1,11 @@
+board STM32H7_CORE V1.3 panel IPS1024x600 1024x600
+GT911 product id 911 cmd 0x00
+read() no touch, avg us: 124
+touch the 5 white squares, one at a time
+press 1: x 24 y 32 -> nearest top-left (centre 20,20, off 4,12)
+press 2: x 992 y 5 -> nearest top-right (centre 1004,20, off -12,-15)
+press 3: x 1012 y 587 -> nearest bottom-right (centre 1004,580, off 8,7)
+press 4: x 502 y 311 -> nearest centre (centre 512,300, off -10,11)
+press 5: x 29 y 590 -> nearest bottom-left (centre 20,580, off 9,10)
+done, presses: 5
+>
