@@ -1,0 +1,18 @@
+{
+    "deploy": [
+        "deploy.md"
+    ],
+    "features": [
+        "Display",
+        "External Flash",
+        "External RAM",
+        "USB"
+    ],
+    "images": [
+        "DEV190806042.jpg"
+    ],
+    "mcu": "stm32h7",
+    "product": "DEV190806042",
+    "url": "",
+    "vendor": "Aliexpress"
+}

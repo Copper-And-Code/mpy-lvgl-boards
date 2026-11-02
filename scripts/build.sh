@@ -196,7 +196,10 @@ NAME=$BOARD${VARIANT:+-$VARIANT}
 BUILD=build-$NAME
 MAKE_ARGS=(BOARD_DIR="$BOARD_DIR" BUILD="$BUILD")
 [[ -n $VARIANT ]] && MAKE_ARGS+=(BOARD_VARIANT="$VARIANT")
-[[ -n ${FROZEN_MANIFEST:-} ]] && MAKE_ARGS+=(FROZEN_MANIFEST="$FROZEN_MANIFEST")
+# Taken out of the environment: make would pass it to the mpy-cross build too.
+FROZEN=${FROZEN_MANIFEST:-}
+unset FROZEN_MANIFEST
+[[ -n $FROZEN ]] && MAKE_ARGS+=(FROZEN_MANIFEST="$FROZEN")
 export LVMP_DIR=$WORK_DIR/lvgl-micropython
 
 log "submodules"

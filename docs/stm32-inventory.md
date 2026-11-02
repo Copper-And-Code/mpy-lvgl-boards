@@ -16,8 +16,10 @@ in MicroPython since, and what is still to verify. Sources are read-only.
 
 ## Boards
 
-All: STM32H743 (DEV190806042 and STM32H7_CORE: IIT6, LQFP176; FK743M5-XIH6: XIH6,
-TFBGA240), HSE 25 MHz, PLL1 M5/N192/P2 = 480 MHz, AHB/APB /2, flash latency 4,
+All: STM32H743. STM32H7_CORE: IIT6 (LQFP176). FK743M5-XIH6: XIH6 (TFBGA240).
+DEV190806042: the docs say IIT6, but its LTDC uses ports J and K (PJ0-PJ15, PK0-PK7 on
+the schematic, which is titled "STM32H750"), so it must be a BGA package with ports
+J/K, not the LQFP176 (deduced from the schematic text). Common to all: HSE 25 MHz, PLL1 M5/N192/P2 = 480 MHz, AHB/APB /2, flash latency 4,
 USB FS on OTG_FS with HSI48, 2 CDC + MSC + HID, REPL also on UART1 (A9/A10, 115200),
 RTC, RNG, ADC, DAC, servo, hardware I2C, SDRAM on FMC bank 1 at 0xC0000000 with the
 MicroPython heap in SDRAM (`MICROPY_HEAP_START = sdram_start()` if the startup test
@@ -178,11 +180,6 @@ here in phase 1. ST-Link (SWD) works on all boards and is used for the backups.
 
 ## Backups
 
-| Board | Internal flash (2 MB) | sha256 | QSPI files | UID |
-|---|---|---|---|---|
-| DEV190806042 | pending | | | |
-| FK743M5-XIH6 | pending | | | |
-| STM32H7_CORE V1.0 | pending | | | |
-| STM32H7_CORE V1.3 | pending | | | |
-
-Files in `/opt/devel/mpy-lvgl-stm32/backup/` (outside the repo).
+Skipped: on 2026-11-02 Nunzio decided he does not need backups of the boards. No
+board was read; flashing goes ahead without them. (The old firmware images are still
+in `/opt/github/lv_micropython/ports/stm32/build-*/`, but not the QSPI filesystems.) `/opt/devel/mpy-lvgl-stm32/backup/` exists and is empty.
