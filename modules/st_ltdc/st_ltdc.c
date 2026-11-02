@@ -16,7 +16,8 @@
 //
 // LVGL (when the firmware has the lvgl-micropython binding): lv_display_create()
 // makes a display in DIRECT mode on the framebuffers, flushed in C; with two
-// buffers each completed refresh is shown from the next vertical blanking.
+// buffers each completed refresh is shown from the next vertical blanking, and
+// LVGL waits for that only before its next refresh (flush_wait_cb).
 // PARTIAL mode renders into small buffers in the same zone and copies each area
 // into the shown framebuffer with the DMA2D.
 
@@ -333,22 +334,30 @@ void LTDC_ER_IRQHandler(void) {
     LTDC_IRQHandler();
 }
 
-// Show framebuffer i from the next vertical blanking and wait until the LTDC
-// has taken the new address: the other buffer is then free to draw into.
-// No MicroPython events are handled while waiting (also called from the flush).
-static bool show_buffer(uint32_t i, uint32_t timeout_us) {
+// Ask the LTDC to show framebuffer i from the next vertical blanking.
+static void request_buffer(uint32_t i) {
     __DSB();  // pixel writes before the address change
     LTDC_Layer1->CFBAR = (uint32_t)st.fb[i];
     LTDC->SRCR = LTDC_SRCR_VBR;
     st.shown = i;
+}
+
+// Wait until the LTDC has taken the address asked for (at most one frame): the
+// other buffer is then free to draw into. No MicroPython events are handled.
+static bool wait_reload(uint32_t timeout_us) {
     uint32_t t0 = mp_hal_ticks_us();
-    while (LTDC->SRCR & LTDC_SRCR_VBR) {
+    while (st.running && (LTDC->SRCR & LTDC_SRCR_VBR)) {
         if (mp_hal_ticks_us() - t0 >= timeout_us) {
             st.reload_timeouts += 1;
             return false;
         }
     }
     return true;
+}
+
+static bool show_buffer(uint32_t i, uint32_t timeout_us) {
+    request_buffer(i);
+    return wait_reload(timeout_us);
 }
 
 static void dma2d_wait_idle(void) {
@@ -585,18 +594,31 @@ static mp_obj_t st_ltdc_lv_tick_install(void) {
 }
 static MP_DEFINE_CONST_FUN_OBJ_0(st_ltdc_lv_tick_install_obj, st_ltdc_lv_tick_install);
 
-// Flush in C: no Python code runs between LVGL handing over a frame and
-// lv_display_flush_ready(), so a KeyboardInterrupt can never leave LVGL
-// waiting forever for the flush.
+// Flush in C: no Python code runs between LVGL handing over a frame and the
+// end of the flush, so a KeyboardInterrupt can never leave LVGL waiting forever.
+//
+// DIRECT with two buffers: the last area of a refresh only asks for the new
+// buffer at the next vertical blanking and returns; the flush stays pending.
+// LVGL waits for it (lv_flush_wait_cb) only when it next needs the other
+// buffer, at the start of the next refresh, by when the swap has usually
+// happened: the CPU does not sit out up to a frame (17 ms at 58 Hz) per refresh.
 static void lv_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map) {
     if (st.running) {
         if (st.partial) {
             dma2d_copy(px_map, area->x1, area->y1, lv_area_get_width(area), lv_area_get_height(area));
         } else if (st.buffers == 2 && lv_display_flush_is_last(disp)) {
-            show_buffer((uint16_t *)px_map == st.fb[1] ? 1 : 0, 100000);
+            request_buffer((uint16_t *)px_map == st.fb[1] ? 1 : 0);
+            return;  // finished by lv_flush_wait_cb
         }
     }
     lv_display_flush_ready(disp);
+}
+
+// Called by LVGL while a flush is pending, before it draws into or syncs the
+// buffer that was on screen; LVGL clears the pending flag on return.
+static void lv_flush_wait_cb(lv_display_t *disp) {
+    (void)disp;
+    wait_reload(100000);
 }
 
 // lv_display_create(partial_lines=0): create the LVGL display on the panel,
@@ -629,6 +651,7 @@ static mp_obj_t st_ltdc_lv_display_create(size_t n_args, const mp_obj_t *args) {
         lv_display_set_buffers(disp, st.fb[0], NULL, fb_bytes(), LV_DISPLAY_RENDER_MODE_DIRECT);
     }
     lv_display_set_flush_cb(disp, lv_flush_cb);
+    lv_display_set_flush_wait_cb(disp, lv_flush_wait_cb);
     lv_display_set_default(disp);
     return mp_const_none;
 }

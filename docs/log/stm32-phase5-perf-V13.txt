@@ -1,0 +1,31 @@
+# STM32H7_CORE V1.3 + IPS1024x600. Before the TLSF pools (firmware aa41639-dirty without patches/lvgl-micropython):
+panel IPS1024x600 board STM32H7_CORE V1.3 freq (480000000, 240000000, 120000000, 120000000)
+driver QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+off    loop  220 ms  alloc  313 ms  copy   74 MB/s  gc 110 ms  underruns 0
+qos    loop  221 ms  alloc  317 ms  copy   49 MB/s  gc 137 ms  underruns 0
+noqos  loop  221 ms  alloc  315 ms  copy   49 MB/s  gc 132 ms  underruns 0
+qos    vs off: loop +0%  alloc +1%  copy -34%  gc +24%
+noqos  vs off: loop +0%  alloc +0%  copy -34%  gc +20%
+DIRECT 2 buf  full refr min 265272 avg 272551 us   label min 17037 avg 17865 us   underruns 0
+DIRECT 1 buf  full refr min 256446 avg 256567 us   label min  5896 avg  9206 us   underruns 0
+PARTIAL 60    full refr min 383533 avg 384286 us   label min  5700 avg  8412 us   underruns 0
+PARTIAL 200   full refr min 242727 avg 243106 us   label min  5704 avg  8913 us   underruns 0
+end QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+mem_free 26538112
+>
+
+# After the TLSF pools (LVMP_POOL_TLSF=1):
+panel IPS1024x600 board STM32H7_CORE V1.3 freq (480000000, 240000000, 120000000, 120000000)
+driver QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+off    loop  220 ms  alloc  311 ms  copy   74 MB/s  gc 112 ms  underruns 0
+qos    loop  220 ms  alloc  315 ms  copy   49 MB/s  gc 138 ms  underruns 0
+noqos  loop  220 ms  alloc  313 ms  copy   49 MB/s  gc 134 ms  underruns 0
+qos    vs off: loop +0%  alloc +1%  copy -34%  gc +23%
+noqos  vs off: loop +0%  alloc +0%  copy -34%  gc +19%
+DIRECT 2 buf  full refr min  55776 avg  66017 us   label min 17053 avg 17916 us   underruns 0
+DIRECT 1 buf  full refr min  52086 avg  52307 us   label min   908 avg  1159 us   underruns 0
+PARTIAL 60    full refr min  86126 avg  87087 us   label min   937 avg  1200 us   underruns 0
+PARTIAL 200   full refr min  77934 avg  78540 us   label min   843 avg  1190 us   underruns 0
+end QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+mem_free 26311824
+>

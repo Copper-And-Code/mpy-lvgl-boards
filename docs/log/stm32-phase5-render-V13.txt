@@ -1,0 +1,50 @@
+# Where the time goes, V1.3 + IPS1024x600 (scratch scripts, before the TLSF pools)
+## render only, PARTIAL 100 lines, flush does nothing (tests/hil/stm32/t05_render_mem.py)
+render only, PARTIAL 100 lines, full screen 1024x600, us (min/avg of 3)
+plain     heap  min   10161 avg   11146  (60.5 Mpx/s)
+plain     zone  min   10309 avg   10553  (59.6 Mpx/s)
+plain     axi   min    2649 avg    2654  (231.9 Mpx/s)
+buttons   heap  min   58692 avg   59536  (10.5 Mpx/s)
+buttons   zone  min   52793 avg   53624  (11.6 Mpx/s)
+buttons   axi   min   32804 avg   33681  (18.7 Mpx/s)
+noshadow  heap  min   31238 avg   31566  (19.7 Mpx/s)
+noshadow  zone  min   26560 avg   26888  (23.1 Mpx/s)
+noshadow  axi   min   13621 avg   14080  (45.1 Mpx/s)
+st_ltdc underruns 0
+>
+
+## memory bandwidth, CPU memcpy and DMA2D, 400 KB blocks, LTDC scanning out (MB/s)
+cpu  heap2 <- heap    50.0
+cpu  zone  <- heap    51.4
+cpu  zone  <- axi    142.1
+cpu  zone2 <- zone    45.0
+cpu  axi   <- heap    93.2
+cpu  heap  <- axi     48.8
+dma2d zone  <- heap    64.8
+dma2d zone  <- axi    137.4
+dma2d zone2 <- zone    48.1
+dma2d heap  <- axi    144.7
+
+## SDRAM read per 8 MB bank into AXI SRAM (MB/s), LTDC on / off
+on  c0100000: 96.8  c0900000:102.1  c1100000:101.3  c1900000: 90.1  c1e00000: 94.7
+off c0100000:150.5  c0900000:151.4  c1100000:151.1  c1900000:151.2  c1e00000:151.3
+
+## LVGL full refresh (48 buttons, DIRECT 1 buffer) against the GC heap state
+## before the TLSF pools
+clean alloc us 64B 3  8K 181  64K 719
+direct1 clean heap                 min   53647
+2MB alloc us 64B 4  8K 611  64K 1716
+direct1 + 2 MB bytearrays          min  574962
+30k alloc us 64B 4  8K 82  64K 557
+direct1 + 30k live objects         min   53497
+freed alloc us 64B 5  8K 609  64K 1717
+direct1 after freeing              min  574469
+## with the TLSF pools
+clean alloc us 64B 3  8K 252  64K 803
+direct1 clean heap                 min   51001
+2MB alloc us 64B 4  8K 1148  64K 1914
+direct1 + 2 MB bytearrays          min   50447
+30k alloc us 64B 3  8K 82  64K 555
+direct1 + 30k live objects         min   50439
+freed alloc us 64B 4  8K 1162  64K 1898
+direct1 after freeing              min   50808

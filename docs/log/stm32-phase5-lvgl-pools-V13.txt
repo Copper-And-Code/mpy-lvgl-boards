@@ -1,0 +1,33 @@
+
+== tests/hil/stm32/t05_lvgl_gc.py (1/6)
+round 1: 300/300 callbacks, 0 wrong, 17 ms, mem_free 28279712
+round 2 (after lv.deinit/lv.init): 300/300 callbacks, 0 wrong, 17 ms, mem_free 28258416
+RESULT: ok
+>
+== tests/hil/t02_lvgl_smoke.py (2/6)
+mem_free before: 28684320
+clicked
+Hello from LVGL - drew 240 px wide refr_now 1265 us
+mem_free after scene: 28363888
+mem_free after deinit: 28684320
+clicked
+Hello from LVGL - drew 240 px wide refr_now 1275 us
+OK
+>
+== tests/hil/stm32/t02_lvgl_softreset.py (3/6)
+run: init+refr 5 ms, flushed [320], mem_free before 28684512 after 28268032, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== tests/hil/stm32/t02_lvgl_softreset.py (4/6)
+run: init+refr 5 ms, flushed [320], mem_free before 28684512 after 28268032, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== tests/hil/stm32/t02_lvgl_softreset.py (5/6)
+run: init+refr 5 ms, flushed [320], mem_free before 28684512 after 28268032, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== tests/hil/stm32/t05_lvgl_gc.py (6/6)
+round 1: 300/300 callbacks, 0 wrong, 17 ms, mem_free 28279728
+round 2 (after lv.deinit/lv.init): 300/300 callbacks, 0 wrong, 13 ms, mem_free 28258432
+RESULT: ok
+>

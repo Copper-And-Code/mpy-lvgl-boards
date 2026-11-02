@@ -29,6 +29,7 @@ class GT911:
         self.x = 0
         self.y = 0
         self.pressed = False
+        self.errors = 0  # I2C errors swallowed by lv_read_cb
         self._status = bytearray(1)
         self._point = bytearray(4)
         self._zero = b"\x00"
@@ -75,7 +76,14 @@ class GT911:
     def lv_read_cb(self, indev, data):
         import lvgl as lv
 
-        pressed, x, y = self.read()
+        try:
+            pressed, x, y = self.read()
+        except OSError:
+            # A transient NACK (seen once in ~9000 polls on an STM32 SoftI2C bus):
+            # keep the last state and try again at the next poll, rather than
+            # raising out of LVGL's input read every time.
+            self.errors += 1
+            pressed, x, y = self.pressed, self.x, self.y
         data.point.x = x
         data.point.y = y
         data.state = lv.INDEV_STATE.PRESSED if pressed else lv.INDEV_STATE.RELEASED

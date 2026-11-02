@@ -1,0 +1,19 @@
+t=    0s lvgl_rps=4.1 panel_fps=82.30 underruns=0 mem_free=26315984 min_free=26316384 allocs=40 errors=0 touch_errors=0
+t=   60s lvgl_rps=34.5 panel_fps=58.31 underruns=0 mem_free=26291552 min_free=26277888 allocs=7720 errors=0 touch_errors=0
+t=  120s lvgl_rps=34.6 panel_fps=58.30 underruns=0 mem_free=26287552 min_free=26277888 allocs=15400 errors=0 touch_errors=1
+t=  180s lvgl_rps=34.8 panel_fps=58.32 underruns=0 mem_free=26283552 min_free=26277888 allocs=23080 errors=0 touch_errors=1
+t=  240s lvgl_rps=34.9 panel_fps=58.30 underruns=0 mem_free=26277552 min_free=26277888 allocs=30800 errors=0 touch_errors=1
+t=  300s lvgl_rps=34.8 panel_fps=58.33 underruns=0 mem_free=26293552 min_free=26277888 allocs=38480 errors=0 touch_errors=1
+t=  360s lvgl_rps=34.8 panel_fps=58.30 underruns=0 mem_free=26287552 min_free=26277888 allocs=46200 errors=0 touch_errors=1
+t=  420s lvgl_rps=34.8 panel_fps=58.32 underruns=0 mem_free=26283552 min_free=26277888 allocs=53880 errors=0 touch_errors=2
+t=  480s lvgl_rps=34.7 panel_fps=58.31 underruns=0 mem_free=26279552 min_free=26277888 allocs=61560 errors=0 touch_errors=2
+t=  540s lvgl_rps=34.8 panel_fps=58.31 underruns=0 mem_free=26295600 min_free=26277888 allocs=69240 errors=0 touch_errors=2
+t=  600s lvgl_rps=34.9 panel_fps=58.31 underruns=0 mem_free=26289552 min_free=26277888 allocs=76960 errors=0 touch_errors=2
+t=  660s lvgl_rps=34.9 panel_fps=58.31 underruns=0 mem_free=26281552 min_free=26277888 allocs=84720 errors=0 touch_errors=3
+t=  720s lvgl_rps=35.1 panel_fps=58.31 underruns=0 mem_free=26295600 min_free=26277888 allocs=92440 errors=0 touch_errors=3
+t=  780s lvgl_rps=34.9 panel_fps=58.32 underruns=0 mem_free=26289552 min_free=26277888 allocs=100160 errors=0 touch_errors=3
+t=  840s lvgl_rps=34.9 panel_fps=58.30 underruns=0 mem_free=26285552 min_free=26277888 allocs=107840 errors=0 touch_errors=3
+SOAK DONE t=900s lvgl_rps=34.9 panel_fps=58.33 underruns=0 min_free=26277888 allocs=115560 errors=0 touch_errors=3
+RESULT: ok
+>
+rc=0

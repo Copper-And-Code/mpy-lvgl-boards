@@ -6,7 +6,8 @@
 #
 # Panel: PANEL in /flash/display_config.py (default IPS1024x600, see panels.py).
 # LVGL renders in DIRECT mode into the two framebuffers (outside the GC heap);
-# the flush (in C) shows the new one at vertical blanking: no tearing.
+# the flush (in C) shows the new one at vertical blanking: no tearing. LVGL
+# refreshes every REFR_PERIOD_MS (16 ms) instead of the binding's 33 ms.
 # The GT911 is registered as LVGL pointer device (touch, indev); its pins come
 # from stm32_board.py.
 #
@@ -25,6 +26,10 @@ import stm32_board
 from machine import Timer
 
 PERIOD_MS = 5
+# LVGL's display refresh period. The binding's lv_conf.h has 33 ms (30 Hz at
+# most); the panels run at about 58 Hz, and the flush no longer blocks for the
+# vertical blanking, so animations can follow the panel.
+REFR_PERIOD_MS = 16
 BUFFERS = 2
 
 PANEL = stm32_board.panel()
@@ -39,6 +44,7 @@ disp = lv.display_get_default()
 if disp is None:
     st_ltdc.lv_display_create()
     disp = lv.display_get_default()
+    disp.get_refr_timer().set_period(REFR_PERIOD_MS)
 
 # Touch: GT911 reports panel pixels (its configuration holds the panel size).
 try:

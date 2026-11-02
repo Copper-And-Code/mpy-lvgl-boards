@@ -1,0 +1,151 @@
+diff --git a/micropython.cmake b/micropython.cmake
+index 09496ad..73c6439 100644
+--- a/micropython.cmake
++++ b/micropython.cmake
+@@ -85,6 +85,7 @@ endif()
+ list(FILTER SOURCES EXCLUDE REGEX "/src/drivers/(opengles|sdl|glfw|x11|wayland|evdev|libinput|qnx|uefi|nuttx|windows)/")
+ list(FILTER SOURCES EXCLUDE REGEX "/src/draw/opengles/")
+ list(APPEND SOURCES ${LVMP_DIR}/src/lv_mem_core_micropython.c)
++list(APPEND SOURCES ${LVMP_DIR}/src/lvmp_tlsf.c)
+ 
+ if(NOT EXISTS ${LVMP_C})
+     message(FATAL_ERROR "${LVMP_C} not found. Sync an exact lvgl-bindings commit or release tag")
+diff --git a/micropython.mk b/micropython.mk
+index 18f93ec..c4785ea 100644
+--- a/micropython.mk
++++ b/micropython.mk
+@@ -91,6 +91,7 @@ SOURCES := $(foreach s,$(SOURCES),$(if $(strip $(foreach d,$(LVMP_EXCLUDE_DIRS),
+ endif
+ 
+ SOURCES += $(LVMP_DIR)/src/lv_mem_core_micropython.c
++SOURCES += $(LVMP_DIR)/src/lvmp_tlsf.c
+ 
+ $(if $(wildcard $(LVMP_C)),,$(error $(LVMP_C) not found. Sync an exact lvgl-bindings commit or release tag))
+ 
+diff --git a/src/lv_mem_core_micropython.c b/src/lv_mem_core_micropython.c
+index 56e5a64..52adca9 100644
+--- a/src/lv_mem_core_micropython.c
++++ b/src/lv_mem_core_micropython.c
+@@ -28,22 +28,37 @@
+ // callback that only lv_obj_t.user_data refers to stays alive, as with
+ // gc_alloc(). Allocations of LVMP_POOL_BIG bytes or more, and anything that
+ // does not fit, still go to gc_alloc().
+-#if defined(ESP_PLATFORM) && MICROPY_MALLOC_USES_ALLOCATED_SIZE
+-#define LVMP_POOL (1)
+-#else
+-#define LVMP_POOL (0)
+-#endif
++//
++// Other ports: the same pools on LVGL's own TLSF (lv_tlsf.c, built for this in
++// lvmp_tlsf.c) when the board sets LVMP_POOL_TLSF=1. STM32H743 with a 28 MB
++// GC heap in SDRAM: a full-screen refresh of 48 buttons took 54 ms with a
++// fresh heap and 575 ms once 2 MB of bytearrays sat behind a free block, every
++// LVGL allocation walking the table past them (mpy-lvgl-boards, 2026-11-02).
++#include "lvmp_pool.h"
+ 
+-#if LVMP_POOL
++#if LVMP_POOL && defined(ESP_PLATFORM)
+ #include "multi_heap.h"
++#elif LVMP_POOL
++// lv_tlsf.h declares these only with LV_STDLIB_BUILTIN.
++typedef void * lv_tlsf_t;
++lv_tlsf_t lv_tlsf_create_with_pool(void * mem, size_t bytes);
++void * lv_tlsf_malloc(lv_tlsf_t tlsf, size_t bytes);
++void * lv_tlsf_realloc(lv_tlsf_t tlsf, void * ptr, size_t size);
++size_t lv_tlsf_free(lv_tlsf_t tlsf, const void * ptr);
++size_t lv_tlsf_block_size(void * ptr);
++typedef lv_tlsf_t multi_heap_handle_t;
++#define multi_heap_register(mem, bytes) lv_tlsf_create_with_pool((mem), (bytes))
++#define multi_heap_malloc lv_tlsf_malloc
++#define multi_heap_realloc lv_tlsf_realloc
++#define multi_heap_free(h, p) ((void)lv_tlsf_free((h), (p)))
++#define multi_heap_get_allocated_size(h, p) lv_tlsf_block_size(p)
++#endif
+ 
+-#define LVMP_POOL_MAX   (8)
+-#define LVMP_POOL_BYTES (256 * 1024)
+-#define LVMP_POOL_BIG   (32 * 1024)
++#if LVMP_POOL
+ 
+-// The pools' GC blocks: a root pointer keeps them (and so everything LVGL
+-// stores in them) reachable.
+-MP_REGISTER_ROOT_POINTER(void *lvmp_pool_mem[8]);
++// The pools' GC blocks are kept reachable (and so everything LVGL stores in
++// them) by the root pointer lvmp_pool_mem, registered in lvgl_micropython_build.c:
++// make builds do not scan this file (SRC_USERMOD_LIB_C) for root pointers.
+ 
+ static multi_heap_handle_t lvmp_heaps[LVMP_POOL_MAX];
+ static uint8_t *lvmp_start[LVMP_POOL_MAX];
+diff --git a/src/lvgl_micropython_build.c b/src/lvgl_micropython_build.c
+index 1508489..c681fe2 100644
+--- a/src/lvgl_micropython_build.c
++++ b/src/lvgl_micropython_build.c
+@@ -6,6 +6,13 @@
+ #include "py/obj.h"
+ #include "py/objstr.h"
+ #include "py/runtime.h"
++#include "lvmp_pool.h"
++
++#if LVMP_POOL
++// The GC blocks of lv_mem_core_micropython.c's pools: this root pointer keeps
++// them, and so everything LVGL stores in them, reachable.
++MP_REGISTER_ROOT_POINTER(void *lvmp_pool_mem[LVMP_POOL_MAX]);
++#endif
+ 
+ #ifndef LVMP_REVISION
+ #define LVMP_REVISION "unknown"
+diff --git a/src/lvmp_pool.h b/src/lvmp_pool.h
+new file mode 100644
+index 0000000..1fb7ea0
+--- /dev/null
++++ b/src/lvmp_pool.h
+@@ -0,0 +1,24 @@
++// LVGL allocations from TLSF pools kept in GC blocks (lv_mem_core_micropython.c).
++// Shared with lvgl_micropython_build.c, which registers the pools' root pointer
++// (make builds scan only SRC_USERMOD_C for root pointers, not the LVGL sources),
++// and lvmp_tlsf.c, which sizes LVGL's TLSF for one pool.
++#ifndef LVMP_POOL_H
++#define LVMP_POOL_H
++
++#include "py/mpconfig.h"
++
++// ESP32: ESP-IDF's multi_heap. Other ports: LVGL's TLSF, when the board sets
++// LVMP_POOL_TLSF=1.
++#if defined(ESP_PLATFORM) && MICROPY_MALLOC_USES_ALLOCATED_SIZE
++#define LVMP_POOL (1)
++#elif defined(LVMP_POOL_TLSF) && LVMP_POOL_TLSF
++#define LVMP_POOL (1)
++#else
++#define LVMP_POOL (0)
++#endif
++
++#define LVMP_POOL_MAX   (8)
++#define LVMP_POOL_BYTES (256 * 1024)
++#define LVMP_POOL_BIG   (32 * 1024)
++
++#endif // LVMP_POOL_H
+diff --git a/src/lvmp_tlsf.c b/src/lvmp_tlsf.c
+new file mode 100644
+index 0000000..a319f41
+--- /dev/null
++++ b/src/lvmp_tlsf.c
+@@ -0,0 +1,19 @@
++/**
++ * @file lvmp_tlsf.c
++ *
++ * LVGL's TLSF allocator for the LVMP pools of lv_mem_core_micropython.c on
++ * ports without ESP-IDF's multi_heap (LVMP_POOL_TLSF=1). LVGL compiles
++ * lv_tlsf.c only with LV_STDLIB_BUILTIN, so it is built here, in a translation
++ * unit of its own, with that setting: nothing else in LVGL changes.
++ */
++#include "lvgl/src/lv_conf_internal.h"
++#if LV_USE_STDLIB_MALLOC == LV_STDLIB_MICROPYTHON_OVERRIDE && defined(LVMP_POOL_TLSF) && LVMP_POOL_TLSF
++#include "lvmp_pool.h"
++#undef LV_USE_STDLIB_MALLOC
++#define LV_USE_STDLIB_MALLOC LV_STDLIB_BUILTIN
++// lv_tlsf.c sizes its tables for LV_MEM_SIZE + LV_MEM_POOL_EXPAND_SIZE, which
++// lv_conf_internal.h defines only with LV_STDLIB_BUILTIN: one TLSF per pool.
++#define LV_MEM_SIZE LVMP_POOL_BYTES
++#define LV_MEM_POOL_EXPAND_SIZE 0
++#include "lvgl/src/stdlib/builtin/lv_tlsf.c"
++#endif
