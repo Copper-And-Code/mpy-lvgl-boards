@@ -1,6 +1,6 @@
 <!--
-Draft issue for PyDevices/lvgl-micropython (src/lv_mem_core_micropython.c) and/or
-lvgl-bindings. Not filed. Review, then file it yourself or tell Claude to.
+Draft issue for PyDevices/omnipython-lvgl (ports/micropython/src/lv_mem_core_micropython.c,
+LV_ASSERT_HANDLER in lv_conf.h). Not filed. Review, then file it yourself or tell Claude to.
 -->
 
 # Out of memory during `lv.timer_handler()` leaves LVGL stuck; the next invalidation hangs the MCU
@@ -27,8 +27,10 @@ application can catch.
 
 ## Versions
 
-- MicroPython v1.29.0; rp2 (RP2350B, Waveshare RP2350-Touch-LCD-4, no PSRAM) and unix
-- PyDevices/lvgl-micropython `3e287e7`, lvgl-bindings `7740c2f` (LVGL 9.5)
+- rp2 (RP2350B, Waveshare RP2350-Touch-LCD-4, no PSRAM), MicroPython v1.29.0:
+  `PyDevices/omnipython-lvgl` `92f8c0a` plus the pools change of #6, which does not touch this code,
+  3 runs out of 3; also on `lvgl-micropython` `3e287e7`, the code this moved from.
+- unix: only on `lvgl-micropython` `3e287e7`, not re-run on omnipython-lvgl.
 
 ## Reproduce
 
@@ -58,7 +60,7 @@ lv.label(scr).set_text("after")
 print("not reached")
 ```
 
-rp2, 4 runs out of 4 (a watchdog reset the board each time):
+rp2 (a watchdog reset the board each run):
 
 ```text
 0 MemoryError memory allocation failed, allocating 176403 bytes
@@ -67,7 +69,8 @@ rp2, 4 runs out of 4 (a watchdog reset the board each time):
 (hang: nothing printed after o.delete() / the next label)
 ```
 
-unix (`-X heapsize=1M`), 2 runs out of 2: no output after the first `lv.timer_handler()`.
+unix (`-X heapsize=1M`), on the old code, 2 runs out of 2: no output after the first
+`lv.timer_handler()`.
 
 ## Possible directions (for discussion)
 
@@ -82,5 +85,7 @@ unix (`-X heapsize=1M`), 2 runs out of 2: no output after the first `lv.timer_ha
    NULL is not enough: that is what unix does today, and it hangs too.
 3. At least document it: on small-heap boards, opacity/transform on large widgets can
    hang the MCU.
+
+`LV_ASSERT_HANDLER` is still `while(1);` in `lv_conf.h` for MicroPython.
 
 Happy to test on RP2350 hardware.

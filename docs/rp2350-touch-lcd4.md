@@ -43,6 +43,41 @@ Full-screen `lv.refr_now()` then takes ~17 ms (9.2 ms rendering + wait for the e
 frame): LVGL refreshes at most once per panel frame (57.7 Hz at PCLK 15 MHz).
 Pixel check vs the unix port still 64/64 tiles identical (`log/phase6-crc-doublebuf.txt`).
 
+## Open: a full redraw sometimes costs one frame more with two buffers
+
+`tests/hil/t06_perf.py` no longer reproduces the table above: `display_driver` now uses two
+buffers, so `refr_now` includes the wait for the swap and reads the frame, not the rendering
+(17.2 ms at 57.7 Hz, 12.9 ms at 77 Hz). Back to back, or from a pause that ends early enough,
+it can read two frames (26 and 34 ms). This is no regression: the published firmware and the
+omnipython-lvgl build give the same figures.
+
+Measured on the 240x240 scene (2026-11-05, 150 MHz), `lv.refr_now()` after a pause:
+
+| heap | one buffer | two buffers |
+|---|---|---|
+| clean | 9.5 ms | 11.5 ms |
+| 30 KB of garbage | 8.9 ms | 28.8 ms |
+| 60 KB of small live objects | 8.9 ms | 28.8 ms |
+| small live objects with holes | 14.7 ms | 28.8 ms |
+
+Timed inside the flush: the wait for the swap stays short (3 ms); LVGL reaches the flush at
+9.4 ms in the first case and 24.7 ms in the slow one. So the extra 15 ms are in LVGL, before
+the flush, and only with two buffers.
+
+Ruled out, by measurement: free memory (slow with over 200 KB free), `gc.collect()` as a
+remedy, the flash clock (`QMI M0_TIMING` unchanged), the XIP cache (same misses), flash writes
+as such, one extra refresh (one `REFR_START` per `refr_now`), and the second framebuffer
+being in the GC heap (a static one gives the same figures, and loses 120 KB with one buffer).
+
+Not known: where the 15 ms go, and why they depend on the heap. They look like a copy of the
+115 KB between the buffers, but `refr_sync_areas()` should have nothing to copy with the
+whole screen invalidated. Python event callbacks on the display made the slowdown disappear
+for the same garbage, probably by changing the heap, so timing from Python does not settle
+it: the next step is timing inside LVGL, in C, with nothing that allocates.
+
+Effect: full-screen redraws at about 34 per second instead of 57 in those heap states; the
+image stays correct. Small redraws were not measured in those states.
+
 ## Robustness: Ctrl-C and soft reset
 
 - **Flush callback in C** (`rgbpanel.lv_display_create()`): with a Python `flush_cb`, a

@@ -1,10 +1,9 @@
 <!--
-Draft issue for PyDevices/lvgl-bindings (the root-pointer code is generated there:
-binding/emit_c_micropython_style.py → mp_lv_init_gc / mp_lv_deinit_gc).
-Not filed. Review, then file it yourself or tell Claude to.
+Draft issue for PyDevices/omnipython-lvgl (binding/emit_c_micropython_style.py:
+mp_lv_init_gc, mp_lv_deinit_gc). Not filed. Review, then file it yourself or tell Claude to.
 -->
 
-# `lv.init()` after a MicroPython soft reset hangs if `lv.deinit()` was not called
+# `lv.init()` after a MicroPython soft reset crashes or hangs if `lv.deinit()` was not called
 
 ## Summary
 
@@ -18,9 +17,9 @@ pointers: `mp_init()` does not zero `mp_state_vm_t`. If the program did not call
 now freed heap), sees `lv_is_initialized()` as true and skips `lv_init()`. LVGL then
 works on memory that MicroPython hands out again to other objects.
 
-On an RP2350 board this hangs the firmware at the first LVGL call after the reset:
-USB stays enumerated, the REPL is dead, and neither `picotool reboot -f` nor the
-1200-baud touch recovers it; only a power cycle does.
+On an ESP32-S3 the next run panics (Guru Meditation, `LoadProhibited`) and the board
+restarts. On an RP2350, on the older lvgl-micropython, it hung at the first LVGL call after
+the reset: USB enumerated, REPL dead, only a power cycle recovered it.
 
 Most real programs never call `lv.deinit()` (an LVGL app typically runs until reset), and
 tools such as `mpremote run` / `mpremote exec` soft-reset the board before every command,
@@ -28,47 +27,36 @@ so this is easy to hit during development.
 
 ## Versions
 
-- MicroPython v1.29.0, `ports/rp2`, RP2350B (Waveshare RP2350-Touch-LCD-4, out-of-tree board)
-- PyDevices/lvgl-micropython `3e287e7`
-- PyDevices/lvgl-bindings `7740c2f` (`LVGL_BINDINGS_COMMIT`), LVGL 9.5
-- Toolchain: xPack arm-none-eabi-gcc 15.2.1-1.1
-- Also checked: no change in this area on lvgl-bindings `origin/main` as of 2026-10-29.
+- `PyDevices/omnipython-lvgl` `92f8c0a` (LVGL 9.5.0), MicroPython v1.29.0, ESP-IDF v5.5.2,
+  ESP32-S3 (ESP32-4848S040): reproduced as below.
+- RP2350: the hang above, on `lvgl-micropython` `3e287e7`, the code this moved from.
 
 ## Reproduce
 
-Any rp2 firmware with the binding, no display hardware needed:
+Any firmware with the binding and no call to `mp_lv_deinit_gc()` at soft reset, no display
+hardware needed. Run this twice with a soft reset (Ctrl-D) in between:
 
-```bash
-mpremote exec "
+```python
 import lvgl as lv
 lv.init()
-d = lv.display_create(64, 64)
-b = bytearray(64 * 64 * 2)
+d = lv.display_create(320, 240)
+d.set_color_format(lv.COLOR_FORMAT.RGB565)
+b = bytearray(320 * 240 * 2)
 d.set_buffers(b, None, len(b), lv.DISPLAY_RENDER_MODE.FULL)
-d.set_flush_cb(lambda d, a, p: d.flush_ready())
-lv.label(lv.screen_active()).set_text('before')
+d.set_flush_cb(lambda d, area, px: d.flush_ready())
+lv.label(lv.screen_active()).set_text("soft reset test")
+lv.tick_inc(50)
 lv.refr_now(d)
-print('ok1')
-"
-# no lv.deinit(): soft reset, then use LVGL again
-mpremote soft-reset exec "
-import lvgl as lv
-lv.init()
-d = lv.display_create(64, 64)
-b = bytearray(64 * 64 * 2)
-d.set_buffers(b, None, len(b), lv.DISPLAY_RENDER_MODE.FULL)
-d.set_flush_cb(lambda d, a, p: d.flush_ready())
-for i in range(50):
-    lv.label(lv.screen_active()).set_text('after %d' % i)
-lv.refr_now(d)
-print('ok2')
-"
+print("OK")
 ```
 
-Expected: `ok1`, then `ok2`.
-Actual: `ok1`, then the second command never returns and the board must be power-cycled.
+Expected: `OK` twice. Actual on the ESP32-S3: `OK`, then on the second run
 
-With `lv.deinit()` at the end of the first command, both print as expected.
+```text
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+```
+
+With `lv.deinit()` at the end of the first run, both print as expected.
 
 ## Cause
 
@@ -90,27 +78,20 @@ stale root, and skips `lv_init()`.
 
 ## Workaround we use (port/board side)
 
-The rp2 port has a board hook that runs before the heap is swept. In the board's
-`mpconfigboard.h`:
-
-```c
-void board_end_soft_reset(void);
-#define MICROPY_BOARD_END_SOFT_RESET() board_end_soft_reset()
-```
-
-and in a C file of the firmware:
+Drop the root at soft reset:
 
 ```c
 void mp_lv_deinit_gc(void);   // exported by the binding
-
-void board_end_soft_reset(void) {
-    mp_lv_deinit_gc();         // forget LVGL's GC-allocated state
-}
 ```
 
-Verified on the board: three consecutive soft resets with LVGL live (display, 50 labels,
-`lv.refr_now()`), `lv.init()` starts clean every time and `gc.mem_free()` is identical
-after each reset (no leak).
+- **rp2, stm32**: the port has a board hook, `MICROPY_BOARD_END_SOFT_RESET`, that calls it.
+- **esp32**: there is no such hook. The board's frozen `_boot.py` creates an object whose
+  finaliser calls it, run by `gc_sweep_all()` in the soft-reset path; no change to
+  MicroPython. See
+  [`modules/esp_rgb/esp_rgb.c`](https://github.com/Copper-And-Code/mpy-lvgl-boards/blob/main/modules/esp_rgb/esp_rgb.c).
+
+Verified: 3 soft resets out of 3 with LVGL left initialised on the ESP32-S3, the same on
+an STM32H743, with `gc.mem_free()` identical each time.
 
 This only drops the root; it does not call `lv_deinit()`, which could run Python
 callbacks while the VM is shutting down. Everything LVGL allocated is GC memory that the
@@ -120,8 +101,8 @@ reset discards anyway. C statics outside `lv_global_t` (if any remain in LVGL wi
 ## Possible fixes in the binding (for discussion)
 
 1. **Document** that ports/boards must call `mp_lv_deinit_gc()` on soft reset, with the
-   hook above for rp2 (`MICROPY_BOARD_END_SOFT_RESET`) and the equivalent places for
-   other ports (esp32 `main.c` soft-reset path, unix has no soft reset).
+   hook above where a port has one (`MICROPY_BOARD_END_SOFT_RESET`), and the finaliser
+   where it has none (esp32).
 2. **Detect a new VM session** in `mp_lv_init_gc()` without relying on root pointers,
    e.g. keep a C static copy of the roots pointer next to a copy of something the soft
    reset changes; or check that `mp_lv_roots` is still the start of a live GC block of
@@ -131,4 +112,4 @@ reset discards anyway. C statics outside `lv_global_t` (if any remain in LVGL wi
    be the clean solution, and would also cover other modules that keep state across a
    soft reset.
 
-Happy to test a fix on RP2350 hardware.
+Happy to test a fix on ESP32-S3, RP2350 and STM32H743 hardware.

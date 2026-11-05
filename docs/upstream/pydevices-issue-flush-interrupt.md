@@ -1,6 +1,6 @@
 <!--
-Draft issue for PyDevices/lvgl-bindings (mp_lv_nesting_call in the generated binding).
-Not filed. Review, then file it yourself or tell Claude to.
+Draft issue for PyDevices/omnipython-lvgl (mp_lv_nesting_call, in
+binding/emit_c_micropython_style.py). Not filed. Review, then file it yourself or tell Claude to.
 -->
 
 # KeyboardInterrupt inside a Python `flush_cb` leaves LVGL waiting for the flush forever
@@ -21,7 +21,9 @@ process pending events makes the window large; a short flush_cb only makes it sm
 
 ## Versions
 
-MicroPython v1.29.0 (rp2, RP2350), lvgl-micropython `3e287e7`, lvgl-bindings `7740c2f` (LVGL 9.5).
+- STM32H743 (STM32H7_CORE V1.3), MicroPython v1.29.0, `PyDevices/omnipython-lvgl`
+  `92f8c0a` plus the pools change of #6, which does not touch this code: 4 runs out of 4.
+- RP2350, on `lvgl-micropython` `3e287e7`, the code this moved from: the same.
 
 ## Reproduce (any port with a REPL)
 
@@ -45,14 +47,22 @@ while True:
     lv.timer_handler()
 ```
 
-Press Ctrl-C a few times: usually the interrupt lands in `flush()` during the sleep, is
-printed by the binding, and the next `lv.timer_handler()` never returns (on an RP2350 board:
-REPL dead, USB still enumerated, power cycle needed).
+Press Ctrl-C once. The loop spends most of its time in that sleep, so the interrupt lands in
+`flush()` and is printed by the binding:
+
+```text
+Traceback (most recent call last):
+  File "<stdin>", line 8, in flush
+KeyboardInterrupt:
+```
+
+The next `lv.timer_handler()` never returns: more Ctrl-C do nothing, the REPL is dead, and
+only a hardware reset recovers the board. A short `flush_cb` makes the window smaller.
 
 ## What we did
 
-We moved the flush callback to C (it calls `lv_display_flush_ready()` unconditionally), so
-no Python code runs between LVGL handing over a frame and the flush being acknowledged.
+We moved the flush callback to C on all our boards, so no Python code runs between LVGL
+handing over a frame and the flush being acknowledged.
 
 ## Possible fixes in the binding (for discussion)
 
