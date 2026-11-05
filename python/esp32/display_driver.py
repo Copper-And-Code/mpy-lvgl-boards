@@ -1,7 +1,7 @@
 # LVGL display driver for the ESP32-4848S040 (RGB panel + GT911 touch).
 #
 # `import display_driver` is all an application needs, as on the RP2350 board:
-# it starts the panel (st_ltdc), LVGL on its framebuffers and a periodic
+# it starts the panel (esp_rgb), LVGL on its framebuffers and a periodic
 # lv.timer_handler(), so the application has no main loop.
 #
 # LVGL renders in DIRECT mode into the two framebuffers (in PSRAM, outside the GC
@@ -10,7 +10,7 @@
 # not wired on this board.
 #
 # Importing again is safe. After a soft reset the panel keeps scanning out the
-# last image (st_ltdc.init() with the same timings does not restart it) and the
+# last image (esp_rgb.init() with the same timings does not restart it) and the
 # board's soft-reset hook has already deinitialised LVGL.
 #
 # display_driver.stop() stops the periodic timer_handler, for applications

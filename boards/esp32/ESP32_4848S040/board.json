@@ -1,5 +1,4 @@
 {
-    "deploy": ["../deploy.md"],
     "docs": "",
     "features": ["BLE", "PSRAM", "USB-UART", "WiFi"],
     "id": "ESP32_4848S040",
