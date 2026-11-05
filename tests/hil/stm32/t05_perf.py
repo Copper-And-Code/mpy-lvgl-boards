@@ -7,7 +7,7 @@
 #      qos   the LTDC running with the driver's AXI QoS (LTDC/DMA2D before the CPU,
 #            SDRAM port limited to one outstanding transaction), as in the old port,
 #      noqos the LTDC running with the AXI QoS registers at their reset values.
-#    Underruns are counted for each (the ER interrupt is enabled since 43d5172).
+#    Underruns are counted for each (the ER interrupt is enabled since be477e3).
 # B. LVGL render modes on the same scene (DIRECT 2 buffers, DIRECT 1 buffer,
 #    PARTIAL 60 and 200 lines): full-screen refresh and a small label change.
 # The driver's QoS is put back at the end.
