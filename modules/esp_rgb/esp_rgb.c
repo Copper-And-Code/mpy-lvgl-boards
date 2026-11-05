@@ -33,6 +33,9 @@
 #include "esp_lcd_panel_ops.h"
 #include "esp_lcd_panel_rgb.h"
 #include "esp_rom_sys.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/idf_additions.h"
 
 #include "st7701_init.h"
 
@@ -128,6 +131,30 @@ static void panel_stop(void) {
     }
 }
 
+typedef struct {
+    const esp_lcd_rgb_panel_config_t *cfg;
+    TaskHandle_t caller;
+    esp_lcd_panel_handle_t panel;
+    esp_err_t err;
+} panel_start_args_t;
+
+static void panel_start_task(void *arg) {
+    panel_start_args_t *a = arg;
+    esp_lcd_rgb_panel_event_callbacks_t cbs = { .on_vsync = on_frame };
+    a->err = esp_lcd_new_rgb_panel(a->cfg, &a->panel);
+    if (a->err == ESP_OK) {
+        a->err = esp_lcd_rgb_panel_register_event_callbacks(a->panel, &cbs, NULL);
+    }
+    if (a->err == ESP_OK) {
+        a->err = esp_lcd_panel_reset(a->panel);
+    }
+    if (a->err == ESP_OK) {
+        a->err = esp_lcd_panel_init(a->panel);
+    }
+    xTaskNotifyGive(a->caller);
+    vTaskDelete(NULL);
+}
+
 static mp_obj_t esp_rgb_init(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
     enum { ARG_width, ARG_height, ARG_hsync, ARG_hbp, ARG_hfp, ARG_vsync, ARG_vbp, ARG_vfp,
            ARG_polarity, ARG_pclk_hz, ARG_buffers, ARG_backlight };
@@ -200,12 +227,16 @@ static mp_obj_t esp_rgb_init(size_t n_args, const mp_obj_t *pos_args, mp_map_t *
         .data_gpio_nums = { MICROPY_HW_RGB_DATA },
         .flags = { .fb_in_psram = 1 },
     };
-    esp_lcd_panel_handle_t panel;
-    check(esp_lcd_new_rgb_panel(&cfg, &panel));
-    esp_lcd_rgb_panel_event_callbacks_t cbs = { .on_vsync = on_frame };
-    check(esp_lcd_rgb_panel_register_event_callbacks(panel, &cbs, NULL));
-    check(esp_lcd_panel_reset(panel));
-    check(esp_lcd_panel_init(panel));
+    // The panel's interrupt stays on the core that creates it, and it copies 24 MB/s
+    // into the bounce buffers: keep it away from the core that runs MicroPython.
+    panel_start_args_t start = { .cfg = &cfg, .caller = xTaskGetCurrentTaskHandle() };
+    if (xTaskCreatePinnedToCore(panel_start_task, "esp_rgb", 4096, &start, configMAX_PRIORITIES - 2, NULL,
+        MP_TASK_COREID == 0 ? 1 : 0) != pdPASS) {
+        check(ESP_ERR_NO_MEM);
+    }
+    ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+    check(start.err);
+    esp_lcd_panel_handle_t panel = start.panel;
     if (buffers == 2) {
         check(esp_lcd_rgb_panel_get_frame_buffer(panel, 2, &st.fb[0], &st.fb[1]));
     } else {
