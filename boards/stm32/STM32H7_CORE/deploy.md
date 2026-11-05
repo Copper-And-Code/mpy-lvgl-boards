@@ -15,3 +15,6 @@ firmware:
 ```bash
 dfu-util --alt 0 -D firmware.dfu
 ```
+
+Step by step, with checks and common problems: `docs/flash-dfu.md` in this repository. After
+writing, the board stays in DFU mode until you press reset.

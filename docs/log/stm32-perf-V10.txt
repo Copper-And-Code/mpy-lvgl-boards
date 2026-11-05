@@ -1,0 +1,8 @@
+qos    loop  222 ms  alloc  324 ms  copy   49 MB/s  gc 138 ms  underruns 0
+noqos  loop  222 ms  alloc  322 ms  copy   49 MB/s  gc 134 ms  underruns 0
+qos    vs off: loop +0%  alloc +1%  copy -34%  gc +24%
+noqos  vs off: loop +0%  alloc +0%  copy -34%  gc +20%
+DIRECT 2 buf  full refr min  53185 avg  64455 us   label min  6761 avg 17894 us   underruns 0
+DIRECT 1 buf  full refr min  52497 avg  52539 us   label min   800 avg  1177 us   underruns 0
+PARTIAL 60    full refr min  86994 avg  87770 us   label min   966 avg  1206 us   underruns 0
+PARTIAL 200   full refr min  78280 avg  79077 us   label min   916 avg  1218 us   underruns 0

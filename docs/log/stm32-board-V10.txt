@@ -1,0 +1,66 @@
+
+== tests/hil/stm32/t01_board.py (1/5)
+uname: (sysname='pyboard', nodename='pyboard', release='1.29.0', version='0fd6c573ea on 2026-11-05', machine='STM32H7_CORE V1.0 with STM32H743')
+ok   known board STM32H7_CORE V1.0 with STM32H743
+freq: (480000000, 240000000, 120000000, 120000000)
+ok   cpu 480 MHz 
+ok   heap in SDRAM total 28687744 free 28679664
+ok   QSPI fs size 16742400 bytes (expected about 16 MB)
+mounts: ['flash']
+note SD not mounted: card inserted? (not counted as a failure)
+LED1 blinked 3 times
+touch i2c: I2C(4, scl=D12, sda=D13, freq=1071428, timingr=0x70330309) ['0x5d']
+ok   GT911 on touch bus 
+ok   GT911 product id b'911\x00'
+
+ID=38003800:10513330:34373137
+DEVID=0x0450
+REVID=0x2003
+S=480000000
+H=240000000
+P1=120000000
+P2=120000000
+_etext=81159cc
+_sidata=81159d4
+_sdata=24000000
+_edata=2400051c
+_sbss=2400051c
+_ebss=2400440c
+_sstack=2407bff8
+_estack=2407fff8
+_ram_start=24000000
+_heap_start=2400440c
+_heap_end=2407bff8
+_ram_end=24080000
+qstr:
+  n_pool=2
+  n_qstr=31
+  n_str_data_bytes=203
+  n_total_bytes=683
+GC:
+  28687744 total
+  9408 : 28678336
+  1=80 2=30 m=233
+SPI flash size: 16777216
+QSPI flash size: 16777216
+LFS free: 16715776 bytes
+
+RESULT: all 6 checks ok
+>
+== tests/hil/stm32/t02_lvgl_softreset.py (2/5)
+run: init+refr 5 ms, flushed [320], mem_free before 28684496 after 28267984, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== tests/hil/stm32/t02_lvgl_softreset.py (3/5)
+run: init+refr 4 ms, flushed [320], mem_free before 28684496 after 28267984, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== tests/hil/stm32/t02_lvgl_softreset.py (4/5)
+run: init+refr 4 ms, flushed [320], mem_free before 28684496 after 28267984, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+>
+== tests/hil/stm32/t05_lvgl_gc.py (5/5)
+round 1: 300/300 callbacks, 0 wrong, 16 ms, mem_free 28279712
+round 2 (after lv.deinit/lv.init): 300/300 callbacks, 0 wrong, 17 ms, mem_free 28258384
+RESULT: ok
+>

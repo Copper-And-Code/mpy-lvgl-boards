@@ -49,7 +49,7 @@ PLL3 (pixel clock), same on all boards: M5, N40, R4 → 25 MHz / 5 × 40 / 4 = *
 phase 3): IPS1024x600 total 1344 × 638 → 58.3 Hz; RGB043M2 884 × 510 → 110.9 Hz.
 
 To verify on the schematics in phase 1 (deduced from text extraction, not yet checked
-by eye): the V1.0 QSPI part (W25Q256 on the drawing, 16 MB in the code); the FK743M5-XIH6
+by eye): the V1.0 QSPI part (W25Q256 on the drawing; 16 MB measured on the board, 2026-11-05); the FK743M5-XIH6
 pins (no schematic available: only the old code); DEV190806042 backlight B5 and touch
 SCL H6 (the same H6 is the backlight on FK743M5-XIH6 and V1.0, no conflict, different
 boards). A runtime check of the flash size is possible on 1.29 (`machine.info()` prints

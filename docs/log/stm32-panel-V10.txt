@@ -1,0 +1,11 @@
+panel: IPS1024x600 {'zone_bytes': 4194304, 'cpsr_y': 0, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 0, 'running': True, 'polarity': 8, 'frames': 0, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+A colour bars + yellow frame: drawn in 6963 ms, swap True
+B ramps red/green/blue/grey: drawn in 6946 ms, swap True
+C 1-pixel checkerboard: drawn in 6934 ms, swap True
+D 20 swaps: 2070 ms (incl. 20 x 100 ms sleep)
+frames 174 in 3000 ms -> 58.00 fps (nominal 58.31), underruns 0
+wrote 200 KB in 2813 ms, frames 170 (expected ~164), underruns 0
+mem_free: 28670080
+info: {'zone_bytes': 4194304, 'cpsr_y': 430, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 1, 'running': True, 'polarity': 8, 'frames': 3208, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+RESULT: patterns shown; check A-D by eye; underruns 0
+>
