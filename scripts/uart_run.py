@@ -27,10 +27,10 @@ import serial
 RAW_PROMPT = b"raw REPL; CTRL-B to exit\r\n>"
 
 
-def open_port(port, baud):
+def open_port(port, baud, dtr=True):
     s = serial.Serial()
     s.port, s.baudrate, s.timeout = port, baud, 0.1
-    s.dtr, s.rts = True, False  # BOOT0 low, NRST released (after the open glitch)
+    s.dtr, s.rts = dtr, False  # BOOT0 low, NRST released (after the open glitch)
     s.open()
     return s
 
@@ -56,7 +56,7 @@ def enter_raw(s, boot_wait):
 
 def soft_reset(s):
     s.write(b"\x04")
-    read_until(s, b"soft reboot", 5)
+    # One wait: over USB "soft reboot" and the prompt can arrive in the same read.
     read_until(s, RAW_PROMPT, 20)
 
 
@@ -91,9 +91,11 @@ def main():
     ap.add_argument("--timeout", type=float, default=120, help="per script")
     ap.add_argument("--boot-wait", type=float, default=3.0)
     ap.add_argument("--soft-reset", action="store_true")
+    # ESP32 boards with the usual auto-reset circuit: DTR high would hold IO0 low.
+    ap.add_argument("--dtr", type=int, default=1, help="level of DTR, 0 on ESP32 boards")
     a = ap.parse_args()
 
-    s = open_port(a.port, a.baud)
+    s = open_port(a.port, a.baud, bool(a.dtr))
     enter_raw(s, a.boot_wait)
     worst = 0
     for i, path in enumerate(a.scripts):
