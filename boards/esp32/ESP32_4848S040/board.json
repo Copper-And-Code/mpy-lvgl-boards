@@ -1,0 +1,11 @@
+{
+    "deploy": ["../deploy.md"],
+    "docs": "",
+    "features": ["BLE", "PSRAM", "USB-UART", "WiFi"],
+    "id": "ESP32_4848S040",
+    "images": [],
+    "mcu": "esp32s3",
+    "product": "ESP32-4848S040",
+    "url": "",
+    "vendor": ""
+}

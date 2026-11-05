@@ -24,7 +24,8 @@ class GT911:
         self.i2c = i2c if i2c is not None else I2C(1, freq=400_000)
         self.addr = addr
         self.scale = scale
-        self.rst = Pin(rst, Pin.OUT, value=1)
+        # rst=None: boards with RST and INT not wired, nothing to reset.
+        self.rst = Pin(rst, Pin.OUT, value=1) if rst is not None else None
         self.irq_pin = irq
         self.x = 0
         self.y = 0
@@ -33,7 +34,7 @@ class GT911:
         self._status = bytearray(1)
         self._point = bytearray(4)
         self._zero = b"\x00"
-        if reset:
+        if reset and rst is not None:
             self.reset()
         pid = self.product_id()
         if pid != "911":

@@ -19,3 +19,7 @@
   `mpconfigboard.h` from `Copper-And-Code/lv_micropython` commits `c3545d440`,
   `a763dc856`, `d84e00f8e`. Schematics and photos: `Copper-And-Code/stm32h7-boards-docs`
   (schematic owners listed there). See `docs/stm32-inventory.md`.
+- **HomeDing, Matthias Hertel** (BSD 3-Clause) — the ST7701 init sequence of the
+  ESP32-4848S040 panel (`modules/esp_rgb/st7701_init.h`, re-encoded as data, with a
+  software reset added and the display not inverted); licence in
+  `modules/esp_rgb/LICENSE-HomeDing.txt`. Board pinout from the HomeDing board page.

@@ -26,6 +26,20 @@ PANELS = {
         "polarity": 8,  # PCPOL = 1, as the old driver set it
         "pclk_hz": 50_000_000,
     },
+    # 4" ST7701 480x480 of the ESP32-4848S040: total 548 x 518, 42.3 Hz at 12 MHz.
+    # Timings and clock as in HomeDing and Meshtastic for this board.
+    "ST7701_4848S040": {
+        "width": 480,
+        "height": 480,
+        "hsync": 8,
+        "hbp": 50,
+        "hfp": 10,
+        "vsync": 8,
+        "vbp": 20,
+        "vfp": 10,
+        "polarity": 12,  # DE active high, data on the falling edge
+        "pclk_hz": 12_000_000,
+    },
     # 4.3" RGB043M2 800x480: total 884 x 510, 110.9 Hz at 50 MHz.
     "RGB043M2": {
         "width": 800,

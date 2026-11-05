@@ -1,0 +1,8 @@
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
+
+# The panel keeps running while the flash is written: its interrupt and the bounce
+# buffers are in internal RAM, and code and constants run from PSRAM.
+CONFIG_LCD_RGB_ISR_IRAM_SAFE=y
+CONFIG_SPIRAM_XIP_FROM_PSRAM=y

@@ -4,6 +4,7 @@
 #   scripts/build.sh <port> <BOARD> [VARIANT]
 #
 #   port     rp2 or stm32; the board lives in boards/<port>/<BOARD>
+#            (esp32: handed over to scripts/build_esp32.sh)
 #   VARIANT  optional board variant (mpconfigvariant_<VARIANT>.{mk,cmake})
 #
 # Idempotent: clones the pinned sources into $WORK_DIR on the first run, checks
@@ -42,6 +43,7 @@ XPACK_SHA256=da6a49ad4003944b823c6c93702a8787c922ab34bd7e918ec0eaf6933a9b1ff6   
 log() { printf '\n== %s\n' "$*"; }
 die() { printf 'error: %s\n' "$*" >&2; exit 1; }
 
+[[ ${1:-} != esp32 ]] || { shift; exec "$(dirname "$0")/build_esp32.sh" "$@"; }
 [[ $# -ge 2 && $# -le 3 ]] || die "usage: $0 <rp2|stm32> <BOARD> [VARIANT]"
 PORT=$1
 BOARD=$2
