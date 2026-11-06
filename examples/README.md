@@ -20,6 +20,7 @@ STM32H7_CORE V1.3 on the bench (CH340 on UART1, DTR/RTS wired to BOOT0/NRST):
 | [simon.py](simon.py) | a game: repeat the growing sequence of colours (LVGL timer, buzzer if the board has one) |
 | [snake.py](snake.py) | a game: snake controlled by tapping on the side to turn to (LVGL objects reused as segments) |
 | [tictactoe.py](tictactoe.py) | a game: you (X) against the microcontroller (O, minimax: it never loses) |
+| [weather.py](weather.py) | ESP32-4848S040 only: weather, wind and 5 days of forecast from Open-Meteo, with drawn icons, setup on the touchscreen and settings on the SD card |
 
 Any resolution: sizes are written for a 240 px display and scaled with `ui.px(n)`
 (`python/ui.py`: `n` times the shorter side / 240, so unchanged on the RP2350 board),

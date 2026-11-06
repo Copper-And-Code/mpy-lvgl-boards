@@ -3,7 +3,8 @@
 #   mpremote run examples/backlight.py
 #
 # display_driver.backlight(percent) sets the backlight, display_driver.backlight()
-# reads it. RP2350 board: PWM on GPIO40. STM32 boards: on/off for now.
+# reads it. RP2350 board: PWM on GPIO40. ESP32-4848S040: PWM on GPIO38. STM32 boards: on/off
+# for now.
 import lvgl as lv
 import display_driver
 import ui

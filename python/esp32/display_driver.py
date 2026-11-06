@@ -20,7 +20,7 @@ import esp_rgb
 import gt911
 import lvgl as lv
 import panels
-from machine import Pin, SoftI2C, Timer
+from machine import PWM, Pin, SoftI2C, Timer
 
 PERIOD_MS = 5
 # LVGL's display refresh period. The binding's lv_conf.h has 33 ms (30 Hz at
@@ -30,9 +30,12 @@ REFR_PERIOD_MS = 16
 BUFFERS = 2
 
 TIMER_ID = 0
+BACKLIGHT = 70  # percent, at start
+BACKLIGHT_PIN = 38
+BACKLIGHT_HZ = 2000
 PANEL = "ST7701_4848S040"
 _timing = panels.get(PANEL)
-esp_rgb.init(**_timing, buffers=BUFFERS)
+esp_rgb.init(**_timing, buffers=BUFFERS, backlight=0)
 WIDTH, HEIGHT = _timing["width"], _timing["height"]
 
 if not lv.is_initialized():
@@ -53,6 +56,8 @@ except OSError as e:
     print("display_driver: no touch:", e)
 
 _timer = None
+_backlight = PWM(Pin(BACKLIGHT_PIN), freq=BACKLIGHT_HZ, duty_u16=0)
+_percent = 0
 
 
 # Ctrl-C while a program runs: lv.timer_handler() takes most of the CPU, so the
@@ -83,11 +88,12 @@ def _arm():
 
 
 def backlight(percent=None):
-    """Set the backlight (0-100) or, with no argument, read it. On/off for now
-    (GPIO), so any percent above 0 is full brightness."""
+    """Set the backlight (0-100, PWM) or, with no argument, read it."""
+    global _percent
     if percent is None:
-        return esp_rgb.backlight()
-    esp_rgb.backlight(percent)
+        return _percent
+    _percent = max(0, min(100, percent))
+    _backlight.duty_u16(65535 * _percent // 100)
 
 
 def start():
@@ -104,4 +110,5 @@ def stop():
         _timer = None
 
 
+backlight(BACKLIGHT)
 start()
