@@ -6,13 +6,16 @@
 #   buzzer.tone(880)         # until buzzer.off()
 #
 # RP2350-Touch-LCD-4: passive buzzer on GPIO1 (PWM). STM32 boards: the "buzzer"
-# pin of stm32_board.CONFIG, none so far.
+# pin of stm32_board.CONFIG, none so far. ESP32-4848S040: the speaker, through audio.py.
 
 import sys
 
 PIN = None
+_audio = None
 if sys.platform == "rp2":
     PIN = 1
+elif sys.platform == "esp32":
+    import audio as _audio
 else:
     try:
         import stm32_board
@@ -21,7 +24,7 @@ else:
     except ImportError:
         pass
 
-AVAILABLE = PIN is not None
+AVAILABLE = PIN is not None or _audio is not None
 
 _pwm = None
 _timer = None
@@ -29,10 +32,13 @@ _timer = None
 
 def tone(freq):
     global _pwm
-    if PIN is None:
-        return
     if freq <= 0:
         off()
+        return
+    if _audio:
+        _audio.tone(int(freq))
+        return
+    if PIN is None:
         return
     if _pwm is None:
         from machine import PWM, Pin
@@ -43,7 +49,9 @@ def tone(freq):
 
 
 def off():
-    if _pwm is not None:
+    if _audio:
+        _audio.finish()
+    elif _pwm is not None:
         _pwm.duty_u16(0)
 
 
@@ -54,6 +62,9 @@ def _stop(t):
 
 def beep(freq, ms=40):
     global _timer
+    if _audio:
+        _audio.beep(int(freq), ms)
+        return
     if PIN is None:
         return
     import lvgl as lv
