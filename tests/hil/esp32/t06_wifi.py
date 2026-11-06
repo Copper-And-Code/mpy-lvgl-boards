@@ -9,7 +9,7 @@
 #   WIFI_PASS = "..."
 #
 # Each phase runs the same animation and reports LVGL refreshes/s, panel fps and the longest
-# gap between two refreshes: idle, connected, TCP download, then a reconnect and a DNS + HTTP
+# gap between two refreshes: idle, connected, TCP downloads, then a reconnect and a DNS + HTTP
 # request to the internet. Watch the panel: the bar must stay straight.
 import gc
 import socket
@@ -98,7 +98,7 @@ def connect(sta):
     return time.ticks_diff(time.ticks_ms(), t)
 
 
-def download():
+def download(blocking):
     srv = socket.socket()
     srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     srv.bind(("0.0.0.0", PORT))
@@ -106,14 +106,18 @@ def download():
     srv.settimeout(20)
     print("LISTEN", sta.ifconfig()[0], PORT)
     c = srv.accept()[0]
-    c.settimeout(5)
+    c.settimeout(5 if blocking else 0)
     buf = bytearray(4096)
     n = 0
     end = ""
     t = time.ticks_ms()
     try:
         while time.ticks_diff(time.ticks_ms(), t) < SECONDS * 1000:
-            n += c.readinto(buf)
+            r = c.readinto(buf)
+            if r is None:
+                time.sleep_ms(1)
+            else:
+                n += r
     except OSError as e:
         end = ", stopped: %s" % e
     dt = time.ticks_diff(time.ticks_ms(), t)
@@ -128,7 +132,9 @@ sta = network.WLAN(network.STA_IF)
 sta.active(True)
 print("connect ms", connect(sta), "rssi", sta.status("rssi"), "channel", sta.config("channel"))
 phase("connected")
-phase("download", download)
+for i in range(3):
+    phase("blocking", lambda: download(True))
+    phase("non-block", lambda: download(False))
 phase("connected")
 
 sta.disconnect()

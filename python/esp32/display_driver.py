@@ -19,7 +19,6 @@
 import esp_rgb
 import gt911
 import lvgl as lv
-import micropython
 import panels
 from machine import Pin, SoftI2C, Timer
 
@@ -54,7 +53,6 @@ except OSError as e:
     print("display_driver: no touch:", e)
 
 _timer = None
-_busy = False
 
 
 # Ctrl-C while a program runs: lv.timer_handler() takes most of the CPU, so the
@@ -67,25 +65,21 @@ def _interrupted():
 
 
 def _task(_):
-    global _busy
-    if _busy:
-        return
-    _busy = True
     try:
         lv.timer_handler()
     except KeyboardInterrupt:
         _interrupted()
     finally:
-        _busy = False
+        if _timer is not None:
+            _arm()
 
 
-def _tick(_):
-    try:
-        micropython.schedule(_task, None)
-    except RuntimeError:
-        pass  # schedule queue full: the next tick will catch up
-    except KeyboardInterrupt:
-        _interrupted()
+# One shot, armed again when the work is done, not a periodic timer: with a periodic one, each
+# tick takes a place in MicroPython's schedule queue (8 places). During a time.sleep_ms()
+# the queue drains at 200 callbacks/s, it fills up, and whatever else is scheduled is lost,
+# such as the I2S callback of audio.py.
+def _arm():
+    _timer.init(period=PERIOD_MS, mode=Timer.ONE_SHOT, callback=_task)
 
 
 def backlight(percent=None):
@@ -99,7 +93,8 @@ def backlight(percent=None):
 def start():
     global _timer
     if _timer is None:
-        _timer = Timer(TIMER_ID, period=PERIOD_MS, mode=Timer.PERIODIC, callback=_tick)
+        _timer = Timer(TIMER_ID)
+        _arm()
 
 
 def stop():

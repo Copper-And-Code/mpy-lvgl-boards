@@ -1,0 +1,18 @@
+
+t=    0s lvgl_rps=13.0 panel_fps=47.62 mem_free=2590704 min_free=2590832 allocs=40 errors=0 touch_errors=0
+t=   60s lvgl_rps=47.3 panel_fps=42.27 mem_free=2554640 min_free=2552864 allocs=9560 errors=0 touch_errors=0
+t=  120s lvgl_rps=47.5 panel_fps=42.27 mem_free=2558640 min_free=2552864 allocs=19080 errors=0 touch_errors=0
+t=  180s lvgl_rps=47.8 panel_fps=42.27 mem_free=2560608 min_free=2552864 allocs=28640 errors=0 touch_errors=0
+t=  240s lvgl_rps=47.6 panel_fps=42.28 mem_free=2562624 min_free=2552864 allocs=38200 errors=0 touch_errors=0
+t=  300s lvgl_rps=47.3 panel_fps=42.27 mem_free=2568624 min_free=2552864 allocs=47680 errors=0 touch_errors=0
+t=  360s lvgl_rps=47.5 panel_fps=42.27 mem_free=2570688 min_free=2552864 allocs=57240 errors=0 touch_errors=0
+t=  420s lvgl_rps=47.6 panel_fps=42.27 mem_free=2554640 min_free=2552752 allocs=66760 errors=0 touch_errors=0
+t=  480s lvgl_rps=47.6 panel_fps=42.28 mem_free=2556624 min_free=2552752 allocs=76320 errors=0 touch_errors=0
+t=  540s lvgl_rps=47.2 panel_fps=42.27 mem_free=2560624 min_free=2552752 allocs=85840 errors=0 touch_errors=0
+t=  600s lvgl_rps=47.3 panel_fps=42.28 mem_free=2564640 min_free=2552752 allocs=95360 errors=0 touch_errors=0
+t=  660s lvgl_rps=47.7 panel_fps=42.28 mem_free=2568624 min_free=2552752 allocs=104880 errors=0 touch_errors=0
+t=  720s lvgl_rps=47.8 panel_fps=42.27 mem_free=2568624 min_free=2552752 allocs=114480 errors=0 touch_errors=0
+t=  780s lvgl_rps=47.8 panel_fps=42.27 mem_free=2570688 min_free=2552752 allocs=124040 errors=0 touch_errors=0
+t=  840s lvgl_rps=47.7 panel_fps=42.28 mem_free=2552640 min_free=2552752 allocs=133600 errors=0 touch_errors=0
+SOAK DONE t=900s lvgl_rps=47.6 panel_fps=42.28 min_free=2552752 allocs=143120 errors=0 touch_errors=0
+RESULT: ok

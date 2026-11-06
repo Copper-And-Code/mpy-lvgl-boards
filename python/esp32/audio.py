@@ -19,15 +19,13 @@
 # timer: nothing blocks, and a long gc.collect() can make the sound stutter.
 import math
 import struct
-import time
 
-from machine import I2S, Pin, Timer
+from machine import I2S, Pin
 
 SCK, WS, SD = 1, 2, 40
 RATE = 22050
 BLOCK = 4096
 IBUF = 8192
-TIMER_ID = 1  # 0 is display_driver's
 # Blocks of silence after the last sound, plus one: the I2S must not stop while the sound is
 # still in its DMA buffers. With a shorter tail a beep of 60 ms is never heard.
 TAIL = 1
@@ -39,23 +37,9 @@ _view = None
 _left = 0
 _atten = 0
 _tail = 0
-_timer = None
-_last = 0
-_patience = 0
-stalls = 0  # I2S callbacks that did not come
-
-
-def _watch(_):
-    # The I2S callback that asks for the next block sometimes does not come, and the sound
-    # would never end. Cause unknown: see docs/esp32-4848s040.md.
-    global stalls
-    if _i2s is not None and time.ticks_diff(time.ticks_ms(), _last) > _patience:
-        stalls += 1
-        _feed()
-
 
 def _start(rate, channels, atten):
-    global _i2s, _buf, _view, _atten, _tail, _timer, _patience
+    global _i2s, _buf, _view, _atten, _tail
     stop()
     fmt = I2S.MONO if channels == 1 else I2S.STEREO
     _i2s = I2S(0, sck=Pin(SCK), ws=Pin(WS), sd=Pin(SD), mode=I2S.TX, bits=16, format=fmt, rate=rate, ibuf=IBUF)
@@ -64,16 +48,12 @@ def _start(rate, channels, atten):
     _atten = atten
     _tail = 0
     _i2s.irq(_feed)
-    _patience = 3 * BLOCK * 1000 // (rate * 2 * channels) + 20
-    _timer = Timer(TIMER_ID)
-    _timer.init(period=20, mode=Timer.PERIODIC, callback=_watch)
 
 
 def _feed(_=None):
-    global _left, _tail, _last
+    global _left, _tail
     if _i2s is None:
         return
-    _last = time.ticks_ms()
     if _tail > TAIL:
         stop()
         return
@@ -94,11 +74,9 @@ def _feed(_=None):
 
 
 def stop():
-    global _i2s, _file, _buf, _view, _timer
-    i2s, f, timer = _i2s, _file, _timer
-    _i2s = _file = _buf = _view = _timer = None
-    if timer:
-        timer.deinit()
+    global _i2s, _file, _buf, _view
+    i2s, f = _i2s, _file
+    _i2s = _file = _buf = _view = None
     if i2s:
         i2s.deinit()
     if f:
