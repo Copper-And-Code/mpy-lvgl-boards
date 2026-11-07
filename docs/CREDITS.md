@@ -23,3 +23,11 @@
   ESP32-4848S040 panel (`modules/esp_rgb/st7701_init.h`, re-encoded as data, with a
   software reset added and the display not inverted); licence in
   `modules/esp_rgb/LICENSE-HomeDing.txt`. Board pinout from the HomeDing board page.
+
+## Font of the terminal
+
+`examples/shell/ansifont.py` is the ASCII part of `Lat15-Terminus16` from Debian's
+console-setup, from [Terminus Font](https://terminus-font.sourceforge.net/), copyright
+Dimitar Toshkov Zhekov, under the SIL Open Font License 1.1 ([OFL.txt](../examples/shell/OFL.txt)):
+that file only, the rest of the repo is MIT. "Terminus Font" is a Reserved Font Name, and
+this is a Modified Version, so `ansifont.py` does not go by that name.

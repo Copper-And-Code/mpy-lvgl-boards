@@ -49,5 +49,5 @@ docs/                    measurements, logs (docs/log/), credits, upstream repor
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Third-party data and provenance (e.g. the ST7701S init
+MIT, see [LICENSE](LICENSE), except the font in `examples/shell/ansifont.py`: SIL OFL 1.1, see [OFL.txt](examples/shell/OFL.txt). Third-party data and provenance (e.g. the ST7701S init
 sequence from Waveshare's demo) are listed in [docs/CREDITS.md](docs/CREDITS.md).

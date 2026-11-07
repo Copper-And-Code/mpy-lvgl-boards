@@ -20,6 +20,7 @@ STM32H7_CORE V1.3 on the bench (CH340 on UART1, DTR/RTS wired to BOOT0/NRST):
 | [simon.py](simon.py) | a game: repeat the growing sequence of colours (LVGL timer, buzzer if the board has one) |
 | [snake.py](snake.py) | a game: snake controlled by tapping on the side to turn to (LVGL objects reused as segments) |
 | [tictactoe.py](tictactoe.py) | a game: you (X) against the microcontroller (O, minimax: it never loses) |
+| [shell/](shell/) | a Linux-like shell on the screen, keyboard from a terminal on the serial port: files, pipes, wildcards, history, Tab; with `vi` and a friendlier `edit`, and an ANSI terminal module for your own programs. The font in `ansifont.py` is under the [SIL OFL](shell/OFL.txt). Goes in `/` (`shell.py`, `ansiterm.py`, `ansifont.py`) and `/bin` (`vi.py`, `edit.py`), then `import shell; shell.main()` |
 | [weather.py](weather.py) | ESP32-4848S040 only: weather, wind and 5 days of forecast from Open-Meteo, with drawn icons, setup on the touchscreen and settings on the SD card |
 
 Any resolution: sizes are written for a 240 px display and scaled with `ui.px(n)`
