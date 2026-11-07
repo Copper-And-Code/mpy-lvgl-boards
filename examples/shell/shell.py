@@ -11,7 +11,12 @@
 #
 #   Keys: left/right, Home/End, Del, up/down (history), Tab (complete), Ctrl-A/E/U/W/L,
 #         Ctrl-C (drop the line, or stop a command), Ctrl-D (exit on an empty line)
+#         Ctrl-C on an empty line leaves too, so that Thonny and mpremote can take over
+#         when the shell starts by itself: once if no command was typed yet, then twice
 #   Shell: "quotes", \escapes, *.py and ? wildcards, ~, cmd1 | cmd2, > file, >> file
+#
+# To start it at power-on put `import shell; shell.main()` in main.py, never in boot.py:
+# boot.py runs again after a soft reset from the raw REPL, and locks Thonny out.
 #
 # `help` lists the commands. Files are for real: `rm -r` asks nothing, as on Linux.
 #
@@ -39,6 +44,7 @@ SD_PINS = {"slot": 2, "sck": 48, "miso": 41, "mosi": 47, "cs": 42, "freq": 10_00
 GREEN, BLUE, RESET = "\x1b[1;32m", "\x1b[1;34m", "\x1b[0m"
 CHUNK = 512
 PATH = ("/bin", "/sd/bin")  # where the Python programs are
+LEAVE_MS = 3000  # two Ctrl-C on an empty line within this time leave the shell
 ERRORS = {
     1: "Operation not permitted",
     2: "No such file or directory",
@@ -58,6 +64,7 @@ ERRORS = {
 term = None  # the terminal on the display, if there is one
 WIDTH = 80  # columns: the line being typed scrolls sideways inside them
 history = []
+last_ctrl_c = None  # when Ctrl-C was pressed on an empty line
 out = None  # where the running command writes: the terminal, a file or the next command
 pipe = None  # what the previous command of a pipeline wrote
 
@@ -928,6 +935,19 @@ def complete(text):
     return word, hits
 
 
+def second_ctrl_c():
+    """None, which leaves the shell, or an empty line. Thonny resets the board by opening
+    the port, so its first Ctrl-C are lost in the boot: from there on it is one per press
+    of Stop, and a shell nobody has used yet goes at the first."""
+    global last_ctrl_c
+    now = time.ticks_ms()
+    if not history or (last_ctrl_c is not None and time.ticks_diff(now, last_ctrl_c) < LEAVE_MS):
+        return None
+    last_ctrl_c = now
+    sys.stdout.write("Ctrl-C again leaves the shell\n")
+    return ""
+
+
 def read_line():
     line, pos = "", 0
     back = len(history)  # position in the history, the end being the new line
@@ -954,7 +974,7 @@ def read_line():
             return line
         if k == "\x03":  # Ctrl-C
             sys.stdout.write("^C\n")
-            return ""
+            return "" if line else second_ctrl_c()
         if k == "\x04":  # Ctrl-D
             if not line:
                 sys.stdout.write("exit\n")
