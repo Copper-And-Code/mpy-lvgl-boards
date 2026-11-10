@@ -18,7 +18,16 @@ BOARDS = {
     "STM32H7_CORE V1.3": {"touch": ("B14", "H7", ("B12", "B13"))},
 }
 
+# The GT911 is rated for 400 kHz. The port's hardware I2C timings are for a 54 MHz
+# kernel clock; these boards clock I2C from PCLK at 120 MHz, so freq=400_000 ran the
+# bus at 1.07 MHz. TOUCH_TIMINGR is 400 kHz Fast mode at 120 MHz (PRESC 5, SCLDEL 7,
+# SDADEL 2, SCLH 18, SCLL 26). SoftI2C rounds its half period to whole microseconds:
+# freq=400_000 gives 500 kHz, 250_000 is the fastest setting within the rating.
+# Measured on the V1.0 (docs/stm32h743.md): address NACKs, 1 in about 30 000 to
+# 150 000 reads, only seen above 400 kHz.
 TOUCH_FREQ = 400_000
+TOUCH_TIMINGR = 0x5072121A  # for a 120 MHz I2C kernel clock
+TOUCH_SOFT_FREQ = 250_000
 
 NAME = None
 for _n in BOARDS:
@@ -41,8 +50,12 @@ def touch_i2c():
 
     bus = CONFIG["touch"][2]
     if isinstance(bus, int):
+        import machine
+
+        if machine.freq()[2] == 120_000_000:  # PCLK, the I2C kernel clock here
+            return I2C(bus, freq=TOUCH_FREQ, timingr=TOUCH_TIMINGR)
         return I2C(bus, freq=TOUCH_FREQ)
-    return SoftI2C(scl=Pin(bus[0]), sda=Pin(bus[1]), freq=TOUCH_FREQ)
+    return SoftI2C(scl=Pin(bus[0]), sda=Pin(bus[1]), freq=TOUCH_SOFT_FREQ)
 
 
 def touch(**kw):

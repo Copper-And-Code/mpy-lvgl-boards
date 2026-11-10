@@ -1,0 +1,22 @@
+# STM32H7_CORE V1.0, 2026-11-10: GT911 address NACKs (OSError 19) per touch bus setting, polling
+# gt911.read() every 2 ms with no touch, after stm32_board.touch(). A 1 minute run, then a 5 minute one.
+
+== hw 400k table (1.07 MHz) I2C(4, scl=D12, sda=D13, freq=1071428, timingr=0x70330309)
+polls 30000 errors 1 ({19: 1}) 1 in 30000, read max 386 us
+== hw timingr 0x5072121A (~380 kHz) I2C(4, scl=D12, sda=D13, freq=434782, timingr=0x5072121a)
+polls 30000 errors 0 ({}) 1 in -, read max 889 us
+== hw 100k table (278 kHz) I2C(4, scl=D12, sda=D13, freq=277777, timingr=0xb0420f13)
+polls 30000 errors 0 ({}) 1 in -, read max 517 us
+== soft 400k SoftI2C(scl=D12, sda=D13, freq=500000)
+polls 30000 errors 3 ({19: 3}) 1 in 10000, read max 263 us
+
+== hw 400k table (1.07 MHz) I2C(4, scl=D12, sda=D13, freq=1071428, timingr=0x70330309)
+polls 125218 errors 1 ({19: 1}) 1 in 125218, read max 1665 us
+== hw timingr 0x5072121A (~380 kHz) I2C(4, scl=D12, sda=D13, freq=434782, timingr=0x5072121a)
+polls 123521 errors 0 ({}) 1 in -, read max 1708 us
+== hw 100k table (278 kHz) I2C(4, scl=D12, sda=D13, freq=277777, timingr=0xb0420f13)
+polls 121915 errors 0 ({}) 1 in -, read max 1752 us
+== soft 400k SoftI2C(scl=D12, sda=D13, freq=500000)
+polls 124158 errors 0 ({}) 1 in -, read max 1694 us
+== soft 200k SoftI2C(scl=D12, sda=D13, freq=250000)
+polls 121332 errors 0 ({}) 1 in -, read max 1776 us
