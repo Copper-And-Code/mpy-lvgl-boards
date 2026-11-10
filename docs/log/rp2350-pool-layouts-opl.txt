@@ -1,0 +1,56 @@
+# Waveshare RP2350-Touch-LCD-4, board 2, 2026-11-10, omnipython-lvgl c34fbee.
+# The layout script of omnipython-lvgl PR #6 as on the STM32 boards (stm32-pool-layouts-*), for this
+# 240x240 panel and ~200 KB heap: 24 buttons of 70x30 and 6 sliders 200 wide, PAD = 40 (40 x 2 KB = 80 KB).
+# 2buf: display_driver as shipped, multimer.hold() -> display_driver.stop()/start().
+# 1buf: rgbpanel.init(buffers=1) + rgbpanel.lv_display_create(), no display_driver: rendering only.
+# Soft reset before each run; pools and none as in rp2350-heap-states-opl.txt.
+--- pools, 2buf
+
+display_driver: no touch: [Errno 5] EIO
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) free 189248 res 240 240
+fresh      alloc_us=132.8 labels50_ms=57.3 refresh_med=51.8 max=51.8 collect_med=7.5
+one-hole   alloc_us=115.5 labels50_ms=57.3 refresh_med=51.8 max=51.8 collect_med=10.4
+many-holes alloc_us=169.0 labels50_ms=57.4 refresh_med=51.8 max=51.8 collect_med=10.4
+>
+display_driver: no touch: [Errno 5] EIO
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) free 189248 res 240 240
+fresh      alloc_us=132.8 labels50_ms=57.3 refresh_med=51.8 max=51.8 collect_med=7.5
+one-hole   alloc_us=115.4 labels50_ms=57.4 refresh_med=51.8 max=51.8 collect_med=10.4
+many-holes alloc_us=169.0 labels50_ms=57.3 refresh_med=51.8 max=51.8 collect_med=10.4
+>
+--- pools, 1buf
+
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) free 313264 res 240 240
+fresh      alloc_us=30.7 labels50_ms=57.1 refresh_med=35.2 max=36.2 collect_med=2.3
+one-hole   alloc_us=22.1 labels50_ms=57.1 refresh_med=35.2 max=36.2 collect_med=5.2
+many-holes alloc_us=95.5 labels50_ms=57.2 refresh_med=35.1 max=36.1 collect_med=5.2
+>
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) free 313264 res 240 240
+fresh      alloc_us=30.7 labels50_ms=57.1 refresh_med=35.2 max=36.2 collect_med=2.3
+one-hole   alloc_us=22.1 labels50_ms=57.1 refresh_med=35.2 max=36.2 collect_med=5.2
+many-holes alloc_us=95.5 labels50_ms=57.1 refresh_med=35.1 max=36.1 collect_med=5.2
+>
+--- none, 2buf then 1buf
+
+display_driver: no touch: [Errno 5] EIO
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) free 215664 res 240 240
+fresh      alloc_us=56.8 labels50_ms=53.0 refresh_med=34.5 max=36.7 collect_med=7.2
+one-hole   alloc_us=104.4 labels50_ms=54.0 refresh_med=68.9 max=83.5 collect_med=10.3
+many-holes alloc_us=154.1 labels50_ms=52.0 refresh_med=68.9 max=75.4 collect_med=10.3
+>
+display_driver: no touch: [Errno 5] EIO
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) free 215664 res 240 240
+fresh      alloc_us=52.4 labels50_ms=52.9 refresh_med=34.5 max=36.9 collect_med=7.2
+one-hole   alloc_us=104.9 labels50_ms=53.9 refresh_med=68.9 max=83.5 collect_med=10.3
+many-holes alloc_us=154.5 labels50_ms=52.0 refresh_med=68.9 max=75.6 collect_med=10.3
+>
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) free 339680 res 240 240
+fresh      alloc_us=27.4 labels50_ms=52.9 refresh_med=33.6 max=34.4 collect_med=2.0
+one-hole   alloc_us=86.0 labels50_ms=53.9 refresh_med=33.6 max=34.5 collect_med=5.0
+many-holes alloc_us=103.6 labels50_ms=51.9 refresh_med=33.9 max=34.9 collect_med=5.0
+>
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) free 339680 res 240 240
+fresh      alloc_us=27.4 labels50_ms=52.9 refresh_med=33.6 max=34.5 collect_med=2.0
+one-hole   alloc_us=86.0 labels50_ms=54.0 refresh_med=33.6 max=34.5 collect_med=5.0
+many-holes alloc_us=103.6 labels50_ms=51.9 refresh_med=33.9 max=34.8 collect_med=5.0
+>

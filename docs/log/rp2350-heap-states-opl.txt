@@ -1,0 +1,62 @@
+# Waveshare RP2350-Touch-LCD-4, board 2, 2026-11-10, omnipython-lvgl c34fbee.
+# tests/hil/t09_heap_states.py with BUFFERS = 2, BUFFERS = 1, BUFFERS = 2, soft reset before each,
+# on the same tree built without and with LVGL's pools:
+#   none:   LVMP_POOLS=none scripts/build.sh rp2 WAVESHARE_RP2350_TOUCH_LCD_4
+#   pools:  scripts/build.sh rp2 WAVESHARE_RP2350_TOUCH_LCD_4
+# (the min of ~1 ms: a refr_now() that found nothing to draw, LVGL's timer had already refreshed).
+--- none
+
+== tests/hil/t09_heap_states.py (1/3)
+display_driver: no touch: [Errno 5] EIO
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) buffers 2 free 215808
+clean        free=216272 refr_med= 26.5 min= 18.3 max= 26.5
+garbage      free=179424 refr_med= 26.0 min= 26.0 max= 42.1
+live         free=143776 refr_med= 43.2 min= 43.2 max= 44.2
+holes        free=175936 refr_med= 43.8 min=  1.1 max= 44.7
+clean again  free=216144 refr_med= 26.5 min=  1.1 max= 26.5
+>
+== tests/hil/t09_heap_states.py (2/3)
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) buffers 1 free 340128
+clean        free=340080 refr_med= 10.5 min=  9.6 max= 10.6
+garbage      free=303360 refr_med=  9.3 min=  9.3 max= 13.0
+live         free=267728 refr_med=  9.3 min=  9.3 max=  9.5
+holes        free=299760 refr_med= 17.0 min= 16.5 max= 17.7
+clean again  free=339968 refr_med= 10.5 min=  9.6 max= 10.6
+>
+== tests/hil/t09_heap_states.py (3/3)
+display_driver: no touch: [Errno 5] EIO
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) buffers 2 free 215776
+clean        free=216272 refr_med= 26.5 min= 18.3 max= 27.4
+garbage      free=179424 refr_med= 26.0 min= 26.0 max= 42.1
+live         free=143744 refr_med= 43.2 min= 43.0 max= 44.2
+holes        free=175904 refr_med= 43.8 min=  1.1 max= 44.7
+clean again  free=216080 refr_med= 26.5 min=  1.1 max= 27.4
+>
+--- pools
+
+== tests/hil/t09_heap_states.py (1/3)
+display_driver: no touch: [Errno 5] EIO
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) buffers 2 free 189424
+clean        free=191600 refr_med= 26.5 min=  1.2 max= 26.7
+garbage      free=154752 refr_med= 26.5 min= 10.1 max= 26.5
+live         free=119280 refr_med= 26.5 min= 10.1 max= 26.5
+holes        free=151472 refr_med= 26.5 min=  1.1 max= 26.5
+clean again  free=191680 refr_med= 26.5 min=  1.1 max= 26.5
+>
+== tests/hil/t09_heap_states.py (2/3)
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) buffers 1 free 313712
+clean        free=315536 refr_med=  9.6 min=  9.6 max=  9.7
+garbage      free=278816 refr_med=  9.6 min=  9.6 max=  9.7
+live         free=243248 refr_med=  9.6 min=  9.6 max=  9.8
+holes        free=275264 refr_med=  9.6 min=  9.6 max=  9.7
+clean again  free=315472 refr_med=  9.6 min=  9.6 max=  9.7
+>
+== tests/hil/t09_heap_states.py (3/3)
+display_driver: no touch: [Errno 5] EIO
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) buffers 2 free 189488
+clean        free=191600 refr_med= 26.5 min=  1.2 max= 26.7
+garbage      free=154752 refr_med= 26.5 min= 24.8 max= 26.5
+live         free=119280 refr_med= 26.5 min= 10.1 max= 26.5
+holes        free=151472 refr_med= 26.5 min=  1.1 max= 26.5
+clean again  free=191680 refr_med= 26.5 min=  1.1 max= 26.5
+>

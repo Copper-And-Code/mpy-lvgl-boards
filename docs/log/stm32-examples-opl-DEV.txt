@@ -1,0 +1,24 @@
+# DEV190806042 (first run on hardware), IPS1024x600, 2026-11-10, this tree (dist/DEV190806042-v0.1.5-dirty.dfu,
+# omnipython-lvgl c34fbee, pools on), flashed with DFU (BOOT + RESET). Native USB: opening the port resets nothing.
+# Every example for 4 s, one line from the same session; a soft reset before each (not played).
+
+== examples/hello.py (1/10)
+ALIVE hello unit 2.50 font14 True mem_free 28633776 underruns 0
+== examples/button.py (2/10)
+ALIVE button unit 2.50 font14 True mem_free 28635056 underruns 0
+== examples/animation.py (3/10)
+ALIVE animation unit 2.50 font14 True mem_free 28628272 underruns 0
+== examples/backlight.py (4/10)
+ALIVE backlight unit 2.50 font14 True mem_free 28634352 underruns 0
+== examples/c64_keyboard.py (5/10)
+ALIVE c64_keyboard unit 2.50 font14 True mem_free 28631952 underruns 0
+== examples/breakout.py (6/10)
+ALIVE breakout unit 2.50 font14 True mem_free 28593952 underruns 0
+== examples/pong.py (7/10)
+ALIVE pong unit 2.50 font14 True mem_free 28589248 underruns 0
+== examples/simon.py (8/10)
+ALIVE simon unit 2.50 font14 True mem_free 28622256 underruns 0
+== examples/snake.py (9/10)
+ALIVE snake unit 2.50 font14 True mem_free 28617376 underruns 0
+== examples/tictactoe.py (10/10)
+ALIVE tictactoe unit 2.50 font14 True mem_free 28623024 underruns 0

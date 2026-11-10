@@ -23,13 +23,20 @@ set(MICROPY_HW_PSRAM_CS_PIN 47)
 
 set(MICROPY_FROZEN_MANIFEST ${MICROPY_BOARD_DIR}/manifest.py)
 
-# lvgl-micropython (PyDevices) checkout, used as $(LVMP_DIR) in manifest.py.
-# Default: the workspace layout, with lvgl-micropython beside mpy-lvgl-boards.
-# Its lvgl-bindings is found by lvgl-micropython itself (BINDINGS_DIR or beside it).
+# The C module and manifest of omnipython-lvgl (PyDevices), its ports/micropython,
+# used as $(LVMP_DIR) in manifest.py: $LVMP_DIR if set (scripts/build.sh sets it),
+# else the workspace layout, with omnipython-lvgl beside mpy-lvgl-boards.
 if(NOT DEFINED MICROPY_MANIFEST_LVMP_DIR)
     if(DEFINED ENV{LVMP_DIR})
         set(MICROPY_MANIFEST_LVMP_DIR $ENV{LVMP_DIR})
     else()
-        get_filename_component(MICROPY_MANIFEST_LVMP_DIR ${MICROPY_BOARD_DIR}/../../../../lvgl-micropython ABSOLUTE)
+        get_filename_component(MICROPY_MANIFEST_LVMP_DIR ${MICROPY_BOARD_DIR}/../../../../omnipython-lvgl/ports/micropython ABSOLUTE)
     endif()
+endif()
+
+# LVGL's memory pools are on in mpconfigboard.h; LVMP_POOLS=none (scripts/build.sh)
+# turns them off, for comparisons. A definition of the firmware target, so the scan
+# for root pointers sees it too.
+if("$ENV{LVMP_POOLS}" STREQUAL "none")
+    list(APPEND MICROPY_DEF_BOARD LVMP_POOL_TLSF=0)
 endif()

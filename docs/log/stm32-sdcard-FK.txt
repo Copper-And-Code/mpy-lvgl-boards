@@ -1,0 +1,18 @@
+# FK743M5-XIH6, 2026-11-10: the SD card did not work (an 8 GB SDHC in the slot, FAT, the C64 firmware's ROMs). Solved.
+# Config: SDMMC1, CK C12, CMD D2, D0-D3 C8-C11, 4-bit (pins from the old fork; no board schematic).
+# Commands work: present() True, info() (7990149120, 512, 1). Data does not:
+#  - at boot the mount fails (t01: "SD not mounted");
+#  - after boot readblocks() leaves the buffer untouched (0xAA kept, in SDRAM and in AXI SRAM alike)
+#    and writeblocks() of a pattern does not read back: no data moves in either direction;
+#  - power(0) then power(1): False, i.e. the init fails, which ends with the 4-bit bus switch
+#    (SCR read over the data lines); readblocks() -> -5 (-EIO, card not active), DMA or polling.
+# The pins match the board's schematic (SDMMC1_D0-D3 PC8-PC11, CMD PD2, CLK PC12, 10k pull-ups).
+# Cause: the SDMMC kernel clock. It is PLL1Q, and PLLQ = 2 made it 960 MHz / 2 = 480 MHz: the driver's
+# init divider (2 x 250) gave the card 960 kHz (spec: 400 kHz max) and its H7 transfer divider (2 x 2)
+# 120 MHz (high speed: 50 MHz max). Fix: PLLQ = 8 on all the H743 boards of this repo: 120 MHz,
+# so 240 kHz and 30 MHz (as NUCLEO_H743ZI: 25 MHz). CPU unchanged (PLLP). SPI1-3 run from it too.
+# After the fix (rebuilt, flashed): the card mounts at boot on /sd, the C64 ROM folders are listed,
+# t01: "ok SD mounted 7974522880 bytes", all 7 checks ok.
+# Before the cause was known, test blocks were written near the end of the card (blocks 15604752-55
+# and 15604760) and then "restored" with buffers the failed reads had left at zero: those 5 blocks
+# may now be zeros. The card is 85 % free (statvfs); not checked further.

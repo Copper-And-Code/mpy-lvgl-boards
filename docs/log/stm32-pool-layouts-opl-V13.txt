@@ -1,0 +1,13 @@
+# STM32H7_CORE V1.3, IPS1024x600, 2026-11-10, v0.1.5 release file (omnipython-lvgl c34fbee, pools on).
+# The layout script of omnipython-lvgl PR #6 as in stm32-pool-layouts-opl-V10.txt (PAD = 1024, 2 MB),
+# a hard reset (port open) before each run.
+--- pools run 1 (hard reset at port open)
+FW 0fd6c573ea on 2026-11-10 free 28644656 res 1024 600
+fresh      alloc_us=111.4 labels50_ms=16.0 refresh_med=68.6 max=68.7 collect_med=33.4
+one-hole   alloc_us=68.3 labels50_ms=16.1 refresh_med=68.6 max=68.7 collect_med=81.7
+many-holes alloc_us=884.2 labels50_ms=19.3 refresh_med=68.6 max=68.7 collect_med=78.5
+--- pools run 2 (hard reset at port open)
+FW 0fd6c573ea on 2026-11-10 free 28644656 res 1024 600
+fresh      alloc_us=111.5 labels50_ms=15.9 refresh_med=68.6 max=68.7 collect_med=33.4
+one-hole   alloc_us=68.4 labels50_ms=16.1 refresh_med=68.6 max=68.7 collect_med=81.7
+many-holes alloc_us=874.8 labels50_ms=19.9 refresh_med=68.6 max=68.7 collect_med=78.4

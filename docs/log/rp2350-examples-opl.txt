@@ -1,0 +1,34 @@
+# Waveshare RP2350-Touch-LCD-4, board 2 (GT911 not answering, so no touch), 2026-11-10, omnipython-lvgl c34fbee.
+# Every example of examples/ for 4 s, then one line from the same session (ui, heap, panel underruns);
+# a soft reset before each. Only that it starts and keeps running: no taps, no eyes.
+
+== examples/hello.py (1/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE hello unit 1.00 font14 True mem_free 189376 underruns 0
+== examples/button.py (2/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE button unit 1.00 font14 True mem_free 165312 underruns 0
+== examples/animation.py (3/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE animation unit 1.00 font14 True mem_free 183664 underruns 0
+== examples/backlight.py (4/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE backlight unit 1.00 font14 True mem_free 164752 underruns 0
+== examples/c64_keyboard.py (5/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE c64_keyboard unit 1.00 font14 True mem_free 160144 underruns 0
+== examples/breakout.py (6/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE breakout unit 1.00 font14 True mem_free 170176 underruns 0
+== examples/pong.py (7/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE pong unit 1.00 font14 True mem_free 151136 underruns 0
+== examples/simon.py (8/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE simon unit 1.00 font14 True mem_free 177760 underruns 0
+== examples/snake.py (9/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE snake unit 1.00 font14 True mem_free 173056 underruns 0
+== examples/tictactoe.py (10/10)
+display_driver: no touch: [Errno 5] EIO
+ALIVE tictactoe unit 1.00 font14 True mem_free 153760 underruns 0

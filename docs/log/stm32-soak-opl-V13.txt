@@ -1,0 +1,19 @@
+# STM32H7_CORE V1.3, IPS1024x600, 2026-11-10, v0.1.5 release file (omnipython-lvgl c34fbee, pools on).
+# tests/hil/stm32/t05_soak.py, 15 min, after a hard reset (port open); no one touching the panel.
+t=    0s lvgl_rps=4.1 panel_fps=82.99 underruns=0 mem_free=26545472 min_free=26545872 allocs=40 errors=0 touch_errors=0
+t=   60s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26520976 min_free=26507312 allocs=7720 errors=0 touch_errors=0
+t=  120s lvgl_rps=35.1 panel_fps=58.32 underruns=0 mem_free=26514976 min_free=26507312 allocs=15440 errors=0 touch_errors=0
+t=  180s lvgl_rps=34.9 panel_fps=58.31 underruns=0 mem_free=26508976 min_free=26507312 allocs=23160 errors=0 touch_errors=0
+t=  240s lvgl_rps=35.0 panel_fps=58.32 underruns=0 mem_free=26525024 min_free=26507312 allocs=30840 errors=0 touch_errors=0
+t=  300s lvgl_rps=35.0 panel_fps=58.30 underruns=0 mem_free=26518976 min_free=26507312 allocs=38560 errors=0 touch_errors=0
+t=  360s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26514976 min_free=26507312 allocs=46240 errors=0 touch_errors=0
+t=  420s lvgl_rps=34.9 panel_fps=58.32 underruns=0 mem_free=26508976 min_free=26507312 allocs=53960 errors=0 touch_errors=0
+t=  480s lvgl_rps=35.1 panel_fps=58.30 underruns=0 mem_free=26522976 min_free=26507312 allocs=61680 errors=0 touch_errors=0
+t=  540s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26518976 min_free=26507312 allocs=69360 errors=0 touch_errors=0
+t=  600s lvgl_rps=35.0 panel_fps=58.32 underruns=0 mem_free=26512976 min_free=26507312 allocs=77080 errors=0 touch_errors=0
+t=  660s lvgl_rps=35.0 panel_fps=58.30 underruns=0 mem_free=26508976 min_free=26507312 allocs=84760 errors=0 touch_errors=0
+t=  720s lvgl_rps=35.1 panel_fps=58.32 underruns=0 mem_free=26520976 min_free=26507312 allocs=92520 errors=0 touch_errors=0
+t=  780s lvgl_rps=34.8 panel_fps=58.31 underruns=0 mem_free=26516976 min_free=26507312 allocs=100200 errors=0 touch_errors=0
+t=  840s lvgl_rps=34.9 panel_fps=58.30 underruns=0 mem_free=26510976 min_free=26507312 allocs=107920 errors=0 touch_errors=0
+SOAK DONE t=900s lvgl_rps=35.0 panel_fps=58.32 underruns=0 min_free=26507312 allocs=115560 errors=0 touch_errors=0
+RESULT: ok

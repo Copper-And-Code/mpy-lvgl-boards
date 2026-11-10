@@ -1,0 +1,113 @@
+# DEV190806042 (first run on hardware), IPS1024x600, 2026-11-10, this tree (dist/DEV190806042-v0.1.5-dirty.dfu,
+# omnipython-lvgl c34fbee, pools on), flashed with DFU (BOOT + RESET). Native USB: opening the port resets nothing.
+# scripts/uart_run.py --port /dev/ttyACM0 --boot-wait 0.3 --soft-reset; panel by eye: still image clean (Nunzio).
+--- t01_board
+uname: (sysname='pyboard', nodename='pyboard', release='1.29.0', version='0fd6c573ea on 2026-11-10', machine='DEV190806042 with STM32H743')
+ok   known board DEV190806042 with STM32H743
+freq: (480000000, 240000000, 120000000, 120000000)
+ok   cpu 480 MHz 
+ok   heap in SDRAM total 28687744 free 28679664
+ok   QSPI fs size 33517568 bytes (expected about 32 MB)
+mounts: ['flash']
+LED1 blinked 3 times
+touch i2c: SoftI2C(scl=H6, sda=G7, freq=500000) ['0x5d']
+ok   GT911 on touch bus 
+ok   GT911 product id b'911\x00'
+
+ID=1c003a00:0c513330:37343838
+DEVID=0x0450
+REVID=0x2003
+S=480000000
+H=240000000
+P1=120000000
+P2=120000000
+_etext=81235ac
+_sidata=81235b4
+_sdata=24000000
+_edata=2400051c
+_sbss=2400051c
+_ebss=240043b0
+_sstack=2407bff8
+_estack=2407fff8
+_ram_start=24000000
+_heap_start=240043b0
+_heap_end=2407bff8
+_ram_end=24080000
+qstr:
+  n_pool=2
+  n_qstr=31
+  n_str_data_bytes=203
+  n_total_bytes=683
+GC:
+  28687744 total
+  9328 : 28678416
+  1=75 2=30 m=233
+SPI flash size: 33554432
+QSPI flash size: 33554432
+LFS free: 33501184 bytes
+
+RESULT: all 6 checks ok
+--- soft resets, panel, GC, perf
+
+== tests/hil/stm32/t02_lvgl_softreset.py (1/9)
+run: init+refr 3 ms, flushed [320], mem_free before 28684496 after 28497360, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+== tests/hil/stm32/t02_lvgl_softreset.py (2/9)
+run: init+refr 3 ms, flushed [320], mem_free before 28684496 after 28497360, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+== tests/hil/stm32/t02_lvgl_softreset.py (3/9)
+run: init+refr 2 ms, flushed [320], mem_free before 28684496 after 28497360, lv.is_initialized True
+OK (LVGL left initialised on purpose)
+== tests/hil/stm32/t03_panel.py (4/9)
+panel: IPS1024x600 {'zone_bytes': 4194304, 'cpsr_y': 0, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 0, 'running': True, 'polarity': 8, 'frames': 0, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+A colour bars + yellow frame: drawn in 3318 ms, swap True
+B ramps red/green/blue/grey: drawn in 3315 ms, swap True
+C 1-pixel checkerboard: drawn in 3301 ms, swap True
+D 20 swaps: 2063 ms (incl. 20 x 100 ms sleep)
+frames 174 in 3000 ms -> 58.00 fps (nominal 58.31), underruns 0
+wrote 200 KB in 1363 ms, frames 83 (expected ~79), underruns 0
+mem_free: 28673264
+info: {'zone_bytes': 4194304, 'cpsr_y': 340, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 1, 'running': True, 'polarity': 8, 'frames': 2056, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+RESULT: patterns shown; check A-D by eye; underruns 0
+== tests/hil/stm32/t03_softreset.py (5/9)
+scan-out survived the soft reset: True frames 2071 underruns 0
+init kept the scan-out (same timings): True
+LVGL refr_now 4 ms, shown buffer 0
+OK (left running on purpose) {'zone_bytes': 4194304, 'cpsr_y': 318, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 0, 'running': True, 'polarity': 8, 'frames': 2073, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+== tests/hil/stm32/t03_softreset.py (6/9)
+scan-out survived the soft reset: True frames 2087 underruns 0
+init kept the scan-out (same timings): True
+LVGL refr_now 4 ms, shown buffer 1
+OK (left running on purpose) {'zone_bytes': 4194304, 'cpsr_y': 329, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 1, 'running': True, 'polarity': 8, 'frames': 2089, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+== tests/hil/stm32/t03_softreset.py (7/9)
+scan-out survived the soft reset: True frames 2103 underruns 0
+init kept the scan-out (same timings): True
+LVGL refr_now 5 ms, shown buffer 0
+OK (left running on purpose) {'zone_bytes': 4194304, 'cpsr_y': 338, 'backlight': 100, 'pclk_hz': 50000000, 'underruns': 0, 'reload_timeouts': 0, 'fb1_addr': 3251814400, 'buffers': 2, 'bus_errors': 0, 'pll3_n': 40, 'refresh_mhz': 58310, 'zone_addr': 3250585600, 'height': 600, 'shown': 0, 'running': True, 'polarity': 8, 'frames': 2105, 'fb0_addr': 3250585600, 'width': 1024, 'pll3_r': 4, 'partial': False}
+== tests/hil/stm32/t05_lvgl_gc.py (8/9)
+round 1: 300/300 callbacks, 0 wrong, 28 ms, mem_free 28312464
+round 2 (after lv.deinit/lv.init): 300/300 callbacks, 0 wrong, 12 ms, mem_free 28291136
+RESULT: ok
+== tests/hil/stm32/t05_perf.py (9/9)
+panel IPS1024x600 board DEV190806042 freq (480000000, 240000000, 120000000, 120000000)
+driver QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+off    loop  220 ms  alloc  294 ms  copy  111 MB/s  gc 104 ms  underruns 0
+qos    loop  222 ms  alloc  295 ms  copy   91 MB/s  gc 113 ms  underruns 0
+noqos  loop  220 ms  alloc  295 ms  copy   92 MB/s  gc 112 ms  underruns 0
+qos    vs off: loop +0%  alloc +0%  copy -19%  gc +8%
+noqos  vs off: loop +0%  alloc +0%  copy -18%  gc +7%
+DIRECT 2 buf  full refr min  38617 avg  47857 us   label min  2519 avg 16903 us   underruns 0
+DIRECT 1 buf  full refr min  38205 avg  38500 us   label min   761 avg   991 us   underruns 0
+PARTIAL 60    full refr min  61050 avg  61168 us   label min   783 avg  1010 us   underruns 0
+PARTIAL 200   full refr min  52107 avg  52204 us   label min   782 avg  1011 us   underruns 0
+end QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+mem_free 26475520
+--- t04_click.py: 5 taps by Nunzio
+gt911 read() no touch, avg us: 280
+tap the button 5 times
+clicked 1
+clicked 2
+clicked 3
+clicked 4
+clicked 5
+done, clicks: 5 read_cb {'max_us': 812, 'down': 19, 'calls': 129} frames 263 underruns 0

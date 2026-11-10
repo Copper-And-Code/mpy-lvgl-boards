@@ -1,0 +1,6 @@
+# STM32H7_CORE V1.3 on its native USB (/dev/ttyACM0, MicroPython f055:9800, USB path 3-7), 2026-11-10,
+# the release file STM32H7_CORE-V13-v0.1.5.hex. machine.bootloader() from the raw REPL, no buttons:
+#   21:41:19  Found DFU: [0483:df11] ... path="3-7", alt=0, name="@Internal Flash   /0x08000000/16*128Kg", serial="200364500000"
+# then dfu-util -s 0x08000000:4:leave -U <new file>, and MicroPython back:
+#   STM32H7_CORE V1.3 with STM32H743 0fd6c573ea on 2026-11-10
+# The same on the DEV190806042 (before restoring its own firmware) and on the FK743M5-XIH6 (used to flash it).

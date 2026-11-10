@@ -44,15 +44,15 @@ Linux x86-64, with git, make, cmake, Python 3 and a host C compiler:
 scripts/build_rp2.sh            # → dist/WAVESHARE_RP2350_TOUCH_LCD_4-<commit>.uf2
 ```
 
-The script clones MicroPython `v1.29.0` and PyDevices `lvgl-micropython` at pinned commits
-into `.work/` (the LVGL binding and LVGL follow lvgl-micropython's pin), downloads the
+The script clones MicroPython `v1.29.0` and PyDevices `omnipython-lvgl` (the binding, with
+LVGL 9.5 as its submodule) at pinned commits into `.work/`, downloads the
 xPack arm-none-eabi-gcc 15.2.1-1.1 toolchain (checksum verified) and builds. Running it
 again reuses everything. `WORK_DIR` and `TOOLCHAIN_DIR` override the locations.
 
 By hand, with checkouts of the pinned versions:
 
 ```bash
-LVMP_DIR=/path/to/lvgl-micropython \
+LVMP_DIR=/path/to/omnipython-lvgl/ports/micropython \
 make -C micropython/ports/rp2 BOARD_DIR=$PWD/boards/rp2/WAVESHARE_RP2350_TOUCH_LCD_4
 ```
 
@@ -102,9 +102,11 @@ clock follows the system clock and may go out of the panel's range.
 
 ### Memory limits (no PSRAM)
 
-About 210 KB of heap is free after `import display_driver`; LVGL objects, styles, fonts
-and images loaded at run time, and the application all share it. Tested with
-lvgl-mpy-builder output: a 3-page, 21-widget UI runs with 205 KB free; its 34-widget
+About 190 KB of heap is free after `import display_driver`; LVGL objects, styles, fonts
+and images loaded at run time, and the application all share it. LVGL's memory pools take
+about 26 KB of it (215 KB without them, `LVMP_POOLS=none`) and keep LVGL's speed the same
+however fragmented the heap is (`docs/rp2350-touch-lcd4.md`). Tested with lvgl-mpy-builder
+output, before the pools: a 3-page, 21-widget UI runs with 205 KB free; its 34-widget
 "all widgets" test project builds but leaves only ~70 KB free.
 
 **Avoid opacity (`style_opa` < 255), transforms (`style_transform_rotation`/`_scale`)
@@ -136,7 +138,7 @@ but the rule stays.
 - 3 DMA channels, claimed from the pico-sdk (not visible to `rp2.DMA`).
 - PWM slice 8 (backlight, GPIO40).
 - SRAM: 123 KB for the static framebuffer and DMA control blocks, 123 KB more on the heap
-  with double buffering. Free heap after `import display_driver`: ~211 KB.
+  with double buffering. Free heap after `import display_driver`: ~190 KB.
 - I2C1 (GPIO6/7, 400 kHz) for the touch, shared with RTC and IMU: `machine.I2C(1)`.
 
 ## Pinout
@@ -175,7 +177,7 @@ high. Names from `pins.csv` are available as `machine.Pin("LCD_BL")` etc.
 
 - Waveshare: hardware, schematic, C demo (ST7701S init sequence and panel timing values).
 - Dr Jon Durrant (DrJonEA), `RP2350Touch4-Exp`: reference for the board header.
-- PyDevices: `lvgl-micropython` and `lvgl-bindings`.
+- PyDevices: `omnipython-lvgl` (before it `lvgl-micropython` and `lvgl-bindings`).
 - MicroPython: `WAVESHARE_RP2350B_CORE` board definition as starting point.
 
 Details and provenance in [`docs/CREDITS.md`](../../../docs/CREDITS.md).

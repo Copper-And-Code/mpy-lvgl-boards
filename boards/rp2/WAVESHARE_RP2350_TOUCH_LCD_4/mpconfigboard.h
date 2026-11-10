@@ -25,3 +25,10 @@
 // Soft reset: let modules/rgbpanel drop LVGL's state (see rgbpanel_board_end_soft_reset).
 void rgbpanel_board_end_soft_reset(void);
 #define MICROPY_BOARD_END_SOFT_RESET() rgbpanel_board_end_soft_reset()
+
+// LVGL's memory pools (omnipython-lvgl#15): LVGL's allocations in TLSF pools held in GC
+// blocks, so they do not walk the GC heap. Here, not in the cmake file, so that the scan
+// for root pointers sees it too. LVMP_POOLS=none (scripts/build.sh) sets 0.
+#ifndef LVMP_POOL_TLSF
+#define LVMP_POOL_TLSF (1)
+#endif

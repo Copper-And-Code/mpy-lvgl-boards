@@ -1,9 +1,58 @@
 # Waveshare RP2350-Touch-LCD-4: performance and memory
 
 Measured on the board (RP2350B, 16 MB flash, **no PSRAM**: U9 not fitted), MicroPython
-v1.29.0 + PyDevices lvgl-micropython `3e287e7` / lvgl-bindings `7740c2f` (LVGL 9.5),
-`MICROPY_HW_RGBPANEL_SCALE = 2` (240x240 framebuffer shown as 2x2 pixels).
-Raw logs in `docs/log/`.
+v1.29.0, `MICROPY_HW_RGBPANEL_SCALE = 2` (240x240 framebuffer shown as 2x2 pixels). LVGL
+9.5 through PyDevices omnipython-lvgl `c34fbee` with its memory pools since 2026-11-10
+(next section); the sections after it were measured before, on lvgl-micropython `3e287e7`
+/ lvgl-bindings `7740c2f`, the same LVGL. Raw logs in `docs/log/`.
+
+## omnipython-lvgl and LVGL's memory pools (2026-11-10)
+
+The board moved from the archived lvgl-micropython to omnipython-lvgl `c34fbee`, like the
+other boards, with LVGL's memory pools on (`LVMP_POOL_TLSF` in `mpconfigboard.h`; the binding's
+TLSF pools, held in GC blocks, from 32 KB doubling up to 256 KB). Measured on board 2,
+whose GT911 does not answer (`log/board2-check.txt`), so without touch,
+`log/rp2350-opl-c34fbee.txt`:
+
+- Same image: the 64 tile CRCs of `t04_crc.py` match the earlier ones (and the unix port).
+- Same speed on a clean heap: `t06_perf.py` 16.6 ms at 150 MHz, 13.1 ms at 200 and
+  240 MHz (two buffers, so frame-bound), 57.67 / 76.67 fps, no underruns.
+- `t02_lvgl_smoke.py` across soft resets, `t03_panel.py` (57.80 fps, 0 underruns, flash
+  writes included), `t07_lvgl_oom.py` as before (the half-done refresh after a
+  `MemoryError` is still there, `docs/upstream/pydevices-issue-oom-render.md`).
+- 26 KB less free heap: 190 KB after `import display_driver` instead of 215 KB.
+- 1 h soak (`t06_soak.py`, two buffers): 57.73 fps, 0 underruns, 0 errors, lowest free
+  heap 151 KB (84 KB before), 668 800 Python allocations (374 400 before, in the same hour)
+  (`log/rp2350-soak-opl.txt`).
+- The 10 examples start and keep running, 151-189 KB free, 0 underruns; not played, no
+  touch on this board (`log/rp2350-examples-opl.txt`).
+- Board 1 (with touch), the same file: the same figures (CRCs, perf, heap states), LVGL
+  clicks 3/3, the 5 touch targets at the corners and centre, GT911 `read()` 200 us (236 before),
+  the 10 examples start, Breakout played by hand: touch responsive, no glitches
+  (`log/rp2350-board1-opl.txt`).
+
+**The pools fix the open issue below.** `lv.refr_now()` of `scene_static` after a 60 ms
+pause, median of 15, the same firmware built with and without the pools
+(`LVMP_POOLS=none`), `log/rp2350-heap-states-opl.txt`:
+
+| heap | two buffers, no pools | two buffers, pools | one buffer, no pools | one buffer, pools |
+|---|---|---|---|---|
+| clean | 26.5 ms | 26.5 ms | 10.5 ms | 9.6 ms |
+| 30 KB of garbage | 26.0 ms | 26.5 ms | 9.3 ms | 9.6 ms |
+| 60 KB of small live objects | **43.2 ms** | 26.5 ms | 9.3 ms | 9.6 ms |
+| small live objects with holes | **43.8 ms** | 26.5 ms | **17.0 ms** | 9.6 ms |
+
+With the pools every heap state costs the same. Without them the extra time appears in the
+same kind of heap states as in the table of 2026-11-05 below: so it was LVGL's allocations walking the GC heap
+(`gc_alloc()` starts from the first free block), as on the STM32H7_CORE
+(`docs/stm32h743.md`). The two-buffer figures include the wait for the end of the frame.
+
+The pool layout script of the STM32 boards (24 buttons and 6 sliders, a 2 KB block per
+hole, 80 KB, `log/rp2350-pool-layouts-opl.txt`) shows the same with two buffers (refresh
+51.8 ms in every layout with the pools, 34.5 ms fresh and 68.9 ms fragmented without);
+with one buffer its scene renders in 35.2 ms with the pools, 33.6-33.9 ms without, so
+here the pools cost 1.6 ms when the heap is not in the way. `gc.collect()`: 2.3-5.2 ms
+with the pools, 2.0-5.0 ms without.
 
 ## Scan-out and rendering vs clock
 
@@ -43,7 +92,9 @@ Full-screen `lv.refr_now()` then takes ~17 ms (9.2 ms rendering + wait for the e
 frame): LVGL refreshes at most once per panel frame (57.7 Hz at PCLK 15 MHz).
 Pixel check vs the unix port still 64/64 tiles identical (`log/phase6-crc-doublebuf.txt`).
 
-## Open: a full redraw sometimes costs one frame more with two buffers
+## Was open: a full redraw sometimes costs one frame more with two buffers
+
+Solved by LVGL's memory pools: see above. The analysis as it was on 2026-11-05:
 
 `tests/hil/t06_perf.py` no longer reproduces the table above: `display_driver` now uses two
 buffers, so `refr_now` includes the wait for the swap and reads the frame, not the rendering

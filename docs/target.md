@@ -1,9 +1,10 @@
 # Build target and pinned inputs
 
-Recorded 2026-10-29 (Phase 0), for the RP2350 board. The ESP32 and STM32 boards use
-PyDevices/omnipython-lvgl instead, at `OPL_SHA` in `scripts/build_esp32.sh` and
-`scripts/build.sh` (`c34fbeeb0440e71acb62c92ddee1c3c65d089622` since 2026-11-10), with its
-`lvgl` submodule.
+Recorded 2026-10-29 (Phase 0), for the RP2350 board. Since 2026-11-10 every board uses
+PyDevices/omnipython-lvgl, at `OPL_SHA` in `scripts/build_esp32.sh` and `scripts/build.sh`
+(`c34fbeeb0440e71acb62c92ddee1c3c65d089622`), with its `lvgl` submodule (LVGL 9.5,
+`85aa60d`, the same LVGL as before); the lvgl-micropython and lvgl-bindings rows below are
+the RP2350 inputs up to v0.1.5.
 
 | Input | Commit | Tag / note |
 |---|---|---|
@@ -26,8 +27,7 @@ PyDevices/omnipython-lvgl instead, at `OPL_SHA` in `scripts/build_esp32.sh` and
 ```text
 work/
   micropython/        v1.29.0, rp2 + unix submodules
-  lvgl-micropython/   PyDevices, commit above
-  lvgl-bindings/      at LVGL_BINDINGS_COMMIT, with lvgl submodule
+  omnipython-lvgl/    PyDevices, at OPL_SHA, with lvgl submodule
   mpy-lvgl-boards/    this repo
   tools/              xPack toolchain
 ../RP2350Touch4-Exp/  reference C demo (read only)
@@ -42,7 +42,8 @@ work/
 export PATH=$PWD/tools/xpack-arm-none-eabi-gcc-15.2.1-1.1/bin:$PATH
 B=$PWD/mpy-lvgl-boards/boards/rp2/WAVESHARE_RP2350_TOUCH_LCD_4
 
-# with LVGL (default manifest; lvgl-micropython beside mpy-lvgl-boards, or LVMP_DIR=...)
+# with LVGL (default manifest; omnipython-lvgl beside mpy-lvgl-boards, or
+# LVMP_DIR=<omnipython-lvgl>/ports/micropython)
 make -C micropython/ports/rp2 BOARD_DIR=$B BUILD=build-TLCD4 -j
 
 # bring-up build without LVGL

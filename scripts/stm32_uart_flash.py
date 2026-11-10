@@ -171,6 +171,23 @@ def main():
     t = time.time()
     b.erase_sectors(sectors)
     print("erased in %.1f s" % (time.time() - t))
+    # The H743 ROM bootloader (v3.1) ACKs the erase before the sectors of bank 2
+    # (8 and up, an image over 1 MB) are done, and erases them with nothing on the line.
+    # A command sent meanwhile gets no answer and a reset leaves them half erased (reads
+    # of zeros, hanging reads): wait in silence, then check that it answers again.
+    if any(s >= 8 for s in sectors):
+        for wait in (5, 10, 20, 40):
+            time.sleep(wait)
+            b.s.reset_input_buffer()
+            try:
+                b.get_version()
+                break
+            except (OSError, IndexError):
+                pass
+        else:
+            print("no answer from the bootloader after the erase of bank 2")
+            return 1
+        print("bank 2 erased in %.1f s" % (time.time() - t))
     blk = list(blocks(mem))
     t = time.time()
     for i, (addr, data) in enumerate(blk):

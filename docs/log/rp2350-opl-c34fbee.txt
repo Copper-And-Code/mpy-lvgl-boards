@@ -1,0 +1,86 @@
+# Waveshare RP2350-Touch-LCD-4, board 2 (chip id 04793f4c817cd6a3, GT911 not answering: board2-check.txt),
+# 2026-11-10, MicroPython v1.29.0 + omnipython-lvgl c34fbee, LVGL pools on
+# (dist/WAVESHARE_RP2350_TOUCH_LCD_4-v0.1.5-dirty: this tree, the binding switch not yet committed).
+# Flash erased first (flash_nuke.uf2), then the .uf2 copied to the RP2350 drive.
+# scripts/uart_run.py --port /dev/ttyACM1 --boot-wait 0.3 --soft-reset (a soft reset before each script).
+# t06_perf needs scene_static.py on the board: it was copied after the first run, then the second run.
+--- run 1
+
+== tests/hil/t01_board.py (1/6)
+uname: (sysname='rp2', nodename='rp2', release='1.29.0', version='0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel)', machine='Waveshare RP2350-Touch-LCD-4 with RP2350')
+freq: 150000000
+mem_free: 350544 mem_alloc: 6320
+i2c: I2C(1, freq=400000, scl=7, sda=6, timeout=50000)
+i2c scan: ['0x51', '0x6b']
+  0x51 PCF85063 RTC
+  0x6B QMI8658 IMU (0x6B)
+  MISSING GT911
+fs total: 12582912 free: 12574720
+>
+== tests/hil/t02_lvgl_smoke.py (2/6)
+mem_free before: 350336
+clicked
+Hello from LVGL - drew 240 px wide refr_now 5596 us
+mem_free after scene: 259280
+mem_free after deinit: 350336
+clicked
+Hello from LVGL - drew 240 px wide refr_now 5645 us
+OK
+>
+== tests/hil/t02_lvgl_smoke.py (3/6)
+mem_free before: 350336
+clicked
+Hello from LVGL - drew 240 px wide refr_now 5657 us
+mem_free after scene: 259280
+mem_free after deinit: 350336
+clicked
+Hello from LVGL - drew 240 px wide refr_now 5611 us
+OK
+>
+== tests/hil/t03_panel.py (4/6)
+info: {'backlight': 80, 'pclk': 15000000, 'running': True, 'width': 240, 'state_machines': (4, 5, 8, 9), 'dma_channels': (0, 1, 2), 'buffers': 1, 'fb_bytes': 115200, 'shown': 0, 'underruns': 0, 'height': 240, 'frames': 3, 'sys_clk': 150000000, 'scale': 2, 'fb_addr': 536909232, 'fps_nominal': 57.726}
+bars drawn in 983 ms
+frames 289 in 5000 ms -> 57.80 fps (nominal 57.73)
+underruns during 5 s: 0
+wrote 200 KB in 2953 ms, frames 170 (expected ~171), underruns 0
+rp2.StateMachine(0) on PIO0: ok
+underruns total: 0 frames: 519
+mem_free: 342240
+>
+== tests/hil/t04_hello.py (5/6)
+display_driver: no touch: [Errno 5] EIO
+hello scene loaded
+>
+== tests/hil/t06_perf.py (6/6)
+display_driver: no touch: [Errno 5] EIO
+Traceback (most recent call last):
+  File "<stdin>", line 14, in <module>
+ImportError: no module named 'scene_static'
+>
+--- run 2
+
+== tests/hil/t04_crc.py (1/3)
+display_driver: no touch: [Errno 5] EIO
+refr_now full screen us: [15847, 17010, 17183, 17191, 17199]
+CRCS 3003402e 52f4adb0 55720201 63026a80 63026a80 63026a80 63026a80 615902c8 49096d6a 291f9ace 88276e55 1a61acbc 1a61acbc da3afa7d 79530fc4 615902c8 63026a80 b085b0cd 81c2f014 b9df5a9a 569bb1d2 cb5cb939 db90880a 615902c8 63026a80 ffba3d62 1caa25f7 1caa25f7 1caa25f7 0dff7d7e 31ec0715 615902c8 6688af58 119370ce 2f54a0cf 2f54a0cf a439ee3a cacdb017 f6edd317 615902c8 63026a80 63026a80 63026a80 63026a80 63026a80 63026a80 63026a80 615902c8 63026a80 570e6361 2b38470c a6cdb9f6 e3821720 da9ae9ca 63026a80 615902c8 615902c8 539d66c4 13d26761 4b56affb edba0836 f9ff01d1 615902c8 ba5395f3
+>
+== tests/hil/t06_perf.py (2/3)
+display_driver: no touch: [Errno 5] EIO
+sys 150 MHz pclk 15.0 MHz: fps 57.67 (nominal 57.73), refr_now us min 14237 avg 16602, underruns run 0 flash 0
+sys 200 MHz pclk 20.0 MHz: fps 76.67 (nominal 76.97), refr_now us min 12851 avg 13073, underruns run 0 flash 0
+sys 240 MHz pclk 20.0 MHz: fps 76.67 (nominal 76.97), refr_now us min 12842 avg 13064, underruns run 0 flash 0
+sys 150 MHz pclk 15.0 MHz: fps 57.67 (nominal 57.73), refr_now us min 13909 avg 16538, underruns run 0 flash 0
+200 MHz / 15 MHz refused: pclk_hz must divide sys clock/2 exactly (sys=200000000)
+back to 150000000 15000000 running True
+>
+== tests/hil/t07_lvgl_oom.py (3/3)
+display_driver: no touch: [Errno 5] EIO
+mem_free 69968 layer needs about 160000
+render 0: MemoryError memory allocation failed, allocating 176403 bytes
+render 1: ok
+render 2: ok
+delete the object, add a label
+Traceback (most recent call last):
+  File "<stdin>", line 41, in <module>
+RuntimeError: LVGL assert failed in lv_inv_area (lv_refr.c:286)
+>

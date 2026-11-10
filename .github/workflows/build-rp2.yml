@@ -1,5 +1,5 @@
 # Build-only CI for the rp2 boards of this repo: no hardware, no release.
-# The pins (MicroPython, lvgl-micropython, toolchain) live in scripts/build.sh.
+# The pins (MicroPython, omnipython-lvgl, toolchain) live in scripts/build.sh.
 name: build rp2
 
 on:

@@ -1,0 +1,87 @@
+# STM32H7_CORE V1.3 (STM32H743, ROM bootloader v3.1, chip id 0x450), 2026-11-10: flashing
+# STM32H7_CORE-V13-v0.1.5.hex (1 201 236 bytes, sectors 0-9: 0-7 in bank 1, 8-9 in bank 2)
+# with scripts/stm32_uart_flash.py over the CH340 on UART1, 115200 baud.
+#
+# What happens: the bootloader ACKs the extended erase (0x44) once bank 1 is erased
+# (6.3 s for sectors 0-7), then erases the bank 2 sectors with nothing on the line.
+# Erasing sectors 8 and 9 alone, the ACK comes at once (0.0 s). Until it is done:
+#  - a command gets no answer (GET polled every 0.8 s for 32 s after the 10-sector erase:
+#    no byte back; sending them may also keep it from finishing, not checked);
+#  - a reset (BOOT0 + NRST, to enter it again) stops the erase half way: afterwards
+#    the start of sector 8 (0x08100000 to at least 0x08100a00) read as zeros, writes there
+#    are ACKed but do not stick, reads further on in bank 2 can hang the bootloader
+#    (probably flash ECC errors).
+# Waiting in silence works: after erasing 8 and 9 the bootloader answers GET at 5 s and
+# both sectors read 0xFF. Earlier images (up to 9 sectors, all in bank 1) never hit this;
+# all four STM32 .hex files of release v0.1.5 reach sector 9.
+# The fix (scripts/stm32_uart_flash.py, after the erase): with sectors of bank 2 in the
+# image, wait 5, 10, 20, 40 s in silence and send GET until it answers.
+# A board left half erased by the old script: flash again with the fixed one (it erases
+# all the image's sectors again); attempt 4 below ran on such a board.
+
+--- attempt 1 and 2: the script before the fix (write right after the erase ACK)
+bootloader v3.1, chip id 0x450, commands 0001021121314463738292
+image 08000000-08125453 (1201236 bytes), erasing sectors [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+erased in 6.3 s
+Traceback (most recent call last):
+  File "scripts/stm32_uart_flash.py", line 201, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "scripts/stm32_uart_flash.py", line 177, in main
+    b.write(addr, data)
+  File "scripts/stm32_uart_flash.py", line 93, in write
+    self.cmd(0x31)
+  File "scripts/stm32_uart_flash.py", line 61, in cmd
+    self._ack("cmd %02x" % c, timeout)
+  File "scripts/stm32_uart_flash.py", line 57, in _ack
+    raise IOError("%s: %s" % (what, r.hex() if r else "timeout"))
+OSError: cmd 31: timeout
+
+--- attempt 3: a first fix that entered the bootloader again (reset) after the erase ACK
+bootloader v3.1, chip id 0x450, commands 0001021121314463738292
+image 08000000-08125453 (1201236 bytes), erasing sectors [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+erased in 6.3 s
+
+written 4693 blocks in 154.3 s
+
+
+verify mismatch at 08100400
+verify mismatch at 08100600
+verify mismatch at 08100800
+verify mismatch at 08100a00
+
+verify: FAILED
+
+--- diagnosis (inline Python with the script's Boot class): erase 8 and 9, then re-enter at once;
+--- then erase 8 and 9 and wait in silence
+enter True
+erase 8,9 ack after 0.0 s
+no answer after the erase: cmd 00: timeout
+re-enter True
+0x08100000 after erase ffffffffffffffffffffffffffffffff
+rewritten 597 blocks of sectors 8-9
+mismatch 0x8120000
+Traceback (most recent call last):
+  File "<stdin>", line 20, in <module>
+  File "scripts/stm32_uart_flash.py", line 103, in read
+    self.cmd(0x11)
+  File "scripts/stm32_uart_flash.py", line 61, in cmd
+    self._ack("cmd %02x" % c, timeout)
+  File "scripts/stm32_uart_flash.py", line 57, in _ack
+    raise IOError("%s: %s" % (what, r.hex() if r else "timeout"))
+OSError: cmd 11: timeout
+enter True
+erase 8,9 ack after 0.0 s
+answers at 5 s (v31)
+0x08100000 ffffffffffffffffffffffffffffffff 0x08120000 ffffffffffffffffffffffffffffffff 0x0813ffe0 ffffffffffffffffffffffffffffffff
+
+--- attempt 4: the fixed script
+bootloader v3.1, chip id 0x450, commands 0001021121314463738292
+image 08000000-08125453 (1201236 bytes), erasing sectors [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+erased in 6.3 s
+bank 2 erased in 11.3 s
+
+written 4693 blocks in 154.7 s
+
+verify: ok
+reset into the firmware

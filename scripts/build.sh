@@ -13,12 +13,11 @@
 #
 # Environment:
 #   WORK_DIR          where the sources live (default: .work in this repo). A directory
-#                     that already holds micropython/ and the binding (stm32:
-#                     omnipython-lvgl/, rp2: lvgl-micropython/) at the pins
+#                     that already holds micropython/ and omnipython-lvgl/ at the pins
 #                     is reused as is; a checkout at another commit, or with changes
 #                     that are not the patches of this repo, stops the build.
 #   GIT_REFERENCE_DIR optional directory with existing clones (micropython/,
-#                     omnipython-lvgl/, lvgl-micropython/, lvgl-bindings/) to copy git objects from
+#                     omnipython-lvgl/) to copy git objects from
 #                     instead of downloading them; origin still points upstream.
 #   TOOLCHAIN_DIR     an arm-none-eabi toolchain (its bin/ is put first in PATH).
 #                     Default: arm-none-eabi-gcc from PATH if it is the pinned version,
@@ -27,9 +26,9 @@
 #   FROZEN_MANIFEST   passed to make if set (e.g. a board's manifest_nolvgl.py); a
 #                     manifest other than the board's manifest.py adds its name to the
 #                     build directory and the output (manifest_nolvgl.py: -nolvgl).
-#   LVMP_POOLS        stm32: "none" builds LVGL without the pools of
-#                     boards/stm32/lvgl_pool.mk, for comparisons; adds -nopool to the
-#                     build directory and the output.
+#   LVMP_POOLS        "none" builds LVGL without its memory pools (stm32:
+#                     boards/stm32/lvgl_pool.mk; rp2: the board's mpconfigboard.cmake),
+#                     for comparisons; adds -nopool to the build directory and the output.
 #   GC_HEAP           STM32H7_CORE: "axi" puts the GC heap in the AXI SRAM instead of
 #                     the SDRAM, for small-heap measurements; adds -axi.
 #
@@ -41,9 +40,7 @@ set -euo pipefail
 MPY_URL=https://github.com/micropython/micropython.git
 MPY_REF=v1.29.0
 MPY_SHA=0fd6c573ea815774668bbb16b8e197c8822368b2
-LVMP_URL=https://github.com/PyDevices/lvgl-micropython.git
-LVMP_SHA=3e287e725886673d0a3b019a68d83ccf66ae4196   # rp2; pins lvgl-bindings in LVGL_BINDINGS_COMMIT
-# stm32: omnipython-lvgl, the successor of lvgl-micropython, at the commit of build_esp32.sh.
+# omnipython-lvgl, the successor of lvgl-micropython, at the commit of build_esp32.sh.
 OPL_URL=https://github.com/PyDevices/omnipython-lvgl.git
 OPL_SHA=c34fbeeb0440e71acb62c92ddee1c3c65d089622
 XPACK_VER=15.2.1-1.1
@@ -147,42 +144,18 @@ apply_patches() {
 
 log "sources in $WORK_DIR"
 checkout "$MPY_URL" "refs/tags/$MPY_REF" "$MPY_SHA" "$WORK_DIR/micropython"
-if [[ $PORT == stm32 ]]; then
-    # The binding, lv_conf.h and LVGL (a submodule) in one repository; its
-    # ports/micropython is the C module and the manifest of $(LVMP_DIR).
-    OPL_DIR=$WORK_DIR/omnipython-lvgl
-    checkout "$OPL_URL" "$OPL_SHA" "$OPL_SHA" "$OPL_DIR"
-    if [[ ! -f $OPL_DIR/lvgl/lvgl.h ]]; then
-        if [[ -n $REF_DIR && -d $REF_DIR/omnipython-lvgl/lvgl/.git ]]; then
-            copy_submodule "$OPL_DIR" lvgl "$REF_DIR/omnipython-lvgl/lvgl"
-        else
-            git -C "$OPL_DIR" submodule update -q --init --depth 1 lvgl
-        fi
+# The binding, lv_conf.h and LVGL (a submodule) in one repository; its
+# ports/micropython is the C module and the manifest of $(LVMP_DIR).
+OPL_DIR=$WORK_DIR/omnipython-lvgl
+checkout "$OPL_URL" "$OPL_SHA" "$OPL_SHA" "$OPL_DIR"
+if [[ ! -f $OPL_DIR/lvgl/lvgl.h ]]; then
+    if [[ -n $REF_DIR && -d $REF_DIR/omnipython-lvgl/lvgl/.git ]]; then
+        copy_submodule "$OPL_DIR" lvgl "$REF_DIR/omnipython-lvgl/lvgl"
+    else
+        git -C "$OPL_DIR" submodule update -q --init --depth 1 lvgl
     fi
-    LVMP_DIR=$OPL_DIR/ports/micropython
-else
-checkout "$LVMP_URL" "$LVMP_SHA" "$LVMP_SHA" "$WORK_DIR/lvgl-micropython"
-LVMP_DIR=$WORK_DIR/lvgl-micropython
-
-# lvgl-micropython uses an lvgl-bindings beside it if there is one, else fetches its pin
-# into its .deps/. A sibling at another commit would silently change LVGL: refuse it.
-BINDINGS_SHA=$(tr -d '[:space:]' < "$WORK_DIR/lvgl-micropython/LVGL_BINDINGS_COMMIT")
-BINDINGS_DIR=$WORK_DIR/lvgl-bindings
-if [[ ! -d $BINDINGS_DIR/.git && -n $REF_DIR && -d $REF_DIR/lvgl-bindings/.git ]]; then
-    # A full sibling clone from the reference, LVGL submodule included.
-    checkout https://github.com/PyDevices/lvgl-bindings.git "$BINDINGS_SHA" "$BINDINGS_SHA" "$BINDINGS_DIR"
-    copy_submodule "$BINDINGS_DIR" lvgl "$REF_DIR/lvgl-bindings/lvgl"
 fi
-if [[ -d $BINDINGS_DIR/.git ]]; then
-    head=$(git -C "$BINDINGS_DIR" rev-parse HEAD)
-    [[ $head == "$BINDINGS_SHA" ]] || die "$BINDINGS_DIR is at ${head:0:12}, lvgl-micropython pins ${BINDINGS_SHA:0:12}"
-    [[ -f $BINDINGS_DIR/lvgl/lvgl.h ]] || git -C "$BINDINGS_DIR" submodule update --init lvgl
-    echo "lvgl-bindings ${BINDINGS_SHA:0:12} ok (beside lvgl-micropython)"
-else
-    "$WORK_DIR/lvgl-micropython/scripts/fetch_bindings.sh"
-    BINDINGS_DIR=$WORK_DIR/lvgl-micropython/.deps/lvgl-bindings
-fi
-fi
+LVMP_DIR=$OPL_DIR/ports/micropython
 
 # micropython submodules already present in the reference clone: copy them from there
 # (make submodules below then finds them at the right commit and fetches only the rest).
@@ -196,12 +169,7 @@ fi
 
 log "patches"
 apply_patches "$WORK_DIR/micropython" "$REPO/patches/micropython"
-if [[ $PORT == stm32 ]]; then
-    apply_patches "$OPL_DIR" "$REPO/patches/omnipython-lvgl"
-else
-    apply_patches "$WORK_DIR/lvgl-micropython" "$REPO/patches/lvgl-micropython"
-    apply_patches "$BINDINGS_DIR" "$REPO/patches/lvgl-bindings"
-fi
+apply_patches "$OPL_DIR" "$REPO/patches/omnipython-lvgl"
 
 # --- toolchain ---
 if [[ -n ${TOOLCHAIN_DIR:-} ]]; then
@@ -235,8 +203,13 @@ if [[ -n $FROZEN && $FROZEN != "$BOARD_DIR/manifest.py" ]]; then
     m=$(basename "$FROZEN" .py)
     NAME=$NAME-${m#manifest_}
 fi
-# LVMP_POOLS=none (stm32): LVGL without the pools of boards/stm32/lvgl_pool.mk.
-[[ ${LVMP_POOLS:-} == none && $PORT == stm32 ]] && NAME=$NAME-nopool
+# LVMP_POOLS=none: LVGL without its memory pools.
+case ${LVMP_POOLS:-} in
+    '') ;;
+    none) NAME=$NAME-nopool ;;
+    *) die "LVMP_POOLS: empty or none, not $LVMP_POOLS" ;;
+esac
+export LVMP_POOLS=${LVMP_POOLS:-}
 # GC_HEAP=axi (STM32H7_CORE): the GC heap in the AXI SRAM, see its mpconfigboard.mk.
 [[ ${GC_HEAP:-} == axi && $PORT == stm32 ]] && NAME=$NAME-axi
 BUILD=build-$NAME
@@ -266,9 +239,5 @@ for ext in "${EXTS[@]}"; do
     (cd "$REPO/dist" && sha256sum "$out" > "$out.sha256")
     echo "$REPO/dist/$out"
 done
-if [[ $PORT == stm32 ]]; then
-    echo "  micropython $MPY_REF, omnipython-lvgl ${OPL_SHA:0:7}"
-else
-    echo "  micropython $MPY_REF, lvgl-micropython ${LVMP_SHA:0:7}, lvgl-bindings ${BINDINGS_SHA:0:7}"
-fi
+echo "  micropython $MPY_REF, omnipython-lvgl ${OPL_SHA:0:7}"
 arm-none-eabi-size "$MPY/ports/$PORT/$BUILD/firmware.elf"

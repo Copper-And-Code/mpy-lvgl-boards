@@ -44,7 +44,7 @@
 #if __has_include("lvgl/lvgl.h")
 #define RGBPANEL_LVGL (1)
 #include "lvgl/lvgl.h"
-// From the lvgl-micropython binding: forgets LVGL's GC-allocated global state.
+// From the LVGL binding (omnipython-lvgl): forgets LVGL's GC-allocated global state.
 void mp_lv_deinit_gc(void);
 #else
 #define RGBPANEL_LVGL (0)
@@ -638,7 +638,7 @@ static mp_obj_t rgbpanel_wait_vsync(size_t n_args, const mp_obj_t *args) {
 static MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(rgbpanel_wait_vsync_obj, 0, 1, rgbpanel_wait_vsync);
 
 /******************************************************************************/
-// LVGL glue (only when the firmware has the lvgl-micropython binding)
+// LVGL glue (only when the firmware has the LVGL binding)
 
 #if RGBPANEL_LVGL
 static uint32_t lv_tick_ms(void) {

@@ -49,7 +49,10 @@ void st_ltdc_board_end_soft_reset(struct _boardctrl_state_t *state);
 #define MICROPY_HW_CLK_PLLM         (5)
 #define MICROPY_HW_CLK_PLLN         (192)
 #define MICROPY_HW_CLK_PLLP         (2)
-#define MICROPY_HW_CLK_PLLQ         (2)
+// PLL1Q (VCO 960 MHz / 8 = 120 MHz) clocks the SDMMC (and SPI1-3): at /2 it was 480 MHz,
+// so the SD card got 960 kHz during init and 120 MHz in transfers, and no data moved.
+// Now 240 kHz and 30 MHz, within the SD specs (docs/log/stm32-sdcard-FK.txt).
+#define MICROPY_HW_CLK_PLLQ         (8)
 #define MICROPY_HW_CLK_PLLR         (2)
 #define MICROPY_HW_CLK_PLLVCI       (RCC_PLL1VCIRANGE_2)
 #define MICROPY_HW_CLK_PLLVCO       (RCC_PLL1VCOWIDE)

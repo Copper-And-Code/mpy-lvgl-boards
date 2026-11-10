@@ -1,0 +1,13 @@
+# DEV190806042 (first run on hardware), IPS1024x600, 2026-11-10, this tree (dist/DEV190806042-v0.1.5-dirty.dfu,
+# omnipython-lvgl c34fbee, pools on), flashed with DFU (BOOT + RESET). Native USB: opening the port resets nothing.
+# The layout script as in stm32-pool-layouts-opl-V10.txt (PAD = 1024, 2 MB), machine.reset() before each run.
+--- pools run 1
+FW 0fd6c573ea on 2026-11-10 free 28644576 res 1024 600
+fresh      alloc_us=67.4 labels50_ms=14.1 refresh_med=51.4 max=51.5 collect_med=29.9
+one-hole   alloc_us=48.4 labels50_ms=14.1 refresh_med=51.4 max=53.6 collect_med=67.5
+many-holes alloc_us=744.9 labels50_ms=16.9 refresh_med=51.4 max=51.5 collect_med=65.7
+--- pools run 2
+FW 0fd6c573ea on 2026-11-10 free 28644576 res 1024 600
+fresh      alloc_us=67.7 labels50_ms=14.1 refresh_med=51.4 max=51.5 collect_med=29.9
+one-hole   alloc_us=48.3 labels50_ms=14.1 refresh_med=51.4 max=53.7 collect_med=67.5
+many-holes alloc_us=745.0 labels50_ms=16.9 refresh_med=51.4 max=51.5 collect_med=65.7

@@ -1,0 +1,23 @@
+# STM32H7_CORE V1.3, IPS1024x600, 2026-11-10, v0.1.5 release file. Every example of examples/ for 4 s, then one
+# line from the same session; a soft reset before each. Only that it starts and keeps running (no taps).
+
+== examples/hello.py (1/10)
+ALIVE hello unit 2.50 font14 True mem_free 28633904 underruns 0
+== examples/button.py (2/10)
+ALIVE button unit 2.50 font14 True mem_free 28635184 underruns 0
+== examples/animation.py (3/10)
+ALIVE animation unit 2.50 font14 True mem_free 28628608 underruns 0
+== examples/backlight.py (4/10)
+ALIVE backlight unit 2.50 font14 True mem_free 28634480 underruns 0
+== examples/c64_keyboard.py (5/10)
+ALIVE c64_keyboard unit 2.50 font14 True mem_free 28632080 underruns 0
+== examples/breakout.py (6/10)
+ALIVE breakout unit 2.50 font14 True mem_free 28611984 underruns 0
+== examples/pong.py (7/10)
+ALIVE pong unit 2.50 font14 True mem_free 28598416 underruns 0
+== examples/simon.py (8/10)
+ALIVE simon unit 2.50 font14 True mem_free 28622480 underruns 0
+== examples/snake.py (9/10)
+ALIVE snake unit 2.50 font14 True mem_free 28617504 underruns 0
+== examples/tictactoe.py (10/10)
+ALIVE tictactoe unit 2.50 font14 True mem_free 28623056 underruns 0

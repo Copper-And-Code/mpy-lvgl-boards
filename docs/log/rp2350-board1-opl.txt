@@ -1,0 +1,105 @@
+# Waveshare RP2350-Touch-LCD-4, board 1 (chip id fb05bfd14aef915b, GT911 answering), 2026-11-10,
+# omnipython-lvgl c34fbee, LVGL pools on (dist/WAVESHARE_RP2350_TOUCH_LCD_4-v0.1.5-dirty.uf2, the same file as on
+# board 2). Full flash saved with picotool save -a first; filesystem kept (the user's files stay).
+# scripts/uart_run.py --port /dev/ttyACM1 --boot-wait 0.3 --soft-reset. CRCS: the 64 tiles of phase4-crc-target.txt.
+--- board, smoke x2, panel, CRC, perf, heap states (BUFFERS = 2)
+
+== tests/hil/t01_board.py (1/7)
+uname: (sysname='rp2', nodename='rp2', release='1.29.0', version='0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel)', machine='Waveshare RP2350-Touch-LCD-4 with RP2350')
+freq: 150000000
+mem_free: 350544 mem_alloc: 6320
+i2c: I2C(1, freq=400000, scl=7, sda=6, timeout=50000)
+i2c scan: ['0x51', '0x5d', '0x6b']
+  0x51 PCF85063 RTC
+  0x5D GT911 (addr 0x5D)
+  0x6B QMI8658 IMU (0x6B)
+fs total: 12582912 free: 12283904
+== tests/hil/t02_lvgl_smoke.py (2/7)
+mem_free before: 350336
+clicked
+Hello from LVGL - drew 240 px wide refr_now 5642 us
+mem_free after scene: 259280
+mem_free after deinit: 350336
+clicked
+Hello from LVGL - drew 240 px wide refr_now 5611 us
+OK
+== tests/hil/t02_lvgl_smoke.py (3/7)
+mem_free before: 350336
+clicked
+Hello from LVGL - drew 240 px wide refr_now 5642 us
+mem_free after scene: 259280
+mem_free after deinit: 350336
+clicked
+Hello from LVGL - drew 240 px wide refr_now 5613 us
+OK
+== tests/hil/t03_panel.py (4/7)
+info: {'backlight': 80, 'pclk': 15000000, 'running': True, 'width': 240, 'state_machines': (4, 5, 8, 9), 'dma_channels': (0, 1, 2), 'buffers': 1, 'fb_bytes': 115200, 'shown': 0, 'underruns': 0, 'height': 240, 'frames': 3, 'sys_clk': 150000000, 'scale': 2, 'fb_addr': 536909232, 'fps_nominal': 57.726}
+bars drawn in 983 ms
+frames 289 in 5000 ms -> 57.80 fps (nominal 57.73)
+underruns during 5 s: 0
+wrote 200 KB in 1226 ms, frames 70 (expected ~71), underruns 0
+rp2.StateMachine(0) on PIO0: ok
+underruns total: 0 frames: 420
+mem_free: 342240
+== tests/hil/t04_crc.py (5/7)
+refr_now full screen us: [14876, 17023, 17190, 17192, 17195]
+CRCS 3003402e 52f4adb0 55720201 63026a80 63026a80 63026a80 63026a80 615902c8 49096d6a 291f9ace 88276e55 1a61acbc 1a61acbc da3afa7d 79530fc4 615902c8 63026a80 b085b0cd 81c2f014 b9df5a9a 569bb1d2 cb5cb939 db90880a 615902c8 63026a80 ffba3d62 1caa25f7 1caa25f7 1caa25f7 0dff7d7e 31ec0715 615902c8 6688af58 119370ce 2f54a0cf 2f54a0cf a439ee3a cacdb017 f6edd317 615902c8 63026a80 63026a80 63026a80 63026a80 63026a80 63026a80 63026a80 615902c8 63026a80 570e6361 2b38470c a6cdb9f6 e3821720 da9ae9ca 63026a80 615902c8 615902c8 539d66c4 13d26761 4b56affb edba0836 f9ff01d1 615902c8 ba5395f3
+== tests/hil/t06_perf.py (6/7)
+sys 150 MHz pclk 15.0 MHz: fps 57.67 (nominal 57.73), refr_now us min 13508 avg 16456, underruns run 0 flash 0
+sys 200 MHz pclk 20.0 MHz: fps 76.67 (nominal 76.97), refr_now us min 12844 avg 13072, underruns run 0 flash 0
+sys 240 MHz pclk 20.0 MHz: fps 76.67 (nominal 76.97), refr_now us min 12850 avg 13065, underruns run 0 flash 0
+sys 150 MHz pclk 15.0 MHz: fps 57.67 (nominal 57.73), refr_now us min 13912 avg 16536, underruns run 0 flash 0
+200 MHz / 15 MHz refused: pclk_hz must divide sys clock/2 exactly (sys=200000000)
+back to 150000000 15000000 running True
+== tests/hil/t09_heap_states.py (7/7)
+FW 0fd6c573ea on 2026-11-10 (GNU 15.2.1 MinSizeRel) buffers 2 free 189264
+clean        free=191120 refr_med= 26.5 min=  1.2 max= 26.5
+garbage      free=154272 refr_med= 26.5 min= 10.1 max= 26.5
+live         free=118832 refr_med= 26.5 min= 24.1 max= 26.5
+holes        free=150960 refr_med= 26.5 min=  1.1 max= 26.5
+clean again  free=191072 refr_med= 26.5 min=  1.1 max= 26.5
+--- t05_click.py: 3 taps by Nunzio (its read() average fell on the first refresh after import)
+gt911 read() avg us: 628
+tap the button
+clicked 1
+clicked 2
+clicked 3
+done, clicks: 3
+--- GT911 read() alone, 200 reads: timer on (med, avg, max us): (200, 200, 284); timer off: (200, 200, 248)
+--- t05_touch_paint.py: the 5 targets by Nunzio
+product id: 911 cmd 0x8040 = 00
+touch the 5 white squares
+UP   x=0 y=0
+DOWN x=0 y=239
+UP   x=0 y=239
+DOWN x=123 y=119
+UP   x=123 y=119
+DOWN x=0 y=0
+UP   x=0 y=0
+DOWN x=239 y=0
+UP   x=239 y=0
+DOWN x=239 y=239
+UP   x=239 y=239
+done, touches: 5
+--- examples, 4 s each (as rp2350-examples-opl.txt); then Breakout played by Nunzio: touch responsive, no glitches
+
+== examples/hello.py (1/10)
+ALIVE hello unit 1.00 font14 True mem_free 178480 underruns 0
+== examples/button.py (2/10)
+ALIVE button unit 1.00 font14 True mem_free 179632 underruns 0
+== examples/animation.py (3/10)
+ALIVE animation unit 1.00 font14 True mem_free 172864 underruns 0
+== examples/backlight.py (4/10)
+ALIVE backlight unit 1.00 font14 True mem_free 179200 underruns 0
+== examples/c64_keyboard.py (5/10)
+ALIVE c64_keyboard unit 1.00 font14 True mem_free 174592 underruns 0
+== examples/breakout.py (6/10)
+ALIVE breakout unit 1.00 font14 True mem_free 159280 underruns 0
+== examples/pong.py (7/10)
+ALIVE pong unit 1.00 font14 True mem_free 139296 underruns 0
+== examples/simon.py (8/10)
+ALIVE simon unit 1.00 font14 True mem_free 167056 underruns 0
+== examples/snake.py (9/10)
+ALIVE snake unit 1.00 font14 True mem_free 162016 underruns 0
+== examples/tictactoe.py (10/10)
+ALIVE tictactoe unit 1.00 font14 True mem_free 168176 underruns 0
