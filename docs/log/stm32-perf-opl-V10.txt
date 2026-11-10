@@ -1,0 +1,16 @@
+# STM32H7_CORE V1.0, IPS1024x600, 2026-11-10, omnipython-lvgl c34fbee (ports/micropython), LVGL pools on
+# (dist/STM32H7_CORE-V10-a42cb13-dirty: this tree, the binding switch not yet committed). Flashed with DFU.
+# tests/hil/stm32/t05_perf.py after a hard reset.
+panel IPS1024x600 board STM32H7_CORE V1.0 freq (480000000, 240000000, 120000000, 120000000)
+driver QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+off    loop  221 ms  alloc  295 ms  copy   74 MB/s  gc 110 ms  underruns 0
+qos    loop  222 ms  alloc  301 ms  copy   49 MB/s  gc 136 ms  underruns 0
+noqos  loop  222 ms  alloc  300 ms  copy   49 MB/s  gc 133 ms  underruns 0
+qos    vs off: loop +0%  alloc +2%  copy -34%  gc +23%
+noqos  vs off: loop +0%  alloc +1%  copy -34%  gc +20%
+DIRECT 2 buf  full refr min  52746 avg  63883 us   label min  6675 avg 17916 us   underruns 0
+DIRECT 1 buf  full refr min  51967 avg  52114 us   label min   942 avg  1194 us   underruns 0
+PARTIAL 60    full refr min  86212 avg  87306 us   label min   967 avg  1239 us   underruns 0
+PARTIAL 200   full refr min  77840 avg  78530 us   label min   974 avg  1226 us   underruns 0
+end QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+mem_free 26475552

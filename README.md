@@ -3,8 +3,9 @@
 MicroPython + LVGL firmware for boards that upstream MicroPython does not cover, built as
 out-of-tree boards and user C modules: no fork of MicroPython or of the LVGL binding
 ([PyDevices lvgl-micropython](https://github.com/PyDevices/lvgl-micropython), now
-archived in favour of [omnipython-lvgl](https://github.com/PyDevices/omnipython-lvgl);
-the build still uses a pinned commit of it). The few changes the pinned sources need are in
+archived in favour of [omnipython-lvgl](https://github.com/PyDevices/omnipython-lvgl)).
+The ESP32 and STM32 boards build on a pinned commit of omnipython-lvgl, unchanged; the
+RP2350 board still on a pinned commit of lvgl-micropython, with the few changes it needs in
 `patches/`, applied by the build script.
 
 Every board ships a frozen `display_driver.py`, so `import display_driver` is all an

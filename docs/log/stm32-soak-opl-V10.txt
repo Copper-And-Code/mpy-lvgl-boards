@@ -1,0 +1,20 @@
+# STM32H7_CORE V1.0, IPS1024x600, 2026-11-10, omnipython-lvgl c34fbee (ports/micropython), LVGL pools on
+# (dist/STM32H7_CORE-V10-a42cb13-dirty: this tree, the binding switch not yet committed). Flashed with DFU.
+# tests/hil/stm32/t05_soak.py after a hard reset, 15 min.
+t=    0s lvgl_rps=4.2 panel_fps=83.33 underruns=0 mem_free=26545552 min_free=26545888 allocs=40 errors=0 touch_errors=0
+t=   60s lvgl_rps=35.1 panel_fps=58.31 underruns=0 mem_free=26521120 min_free=26507456 allocs=7720 errors=0 touch_errors=0
+t=  120s lvgl_rps=35.0 panel_fps=58.33 underruns=0 mem_free=26513120 min_free=26507456 allocs=15480 errors=0 touch_errors=2
+t=  180s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26507120 min_free=26507456 allocs=23200 errors=0 touch_errors=2
+t=  240s lvgl_rps=35.1 panel_fps=58.31 underruns=0 mem_free=26523120 min_free=26507456 allocs=30880 errors=0 touch_errors=2
+t=  300s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26519120 min_free=26507456 allocs=38560 errors=0 touch_errors=2
+t=  360s lvgl_rps=34.9 panel_fps=58.31 underruns=0 mem_free=26513120 min_free=26507456 allocs=46280 errors=0 touch_errors=2
+t=  420s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26507120 min_free=26507456 allocs=54000 errors=0 touch_errors=2
+t=  480s lvgl_rps=34.9 panel_fps=58.31 underruns=0 mem_free=26523120 min_free=26507456 allocs=61680 errors=0 touch_errors=2
+t=  540s lvgl_rps=35.2 panel_fps=58.31 underruns=0 mem_free=26517120 min_free=26507456 allocs=69400 errors=0 touch_errors=2
+t=  600s lvgl_rps=35.0 panel_fps=58.30 underruns=0 mem_free=26513120 min_free=26507456 allocs=77080 errors=0 touch_errors=2
+t=  660s lvgl_rps=34.8 panel_fps=58.31 underruns=0 mem_free=26509120 min_free=26507456 allocs=84760 errors=0 touch_errors=2
+t=  720s lvgl_rps=35.1 panel_fps=58.32 underruns=0 mem_free=26521120 min_free=26507456 allocs=92520 errors=0 touch_errors=2
+t=  780s lvgl_rps=34.8 panel_fps=58.31 underruns=0 mem_free=26517120 min_free=26507456 allocs=100200 errors=0 touch_errors=2
+t=  840s lvgl_rps=34.9 panel_fps=58.32 underruns=0 mem_free=26511120 min_free=26507456 allocs=107920 errors=0 touch_errors=2
+SOAK DONE t=900s lvgl_rps=35.0 panel_fps=58.32 underruns=0 min_free=26507456 allocs=115560 errors=0 touch_errors=2
+RESULT: ok

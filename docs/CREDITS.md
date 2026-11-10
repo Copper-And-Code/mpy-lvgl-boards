@@ -9,7 +9,8 @@
   panel timing values (porches/sync widths in `modules/rgbpanel/rgbpanel.pio`).
   The PIO programs and the DMA code are rewritten (DE driven with the pixels,
   IRQ-free chained DMA, pixel doubling).
-- **PyDevices** — `lvgl-micropython` and `lvgl-bindings` (LVGL binding).
+- **PyDevices** — `omnipython-lvgl`, and before it `lvgl-micropython` and `lvgl-bindings`
+  (LVGL binding).
 - **MicroPython** — `ports/rp2/boards/WAVESHARE_RP2350B_CORE` as starting point of the
   board definition (MIT).
 - **Nunzio Raciti (Copper-And-Code)** — the STM32H743 boards come from his earlier

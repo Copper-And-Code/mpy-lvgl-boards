@@ -1,0 +1,24 @@
+# STM32H7_CORE V1.0, IPS1024x600, 2026-11-10, omnipython-lvgl c34fbee (ports/micropython), LVGL pools on
+# (dist/STM32H7_CORE-V10-a42cb13-dirty: this tree, the binding switch not yet committed). Flashed with DFU.
+# every example for 4 s after building its screen, then one ALIVE line; soft reset between.
+
+== examples/hello.py (1/10)
+ALIVE hello unit 2.50 font14 True mem_free 28633952 underruns 0
+== examples/button.py (2/10)
+ALIVE button unit 2.50 font14 True mem_free 28635232 underruns 0
+== examples/animation.py (3/10)
+ALIVE animation unit 2.50 font14 True mem_free 28628528 underruns 0
+== examples/backlight.py (4/10)
+ALIVE backlight unit 2.50 font14 True mem_free 28634528 underruns 0
+== examples/c64_keyboard.py (5/10)
+ALIVE c64_keyboard unit 2.50 font14 True mem_free 28632128 underruns 0
+== examples/breakout.py (6/10)
+ALIVE breakout unit 2.50 font14 True mem_free 28612032 underruns 0
+== examples/pong.py (7/10)
+ALIVE pong unit 2.50 font14 True mem_free 28598464 underruns 0
+== examples/simon.py (8/10)
+ALIVE simon unit 2.50 font14 True mem_free 28622432 underruns 0
+== examples/snake.py (9/10)
+ALIVE snake unit 2.50 font14 True mem_free 28617552 underruns 0
+== examples/tictactoe.py (10/10)
+ALIVE tictactoe unit 2.50 font14 True mem_free 28623216 underruns 0

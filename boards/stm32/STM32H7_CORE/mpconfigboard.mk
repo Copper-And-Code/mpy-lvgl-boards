@@ -26,12 +26,12 @@ MICROPY_VFS_LFS2 = 1
 
 FROZEN_MANIFEST ?= $(BOARD_DIR)/manifest.py
 
-# lvgl-micropython (PyDevices) checkout, used as $(LVMP_DIR) in manifest.py.
-# Default: $LVMP_DIR from the environment (scripts/build.sh sets it), else the
-# workspace layout, with lvgl-micropython beside mpy-lvgl-boards.
-# Its lvgl-bindings is found by lvgl-micropython itself (BINDINGS_DIR or beside it).
+# The C module and manifest of omnipython-lvgl (PyDevices), its ports/micropython,
+# used as $(LVMP_DIR) in manifest.py. Default: $LVMP_DIR from the environment
+# (scripts/build.sh sets it), else the workspace layout, with omnipython-lvgl beside
+# mpy-lvgl-boards.
 ifneq ($(LVMP_DIR),)
 MICROPY_MANIFEST_LVMP_DIR ?= $(LVMP_DIR)
 else
-MICROPY_MANIFEST_LVMP_DIR ?= $(abspath $(BOARD_DIR)/../../../../lvgl-micropython)
+MICROPY_MANIFEST_LVMP_DIR ?= $(abspath $(BOARD_DIR)/../../../../omnipython-lvgl/ports/micropython)
 endif

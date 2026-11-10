@@ -1,0 +1,26 @@
+# STM32H7_CORE V1.0, IPS1024x600, 28 MB GC heap in SDRAM, 2026-11-10.
+# The layout script of omnipython-lvgl PR #6 (fresh heap, one hole below 1024 x 2 KB, many holes),
+# with its multimer.hold() replaced by display_driver.stop()/start(). Hard reset before each run.
+# Two builds from the same tree (a42cb13-dirty, omnipython-lvgl c34fbee, its ports/micropython):
+#   pools:  scripts/build.sh stm32 STM32H7_CORE V10
+#   none:   LVMP_POOLS=none scripts/build.sh stm32 STM32H7_CORE V10
+--- nopool-opl run 1
+FW 0fd6c573ea on 2026-11-10 free 28670368 res 1024 600
+fresh      alloc_us=102.8 labels50_ms=16.9 refresh_med=68.6 max=68.8 collect_med=31.8
+one-hole   alloc_us=73.4 labels50_ms=32.6 refresh_med=359.3 max=359.6 collect_med=81.0
+many-holes alloc_us=851.6 labels50_ms=93.6 refresh_med=360.0 max=360.2 collect_med=77.2
+--- nopool-opl run 2
+FW 0fd6c573ea on 2026-11-10 free 28670368 res 1024 600
+fresh      alloc_us=102.9 labels50_ms=16.7 refresh_med=68.6 max=68.8 collect_med=31.8
+one-hole   alloc_us=72.8 labels50_ms=32.7 refresh_med=359.3 max=359.8 collect_med=81.0
+many-holes alloc_us=861.8 labels50_ms=94.5 refresh_med=360.0 max=371.1 collect_med=77.2
+--- pools-opl run 1
+FW 0fd6c573ea on 2026-11-10 free 28644816 res 1024 600
+fresh      alloc_us=111.1 labels50_ms=15.6 refresh_med=68.6 max=68.7 collect_med=33.3
+one-hole   alloc_us=66.8 labels50_ms=15.6 refresh_med=68.6 max=68.7 collect_med=82.5
+many-holes alloc_us=866.7 labels50_ms=19.2 refresh_med=68.6 max=68.7 collect_med=78.4
+--- pools-opl run 2
+FW 0fd6c573ea on 2026-11-10 free 28644816 res 1024 600
+fresh      alloc_us=111.8 labels50_ms=15.5 refresh_med=68.6 max=68.7 collect_med=33.3
+one-hole   alloc_us=66.6 labels50_ms=15.6 refresh_med=68.6 max=68.7 collect_med=82.5
+many-holes alloc_us=868.2 labels50_ms=18.8 refresh_med=68.6 max=68.6 collect_med=78.5

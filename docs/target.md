@@ -1,6 +1,9 @@
 # Build target and pinned inputs
 
-Recorded 2026-10-29 (Phase 0).
+Recorded 2026-10-29 (Phase 0), for the RP2350 board. The ESP32 and STM32 boards use
+PyDevices/omnipython-lvgl instead, at `OPL_SHA` in `scripts/build_esp32.sh` and
+`scripts/build.sh` (`c34fbeeb0440e71acb62c92ddee1c3c65d089622` since 2026-11-10), with its
+`lvgl` submodule.
 
 | Input | Commit | Tag / note |
 |---|---|---|

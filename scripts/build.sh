@@ -13,11 +13,12 @@
 #
 # Environment:
 #   WORK_DIR          where the sources live (default: .work in this repo). A directory
-#                     that already holds micropython/ and lvgl-micropython/ at the pins
+#                     that already holds micropython/ and the binding (stm32:
+#                     omnipython-lvgl/, rp2: lvgl-micropython/) at the pins
 #                     is reused as is; a checkout at another commit, or with changes
 #                     that are not the patches of this repo, stops the build.
 #   GIT_REFERENCE_DIR optional directory with existing clones (micropython/,
-#                     lvgl-micropython/, lvgl-bindings/) to copy git objects from
+#                     omnipython-lvgl/, lvgl-micropython/, lvgl-bindings/) to copy git objects from
 #                     instead of downloading them; origin still points upstream.
 #   TOOLCHAIN_DIR     an arm-none-eabi toolchain (its bin/ is put first in PATH).
 #                     Default: arm-none-eabi-gcc from PATH if it is the pinned version,
@@ -39,7 +40,10 @@ MPY_URL=https://github.com/micropython/micropython.git
 MPY_REF=v1.29.0
 MPY_SHA=0fd6c573ea815774668bbb16b8e197c8822368b2
 LVMP_URL=https://github.com/PyDevices/lvgl-micropython.git
-LVMP_SHA=3e287e725886673d0a3b019a68d83ccf66ae4196   # pins lvgl-bindings in LVGL_BINDINGS_COMMIT
+LVMP_SHA=3e287e725886673d0a3b019a68d83ccf66ae4196   # rp2; pins lvgl-bindings in LVGL_BINDINGS_COMMIT
+# stm32: omnipython-lvgl, the successor of lvgl-micropython, at the commit of build_esp32.sh.
+OPL_URL=https://github.com/PyDevices/omnipython-lvgl.git
+OPL_SHA=c34fbeeb0440e71acb62c92ddee1c3c65d089622
 XPACK_VER=15.2.1-1.1
 XPACK_SHA256=da6a49ad4003944b823c6c93702a8787c922ab34bd7e918ec0eaf6933a9b1ff6   # linux-x64
 
@@ -141,7 +145,22 @@ apply_patches() {
 
 log "sources in $WORK_DIR"
 checkout "$MPY_URL" "refs/tags/$MPY_REF" "$MPY_SHA" "$WORK_DIR/micropython"
+if [[ $PORT == stm32 ]]; then
+    # The binding, lv_conf.h and LVGL (a submodule) in one repository; its
+    # ports/micropython is the C module and the manifest of $(LVMP_DIR).
+    OPL_DIR=$WORK_DIR/omnipython-lvgl
+    checkout "$OPL_URL" "$OPL_SHA" "$OPL_SHA" "$OPL_DIR"
+    if [[ ! -f $OPL_DIR/lvgl/lvgl.h ]]; then
+        if [[ -n $REF_DIR && -d $REF_DIR/omnipython-lvgl/lvgl/.git ]]; then
+            copy_submodule "$OPL_DIR" lvgl "$REF_DIR/omnipython-lvgl/lvgl"
+        else
+            git -C "$OPL_DIR" submodule update -q --init --depth 1 lvgl
+        fi
+    fi
+    LVMP_DIR=$OPL_DIR/ports/micropython
+else
 checkout "$LVMP_URL" "$LVMP_SHA" "$LVMP_SHA" "$WORK_DIR/lvgl-micropython"
+LVMP_DIR=$WORK_DIR/lvgl-micropython
 
 # lvgl-micropython uses an lvgl-bindings beside it if there is one, else fetches its pin
 # into its .deps/. A sibling at another commit would silently change LVGL: refuse it.
@@ -161,6 +180,7 @@ else
     "$WORK_DIR/lvgl-micropython/scripts/fetch_bindings.sh"
     BINDINGS_DIR=$WORK_DIR/lvgl-micropython/.deps/lvgl-bindings
 fi
+fi
 
 # micropython submodules already present in the reference clone: copy them from there
 # (make submodules below then finds them at the right commit and fetches only the rest).
@@ -174,8 +194,12 @@ fi
 
 log "patches"
 apply_patches "$WORK_DIR/micropython" "$REPO/patches/micropython"
-apply_patches "$WORK_DIR/lvgl-micropython" "$REPO/patches/lvgl-micropython"
-apply_patches "$BINDINGS_DIR" "$REPO/patches/lvgl-bindings"
+if [[ $PORT == stm32 ]]; then
+    apply_patches "$OPL_DIR" "$REPO/patches/omnipython-lvgl"
+else
+    apply_patches "$WORK_DIR/lvgl-micropython" "$REPO/patches/lvgl-micropython"
+    apply_patches "$BINDINGS_DIR" "$REPO/patches/lvgl-bindings"
+fi
 
 # --- toolchain ---
 if [[ -n ${TOOLCHAIN_DIR:-} ]]; then
@@ -215,7 +239,7 @@ BUILD=build-$NAME
 MAKE_ARGS=(BOARD_DIR="$BOARD_DIR" BUILD="$BUILD")
 [[ -n $VARIANT ]] && MAKE_ARGS+=(BOARD_VARIANT="$VARIANT")
 [[ -n $FROZEN ]] && MAKE_ARGS+=(FROZEN_MANIFEST="$FROZEN")
-export LVMP_DIR=$WORK_DIR/lvgl-micropython
+export LVMP_DIR
 
 log "submodules"
 make -C "$MPY/ports/$PORT" "${MAKE_ARGS[@]}" submodules >/dev/null
@@ -238,5 +262,9 @@ for ext in "${EXTS[@]}"; do
     (cd "$REPO/dist" && sha256sum "$out" > "$out.sha256")
     echo "$REPO/dist/$out"
 done
-echo "  micropython $MPY_REF, lvgl-micropython ${LVMP_SHA:0:7}, lvgl-bindings ${BINDINGS_SHA:0:7}"
+if [[ $PORT == stm32 ]]; then
+    echo "  micropython $MPY_REF, omnipython-lvgl ${OPL_SHA:0:7}"
+else
+    echo "  micropython $MPY_REF, lvgl-micropython ${LVMP_SHA:0:7}, lvgl-bindings ${BINDINGS_SHA:0:7}"
+fi
 arm-none-eabi-size "$MPY/ports/$PORT/$BUILD/firmware.elf"

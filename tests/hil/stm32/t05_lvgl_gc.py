@@ -1,4 +1,4 @@
-# Phase 5: LVGL memory in TLSF pools (patches/lvgl-micropython/0001-...) stays
+# Phase 5: LVGL memory in TLSF pools (omnipython-lvgl lvmp_pool.h, LVMP_POOL_TLSF=1) stays
 # visible to the GC. No panel needed.
 #   scripts/uart_run.py tests/hil/stm32/t05_lvgl_gc.py --timeout 120
 # 300 buttons, each with an event callback that only LVGL refers to (a closure
