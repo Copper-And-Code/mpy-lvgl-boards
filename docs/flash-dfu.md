@@ -21,6 +21,19 @@ the UART bootloader see `docs/stm32h743.md` (Bench).
 
 ## 1. Put the board in DFU mode
 
+From a running firmware of this repo built since 2026-11-10, no buttons: in the REPL,
+
+```python
+>>> import machine; machine.bootloader()
+```
+
+or `mpremote bootloader`. The board resets into the ROM bootloader and its serial port
+goes away. Tested on the STM32H7_CORE V1.0: twice in a row, one with a full write from that DFU. An older
+firmware resets into MicroPython instead: it jumped to 0x1ff00000, which reads as zeros
+on the H743, not to the bootloader at 0x1ff09800 (`boards/stm32/h743_bootloader.c`).
+
+With the buttons, on any firmware or none:
+
 1. Hold **BOOT0**.
 2. Press and release **RESET**, or plug in the USB cable.
 3. Release BOOT0.
@@ -53,7 +66,15 @@ Done parsing DfuSe file
 
 ## 3. Start the firmware
 
-The board **stays in DFU mode** after writing. Press **RESET**, without BOOT0.
+The board **stays in DFU mode** after writing. Press **RESET**, without BOOT0, or leave
+DFU from the computer:
+
+```bash
+dfu-util -a 0 -d 0483:df11 -s 0x08000000:4:leave -U /tmp/leave.bin   # a file that does not exist yet
+```
+
+It ends with `Error during download get_status`: normal, the board has already left. With
+an existing file `dfu-util -U` refuses to start and the board stays in DFU.
 
 ## 4. Check it
 

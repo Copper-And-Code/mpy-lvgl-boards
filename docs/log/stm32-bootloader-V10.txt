@@ -1,0 +1,20 @@
+# STM32H7_CORE V1.0 (STM32H743, DBGMCU IDCODE 0x20036450, rev V), 2026-11-10: machine.bootloader().
+# The ROM's vector tables, read from MicroPython (machine.mem32):
+0x1ff00000 sp 0x0 pc 0x0
+0x1ff09800 sp 0x240044b0 pc 0x1ff09ac1
+# Before (port default, jump to 0x1ff00000, direct or through the reset): the board came back as
+# f055:9800 MicroPython. A direct jump to 0x1ff09800 from running Python code (USB off, IRQs off,
+# LTDC and caches on): hard reset into MicroPython too.
+# After (boards/stm32/h743_bootloader.c: reset, then the jump to 0x1ff09800 in MICROPY_BOARD_STARTUP):
+after machine.bootloader():
+Bus 003 Device 062: ID 0483:df11 STMicroelectronics STM Device in DFU Mode
+# firmware written from that DFU, left with dfu-util :leave
+Bus 003 Device 063: ID f055:9800 MicroPython STM32H7 Virtual Comm Port in FS Mode
+after machine.reset():
+Bus 003 Device 064: ID f055:9800 MicroPython STM32H7 Virtual Comm Port in FS Mode
+cause 2 ticks 5825
+after machine.bootloader() #2:
+Bus 003 Device 065: ID 0483:df11 STMicroelectronics STM Device in DFU Mode
+after leave:
+Bus 003 Device 066: ID f055:9800 MicroPython STM32H7 Virtual Comm Port in FS Mode
+# then t01_board 6/6, t03_softreset scan-out kept, 0 underruns.

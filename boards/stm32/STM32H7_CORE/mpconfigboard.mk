@@ -9,6 +9,7 @@ MICROPY_FLOAT_IMPL = double
 # LVGL also needs a few float functions (sinf, ...): see this file.
 include $(BOARD_DIR)/../lvgl_libm.mk
 include $(BOARD_DIR)/../lvgl_pool.mk
+include $(BOARD_DIR)/../h743_bootloader.mk
 AF_FILE = boards/stm32h743_af.csv
 
 # GC_HEAP=axi: the GC heap in the AXI SRAM (about 450 KB) instead of the SDRAM, for

@@ -22,7 +22,9 @@
 // potentially bricking the device.
 #define MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE (0)
 
-#define MICROPY_HW_ENTER_BOOTLOADER_VIA_RESET   (0)
+// machine.bootloader(): USB DFU in the ROM bootloader, at 0x1ff09800 on the H743, not
+// at the 0x1ff00000 of the port (../h743_bootloader.c).
+#include "../h743_bootloader.h"
 #define MICROPY_HW_SDCARD_MOUNT_AT_BOOT         (1)
 
 // LTDC display (modules/st_ltdc): pins (port, pin, alternate function) checked

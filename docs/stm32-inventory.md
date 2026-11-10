@@ -201,8 +201,10 @@ first thing to miss; there is room to add some (frozen font files or ROMFS).
 
 STM32H743 system bootloader (USB DFU on PA11/PA12, OTG_FS): hold **BOOT0** high and
 reset (or plug USB), then `dfu-util --alt 0 -D firmware.dfu`. From a running
-MicroPython: `machine.bootloader()` (or `mpremote bootloader`) jumps straight to the
-system bootloader, since these boards set `MICROPY_HW_ENTER_BOOTLOADER_VIA_RESET (0)`.
+MicroPython: `machine.bootloader()` (or `mpremote bootloader`), since 2026-11-10: it
+resets and jumps to the ROM bootloader at 0x1ff09800 first thing in the boot
+(`boards/stm32/h743_bootloader.c`). Before, it jumped to the port's 0x1ff00000, which
+reads as zeros on the H743, and the board reset into MicroPython.
 Where the BOOT0 button/jumper sits on each board: to be confirmed by Nunzio and noted
 here in phase 1. ST-Link (SWD) works on all boards and is used for the backups.
 
