@@ -1,0 +1,23 @@
+# ESP32-4848S040, 2026-11-10, omnipython-lvgl c34fbee, LVGL pools on (dist/ESP32_4848S040-3cc2cbb-dirty, the tree of a42cb13): every example
+# for 4 s after building its screen, then one ALIVE line; soft reset before each, one session.
+
+== examples/hello.py (1/10)
+ALIVE hello unit 2.00 font14 True mem_free 4596640
+== examples/button.py (2/10)
+ALIVE button unit 2.00 font14 True mem_free 4598224
+== examples/animation.py (3/10)
+ALIVE animation unit 2.00 font14 True mem_free 4591856
+== examples/backlight.py (4/10)
+ALIVE backlight unit 2.00 font14 True mem_free 4597824
+== examples/c64_keyboard.py (5/10)
+ALIVE c64_keyboard unit 2.00 font14 True mem_free 4595232
+== examples/breakout.py (6/10)
+ALIVE breakout unit 2.00 font14 True mem_free 4643440
+== examples/pong.py (7/10)
+ALIVE pong unit 2.00 font14 True mem_free 4605440
+== examples/simon.py (8/10)
+ALIVE simon unit 2.00 font14 True mem_free 4600304
+== examples/snake.py (9/10)
+ALIVE snake unit 2.00 font14 True mem_free 4646256
+== examples/tictactoe.py (10/10)
+ALIVE tictactoe unit 2.00 font14 True mem_free 4602384
