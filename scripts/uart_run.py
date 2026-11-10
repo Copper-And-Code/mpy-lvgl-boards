@@ -13,8 +13,13 @@ boot to finish and then runs all the scripts in the same session. Tests that nee
 state to survive a soft reset must therefore be given as several scripts in one
 call (as with `mpremote run a.py run a.py`), never as separate calls.
 
+Over a board's own USB port (STM32H7_CORE V1.0 on /dev/ttyACM0, ESP32 boards with
+--dtr 0) opening the port resets nothing: the first script runs on whatever the last
+call left, a display driver already imported, callbacks still registered.
+
 --soft-reset soft-resets the board (Ctrl-D in the raw REPL, as `mpremote run`
-does) before every script but the first, which runs right after the hard reset.
+does) before every script, the first one too, so each starts from a clean heap
+whatever port it came through.
 Exit status: 0 if every script ran without an exception and printed no
 "RESULT: FAILED", else 1 (2 on a timeout).
 """
@@ -99,7 +104,7 @@ def main():
     enter_raw(s, a.boot_wait)
     worst = 0
     for i, path in enumerate(a.scripts):
-        if a.soft_reset and i:
+        if a.soft_reset:
             soft_reset(s)
         if len(a.scripts) > 1:
             print("\n== %s (%d/%d)" % (path, i + 1, len(a.scripts)))
