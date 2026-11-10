@@ -1,0 +1,221 @@
+# ESP32-4848S040, 2026-11-10: omnipython-lvgl v9.5.53 (0886d38), MicroPython 1.29.0, ESP-IDF 5.5.2.
+# Three builds of the same tree (firmware hashes verified after writing):
+#   nopool:    the module as it ships, pools compiled out (LVMP_POOLS=none now)
+#   multiheap: ESP-IDF's multi_heap pools (the default of scripts/build_esp32.sh now)
+#   tlsf:      LVGL's TLSF pools (LVMP_POOLS=tlsf)
+# Per build: the layout script of omnipython-lvgl PR #6 twice (multimer.hold() replaced by
+# display_driver.stop()/start()), t05_perf, t07_audio, t06_wifi, t05_soak (15 min).
+# The board's address and the path of the WiFi settings are left out.
+
+=== nopool
+Hash of data verified.
+--- layouts run 1
+FW 0fd6c573ea on 2026-11-07 free 4764032 res 480 480
+fresh      alloc_us=173.9 labels50_ms=30.8 refresh_med=70.9 max=72.1 collect_med=3.0
+one-hole   alloc_us=161.6 labels50_ms=70.1 refresh_med=471.0 max=471.6 collect_med=127.6
+many-holes alloc_us=2885.2 labels50_ms=240.6 refresh_med=496.0 max=506.2 collect_med=112.6
+--- layouts run 2
+FW 0fd6c573ea on 2026-11-07 free 4764032 res 480 480
+fresh      alloc_us=173.9 labels50_ms=30.8 refresh_med=70.9 max=72.1 collect_med=3.0
+one-hole   alloc_us=161.4 labels50_ms=69.7 refresh_med=471.0 max=471.6 collect_med=127.6
+many-holes alloc_us=2885.2 labels50_ms=240.6 refresh_med=496.0 max=506.1 collect_med=112.7
+--- t05_perf
+full refresh us: min 94283 avg 96512
+label change us: min 4249 avg 21222
+animation: LVGL 54.5 refreshes/s, panel 42.30 fps
+mem_free 4736608
+RESULT: ok
+--- t07_audio
+beep   returned in 2 ms, lasted 302 ms, LVGL 56.3/s, longest gap 23 ms
+mono   returned in 9 ms, lasted 1208 ms, LVGL 55.5/s, longest gap 24 ms
+stereo returned in 6 ms, lasted 1124 ms, LVGL 55.2/s, longest gap 25 ms
+cut    returned in 6 ms, lasted 511 ms, LVGL 54.8/s, longest gap 25 ms
+beep   returned in 5 ms, lasted 268 ms, LVGL 56.0/s, longest gap 24 ms
+beep   returned in 10 ms, lasted 262 ms, LVGL 57.3/s, longest gap 24 ms
+beep   returned in 4 ms, lasted 267 ms, LVGL 56.2/s, longest gap 22 ms
+bad file: not a WAV file
+RESULT: ok
+--- t06_wifi
+
+== tests/hil/esp32/t06_wifi.py (2/2)
+no wifi    LVGL 54.5/s, panel 42.30 fps, longest gap 25 ms, internal block 128 KB
+connect ms 4091 rssi -68 channel 2
+connected  LVGL 55.6/s, panel 42.29 fps, longest gap 26 ms, internal block 88 KB
+tcp_source: 2720 KB sent, [Errno 104] Connection reset by peer
+blocking   LVGL 31.9/s, panel 42.24 fps, longest gap 114 ms, internal block 88 KB, 2.07 Mbit/s (2668 KB)
+tcp_source: 3488 KB sent, [Errno 104] Connection reset by peer
+non-block  LVGL 53.3/s, panel 42.20 fps, longest gap 105 ms, internal block 84 KB, 2.81 Mbit/s (3429 KB)
+tcp_source: 4560 KB sent, [Errno 104] Connection reset by peer
+blocking   LVGL 45.8/s, panel 42.23 fps, longest gap 111 ms, internal block 84 KB, 3.68 Mbit/s (4504 KB)
+tcp_source: 4672 KB sent, [Errno 32] Broken pipe
+non-block  LVGL 52.8/s, panel 42.31 fps, longest gap 113 ms, internal block 84 KB, 3.79 Mbit/s (4628 KB)
+tcp_source: 4560 KB sent, [Errno 104] Connection reset by peer
+blocking   LVGL 46.2/s, panel 42.32 fps, longest gap 113 ms, internal block 88 KB, 3.70 Mbit/s (4512 KB)
+tcp_source: 4576 KB sent, [Errno 104] Connection reset by peer
+non-block  LVGL 53.6/s, panel 42.27 fps, longest gap 102 ms, internal block 88 KB, 3.70 Mbit/s (4522 KB)
+connected  LVGL 55.6/s, panel 42.30 fps, longest gap 25 ms, internal block 88 KB
+reconnect ms 3766
+http ms 111 b'HTTP/1.1 200 OK\r\n'
+wifi off   LVGL 55.5/s, panel 42.28 fps, longest gap 25 ms, internal block 88 KB
+mem_free 4760976
+RESULT: ok
+--- t05_soak
+t=    0s lvgl_rps=13.0 panel_fps=47.62 mem_free=2591120 min_free=2591248 allocs=40 errors=0 touch_errors=0
+t=   60s lvgl_rps=47.5 panel_fps=42.26 mem_free=2553056 min_free=2553168 allocs=9600 errors=0 touch_errors=0
+t=  120s lvgl_rps=47.3 panel_fps=42.29 mem_free=2559056 min_free=2553168 allocs=19080 errors=0 touch_errors=0
+t=  180s lvgl_rps=47.6 panel_fps=42.27 mem_free=2561056 min_free=2553168 allocs=28640 errors=0 touch_errors=0
+t=  240s lvgl_rps=47.5 panel_fps=42.27 mem_free=2565008 min_free=2553168 allocs=38160 errors=0 touch_errors=0
+t=  300s lvgl_rps=47.6 panel_fps=42.27 mem_free=2567056 min_free=2553168 allocs=47720 errors=0 touch_errors=0
+t=  360s lvgl_rps=47.6 panel_fps=42.27 mem_free=2569040 min_free=2553168 allocs=57280 errors=0 touch_errors=0
+t=  420s lvgl_rps=47.9 panel_fps=42.28 mem_free=2571104 min_free=2553168 allocs=66840 errors=0 touch_errors=0
+t=  480s lvgl_rps=47.7 panel_fps=42.27 mem_free=2553040 min_free=2553168 allocs=76400 errors=0 touch_errors=0
+t=  540s lvgl_rps=47.6 panel_fps=42.28 mem_free=2557056 min_free=2553168 allocs=85920 errors=0 touch_errors=0
+t=  600s lvgl_rps=47.7 panel_fps=42.28 mem_free=2561056 min_free=2553168 allocs=95440 errors=0 touch_errors=0
+t=  660s lvgl_rps=47.2 panel_fps=42.27 mem_free=2565056 min_free=2553168 allocs=104960 errors=0 touch_errors=0
+t=  720s lvgl_rps=48.2 panel_fps=42.28 mem_free=2565056 min_free=2553168 allocs=114560 errors=0 touch_errors=0
+t=  780s lvgl_rps=47.6 panel_fps=42.26 mem_free=2569040 min_free=2553168 allocs=124080 errors=0 touch_errors=0
+t=  840s lvgl_rps=47.8 panel_fps=42.28 mem_free=2571104 min_free=2553168 allocs=133640 errors=0 touch_errors=0
+SOAK DONE t=900s lvgl_rps=47.7 panel_fps=42.28 min_free=2553168 allocs=143120 errors=0 touch_errors=0
+RESULT: ok
+
+=== multiheap
+Hash of data verified.
+--- layouts run 1
+FW 0fd6c573ea on 2026-11-07 free 4511152 res 480 480
+fresh      alloc_us=80.6 labels50_ms=26.9 refresh_med=70.9 max=71.1 collect_med=15.7
+one-hole   alloc_us=130.5 labels50_ms=26.8 refresh_med=70.9 max=71.2 collect_med=121.5
+many-holes alloc_us=4183.1 labels50_ms=36.7 refresh_med=70.8 max=71.0 collect_med=122.3
+--- layouts run 2
+FW 0fd6c573ea on 2026-11-07 free 4511152 res 480 480
+fresh      alloc_us=80.6 labels50_ms=26.9 refresh_med=70.9 max=71.0 collect_med=15.7
+one-hole   alloc_us=131.9 labels50_ms=27.1 refresh_med=70.8 max=71.3 collect_med=121.6
+many-holes alloc_us=4191.2 labels50_ms=36.6 refresh_med=70.9 max=79.9 collect_med=122.6
+--- t05_perf
+full refresh us: min 85497 avg 93338
+label change us: min 4404 avg 23189
+animation: LVGL 54.5 refreshes/s, panel 42.29 fps
+mem_free 4510336
+RESULT: ok
+--- t07_audio
+beep   returned in 6 ms, lasted 301 ms, LVGL 59.8/s, longest gap 23 ms
+mono   returned in 9 ms, lasted 1207 ms, LVGL 56.3/s, longest gap 24 ms
+stereo returned in 5 ms, lasted 1116 ms, LVGL 56.5/s, longest gap 25 ms
+cut    returned in 17 ms, lasted 507 ms, LVGL 55.2/s, longest gap 24 ms
+beep   returned in 2 ms, lasted 269 ms, LVGL 55.8/s, longest gap 24 ms
+beep   returned in 2 ms, lasted 267 ms, LVGL 56.2/s, longest gap 23 ms
+beep   returned in 2 ms, lasted 262 ms, LVGL 57.3/s, longest gap 24 ms
+bad file: not a WAV file
+RESULT: ok
+--- t06_wifi
+
+== tests/hil/esp32/t06_wifi.py (2/2)
+no wifi    LVGL 54.2/s, panel 42.30 fps, longest gap 25 ms, internal block 128 KB
+connect ms 3912 rssi -48 channel 2
+connected  LVGL 54.5/s, panel 42.20 fps, longest gap 25 ms, internal block 88 KB
+tcp_source: 4016 KB sent, [Errno 104] Connection reset by peer
+blocking   LVGL 32.4/s, panel 42.28 fps, longest gap 213 ms, internal block 88 KB, 3.20 Mbit/s (3960 KB)
+tcp_source: 5120 KB sent, [Errno 32] Broken pipe
+non-block  LVGL 54.3/s, panel 42.26 fps, longest gap 119 ms, internal block 88 KB, 4.15 Mbit/s (5069 KB)
+tcp_source: 5728 KB sent, [Errno 104] Connection reset by peer
+blocking   LVGL 44.1/s, panel 42.32 fps, longest gap 114 ms, internal block 88 KB, 4.65 Mbit/s (5680 KB)
+non-block  LVGL 53.8/s, panel 42.20 fps, longest gap 107 ms, internal block 84 KB, 3.39 Mbit/s (4137 KB)
+tcp_source: 4192 KB sent, [Errno 32] Broken pipe
+tcp_source: 5040 KB sent, [Errno 104] Connection reset by peer
+blocking   LVGL 40.8/s, panel 42.30 fps, longest gap 136 ms, internal block 88 KB, 4.07 Mbit/s (4980 KB)
+non-block  LVGL 53.9/s, panel 42.26 fps, longest gap 106 ms, internal block 84 KB, 4.06 Mbit/s (4962 KB)
+tcp_source: 5008 KB sent, [Errno 104] Connection reset by peer
+connected  LVGL 54.5/s, panel 42.30 fps, longest gap 26 ms, internal block 88 KB
+reconnect ms 3799
+http ms 109 b'HTTP/1.1 200 OK\r\n'
+wifi off   LVGL 55.0/s, panel 42.30 fps, longest gap 28 ms, internal block 88 KB
+mem_free 4507936
+RESULT: ok
+--- t05_soak
+t=    0s lvgl_rps=12.6 panel_fps=50.42 mem_free=2420960 min_free=2421120 allocs=40 errors=0 touch_errors=0
+t=   60s lvgl_rps=43.2 panel_fps=42.28 mem_free=2388832 min_free=2382992 allocs=8680 errors=0 touch_errors=0
+t=  120s lvgl_rps=43.4 panel_fps=42.27 mem_free=2396832 min_free=2382992 allocs=17320 errors=0 touch_errors=0
+t=  180s lvgl_rps=43.2 panel_fps=42.27 mem_free=2384832 min_free=2382992 allocs=25960 errors=0 touch_errors=0
+t=  240s lvgl_rps=43.3 panel_fps=42.27 mem_free=2392832 min_free=2382992 allocs=34600 errors=0 touch_errors=0
+t=  300s lvgl_rps=43.2 panel_fps=42.27 mem_free=2400880 min_free=2382992 allocs=43240 errors=0 touch_errors=0
+t=  360s lvgl_rps=43.2 panel_fps=42.29 mem_free=2388832 min_free=2382992 allocs=51880 errors=0 touch_errors=0
+t=  420s lvgl_rps=43.2 panel_fps=42.27 mem_free=2396832 min_free=2382992 allocs=60520 errors=0 touch_errors=0
+t=  480s lvgl_rps=43.3 panel_fps=42.28 mem_free=2384832 min_free=2382992 allocs=69160 errors=0 touch_errors=0
+t=  540s lvgl_rps=43.3 panel_fps=42.27 mem_free=2392832 min_free=2382992 allocs=77800 errors=0 touch_errors=0
+t=  600s lvgl_rps=43.3 panel_fps=42.28 mem_free=2400880 min_free=2382992 allocs=86440 errors=0 touch_errors=0
+t=  660s lvgl_rps=43.2 panel_fps=42.27 mem_free=2388832 min_free=2382992 allocs=95080 errors=0 touch_errors=0
+t=  720s lvgl_rps=43.3 panel_fps=42.28 mem_free=2396832 min_free=2382992 allocs=103720 errors=0 touch_errors=0
+t=  780s lvgl_rps=43.2 panel_fps=42.28 mem_free=2384832 min_free=2382992 allocs=112360 errors=0 touch_errors=0
+t=  840s lvgl_rps=43.3 panel_fps=42.27 mem_free=2392832 min_free=2382992 allocs=121000 errors=0 touch_errors=0
+SOAK DONE t=900s lvgl_rps=43.3 panel_fps=42.28 min_free=2382992 allocs=129600 errors=0 touch_errors=0
+RESULT: ok
+
+=== tlsf
+Hash of data verified.
+--- layouts run 1
+FW 0fd6c573ea on 2026-11-07 free 4511152 res 480 480
+fresh      alloc_us=80.1 labels50_ms=27.8 refresh_med=70.9 max=81.3 collect_med=15.8
+one-hole   alloc_us=131.2 labels50_ms=27.4 refresh_med=70.8 max=71.5 collect_med=121.8
+many-holes alloc_us=4179.1 labels50_ms=37.7 refresh_med=70.8 max=76.2 collect_med=122.4
+--- layouts run 2
+FW 0fd6c573ea on 2026-11-07 free 4511152 res 480 480
+fresh      alloc_us=80.1 labels50_ms=27.8 refresh_med=70.9 max=81.3 collect_med=15.8
+one-hole   alloc_us=131.2 labels50_ms=27.4 refresh_med=70.8 max=71.2 collect_med=121.8
+many-holes alloc_us=4180.2 labels50_ms=37.3 refresh_med=70.8 max=81.5 collect_med=122.4
+--- t05_perf
+full refresh us: min 82791 avg 93055
+label change us: min 4132 avg 22872
+animation: LVGL 54.3 refreshes/s, panel 42.30 fps
+mem_free 4510336
+RESULT: ok
+--- t07_audio
+beep   returned in 2 ms, lasted 299 ms, LVGL 53.5/s, longest gap 25 ms
+mono   returned in 7 ms, lasted 1217 ms, LVGL 55.1/s, longest gap 25 ms
+stereo returned in 6 ms, lasted 1114 ms, LVGL 55.7/s, longest gap 25 ms
+cut    returned in 10 ms, lasted 512 ms, LVGL 56.6/s, longest gap 24 ms
+beep   returned in 2 ms, lasted 267 ms, LVGL 56.2/s, longest gap 25 ms
+beep   returned in 2 ms, lasted 264 ms, LVGL 53.0/s, longest gap 25 ms
+beep   returned in 2 ms, lasted 263 ms, LVGL 53.2/s, longest gap 24 ms
+bad file: not a WAV file
+RESULT: ok
+--- t06_wifi
+
+== tests/hil/esp32/t06_wifi.py (2/2)
+no wifi    LVGL 54.6/s, panel 42.30 fps, longest gap 25 ms, internal block 128 KB
+connect ms 3925 rssi -66 channel 2
+connected  LVGL 55.5/s, panel 42.30 fps, longest gap 25 ms, internal block 88 KB
+blocking   LVGL 37.8/s, panel 42.26 fps, longest gap 149 ms, internal block 88 KB, 3.11 Mbit/s (3848 KB)
+tcp_source: 3904 KB sent, [Errno 104] Connection reset by peer
+tcp_source: 2896 KB sent, [Errno 104] Connection reset by peer
+non-block  LVGL 52.0/s, panel 42.23 fps, longest gap 217 ms, internal block 80 KB, 2.33 Mbit/s (2842 KB)
+tcp_source: 3232 KB sent, [Errno 104] Connection reset by peer
+blocking   LVGL 35.5/s, panel 42.33 fps, longest gap 239 ms, internal block 88 KB, 2.55 Mbit/s (3172 KB)
+non-block  LVGL 53.2/s, panel 42.27 fps, longest gap 112 ms, internal block 84 KB, 2.19 Mbit/s (2676 KB)
+tcp_source: 2720 KB sent, [Errno 32] Broken pipe
+tcp_source: 3296 KB sent, [Errno 104] Connection reset by peer
+blocking   LVGL 36.5/s, panel 42.28 fps, longest gap 121 ms, internal block 88 KB, 2.63 Mbit/s (3244 KB)
+tcp_source: 3872 KB sent, [Errno 32] Broken pipe
+non-block  LVGL 54.0/s, panel 42.23 fps, longest gap 87 ms, internal block 84 KB, 3.13 Mbit/s (3818 KB)
+connected  LVGL 54.3/s, panel 42.28 fps, longest gap 25 ms, internal block 88 KB
+reconnect ms 3778
+http ms 92 b'HTTP/1.1 200 OK\r\n'
+wifi off   LVGL 55.3/s, panel 42.30 fps, longest gap 26 ms, internal block 88 KB
+mem_free 4507936
+RESULT: ok
+--- t05_soak
+t=    0s lvgl_rps=12.6 panel_fps=50.21 mem_free=2420960 min_free=2421120 allocs=40 errors=0 touch_errors=0
+t=   60s lvgl_rps=43.2 panel_fps=42.27 mem_free=2388832 min_free=2382992 allocs=8680 errors=0 touch_errors=0
+t=  120s lvgl_rps=43.3 panel_fps=42.27 mem_free=2396832 min_free=2382992 allocs=17320 errors=0 touch_errors=0
+t=  180s lvgl_rps=43.2 panel_fps=42.27 mem_free=2384832 min_free=2382992 allocs=25960 errors=0 touch_errors=0
+t=  240s lvgl_rps=43.2 panel_fps=42.28 mem_free=2392832 min_free=2382992 allocs=34600 errors=0 touch_errors=0
+t=  300s lvgl_rps=43.3 panel_fps=42.26 mem_free=2400880 min_free=2382992 allocs=43240 errors=0 touch_errors=0
+t=  360s lvgl_rps=43.4 panel_fps=42.28 mem_free=2388832 min_free=2382992 allocs=51880 errors=0 touch_errors=0
+t=  420s lvgl_rps=43.3 panel_fps=42.26 mem_free=2396832 min_free=2382992 allocs=60520 errors=0 touch_errors=0
+t=  480s lvgl_rps=43.3 panel_fps=42.29 mem_free=2384832 min_free=2382992 allocs=69160 errors=0 touch_errors=0
+t=  540s lvgl_rps=43.3 panel_fps=42.26 mem_free=2392832 min_free=2382992 allocs=77800 errors=0 touch_errors=0
+t=  600s lvgl_rps=43.3 panel_fps=42.28 mem_free=2400880 min_free=2382992 allocs=86440 errors=0 touch_errors=0
+t=  660s lvgl_rps=43.4 panel_fps=42.27 mem_free=2388832 min_free=2382992 allocs=95080 errors=0 touch_errors=0
+t=  720s lvgl_rps=43.1 panel_fps=42.28 mem_free=2396832 min_free=2382992 allocs=103720 errors=0 touch_errors=0
+t=  780s lvgl_rps=43.3 panel_fps=42.27 mem_free=2384832 min_free=2382992 allocs=112360 errors=0 touch_errors=0
+t=  840s lvgl_rps=43.2 panel_fps=42.27 mem_free=2392832 min_free=2382992 allocs=121000 errors=0 touch_errors=0
+SOAK DONE t=900s lvgl_rps=43.3 panel_fps=42.28 min_free=2382992 allocs=129600 errors=0 touch_errors=0
+RESULT: ok

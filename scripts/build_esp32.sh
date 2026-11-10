@@ -12,8 +12,11 @@
 #              (default: the one already exported, else /opt/devel/espressif/v$IDF_VER/esp-idf)
 #   IDF_TOOLS_PATH  passed to ESP-IDF if set
 #   JOBS       parallel jobs (default: nproc)
+#   LVMP_POOLS LVGL's memory pools (modules/esp32_usermods.cmake): empty for ESP-IDF's
+#              multi_heap, "tlsf" for LVGL's TLSF, "none" for no pools. Not empty: its own
+#              build directory and output name (-tlsf, -nopool).
 #
-# Output: dist/<BOARD>-<this repo commit>.bin, to write at offset 0, and its .sha256.
+# Output: dist/<BOARD>[-tlsf|-nopool]-<this repo commit>.bin, to write at offset 0, and its .sha256.
 set -euo pipefail
 
 # --- pins (bump together, then re-run the hardware tests: docs/) ---
@@ -21,7 +24,7 @@ MPY_URL=https://github.com/micropython/micropython.git
 MPY_REF=v1.29.0
 MPY_SHA=0fd6c573ea815774668bbb16b8e197c8822368b2
 OPL_URL=https://github.com/PyDevices/omnipython-lvgl.git
-OPL_SHA=92f8c0a493fa71bccc151b78f9a451f64ed78a18
+OPL_SHA=0886d385c46b50b22475cef095dffe205ad0dd85
 IDF_VER=5.5.2
 
 log() { printf '\n== %s\n' "$*"; }
@@ -66,18 +69,26 @@ idf.py --version
 
 MPY=$WORK_DIR/micropython
 export OMNIPYTHON_LVGL_DIR=$WORK_DIR/omnipython-lvgl
-MAKE_ARGS=(BOARD_DIR="$BOARD_DIR" USER_C_MODULES="$REPO/modules/esp32_usermods.cmake")
+case ${LVMP_POOLS:-} in
+    "") NAME=$BOARD ;;
+    tlsf) NAME=$BOARD-tlsf ;;
+    none) NAME=$BOARD-nopool ;;
+    *) die "LVMP_POOLS: empty, tlsf or none, not $LVMP_POOLS" ;;
+esac
+export LVMP_POOLS=${LVMP_POOLS:-}
+MAKE_ARGS=(BOARD_DIR="$BOARD_DIR" BUILD="build-$NAME"
+    USER_C_MODULES="$REPO/modules/esp32_usermods.cmake")
 log "submodules"
 make -C "$MPY/ports/esp32" "${MAKE_ARGS[@]}" submodules >/dev/null
 log "mpy-cross"
 make -C "$MPY/mpy-cross" -j"$JOBS" >/dev/null
-log "firmware $BOARD"
+log "firmware $NAME"
 make -C "$MPY/ports/esp32" "${MAKE_ARGS[@]}" -j"$JOBS"
 
 REV=$(git -C "$REPO" describe --always --dirty 2>/dev/null || echo unknown)
-out=$BOARD-$REV.bin
+out=$NAME-$REV.bin
 mkdir -p "$REPO/dist"
-cp "$MPY/ports/esp32/build-$BOARD/firmware.bin" "$REPO/dist/$out"
+cp "$MPY/ports/esp32/build-$NAME/firmware.bin" "$REPO/dist/$out"
 (cd "$REPO/dist" && sha256sum "$out" > "$out.sha256")
 log "done"
 echo "$REPO/dist/$out"
