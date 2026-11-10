@@ -26,6 +26,9 @@
 #   FROZEN_MANIFEST   passed to make if set (e.g. a board's manifest_nolvgl.py); a
 #                     manifest other than the board's manifest.py adds its name to the
 #                     build directory and the output (manifest_nolvgl.py: -nolvgl).
+#   LVMP_POOLS        stm32: "none" builds LVGL without the pools of
+#                     boards/stm32/lvgl_pool.mk, for comparisons; adds -nopool to the
+#                     build directory and the output.
 #
 # Output: dist/<BOARD>[-<VARIANT>]-<this repo commit>.<ext> and .sha256 files
 # (rp2: .uf2; stm32: .dfu and .hex).
@@ -206,6 +209,8 @@ if [[ -n $FROZEN && $FROZEN != "$BOARD_DIR/manifest.py" ]]; then
     m=$(basename "$FROZEN" .py)
     NAME=$NAME-${m#manifest_}
 fi
+# LVMP_POOLS=none (stm32): LVGL without the pools of boards/stm32/lvgl_pool.mk.
+[[ ${LVMP_POOLS:-} == none && $PORT == stm32 ]] && NAME=$NAME-nopool
 BUILD=build-$NAME
 MAKE_ARGS=(BOARD_DIR="$BOARD_DIR" BUILD="$BUILD")
 [[ -n $VARIANT ]] && MAKE_ARGS+=(BOARD_VARIANT="$VARIANT")
