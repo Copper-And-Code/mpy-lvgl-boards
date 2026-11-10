@@ -22,10 +22,9 @@
 #define MICROPY_HW_RGB_SPI_SCK              (48)
 #define MICROPY_HW_RGB_SPI_MOSI             (47)
 
-// LVGL's memory pools (modules/esp32_usermods.cmake). lvmp_pool.h takes them on ESP32 only
-// with MICROPY_MALLOC_USES_ALLOCATED_SIZE, which the esp32 port leaves at 0; LVMP_POOL_TLSF
-// turns them on anyway, and with ESP_PLATFORM they use ESP-IDF's multi_heap. Here, not in
-// the cmake file, so that the scan for root pointers sees it too. LVMP_POOLS=none sets 0.
+// LVGL's memory pools (omnipython-lvgl#15): LVGL's allocations in TLSF pools held in GC
+// blocks, so they do not walk the GC heap. Here, not in the cmake file, so that the scan for
+// root pointers sees it too. LVMP_POOLS=none (scripts/build_esp32.sh) sets 0.
 #ifndef LVMP_POOL_TLSF
 #define LVMP_POOL_TLSF (1)
 #endif

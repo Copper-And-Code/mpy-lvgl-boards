@@ -12,11 +12,10 @@
 #              (default: the one already exported, else /opt/devel/espressif/v$IDF_VER/esp-idf)
 #   IDF_TOOLS_PATH  passed to ESP-IDF if set
 #   JOBS       parallel jobs (default: nproc)
-#   LVMP_POOLS LVGL's memory pools (modules/esp32_usermods.cmake): empty for ESP-IDF's
-#              multi_heap, "tlsf" for LVGL's TLSF, "none" for no pools. Not empty: its own
-#              build directory and output name (-tlsf, -nopool).
+#   LVMP_POOLS "none" builds without LVGL's memory pools (modules/esp32_usermods.cmake),
+#              for comparisons, in its own build directory, output name -nopool.
 #
-# Output: dist/<BOARD>[-tlsf|-nopool]-<this repo commit>.bin, to write at offset 0, and its .sha256.
+# Output: dist/<BOARD>[-nopool]-<this repo commit>.bin, to write at offset 0, and its .sha256.
 set -euo pipefail
 
 # --- pins (bump together, then re-run the hardware tests: docs/) ---
@@ -24,7 +23,7 @@ MPY_URL=https://github.com/micropython/micropython.git
 MPY_REF=v1.29.0
 MPY_SHA=0fd6c573ea815774668bbb16b8e197c8822368b2
 OPL_URL=https://github.com/PyDevices/omnipython-lvgl.git
-OPL_SHA=0886d385c46b50b22475cef095dffe205ad0dd85
+OPL_SHA=c34fbeeb0440e71acb62c92ddee1c3c65d089622
 IDF_VER=5.5.2
 
 log() { printf '\n== %s\n' "$*"; }
@@ -71,9 +70,8 @@ MPY=$WORK_DIR/micropython
 export OMNIPYTHON_LVGL_DIR=$WORK_DIR/omnipython-lvgl
 case ${LVMP_POOLS:-} in
     "") NAME=$BOARD ;;
-    tlsf) NAME=$BOARD-tlsf ;;
     none) NAME=$BOARD-nopool ;;
-    *) die "LVMP_POOLS: empty, tlsf or none, not $LVMP_POOLS" ;;
+    *) die "LVMP_POOLS: empty or none, not $LVMP_POOLS" ;;
 esac
 export LVMP_POOLS=${LVMP_POOLS:-}
 MAKE_ARGS=(BOARD_DIR="$BOARD_DIR" BUILD="build-$NAME"
