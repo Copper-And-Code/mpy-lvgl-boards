@@ -11,6 +11,12 @@ include $(BOARD_DIR)/../lvgl_libm.mk
 include $(BOARD_DIR)/../lvgl_pool.mk
 AF_FILE = boards/stm32h743_af.csv
 
+# GC_HEAP=axi: the GC heap in the AXI SRAM (about 450 KB) instead of the SDRAM, for
+# measurements with a small heap; the framebuffers stay in the SDRAM.
+ifeq ($(GC_HEAP),axi)
+CFLAGS += -DMICROPY_HW_GC_HEAP_AXI=1
+endif
+
 ifeq ($(USE_MBOOT),1)
 # When using Mboot everything goes after the bootloader
 LD_FILES = $(BOARD_DIR)/stm32h743.ld boards/common_bl.ld

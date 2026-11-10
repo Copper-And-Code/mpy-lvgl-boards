@@ -1,0 +1,37 @@
+# STM32H7_CORE V1.0, IPS1024x600, 2026-11-10, omnipython-lvgl c34fbee.
+# The layout script of omnipython-lvgl PR #6 with PAD = 128 (128 x 2 KB = 256 KB instead of 2 MB),
+# multimer.hold() replaced by display_driver.stop()/start(). Hard reset before each run.
+# The GC heap in the AXI SRAM, 490 KB (GC_HEAP=axi, framebuffers still in SDRAM), with and without pools:
+#   pools:  GC_HEAP=axi scripts/build.sh stm32 STM32H7_CORE V10
+#   none:   GC_HEAP=axi LVMP_POOLS=none scripts/build.sh stm32 STM32H7_CORE V10
+# and, for reference, the same script on the usual build (pools, 28 MB heap in SDRAM).
+--- nopool-axi run 1
+FW 0fd6c573ea on 2026-11-10 free 461968 res 1024 600
+fresh      alloc_us=117.0 labels50_ms=12.3 refresh_med=51.4 max=61.8 collect_med=1.4
+one-hole   alloc_us=17.9 labels50_ms=13.5 refresh_med=85.6 max=85.9 collect_med=4.9
+many-holes alloc_us=61.6 labels50_ms=12.1 refresh_med=85.7 max=93.0 collect_med=4.8
+--- nopool-axi run 2
+FW 0fd6c573ea on 2026-11-10 free 461968 res 1024 600
+fresh      alloc_us=117.1 labels50_ms=12.3 refresh_med=51.4 max=61.7 collect_med=1.4
+one-hole   alloc_us=17.9 labels50_ms=13.5 refresh_med=85.6 max=85.8 collect_med=4.9
+many-holes alloc_us=61.7 labels50_ms=12.1 refresh_med=85.7 max=93.0 collect_med=4.8
+--- pools-axi run 1
+FW 0fd6c573ea on 2026-11-10 free 436224 res 1024 600
+fresh      alloc_us=123.0 labels50_ms=12.6 refresh_med=51.4 max=58.2 collect_med=2.0
+one-hole   alloc_us=9.2 labels50_ms=12.6 refresh_med=51.4 max=54.8 collect_med=5.5
+many-holes alloc_us=65.1 labels50_ms=12.6 refresh_med=51.4 max=57.3 collect_med=5.5
+--- pools-axi run 2
+FW 0fd6c573ea on 2026-11-10 free 436224 res 1024 600
+fresh      alloc_us=123.0 labels50_ms=12.6 refresh_med=51.4 max=58.2 collect_med=2.0
+one-hole   alloc_us=9.1 labels50_ms=12.6 refresh_med=51.4 max=54.8 collect_med=5.5
+many-holes alloc_us=65.1 labels50_ms=12.6 refresh_med=51.4 max=57.3 collect_med=5.5
+--- pools-sdram-pad128 run 1
+FW 0fd6c573ea on 2026-11-10 free 28644800 res 1024 600
+fresh      alloc_us=111.7 labels50_ms=15.5 refresh_med=68.6 max=68.6 collect_med=33.4
+one-hole   alloc_us=13.2 labels50_ms=15.7 refresh_med=68.6 max=68.7 collect_med=40.5
+many-holes alloc_us=70.0 labels50_ms=15.7 refresh_med=68.6 max=68.7 collect_med=39.7
+--- pools-sdram-pad128 run 2
+FW 0fd6c573ea on 2026-11-10 free 28644800 res 1024 600
+fresh      alloc_us=111.6 labels50_ms=15.5 refresh_med=68.6 max=68.7 collect_med=33.4
+one-hole   alloc_us=13.2 labels50_ms=15.7 refresh_med=68.6 max=68.7 collect_med=40.5
+many-holes alloc_us=70.0 labels50_ms=15.7 refresh_med=68.6 max=68.7 collect_med=39.7

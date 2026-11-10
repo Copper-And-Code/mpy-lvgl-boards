@@ -177,8 +177,14 @@ extern struct _spi_bdev_t spi_bdev;
 #define MICROPY_HW_SDRAM_SIZE               (32 * 1024 * 1024)  // 32MB
 #define MICROPY_HW_SDRAM_STARTUP_TEST       (1)
 #define MICROPY_HW_SDRAM_TEST_FAIL_ON_ERROR (1)
+#if defined(MICROPY_HW_GC_HEAP_AXI) && MICROPY_HW_GC_HEAP_AXI
+// GC_HEAP=axi (mpconfigboard.mk): the heap in the AXI SRAM, as without SDRAM.
+#define MICROPY_HEAP_START  (&_heap_start)
+#define MICROPY_HEAP_END    (&_heap_end)
+#else
 #define MICROPY_HEAP_START  ((sdram_valid) ? sdram_start() : &_heap_start)
 #define MICROPY_HEAP_END    ((sdram_valid) ? (void *)((uint8_t *)sdram_end() - MICROPY_HW_LTDC_FB_BYTES) : &_heap_end)
+#endif
 
 // Timing configuration for SDRAM @120Mhz
 #define MICROPY_HW_SDRAM_TIMING_TMRD        (2)

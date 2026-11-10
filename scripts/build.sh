@@ -30,6 +30,8 @@
 #   LVMP_POOLS        stm32: "none" builds LVGL without the pools of
 #                     boards/stm32/lvgl_pool.mk, for comparisons; adds -nopool to the
 #                     build directory and the output.
+#   GC_HEAP           STM32H7_CORE: "axi" puts the GC heap in the AXI SRAM instead of
+#                     the SDRAM, for small-heap measurements; adds -axi.
 #
 # Output: dist/<BOARD>[-<VARIANT>]-<this repo commit>.<ext> and .sha256 files
 # (rp2: .uf2; stm32: .dfu and .hex).
@@ -235,6 +237,8 @@ if [[ -n $FROZEN && $FROZEN != "$BOARD_DIR/manifest.py" ]]; then
 fi
 # LVMP_POOLS=none (stm32): LVGL without the pools of boards/stm32/lvgl_pool.mk.
 [[ ${LVMP_POOLS:-} == none && $PORT == stm32 ]] && NAME=$NAME-nopool
+# GC_HEAP=axi (STM32H7_CORE): the GC heap in the AXI SRAM, see its mpconfigboard.mk.
+[[ ${GC_HEAP:-} == axi && $PORT == stm32 ]] && NAME=$NAME-axi
 BUILD=build-$NAME
 MAKE_ARGS=(BOARD_DIR="$BOARD_DIR" BUILD="$BUILD")
 [[ -n $VARIANT ]] && MAKE_ARGS+=(BOARD_VARIANT="$VARIANT")
