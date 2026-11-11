@@ -1,0 +1,412 @@
+# omnipython-lvgl 665dec5 (#19, LVGL asserts: file base name and line, noreturn) on every board, 2026-11-11.
+# Images of this tree (scripts/build*.sh at 665dec5), flashed with DFU from machine.bootloader() (DEV: BOOT + RESET),
+# picotool on the RP2350, esptool on the ESP32. scratch/assert_test.py: display.set_tile_cnt(256) must raise
+# RuntimeError and LVGL must keep running. SD checks read only (pyb.SDCard().readblocks, file reads).
+# The V1.0 card's file names are left out; 31 of them are not UTF-8, os.ilistdir needs bytes paths there.
+
+######## esp32-665dec5-quick
+
+== tests/hil/esp32/t03_panel.py (1/3)
+info: {'buffers': 2, 'pclk': 12000000, 'backlight': 100, 'frames': 162, 'fb_addr': 1009387840, 'fps_nominal': 42.273764, 'shown': 1, 'height': 480, 'width': 480, 'running': True}
+bars drawn in 15524 ms
+swap: True
+frames 211 in 5000 ms -> 42.20 fps (nominal 42.27)
+wrote 200 KB in 3243 ms, frames 137
+RESULT: ok
+== tests/hil/esp32/t05_perf.py (2/3)
+full refresh us: min 88595 avg 93714
+label change us: min 4525 avg 23403
+animation: LVGL 54.2 refreshes/s, panel 42.30 fps
+mem_free 4162160
+RESULT: ok
+== scratch/assert_test.py (3/3)
+caught: LVGL assert failed at lv_display.c:614
+lvgl alive after assert
+
+######## fk-665dec5-quick
+
+== tests/hil/stm32/t01_board.py (1/3)
+uname: (sysname='pyboard', nodename='pyboard', release='1.29.0', version='0fd6c573ea on 2026-11-11', machine='FK743M5-XIH6 with STM32H743')
+ok   known board FK743M5-XIH6 with STM32H743
+freq: (480000000, 240000000, 120000000, 120000000)
+ok   cpu 480 MHz 
+ok   heap in SDRAM total 28687744 free 28678992
+ok   QSPI fs size 8368128 bytes (expected about 8 MB)
+mounts: ['flash', 'sd']
+ok   SD mounted 7974522880 bytes
+LED1 blinked 3 times
+touch i2c: SoftI2C(scl=G3, sda=G7, freq=500000) ['0x5d']
+ok   GT911 on touch bus 
+ok   GT911 product id b'911\x00'
+
+ID=44002f00:03513331:31333634
+DEVID=0x0450
+REVID=0x2003
+S=480000000
+H=240000000
+P1=120000000
+P2=120000000
+_etext=8119ccc
+_sidata=8119cd4
+_sdata=24000000
+_edata=2400051c
+_sbss=2400051c
+_ebss=2400442c
+_sstack=2407bff8
+_estack=2407fff8
+_ram_start=24000000
+_heap_start=2400442c
+_heap_end=2407bff8
+_ram_end=24080000
+qstr:
+  n_pool=2
+  n_qstr=30
+  n_str_data_bytes=195
+  n_total_bytes=675
+GC:
+  28687744 total
+  10448 : 28677296
+  1=87 2=36 m=233
+SPI flash size: 8388608
+QSPI flash size: 8388608
+LFS free: 8269824 bytes
+
+RESULT: all 7 checks ok
+== tests/hil/stm32/t05_perf.py (2/3)
+panel IPS1024x600 board FK743M5-XIH6 freq (480000000, 240000000, 120000000, 120000000)
+driver QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+off    loop  221 ms  alloc  300 ms  copy   74 MB/s  gc 111 ms  underruns 0
+qos    loop  220 ms  alloc  304 ms  copy   49 MB/s  gc 138 ms  underruns 0
+noqos  loop  220 ms  alloc  303 ms  copy   49 MB/s  gc 134 ms  underruns 0
+qos    vs off: loop -1%  alloc +1%  copy -34%  gc +24%
+noqos  vs off: loop -1%  alloc +1%  copy -34%  gc +20%
+DIRECT 2 buf  full refr min  52376 avg  64387 us   label min  6654 avg 17927 us   underruns 0
+DIRECT 1 buf  full refr min  51693 avg  51904 us   label min   911 avg  1172 us   underruns 0
+PARTIAL 60    full refr min  86052 avg  87157 us   label min   921 avg  1214 us   underruns 0
+PARTIAL 200   full refr min  77426 avg  78341 us   label min   945 avg  1213 us   underruns 0
+end QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+mem_free 26472048
+== scratch/assert_test_stm.py (3/3)
+caught: LVGL assert failed at lv_display.c:614
+lvgl alive after assert
+
+######## v13-665dec5-quick
+
+== scratch/sd_ro.py (1/4)
+0fd6c573ea on 2026-11-11 STM32H7_CORE V1.3 with STM32H743
+root ['flash']
+no /sd
+== tests/hil/stm32/t01_board.py (2/4)
+uname: (sysname='pyboard', nodename='pyboard', release='1.29.0', version='0fd6c573ea on 2026-11-11', machine='STM32H7_CORE V1.3 with STM32H743')
+ok   known board STM32H7_CORE V1.3 with STM32H743
+freq: (480000000, 240000000, 120000000, 120000000)
+ok   cpu 480 MHz 
+ok   heap in SDRAM total 28687744 free 28679456
+ok   QSPI fs size 16742400 bytes (expected about 16 MB)
+mounts: ['flash']
+note SD not mounted: card inserted? (not counted as a failure)
+LED1 blinked 3 times
+LED2 blinked 3 times
+touch i2c: SoftI2C(scl=B12, sda=B13, freq=500000) ['0x5d']
+ok   GT911 on touch bus 
+ok   GT911 product id b'911\x00'
+
+ID=2e004100:09513330:35333736
+DEVID=0x0450
+REVID=0x2003
+S=480000000
+H=240000000
+P1=120000000
+P2=120000000
+_etext=8119a30
+_sidata=8119a38
+_sdata=24000000
+_edata=2400051c
+_sbss=2400051c
+_ebss=24004430
+_sstack=2407bff8
+_estack=2407fff8
+_ram_start=24000000
+_heap_start=24004430
+_heap_end=2407bff8
+_ram_end=24080000
+qstr:
+  n_pool=2
+  n_qstr=40
+  n_str_data_bytes=257
+  n_total_bytes=737
+GC:
+  28687744 total
+  9696 : 28678048
+  1=83 2=32 m=233
+SPI flash size: 16777216
+QSPI flash size: 16777216
+LFS free: 16173056 bytes
+
+RESULT: all 6 checks ok
+== tests/hil/stm32/t05_perf.py (3/4)
+panel IPS1024x600 board STM32H7_CORE V1.3 freq (480000000, 240000000, 120000000, 120000000)
+driver QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+off    loop  222 ms  alloc  301 ms  copy   74 MB/s  gc 112 ms  underruns 0
+qos    loop  220 ms  alloc  306 ms  copy   49 MB/s  gc 134 ms  underruns 0
+noqos  loop  220 ms  alloc  305 ms  copy   49 MB/s  gc 132 ms  underruns 0
+qos    vs off: loop -1%  alloc +1%  copy -34%  gc +19%
+noqos  vs off: loop -1%  alloc +1%  copy -34%  gc +17%
+DIRECT 2 buf  full refr min  51553 avg  61248 us   label min  6686 avg 17941 us   underruns 0
+DIRECT 1 buf  full refr min  51875 avg  51949 us   label min   906 avg  1173 us   underruns 0
+PARTIAL 60    full refr min  85867 avg  86841 us   label min   826 avg  1201 us   underruns 0
+PARTIAL 200   full refr min  76957 avg  77536 us   label min   932 avg  1207 us   underruns 0
+end QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+mem_free 26472720
+== scratch/assert_test_stm.py (4/4)
+caught: LVGL assert failed at lv_display.c:614
+lvgl alive after assert
+
+######## v13-sd-665dec5
+
+== scratch/sd_diag.py (1/3)
+present True
+power True
+info (15634268160, 512, 1)
+readblocks 0 sig 0x55 0xaa
+== scratch/sd_ro.py (2/3)
+0fd6c573ea on 2026-11-11 STM32H7_CORE V1.3 with STM32H743
+root ['flash', 'sd']
+sd size 15625879552 free 15625846784
+== tests/hil/stm32/t01_board.py (3/3)
+uname: (sysname='pyboard', nodename='pyboard', release='1.29.0', version='0fd6c573ea on 2026-11-11', machine='STM32H7_CORE V1.3 with STM32H743')
+ok   known board STM32H7_CORE V1.3 with STM32H743
+freq: (480000000, 240000000, 120000000, 120000000)
+ok   cpu 480 MHz 
+ok   heap in SDRAM total 28687792 free 28677376
+ok   QSPI fs size 16742400 bytes (expected about 16 MB)
+mounts: ['flash', 'sd']
+ok   SD mounted 15625879552 bytes
+LED1 blinked 3 times
+LED2 blinked 3 times
+touch i2c: SoftI2C(scl=B12, sda=B13, freq=500000) ['0x5d']
+ok   GT911 on touch bus 
+ok   GT911 product id b'911\x00'
+
+ID=2e004100:09513330:35333736
+DEVID=0x0450
+REVID=0x2003
+S=480000000
+H=240000000
+P1=120000000
+P2=120000000
+_etext=8119a30
+_sidata=8119a38
+_sdata=24000000
+_edata=2400051c
+_sbss=2400051c
+_ebss=24004430
+_sstack=2407bff8
+_estack=2407fff8
+_ram_start=24000000
+_heap_start=24004430
+_heap_end=2407bff8
+_ram_end=24080000
+qstr:
+  n_pool=2
+  n_qstr=40
+  n_str_data_bytes=251
+  n_total_bytes=731
+GC:
+  28687744 total
+  12144 : 28675600
+  1=94 2=38 m=233
+SPI flash size: 16777216
+QSPI flash size: 16777216
+LFS free: 16173056 bytes
+
+RESULT: all 7 checks ok
+read 0 KB chunks: 1.97 MB/s (512 B)
+read 32 KB chunks: 12.51 MB/s 
+
+######## v10-665dec5-quick
+
+== scratch/sd_diag.py (1/6)
+present True
+power True
+info (4026531840, 512, 1)
+readblocks 0 sig 0x55 0xaa
+== scratch/sd_ro.py (2/6)
+0fd6c573ea on 2026-11-11 STM32H7_CORE V1.0 with STM32H743
+root ['flash', 'sd']
+sd size 4017618944 free 1488969728
+Traceback (most recent call last):
+  File "<stdin>", line 16, in <module>
+  File "<stdin>", line 13, in walk
+  File "<stdin>", line 10, in walk
+UnicodeError: 
+== scratch/sd_speed.py (3/6)
+read 0 KB chunks: 0.86 MB/s (512 B)
+read 32 KB chunks: 8.74 MB/s 
+== tests/hil/stm32/t01_board.py (4/6)
+uname: (sysname='pyboard', nodename='pyboard', release='1.29.0', version='0fd6c573ea on 2026-11-11', machine='STM32H7_CORE V1.0 with STM32H743')
+ok   known board STM32H7_CORE V1.0 with STM32H743
+freq: (480000000, 240000000, 120000000, 120000000)
+ok   cpu 480 MHz 
+ok   heap in SDRAM total 28687808 free 28643824
+ok   QSPI fs size 16742400 bytes (expected about 16 MB)
+mounts: ['flash', 'sd']
+ok   SD mounted 4017618944 bytes
+LED1 blinked 3 times
+touch i2c: I2C(4, scl=D12, sda=D13, freq=1071428, timingr=0x70330309) ['0x5d']
+ok   GT911 on touch bus 
+ok   GT911 product id b'911\x00'
+
+ID=38003800:10513330:34373137
+DEVID=0x0450
+REVID=0x2003
+S=480000000
+H=240000000
+P1=120000000
+P2=120000000
+_etext=8119924
+_sidata=811992c
+_sdata=24000000
+_edata=2400051c
+_sbss=2400051c
+_ebss=2400442c
+_sstack=2407bff8
+_estack=2407fff8
+_ram_start=24000000
+_heap_start=2400442c
+_heap_end=2407bff8
+_ram_end=24080000
+qstr:
+  n_pool=2
+  n_qstr=43
+  n_str_data_bytes=268
+  n_total_bytes=748
+GC:
+  28687744 total
+  45568 : 28642176
+  1=113 2=48 m=2048
+SPI flash size: 16777216
+QSPI flash size: 16777216
+LFS free: 16431104 bytes
+
+RESULT: all 7 checks ok
+== tests/hil/stm32/t05_perf.py (5/6)
+panel IPS1024x600 board STM32H7_CORE V1.0 freq (480000000, 240000000, 120000000, 120000000)
+driver QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+off    loop  220 ms  alloc  306 ms  copy   74 MB/s  gc 112 ms  underruns 0
+qos    loop  220 ms  alloc  310 ms  copy   49 MB/s  gc 136 ms  underruns 0
+noqos  loop  220 ms  alloc  308 ms  copy   49 MB/s  gc 134 ms  underruns 0
+qos    vs off: loop +0%  alloc +1%  copy -34%  gc +21%
+noqos  vs off: loop +0%  alloc +0%  copy -34%  gc +19%
+DIRECT 2 buf  full refr min  52213 avg  64930 us   label min  6764 avg 17938 us   underruns 0
+DIRECT 1 buf  full refr min  51529 avg  51575 us   label min   930 avg  1177 us   underruns 0
+PARTIAL 60    full refr min  85956 avg  86716 us   label min   956 avg  1222 us   underruns 0
+PARTIAL 200   full refr min  77162 avg  77927 us   label min   946 avg  1217 us   underruns 0
+end QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+mem_free 26437024
+== scratch/assert_test_stm.py (6/6)
+caught: LVGL assert failed at lv_display.c:614
+lvgl alive after assert
+names not utf-8: 31 largest file 18219135 bytes
+file read: 4194304 bytes in 970 ms -> 4.12 MB/s
+
+######## dev-665dec5-quick
+
+== tests/hil/stm32/t01_board.py (1/3)
+uname: (sysname='pyboard', nodename='pyboard', release='1.29.0', version='0fd6c573ea on 2026-11-11', machine='DEV190806042 with STM32H743')
+ok   known board DEV190806042 with STM32H743
+freq: (480000000, 240000000, 120000000, 120000000)
+ok   cpu 480 MHz 
+ok   heap in SDRAM total 28687744 free 28679664
+ok   QSPI fs size 33517568 bytes (expected about 32 MB)
+mounts: ['flash']
+LED1 blinked 3 times
+touch i2c: SoftI2C(scl=H6, sda=G7, freq=500000) ['0x5d']
+ok   GT911 on touch bus 
+ok   GT911 product id b'911\x00'
+
+ID=1c003a00:0c513330:37343838
+DEVID=0x0450
+REVID=0x2003
+S=480000000
+H=240000000
+P1=120000000
+P2=120000000
+_etext=81180a4
+_sidata=81180ac
+_sdata=24000000
+_edata=2400051c
+_sbss=2400051c
+_ebss=240043b0
+_sstack=2407bff8
+_estack=2407fff8
+_ram_start=24000000
+_heap_start=240043b0
+_heap_end=2407bff8
+_ram_end=24080000
+qstr:
+  n_pool=2
+  n_qstr=32
+  n_str_data_bytes=211
+  n_total_bytes=691
+GC:
+  28687744 total
+  9328 : 28678416
+  1=75 2=30 m=233
+SPI flash size: 33554432
+QSPI flash size: 33554432
+LFS free: 33501184 bytes
+
+RESULT: all 6 checks ok
+== tests/hil/stm32/t05_perf.py (2/3)
+panel IPS1024x600 board DEV190806042 freq (480000000, 240000000, 120000000, 120000000)
+driver QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+off    loop  221 ms  alloc  296 ms  copy  111 MB/s  gc 105 ms  underruns 0
+qos    loop  221 ms  alloc  296 ms  copy   91 MB/s  gc 113 ms  underruns 0
+noqos  loop  222 ms  alloc  296 ms  copy   92 MB/s  gc 112 ms  underruns 0
+qos    vs off: loop +0%  alloc +0%  copy -19%  gc +7%
+noqos  vs off: loop +0%  alloc +0%  copy -18%  gc +6%
+DIRECT 2 buf  full refr min  38366 avg  47075 us   label min  2472 avg 16916 us   underruns 0
+DIRECT 1 buf  full refr min  37966 avg  38256 us   label min   742 avg   985 us   underruns 0
+PARTIAL 60    full refr min  60906 avg  61010 us   label min   770 avg  1002 us   underruns 0
+PARTIAL 200   full refr min  52463 avg  52481 us   label min   765 avg  1004 us   underruns 0
+end QoS: INI5_READ_QOS=e INI2_READ_QOS=0 TARG5_FN_MOD_ISS_BM=1 INI5_WRITE_QOS=e INI2_WRITE_QOS=0 INI6_READ_QOS=f INI6_WRITE_QOS=f
+mem_free 26472784
+== scratch/assert_test_stm.py (3/3)
+caught: LVGL assert failed at lv_display.c:614
+lvgl alive after assert
+
+######## rp2350-665dec5-quick
+
+== tests/hil/t01_board.py (1/5)
+uname: (sysname='rp2', nodename='rp2', release='1.29.0', version='0fd6c573ea on 2026-11-11 (GNU 15.2.1 MinSizeRel)', machine='Waveshare RP2350-Touch-LCD-4 with RP2350')
+freq: 150000000
+mem_free: 350544 mem_alloc: 6320
+i2c: I2C(1, freq=400000, scl=7, sda=6, timeout=50000)
+i2c scan: ['0x51', '0x5d', '0x6b']
+  0x51 PCF85063 RTC
+  0x5D GT911 (addr 0x5D)
+  0x6B QMI8658 IMU (0x6B)
+fs total: 12582912 free: 12283904
+== tests/hil/t03_panel.py (2/5)
+info: {'backlight': 80, 'pclk': 15000000, 'running': True, 'width': 240, 'state_machines': (4, 5, 8, 9), 'dma_channels': (0, 1, 2), 'buffers': 1, 'fb_bytes': 115200, 'shown': 0, 'underruns': 0, 'height': 240, 'frames': 3, 'sys_clk': 150000000, 'scale': 2, 'fb_addr': 536909232, 'fps_nominal': 57.726}
+bars drawn in 983 ms
+frames 289 in 5000 ms -> 57.80 fps (nominal 57.73)
+underruns during 5 s: 0
+wrote 200 KB in 1224 ms, frames 70 (expected ~70), underruns 0
+rp2.StateMachine(0) on PIO0: ok
+underruns total: 0 frames: 420
+mem_free: 341392
+== tests/hil/t04_crc.py (3/5)
+refr_now full screen us: [15036, 17185, 17183, 17187, 17191]
+CRCS 3003402e 52f4adb0 55720201 63026a80 63026a80 63026a80 63026a80 615902c8 49096d6a 291f9ace 88276e55 1a61acbc 1a61acbc da3afa7d 79530fc4 615902c8 63026a80 b085b0cd 81c2f014 b9df5a9a 569bb1d2 cb5cb939 db90880a 615902c8 63026a80 ffba3d62 1caa25f7 1caa25f7 1caa25f7 0dff7d7e 31ec0715 615902c8 6688af58 119370ce 2f54a0cf 2f54a0cf a439ee3a cacdb017 f6edd317 615902c8 63026a80 63026a80 63026a80 63026a80 63026a80 63026a80 63026a80 615902c8 63026a80 570e6361 2b38470c a6cdb9f6 e3821720 da9ae9ca 63026a80 615902c8 615902c8 539d66c4 13d26761 4b56affb edba0836 f9ff01d1 615902c8 ba5395f3
+== tests/hil/t06_perf.py (4/5)
+sys 150 MHz pclk 15.0 MHz: fps 57.67 (nominal 57.73), refr_now us min 12698 avg 16305, underruns run 0 flash 0
+sys 200 MHz pclk 20.0 MHz: fps 76.67 (nominal 76.97), refr_now us min 12865 avg 13089, underruns run 0 flash 0
+sys 240 MHz pclk 20.0 MHz: fps 76.67 (nominal 76.97), refr_now us min 12860 avg 13273, underruns run 0 flash 0
+sys 150 MHz pclk 15.0 MHz: fps 57.67 (nominal 57.73), refr_now us min 13951 avg 16554, underruns run 0 flash 0
+200 MHz / 15 MHz refused: pclk_hz must divide sys clock/2 exactly (sys=200000000)
+back to 150000000 15000000 running True
+== scratch/assert_test.py (5/5)
+caught: LVGL assert failed at lv_display.c:614
+lvgl alive after assert

@@ -1,0 +1,39 @@
+# Build-only CI for the esp32 boards of this repo: no hardware, no release.
+# The pins (MicroPython, omnipython-lvgl, ESP-IDF version) live in scripts/build_esp32.sh;
+# the container below must carry the same ESP-IDF version.
+name: build esp32
+
+on:
+  push:
+    paths: [boards/esp32/**, modules/**, python/**, patches/**, scripts/build_esp32.sh, .github/workflows/build-esp32.yml]
+  pull_request:
+    paths: [boards/esp32/**, modules/**, python/**, patches/**, scripts/build_esp32.sh, .github/workflows/build-esp32.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    container: espressif/idf:v5.5.2
+    strategy:
+      fail-fast: false
+      matrix:
+        board: [ESP32_4848S040]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # git describe names the image after the last tag
+
+      - name: Build
+        shell: bash
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          IDF_PATH=/opt/esp/idf scripts/build_esp32.sh ${{ matrix.board }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.board }}
+          path: dist/${{ matrix.board }}-*
+          if-no-files-found: error

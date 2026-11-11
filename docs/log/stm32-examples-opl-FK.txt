@@ -1,0 +1,22 @@
+# FK743M5-XIH6, 2026-11-11, same image as stm32-soak-opl-FK.txt: the 10 examples, 4 s each, soft reset between.
+
+== examples/hello.py (1/10)
+ALIVE hello unit 2.50 font14 True mem_free 28633296 underruns 0
+== examples/button.py (2/10)
+ALIVE button unit 2.50 font14 True mem_free 28634576 underruns 0
+== examples/animation.py (3/10)
+ALIVE animation unit 2.50 font14 True mem_free 28627840 underruns 0
+== examples/backlight.py (4/10)
+ALIVE backlight unit 2.50 font14 True mem_free 28634176 underruns 0
+== examples/c64_keyboard.py (5/10)
+ALIVE c64_keyboard unit 2.50 font14 True mem_free 28631472 underruns 0
+== examples/breakout.py (6/10)
+ALIVE breakout unit 2.50 font14 True mem_free 28611360 underruns 0
+== examples/pong.py (7/10)
+ALIVE pong unit 2.50 font14 True mem_free 28588688 underruns 0
+== examples/simon.py (8/10)
+ALIVE simon unit 2.50 font14 True mem_free 28621840 underruns 0
+== examples/snake.py (9/10)
+ALIVE snake unit 2.50 font14 True mem_free 28616960 underruns 0
+== examples/tictactoe.py (10/10)
+ALIVE tictactoe unit 2.50 font14 True mem_free 28622656 underruns 0

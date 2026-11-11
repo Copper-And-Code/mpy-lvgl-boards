@@ -1,0 +1,46 @@
+# Build-only CI for the stm32 boards of this repo: no hardware, no release.
+# The pins (MicroPython, omnipython-lvgl, toolchain) live in scripts/build.sh.
+name: build stm32
+
+on:
+  push:
+    paths: [boards/stm32/**, modules/**, python/**, patches/**, scripts/build.sh, .github/workflows/build-stm32.yml]
+  pull_request:
+    paths: [boards/stm32/**, modules/**, python/**, patches/**, scripts/build.sh, .github/workflows/build-stm32.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { board: STM32H7_CORE, variant: V10 }
+          - { board: STM32H7_CORE, variant: V13 }
+          - { board: DEV190806042, variant: "" }
+          - { board: FK743M5-XIH6, variant: "" }
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # git describe names the image after the last tag
+
+      - name: Cache toolchain
+        uses: actions/cache@v4
+        with:
+          path: .work/tools
+          key: xpack-arm-none-eabi-gcc-${{ hashFiles('scripts/build.sh') }}
+
+      - name: Build
+        run: scripts/build.sh stm32 ${{ matrix.board }} ${{ matrix.variant }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.board }}${{ matrix.variant && format('-{0}', matrix.variant) || '' }}
+          path: |
+            dist/${{ matrix.board }}-*.dfu*
+            dist/${{ matrix.board }}-*.hex*
+          if-no-files-found: error

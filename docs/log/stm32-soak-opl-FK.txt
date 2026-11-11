@@ -1,0 +1,30 @@
+# FK743M5-XIH6, IPS1024x600, 2026-11-11, dist/FK743M5-XIH6-v0.1.5-1-g3f8dc1d.dfu (omnipython-lvgl c34fbee,
+# pools on, PLLQ 8), flashed with DFU from machine.bootloader(). t01 (SD read only), then machine.reset()
+# and tests/hil/stm32/t05_soak.py, 15 min.
+uname: (sysname='pyboard', nodename='pyboard', release='1.29.0', version='0fd6c573ea on 2026-11-11', machine='FK743M5-XIH6 with STM32H743')
+ok   known board FK743M5-XIH6 with STM32H743
+ok   cpu 480 MHz 
+ok   heap in SDRAM total 28687744 free 28678992
+ok   QSPI fs size 8368128 bytes (expected about 8 MB)
+mounts: ['flash', 'sd']
+ok   SD mounted 7974522880 bytes
+ok   GT911 on touch bus 
+ok   GT911 product id b'911\x00'
+RESULT: all 7 checks ok
+t=    0s lvgl_rps=4.2 panel_fps=83.33 underruns=0 mem_free=26544944 min_free=26545344 allocs=40 errors=0 touch_errors=0
+t=   60s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26520496 min_free=26506832 allocs=7720 errors=0 touch_errors=0
+t=  120s lvgl_rps=35.1 panel_fps=58.32 underruns=0 mem_free=26514448 min_free=26506784 allocs=15440 errors=0 touch_errors=0
+t=  180s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26508448 min_free=26506784 allocs=23160 errors=0 touch_errors=0
+t=  240s lvgl_rps=35.0 panel_fps=58.30 underruns=0 mem_free=26524496 min_free=26506784 allocs=30840 errors=0 touch_errors=0
+t=  300s lvgl_rps=35.2 panel_fps=58.31 underruns=0 mem_free=26518448 min_free=26506784 allocs=38560 errors=0 touch_errors=0
+t=  360s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26514448 min_free=26506784 allocs=46240 errors=0 touch_errors=0
+t=  420s lvgl_rps=35.1 panel_fps=58.31 underruns=0 mem_free=26508448 min_free=26506784 allocs=53960 errors=0 touch_errors=0
+t=  480s lvgl_rps=35.2 panel_fps=58.30 underruns=0 mem_free=26522448 min_free=26506784 allocs=61680 errors=0 touch_errors=0
+t=  540s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26518448 min_free=26506784 allocs=69360 errors=0 touch_errors=0
+t=  600s lvgl_rps=34.9 panel_fps=58.32 underruns=0 mem_free=26512448 min_free=26506784 allocs=77080 errors=0 touch_errors=0
+t=  660s lvgl_rps=34.9 panel_fps=58.30 underruns=0 mem_free=26508448 min_free=26506784 allocs=84760 errors=0 touch_errors=0
+t=  720s lvgl_rps=35.2 panel_fps=58.32 underruns=0 mem_free=26520448 min_free=26506784 allocs=92520 errors=0 touch_errors=0
+t=  780s lvgl_rps=35.0 panel_fps=58.31 underruns=0 mem_free=26516448 min_free=26506784 allocs=100200 errors=0 touch_errors=0
+t=  840s lvgl_rps=35.0 panel_fps=58.30 underruns=0 mem_free=26510448 min_free=26506784 allocs=107920 errors=0 touch_errors=0
+SOAK DONE t=900s lvgl_rps=35.0 panel_fps=58.32 underruns=0 min_free=26506784 allocs=115560 errors=0 touch_errors=0
+RESULT: ok

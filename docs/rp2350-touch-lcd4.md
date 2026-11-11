@@ -2,7 +2,8 @@
 
 Measured on the board (RP2350B, 16 MB flash, **no PSRAM**: U9 not fitted), MicroPython
 v1.29.0, `MICROPY_HW_RGBPANEL_SCALE = 2` (240x240 framebuffer shown as 2x2 pixels). LVGL
-9.5 through PyDevices omnipython-lvgl `c34fbee` with its memory pools since 2026-11-10
+9.5 through PyDevices omnipython-lvgl (`c34fbee` since 2026-11-10, `665dec5` since 2026-11-11: the
+same numbers, 46 KB less flash, see the end of the next section) with its memory pools
 (next section); the sections after it were measured before, on lvgl-micropython `3e287e7`
 / lvgl-bindings `7740c2f`, the same LVGL. Raw logs in `docs/log/`.
 
@@ -53,6 +54,12 @@ hole, 80 KB, `log/rp2350-pool-layouts-opl.txt`) shows the same with two buffers 
 with one buffer its scene renders in 35.2 ms with the pools, 33.6-33.9 ms without, so
 here the pools cost 1.6 ms when the heap is not in the way. `gc.collect()`: 2.3-5.2 ms
 with the pools, 2.0-5.0 ms without.
+
+omnipython-lvgl 665dec5 (2026-11-11, board 1, `log/opl-665dec5-all-boards.txt`): its PR #19
+makes an LVGL assert pass only the file's base name and the line, 46,336 B less flash. Same
+64 tile CRCs, the same `t06_perf.py` figures (57.67 / 76.67 fps, 13.1 ms at 200 MHz), the
+same 350 KB free after boot, and `display.set_tile_cnt(256)` raises `RuntimeError: LVGL
+assert failed at lv_display.c:614` with LVGL still running.
 
 ## Scan-out and rendering vs clock
 

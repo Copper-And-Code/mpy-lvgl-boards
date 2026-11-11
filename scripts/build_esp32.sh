@@ -23,7 +23,7 @@ MPY_URL=https://github.com/micropython/micropython.git
 MPY_REF=v1.29.0
 MPY_SHA=0fd6c573ea815774668bbb16b8e197c8822368b2
 OPL_URL=https://github.com/PyDevices/omnipython-lvgl.git
-OPL_SHA=c34fbeeb0440e71acb62c92ddee1c3c65d089622
+OPL_SHA=665dec523206fc37c583053325b8ed80a96d5504
 IDF_VER=5.5.2
 
 log() { printf '\n== %s\n' "$*"; }

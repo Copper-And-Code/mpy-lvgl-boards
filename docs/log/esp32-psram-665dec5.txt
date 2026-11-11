@@ -1,0 +1,21 @@
+# ESP32-4848S040 (second board, MAC dc:b4:d9:04:87:c0), 2026-11-11, ESP-IDF 5.5.2, CONFIG_SPIRAM_XIP_FROM_PSRAM.
+# Three images written one after the other on the same board (esptool write_flash 0x0, hash verified), then a reset
+# and, at the REPL: gc.collect(); gc.mem_free(); esp32.idf_heap_info(esp32.HEAP_DATA), the PSRAM region (> 1 MB).
+# The boot log of ESP-IDF does not reach the UART in this build. Segment sizes: esptool image_info of the app at 0x10000.
+#   v9.5.53 = dist/ESP32_4848S040-dd01e02-dirty.bin (omnipython-lvgl 0886d38, multi_heap pools)
+#   c34fbee = dist/ESP32_4848S040-v0.1.5-1-g3f8dc1d.bin (TLSF pools)
+#   665dec5 = this tree (TLSF pools)
+
+image     firmware B   DROM (rodata) B  pages   IROM (code) B  pages   PSRAM region B   gc.mem_free()
+v9.5.53   2,758,656    640,200 (0x9c4c8)   10   1,914,600 (0x1d36e8)  30   5,767,168        4,012,384 (multi_heap pools)
+c34fbee   2,816,208    672,632 (0xa4378)   11   1,939,720 (0x1d9908)  30   5,701,632        4,172,640
+665dec5   2,766,176    641,768 (0x9cae8)   10   1,920,544 (0x1d4e20)  30   5,767,168        4,238,176
+
+idf_heap_info rows (total, free, largest free block, min free):
+c34fbee   (5701632, 4040428, 3997696, 4040428)
+v9.5.53   (5767168, 3966700, 3932160, 3966700)
+665dec5   (5767168, 4105964, 4063232, 4105964)
+
+# Only the constants crossed a 64 KB page from v9.5.53 to c34fbee here, so the region lost 64 KB (not 128 KB as
+# docs said before: that was the free GC heap on the first board). 665dec5 brings the region back to the v9.5.53 size;
+# gc.mem_free() is 65,536 B higher than on c34fbee. The v9.5.53 mem_free is lower because of its multi_heap pools.
