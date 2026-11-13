@@ -1,0 +1,10 @@
+# 2026-11-13 22:35:50 port=/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0 reps=15
+# startup Ctrl-C: a key in the editor 7, stopped the command 23
+# done per case: {'vi-normal': 15, 'vi-insert': 15, 'edit-copy': 15, 'vi-startup': 15, 'edit-startup': 15}
+RESULT: OK
+
+# 2026-11-13 manual test by the user on the display, serial terminal on /dev/ttyUSB0:
+#   vi /shell.py: Ctrl-C in normal mode, i + text + Ctrl-C, u, :q!
+#   edit /shell.py: Ctrl-C copy, Ctrl-V paste, Ctrl-Q + n
+#   shell: sleep 5 stopped by Ctrl-C
+# result: everything works, nothing saved

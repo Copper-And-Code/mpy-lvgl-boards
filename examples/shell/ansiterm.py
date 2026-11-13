@@ -182,20 +182,32 @@ class Terminal(io.IOBase):
     def write(self, buf):
         # A KeyboardInterrupt leaving this method would make dupterm drop the terminal for
         # good, so it stops here. Whoever can raise it again does: see check().
+        # MicroPython raises a pending Ctrl-C at the first jump in the bytecode. It often
+        # arrives while the serial port sends the same text, in C, before this method
+        # runs (a blocking UART on the STM32 boards), so the first jump here must already
+        # be inside the try, and so must the last one: hence the `if` at the end.
         n = len(buf)
-        if self.busy:  # printing from a callback that interrupted a write
-            return n
-        self.busy = True
+        mine = False  # this call set busy, so it clears it
         try:
-            self.feed(buf)
+            if self.busy:  # printing from a callback that interrupted a write
+                return n
+            self.busy = mine = True
+            try:
+                self.feed(buf)
+            except KeyboardInterrupt:
+                self.interrupted = True
+            try:
+                self.show_cursor()
+                self.flush()
+            except KeyboardInterrupt:
+                self.interrupted = True
+            self.busy = False
+            if self.busy:
+                pass
         except KeyboardInterrupt:
+            if mine:
+                self.busy = False
             self.interrupted = True
-        try:
-            self.show_cursor()
-            self.flush()
-        except KeyboardInterrupt:
-            self.interrupted = True
-        self.busy = False
         return n
 
     def text(self, s):
@@ -574,10 +586,13 @@ class Terminal(io.IOBase):
 term = None
 
 
-# Ctrl-C during lv.timer_handler(): the driver's task stops the display, which is not what
-# a terminal wants. This one leaves it to check(). The VM raises a pending interrupt only at
-# a jump, and C code runs for most of the time here: without the `if` that would be after
-# the try, where the scheduler swallows it and the timer is not armed again.
+# Ctrl-C during lv.timer_handler(). A driver with CONTRACT 1 (docs/display-driver.md)
+# hands it on to the program and the screen goes on, which is what a terminal wants.
+# Firmware before it (v0.1.6 and older) stops the display or drops the Ctrl-C: there
+# this task replaces the driver's and leaves it to check(). The VM raises a pending
+# interrupt only at a jump, and C code runs for most of the time here: without the `if`
+# that would be after the try, where the scheduler swallows it and the timer is not
+# armed again.
 def _task(_):
     try:
         lv.timer_handler()
@@ -595,10 +610,13 @@ def start():
     if term is None:
         term = Terminal()
     term.show()
-    display_driver._task = _task
-    display_driver.start()
-    if hasattr(display_driver, "_arm"):
-        display_driver._arm()  # a one shot timer (ESP32): this also revives one that did not rearm
+    if hasattr(display_driver, "CONTRACT"):
+        display_driver.start()
+    else:  # firmware before CONTRACT 1: its internal names
+        display_driver._task = _task
+        display_driver.start()
+        if hasattr(display_driver, "_arm"):
+            display_driver._arm()  # a one shot timer (ESP32): this also revives one that did not rearm
     os.dupterm(term)
     return term
 

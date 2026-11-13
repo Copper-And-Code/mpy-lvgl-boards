@@ -1062,19 +1062,26 @@ def main():
     mount_sd()
     try:
         while True:
-            if screen:
-                screen.start()  # a program may have shown its own screen
-                term.interrupted = False
-            micropython.kbd_intr(-1)  # Ctrl-C reaches the editor as a key
-            line = read_line()
+            # A Ctrl-C can arrive anywhere, not only in run_line(): the display driver hands
+            # on one that landed in LVGL's service a few ms later (docs/display-driver.md),
+            # which can be after the command has ended. Here it only cancels the line.
+            try:
+                if screen:
+                    screen.start()  # a program may have shown its own screen
+                    term.interrupted = False
+                micropython.kbd_intr(-1)  # Ctrl-C reaches the editor as a key
+                line = read_line()
+            except KeyboardInterrupt:
+                print("^C")
+                line = ""
             micropython.kbd_intr(3)  # and it stops the commands
             if line is None:
                 return
-            line = line.strip()
-            if line and (not history or history[-1] != line):
-                history.append(line)
-                del history[:-50]
             try:
+                line = line.strip()
+                if line and (not history or history[-1] != line):
+                    history.append(line)
+                    del history[:-50]
                 run_line(line)
             except KeyboardInterrupt:
                 print("^C")

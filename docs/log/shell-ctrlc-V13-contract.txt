@@ -1,0 +1,7 @@
+# 2026-11-13 23:34:59 port=/dev/ttyUSB1 file=/flash/contract_test/shell.py repeat=30 start="import sys; sys.path.insert(0, '/flash/contract_test'); import shell; shell.main()"
+# boot: " for more information. | >>>  | >>>  | >>>  | >>> import sys; sys.path.insert(0, '/flash/contract_test'); import shell; shell.main() | MicroPython shell, `help` lists the commands, | `exit` or Ctrl-D ends it | [K[1;32mmpy@pyboard[0m:[1;34m/sd[0m$  | [K[1;32mmpy@pyboard[0m:[1;34m/sd[0m$ 
+long    30 Ctrl-C, prompt back in 0.09 s on average, 0.10 s at most, tracebacks 0
+output  30 Ctrl-C, prompt back in 0.43 s on average, 0.85 s at most, tracebacks 0
+line    30 Ctrl-C, prompt back in 0.05 s on average, 0.05 s at most, tracebacks 0
+edge    30 Ctrl-C, prompt back in 0.12 s on average, 0.15 s at most, tracebacks 0
+RESULT: OK

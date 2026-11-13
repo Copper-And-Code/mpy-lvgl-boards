@@ -1,0 +1,9 @@
+# 2026-11-13 19:48:03 port=/dev/ttyUSB0 file=/shell/shell.py repeat=15 start="import sys; sys.modules.pop('shell', None); sys.path.insert(0, '/shell'); import shell; shell.main()"
+# boot: ort sys; sys.modules.pop('shell', None); sys.path.insert(0, '/shell'); import shell; shell.main() | <module 'shell'> | MicroPython shell, `help` lists the commands, | `exit` or Ctrl-D ends it | SD card mounted on /sd | [K[1;32mmpy@esp32[0m:[1;34m/[0m$  | [K[1;32mmpy@esp32[0m:[1;34m/[0m$ 
+  FAIL long 7: prompt without ^C (b'\r\x1b[K\x1b[1;32mmpy@esp32\x1b[0m:\x1b[1;34m/\x1b[0m$ ')
+  FAIL long 9: prompt without ^C (b'\r\x1b[K\x1b[1;32mmpy@esp32\x1b[0m:\x1b[1;34m/\x1b[0m$ ')
+long    15 Ctrl-C, prompt back in 0.23 s on average, 1.75 s at most, tracebacks 0
+output  15 Ctrl-C, prompt back in 0.56 s on average, 0.85 s at most, tracebacks 0
+line    15 Ctrl-C, prompt back in 0.05 s on average, 0.05 s at most, tracebacks 0
+edge    15 Ctrl-C, prompt back in 0.14 s on average, 0.15 s at most, tracebacks 0
+RESULT: FAILED (2 failures)

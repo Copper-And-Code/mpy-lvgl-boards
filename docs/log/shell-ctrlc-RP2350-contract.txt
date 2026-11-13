@@ -1,0 +1,7 @@
+# 2026-11-13 23:52:11 port=/dev/serial/by-id/usb-MicroPython_Board_in_FS_mode_fb05bfd14aef915b-if00 file=/bin/vi.py repeat=30 start='import shell; shell.main()'
+# boot:  | >>>  | >>>  | >>> import shell; shell.main() | MicroPython shell, `help` lists the commands, | `exit` or Ctrl-D ends it | [K[1;32mmpy@rp2[0m:[1;34m/[0m$  | [K[1;32mmpy@rp2[0m:[1;34m/[0m$ 
+long    30 Ctrl-C, prompt back in 0.05 s on average, 0.05 s at most, tracebacks 0
+output  30 Ctrl-C, prompt back in 0.16 s on average, 0.40 s at most, tracebacks 0
+line    30 Ctrl-C, prompt back in 0.05 s on average, 0.05 s at most, tracebacks 0
+edge    30 Ctrl-C, prompt back in 0.05 s on average, 0.05 s at most, tracebacks 0
+RESULT: OK
