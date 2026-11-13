@@ -31,6 +31,9 @@ class GT911:
         self.y = 0
         self.pressed = False
         self.errors = 0  # I2C errors swallowed by lv_read_cb
+        # A Ctrl-C that landed in lv_read_cb: display_driver hands it on to the program
+        # after lv.timer_handler() and clears this (docs/display-driver.md).
+        self.interrupted = False
         self._status = bytearray(1)
         self._point = bytearray(4)
         self._zero = b"\x00"
@@ -75,6 +78,17 @@ class GT911:
         return self.pressed, self.x, self.y
 
     def lv_read_cb(self, indev, data):
+        # LVGL calls this from lv.timer_handler(), in C: a KeyboardInterrupt raised here
+        # would be printed and dropped by LVGL's callback, so it is kept for display_driver.
+        # The `if` is a jump inside the try: the VM raises a pending Ctrl-C only at a jump.
+        try:
+            self._lv_read(data)
+            if self.interrupted:
+                pass
+        except KeyboardInterrupt:
+            self.interrupted = True
+
+    def _lv_read(self, data):
         import lvgl as lv
 
         try:

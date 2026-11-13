@@ -1,0 +1,36 @@
+# 2026-11-13 20:02:48 RP2350-Touch-LCD-4 (USB serial fb05bfd14aef915b): flash of dist/WAVESHARE_RP2350_TOUCH_LCD_4-v0.1.6-1-g6de0f40-dirty.uf2 (branch display-contract, omnipython-lvgl a13f5c7 v9.5.54), machine.bootloader() then copy to the RP2350 disk
+a546f8b0c48ada7d9f0fd997ad5f9f6f556e71b6b5acc52bd8591be41ec94822  dist/WAVESHARE_RP2350_TOUCH_LCD_4-v0.1.6-1-g6de0f40-dirty.uf2
+UF2 Bootloader v1.1
+Model: Raspberry Pi RP2350
+Board-ID: RP2350
+cp rc=0
+
+== /tmp/claude-1000/-opt-devel-lvgl-mpy-lvgl-stm32/737c282d-19c4-4619-bec6-a69676c84dbb/scratchpad/uname.py (1/3)
+(sysname='rp2', nodename='rp2', release='1.29.0', version='0fd6c573ea on 2026-11-13 (GNU 15.2.1 MinSizeRel)', machine='Waveshare RP2350-Touch-LCD-4 with RP2350')
+>
+== /tmp/claude-1000/-opt-devel-lvgl-mpy-lvgl-stm32/737c282d-19c4-4619-bec6-a69676c84dbb/scratchpad/contract_board.py (2/3)
+ok   CONTRACT == 1
+ok   has WIDTH
+ok   has HEIGHT
+ok   has BUFFERS
+ok   has PERIOD_MS
+ok   has indev
+ok   has start
+ok   has stop
+ok   has running
+ok   has backlight
+ok   WIDTH, HEIGHT > 0
+ok   BUFFERS 1 or 2
+ok   running after import
+ok   start() when running: still running
+ok   stop(): not running
+ok   stop() twice: not running
+ok   start() again: running
+ok   backlight(50) reads back > 0
+RESULT: OK
+>
+== /tmp/claude-1000/-opt-devel-lvgl-mpy-lvgl-stm32/737c282d-19c4-4619-bec6-a69676c84dbb/scratchpad/ls3.py (3/3)
+lms_apps dir
+lvgl_ide_apps dir
+scene_static.py 1271
+>

@@ -1,0 +1,19 @@
+# 2026-11-13 22:50:00 V1.3 on /dev/ttyUSB1 (CH340, usb-0:7), UART bootloader; image dist/STM32H7_CORE-V13-v0.1.6-1-g6de0f40-dirty.hex sha256 ff965e31; rollback dist/STM32H7_CORE-V13-v0.1.6.hex
+bootloader v3.1, chip id 0x450, commands 0001021121314463738292
+image 08000000-0811a083 (1155204 bytes), erasing sectors [0, 1, 2, 3, 4, 5, 6, 7, 8]
+erased in 6.3 s
+bank 2 erased in 11.3 s
+write   0%write   1%write   2%write   4%write   5%write   7%write   8%write   9%write  11%write  12%write  14%write  15%write  17%write  18%write  19%write  21%write  22%write  24%write  25%write  26%write  28%write  29%write  31%write  32%write  34%write  35%write  36%write  38%write  39%write  41%write  42%write  43%write  45%write  46%write  48%write  49%write  51%write  52%write  53%write  55%write  56%write  58%write  59%write  60%write  62%write  63%write  65%write  66%write  68%write  69%write  70%write  72%write  73%write  75%write  76%write  77%write  79%write  80%write  82%write  83%write  85%write  86%write  87%write  89%write  90%write  92%write  93%write  95%write  96%write  97%write  99%written 4513 blocks in 148.4 s
+verify   0%verify   1%verify   2%verify   4%verify   5%verify   7%verify   8%verify   9%verify  11%verify  12%verify  14%verify  15%verify  17%verify  18%verify  19%verify  21%verify  22%verify  24%verify  25%verify  26%verify  28%verify  29%verify  31%verify  32%verify  34%verify  35%verify  36%verify  38%verify  39%verify  41%verify  42%verify  43%verify  45%verify  46%verify  48%verify  49%verify  51%verify  52%verify  53%verify  55%verify  56%verify  58%verify  59%verify  60%verify  62%verify  63%verify  65%verify  66%verify  68%verify  69%verify  70%verify  72%verify  73%verify  75%verify  76%verify  77%verify  79%verify  80%verify  82%verify  83%verify  85%verify  86%verify  87%verify  89%verify  90%verify  92%verify  93%verify  95%verify  96%verify  97%verify  99%verify: ok
+reset into the firmware
+# boot: MicroPython 0fd6c573ea on 2026-11-13; STM32H7_CORE V1.3 with STM32H743 | Type "help()" for more information. | >>>  | >>>  | >>>  | >>> 
+import os; print(os.uname().version); print(len(os.listdir('/flash')), os.listdir('/flash'))
+0fd6c573ea on 2026-11-13
+19 ['boot.py', 'main.py', 'pybcdc.inf', 'README.txt', 'ansi_term.py', 'lvgl_probe.py', 'config.py', 'term_widget.py', 'editor.py', 'test_lv.py', 'hello_lv.py', 'tetris.py', 'shell.py', 'tetris_lvgl.py', 'GT911_2', 'lvgl_ide_apps', 'System Volume Information', 'lms_apps', 'shell']
+>>>
+import display_driver as d; print(d.CONTRACT, d.WIDTH, d.HEIGHT, d.BUFFERS, d.PERIOD_MS, d.HOLD_MS, d.running(), d.indev is not None)
+1 1024 600 2 5 30 True True
+>>>
+# after the flash: contract RESULT OK (docs/log/display-contract-V13.txt);
+# ctrlc-contract-V13-{sleep,stdin,cb,touch}.txt all RESULT OK, 60/60 main, 58.3 fps, 216 finger reports
+# /flash unchanged: 19 entries, the same as before the flash

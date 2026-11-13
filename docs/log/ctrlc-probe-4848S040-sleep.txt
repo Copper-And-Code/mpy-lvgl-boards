@@ -1,0 +1,116 @@
+# 2026-11-13 14:07:00 mode=sleep trials=60 window=0.80s seed=1794575212 port=/dev/ttyUSB0
+# board: READY sleep ESP32-4848S040 with ESP32-S3 | S 4 1 | S 9 1 | S 14 1 | S 19 1 | S 24 1 | S 29 1 | S 34 1 | S 39 1 | S 44 1 | S 49 1 | S 54 1 | S 59 1 | S 64 1 | S 69 1 | S 74 1 | S 79 1 | S 84 1
+  1 scheduler        service=continued before=[(104, 1)] after=[(109, 1), (114, 1), (119, 1), (124, 1), (129, 1), (134, 1)] frames+25
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 109 1 | S 114 1 | S 119 1 | S 124 1 | S 129 1 | S 134 1
+  2 scheduler        service=continued before=[(174, 1)] after=[(179, 1), (184, 1), (189, 1), (194, 1), (199, 1), (204, 1), (209, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 179 1 | S 184 1 | S 189 1 | S 194 1 | S 199 1 | S 204 1 | S 209 1
+  3 scheduler        service=continued before=[(254, 1)] after=[(259, 1), (264, 1), (269, 1), (274, 1), (279, 1), (284, 1), (289, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 259 1 | S 264 1 | S 269 1 | S 274 1 | S 279 1 | S 284 1 | S 289 1
+  4 scheduler        service=continued before=[(334, 1)] after=[(339, 1), (344, 1), (349, 1), (354, 1), (359, 1), (364, 1), (369, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 339 1 | S 344 1 | S 349 1 | S 354 1 | S 359 1 | S 364 1 | S 369 1
+  5 scheduler        service=continued before=[(379, 1)] after=[(384, 1), (389, 1), (394, 1), (399, 1), (404, 1), (409, 1), (414, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 384 1 | S 389 1 | S 394 1 | S 399 1 | S 404 1 | S 409 1 | S 414 1
+  6 scheduler        service=continued before=[(444, 1)] after=[(449, 1), (454, 1), (459, 1), (464, 1), (469, 1), (474, 1), (479, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 449 1 | S 454 1 | S 459 1 | S 464 1 | S 469 1 | S 474 1 | S 479 1
+  7 scheduler        service=continued before=[(514, 1)] after=[(519, 1), (524, 1), (529, 1), (534, 1), (539, 1), (544, 1)] frames+25
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 519 1 | S 524 1 | S 529 1 | S 534 1 | S 539 1 | S 544 1
+  8 scheduler        service=continued before=[(584, 1)] after=[(589, 1), (594, 1), (599, 1), (604, 1), (609, 1), (614, 1), (619, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 589 1 | S 594 1 | S 599 1 | S 604 1 | S 609 1 | S 614 1 | S 619 1
+  9 scheduler        service=continued before=[(639, 1)] after=[(644, 1), (649, 1), (654, 1), (659, 1), (664, 1), (669, 1), (674, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 644 1 | S 649 1 | S 654 1 | S 659 1 | S 664 1 | S 669 1 | S 674 1
+ 10 main             service=continued before=[(689, 1)] after=[(694, 1), (699, 1), (704, 1), (709, 1), (714, 1), (719, 1), (724, 1)] frames+30
+ 11 scheduler        service=continued before=[(754, 1)] after=[(759, 1), (764, 1), (769, 1), (774, 1), (779, 1), (784, 1), (789, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 759 1 | S 764 1 | S 769 1 | S 774 1 | S 779 1 | S 784 1 | S 789 1
+ 12 scheduler        service=continued before=[(829, 1)] after=[(834, 1), (839, 1), (844, 1), (849, 1), (854, 1), (859, 1), (864, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 834 1 | S 839 1 | S 844 1 | S 849 1 | S 854 1 | S 859 1 | S 864 1
+ 13 main             service=continued before=[(889, 1)] after=[(894, 1), (899, 1), (904, 1), (909, 1), (914, 1), (919, 1), (924, 1)] frames+30
+ 14 main             service=continued before=[(944, 1)] after=[(949, 1), (954, 1), (959, 1), (964, 1), (969, 1), (974, 1), (979, 1)] frames+30
+ 15 scheduler        service=continued before=[(1014, 1)] after=[(1019, 1), (1024, 1), (1029, 1), (1034, 1), (1039, 1), (1044, 1)] frames+25
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1019 1 | S 1024 1 | S 1029 1 | S 1034 1 | S 1039 1 | S 1044 1
+ 16 main             service=continued before=[(1069, 1)] after=[(1074, 1), (1079, 1), (1084, 1), (1089, 1), (1094, 1), (1099, 1)] frames+25
+ 17 main             service=continued before=[(1124, 1)] after=[(1129, 1), (1134, 1), (1139, 1), (1144, 1), (1149, 1), (1154, 1)] frames+25
+ 18 scheduler        service=continued before=[(1174, 1)] after=[(1179, 1), (1184, 1), (1189, 1), (1194, 1), (1199, 1), (1204, 1), (1209, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1179 1 | S 1184 1 | S 1189 1 | S 1194 1 | S 1199 1 | S 1204 1 | S 1209 1
+ 19 scheduler        service=continued before=[(1229, 1)] after=[(1234, 1), (1239, 1), (1244, 1), (1249, 1), (1254, 1), (1259, 1), (1264, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1234 1 | S 1239 1 | S 1244 1 | S 1249 1 | S 1254 1 | S 1259 1 | S 1264 1
+ 20 scheduler        service=continued before=[(1284, 1)] after=[(1289, 1), (1294, 1), (1299, 1), (1304, 1), (1309, 1), (1314, 1), (1319, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1289 1 | S 1294 1 | S 1299 1 | S 1304 1 | S 1309 1 | S 1314 1 | S 1319 1
+ 21 scheduler        service=continued before=[(1344, 1)] after=[(1349, 1), (1354, 1), (1359, 1), (1364, 1), (1369, 1), (1374, 1)] frames+25
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1349 1 | S 1354 1 | S 1359 1 | S 1364 1 | S 1369 1 | S 1374 1
+ 22 scheduler        service=continued before=[(1429, 1)] after=[(1434, 1), (1439, 1), (1444, 1), (1449, 1), (1454, 1), (1459, 1)] frames+25
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1434 1 | S 1439 1 | S 1444 1 | S 1449 1 | S 1454 1 | S 1459 1
+ 23 scheduler        service=continued before=[(1494, 1)] after=[(1499, 1), (1504, 1), (1509, 1), (1514, 1), (1519, 1), (1524, 1), (1529, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1499 1 | S 1504 1 | S 1509 1 | S 1514 1 | S 1519 1 | S 1524 1 | S 1529 1
+ 24 scheduler        service=continued before=[(1544, 1)] after=[(1549, 1), (1554, 1), (1559, 1), (1564, 1), (1569, 1), (1574, 1), (1579, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1549 1 | S 1554 1 | S 1559 1 | S 1564 1 | S 1569 1 | S 1574 1 | S 1579 1
+ 25 scheduler        service=continued before=[(1619, 1)] after=[(1624, 1), (1629, 1), (1634, 1), (1639, 1), (1644, 1), (1649, 1), (1654, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1624 1 | S 1629 1 | S 1634 1 | S 1639 1 | S 1644 1 | S 1649 1 | S 1654 1
+ 26 main             service=continued before=[(1679, 1)] after=[(1684, 1), (1689, 1), (1694, 1), (1699, 1), (1704, 1), (1709, 1), (1714, 1)] frames+30
+ 27 scheduler        service=continued before=[(1729, 1)] after=[(1734, 1), (1739, 1), (1744, 1), (1749, 1), (1754, 1), (1759, 1), (1764, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1734 1 | S 1739 1 | S 1744 1 | S 1749 1 | S 1754 1 | S 1759 1 | S 1764 1
+ 28 scheduler        service=continued before=[(1784, 1)] after=[(1789, 1), (1794, 1), (1799, 1), (1804, 1), (1809, 1), (1814, 1), (1819, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1789 1 | S 1794 1 | S 1799 1 | S 1804 1 | S 1809 1 | S 1814 1 | S 1819 1
+ 29 main             service=continued before=[(1864, 1)] after=[(1869, 1), (1874, 1), (1879, 1), (1884, 1), (1889, 1), (1894, 1), (1899, 1)] frames+30
+ 30 main             service=continued before=[(1934, 1)] after=[(1939, 1), (1944, 1), (1949, 1), (1954, 1), (1959, 1), (1964, 1), (1969, 1)] frames+30
+ 31 scheduler        service=continued before=[(1994, 1)] after=[(1999, 1), (2004, 1), (2009, 1), (2014, 1), (2019, 1), (2024, 1), (2029, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 1999 1 | S 2004 1 | S 2009 1 | S 2014 1 | S 2019 1 | S 2024 1 | S 2029 1
+ 32 scheduler        service=continued before=[(2059, 1)] after=[(2064, 1), (2069, 1), (2074, 1), (2079, 1), (2084, 1), (2089, 1), (2094, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2064 1 | S 2069 1 | S 2074 1 | S 2079 1 | S 2084 1 | S 2089 1 | S 2094 1
+ 33 scheduler        service=continued before=[(2129, 1)] after=[(2134, 1), (2139, 1), (2144, 1), (2149, 1), (2154, 1), (2159, 1), (2164, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2134 1 | S 2139 1 | S 2144 1 | S 2149 1 | S 2154 1 | S 2159 1 | S 2164 1
+ 34 scheduler        service=continued before=[(2204, 1)] after=[(2209, 1), (2214, 1), (2219, 1), (2224, 1), (2229, 1), (2234, 1)] frames+25
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2209 1 | S 2214 1 | S 2219 1 | S 2224 1 | S 2229 1 | S 2234 1
+ 35 main             service=continued before=[(2264, 1)] after=[(2269, 1), (2274, 1), (2279, 1), (2284, 1), (2289, 1), (2294, 1)] frames+25
+ 36 scheduler        service=continued before=[(2344, 1)] after=[(2349, 1), (2354, 1), (2359, 1), (2364, 1), (2369, 1), (2374, 1), (2379, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2349 1 | S 2354 1 | S 2359 1 | S 2364 1 | S 2369 1 | S 2374 1 | S 2379 1
+ 37 scheduler        service=continued before=[(2419, 1)] after=[(2424, 1), (2429, 1), (2434, 1), (2439, 1), (2444, 1), (2449, 1), (2454, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2424 1 | S 2429 1 | S 2434 1 | S 2439 1 | S 2444 1 | S 2449 1 | S 2454 1
+ 38 scheduler        service=continued before=[(2499, 1)] after=[(2504, 1), (2509, 1), (2514, 1), (2519, 1), (2524, 1), (2529, 1), (2534, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2504 1 | S 2509 1 | S 2514 1 | S 2519 1 | S 2524 1 | S 2529 1 | S 2534 1
+ 39 scheduler        service=continued before=[(2564, 1)] after=[(2569, 1), (2574, 1), (2579, 1), (2584, 1), (2589, 1), (2594, 1)] frames+25
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2569 1 | S 2574 1 | S 2579 1 | S 2584 1 | S 2589 1 | S 2594 1
+ 40 scheduler        service=continued before=[(2629, 1)] after=[(2634, 1), (2639, 1), (2644, 1), (2649, 1), (2654, 1), (2659, 1), (2664, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2634 1 | S 2639 1 | S 2644 1 | S 2649 1 | S 2654 1 | S 2659 1 | S 2664 1
+ 41 scheduler        service=continued before=[(2699, 1)] after=[(2704, 1), (2709, 1), (2714, 1), (2719, 1), (2724, 1), (2729, 1), (2734, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2704 1 | S 2709 1 | S 2714 1 | S 2719 1 | S 2724 1 | S 2729 1 | S 2734 1
+ 42 scheduler        service=continued before=[(2754, 1)] after=[(2759, 1), (2764, 1), (2769, 1), (2774, 1), (2779, 1), (2784, 1), (2789, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2759 1 | S 2764 1 | S 2769 1 | S 2774 1 | S 2779 1 | S 2784 1 | S 2789 1
+ 43 scheduler        service=continued before=[(2804, 1)] after=[(2809, 1), (2814, 1), (2819, 1), (2824, 1), (2829, 1), (2834, 1), (2839, 1)] frames+30
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2809 1 | S 2814 1 | S 2819 1 | S 2824 1 | S 2829 1 | S 2834 1 | S 2839 1
+ 44 scheduler        service=continued before=[(2879, 1)] after=[(2884, 1), (2889, 1), (2894, 1), (2899, 1), (2904, 1), (2909, 1), (2914, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2884 1 | S 2889 1 | S 2894 1 | S 2899 1 | S 2904 1 | S 2909 1 | S 2914 1
+ 45 scheduler        service=continued before=[(2939, 1)] after=[(2944, 1), (2949, 1), (2954, 1), (2959, 1), (2964, 1), (2969, 1), (2974, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2944 1 | S 2949 1 | S 2954 1 | S 2959 1 | S 2964 1 | S 2969 1 | S 2974 1
+ 46 scheduler        service=continued before=[(2984, 1)] after=[(2989, 1), (2994, 1), (2999, 1), (3004, 1), (3009, 1), (3014, 1), (3019, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 2989 1 | S 2994 1 | S 2999 1 | S 3004 1 | S 3009 1 | S 3014 1 | S 3019 1
+ 47 scheduler        service=continued before=[(3059, 1)] after=[(3064, 1), (3069, 1), (3074, 1), (3079, 1), (3084, 1), (3089, 1), (3094, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3064 1 | S 3069 1 | S 3074 1 | S 3079 1 | S 3084 1 | S 3089 1 | S 3094 1
+ 48 main             service=continued before=[(3124, 1)] after=[(3129, 1), (3134, 1), (3139, 1), (3144, 1), (3149, 1), (3154, 1), (3159, 1)] frames+30
+ 49 scheduler        service=continued before=[(3194, 1)] after=[(3199, 1), (3204, 1), (3209, 1), (3214, 1), (3219, 1), (3224, 1), (3229, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3199 1 | S 3204 1 | S 3209 1 | S 3214 1 | S 3219 1 | S 3224 1 | S 3229 1
+ 50 scheduler        service=continued before=[(3244, 1)] after=[(3249, 1), (3254, 1), (3259, 1), (3264, 1), (3269, 1), (3274, 1), (3279, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3249 1 | S 3254 1 | S 3259 1 | S 3264 1 | S 3269 1 | S 3274 1 | S 3279 1
+ 51 scheduler        service=continued before=[(3299, 1)] after=[(3304, 1), (3309, 1), (3314, 1), (3319, 1), (3324, 1), (3329, 1), (3334, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3304 1 | S 3309 1 | S 3314 1 | S 3319 1 | S 3324 1 | S 3329 1 | S 3334 1
+ 52 scheduler        service=continued before=[(3369, 1)] after=[(3374, 1), (3379, 1), (3384, 1), (3389, 1), (3394, 1), (3399, 1)] frames+25
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3374 1 | S 3379 1 | S 3384 1 | S 3389 1 | S 3394 1 | S 3399 1
+ 53 scheduler        service=continued before=[(3439, 1)] after=[(3444, 1), (3449, 1), (3454, 1), (3459, 1), (3464, 1), (3469, 1), (3474, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3444 1 | S 3449 1 | S 3454 1 | S 3459 1 | S 3464 1 | S 3469 1 | S 3474 1
+ 54 scheduler        service=continued before=[(3509, 1)] after=[(3514, 1), (3519, 1), (3524, 1), (3529, 1), (3534, 1), (3539, 1), (3544, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3514 1 | S 3519 1 | S 3524 1 | S 3529 1 | S 3534 1 | S 3539 1 | S 3544 1
+ 55 main             service=continued before=[(3579, 1)] after=[(3584, 1), (3589, 1), (3594, 1), (3599, 1), (3604, 1), (3609, 1), (3614, 1)] frames+30
+ 56 main             service=continued before=[(3634, 1)] after=[(3639, 1), (3644, 1), (3649, 1), (3654, 1), (3659, 1), (3664, 1), (3669, 1)] frames+30
+ 57 main             service=continued before=[(3704, 1)] after=[(3709, 1), (3714, 1), (3719, 1), (3724, 1), (3729, 1), (3734, 1), (3739, 1)] frames+30
+ 58 scheduler        service=continued before=[(3784, 1)] after=[(3789, 1), (3794, 1), (3799, 1), (3804, 1), (3809, 1), (3814, 1), (3819, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3789 1 | S 3794 1 | S 3799 1 | S 3804 1 | S 3809 1 | S 3814 1 | S 3819 1
+ 59 scheduler        service=continued before=[(3844, 1)] after=[(3849, 1), (3854, 1), (3859, 1), (3864, 1), (3869, 1), (3874, 1), (3879, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3849 1 | S 3854 1 | S 3859 1 | S 3864 1 | S 3869 1 | S 3874 1 | S 3879 1
+ 60 scheduler        service=continued before=[(3899, 1)] after=[(3904, 1), (3909, 1), (3914, 1), (3919, 1), (3924, 1), (3929, 1), (3934, 1)] frames+30
+    text: Traceback (most recent call last): |   File "display_driver.py", line 74, in _task | KeyboardInterrupt:  | S 3904 1 | S 3909 1 | S 3914 1 | S 3919 1 | S 3924 1 | S 3929 1 | S 3934 1
+# summary mode=sleep trials=60
+#   main       13   21.7%
+#   driver      0    0.0%
+#   scheduler  47   78.3%
+#   lost        0    0.0%
+#   service continued 60, stopped 0, unknown 0
+# end:  S 6599 1 | S 6604 1 | S 6609 1 | S 6614 1 | S 6619 1 | S 6624 1 | S 6629 1 | S 6634 1 | S 6639 1 | S 6644 1 | S 6649 1 | S 6654 1 | S 6659 1 | S 6664 1 | S 6669 1 | S 6674 1 | S 6679 1 | END 13 | >

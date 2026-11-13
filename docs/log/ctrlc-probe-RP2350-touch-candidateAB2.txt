@@ -1,0 +1,74 @@
+# SPECIAL ok: KeyboardInterrupt raised in the main program
+# FPS driver 28.5 candidate-AB2 28.3
+# 2026-11-13 18:21:55 mode=sleep candidate=AB2 trials=60 window=0.80s seed=1794590505 port=/dev/serial/by-id/usb-MicroPython_Board_in_FS_mode_fb05bfd14aef915b-if00
+# board: sleep Waveshare RP2350-Touch-LCD-4 with RP2350
+  1 main             service=continued before=[(690, 1)] after=[(693, 1), (696, 1), (699, 1), (702, 1), (705, 1), (708, 1), (711, 1), (714, 1)] frames+21
+  2 main             service=continued before=[(729, 1)] after=[(732, 1), (735, 1), (738, 1), (741, 1), (744, 1), (747, 1), (750, 1), (753, 1)] frames+21
+  3 main             service=continued before=[(786, 1)] after=[(789, 1), (792, 1), (795, 1), (798, 1), (801, 1), (804, 1), (807, 1), (810, 1)] frames+21
+  4 main             service=continued before=[(837, 1)] after=[(843, 1), (846, 1), (849, 1), (852, 1), (855, 1), (858, 1), (861, 1)] frames+18
+  5 main             service=continued before=[(879, 1)] after=[(882, 1), (885, 1), (888, 1), (891, 1), (894, 1), (897, 1), (900, 1)] frames+18
+  6 main             service=continued before=[(933, 1)] after=[(936, 1), (939, 1), (942, 1), (945, 1), (948, 1), (951, 1), (954, 1), (957, 1)] frames+21
+  7 main             service=continued before=[(981, 1)] after=[(984, 1), (987, 1), (990, 1), (993, 1), (996, 1), (999, 1), (1002, 1), (1005, 1)] frames+21
+  8 main             service=continued before=[(1023, 1)] after=[(1026, 1), (1029, 1), (1032, 1), (1035, 1), (1038, 1), (1041, 1), (1044, 1), (1047, 1)] frames+21
+  9 main             service=continued before=[(1065, 1)] after=[(1068, 1), (1071, 1), (1074, 1), (1077, 1), (1080, 1), (1083, 1), (1086, 1)] frames+18
+ 10 main             service=paused    before=[(1095, 1)] after=[(1098, 0), (1101, 1), (1104, 1), (1107, 1), (1110, 1), (1113, 1), (1116, 1), (1119, 1)] frames+21
+ 11 main             service=continued before=[(1131, 1)] after=[(1134, 1), (1137, 1), (1140, 1), (1143, 1), (1146, 1), (1149, 1), (1152, 1)] frames+18
+ 12 main             service=continued before=[(1179, 1)] after=[(1182, 1), (1185, 1), (1188, 1), (1191, 1), (1194, 1), (1197, 1), (1200, 1)] frames+18
+ 13 main             service=continued before=[(1224, 1)] after=[(1227, 1), (1230, 1), (1233, 1), (1236, 1), (1239, 1), (1242, 1), (1245, 1), (1248, 1)] frames+21
+ 14 main             service=continued before=[(1281, 1)] after=[(1284, 1), (1287, 1), (1290, 1), (1293, 1), (1296, 1), (1299, 1), (1302, 1), (1305, 1)] frames+21
+ 15 main             service=continued before=[(1311, 1)] after=[(1314, 1), (1317, 1), (1320, 1), (1323, 1), (1326, 1), (1329, 1), (1332, 1), (1335, 1)] frames+21
+ 16 main             service=continued before=[(1344, 1)] after=[(1347, 1), (1350, 1), (1353, 1), (1356, 1), (1359, 1), (1362, 1), (1365, 1), (1368, 1)] frames+21
+ 17 main             service=continued before=[(1392, 1)] after=[(1395, 1), (1398, 1), (1401, 1), (1404, 1), (1407, 1), (1410, 1), (1413, 1), (1416, 1)] frames+21
+ 18 main             service=continued before=[(1428, 1)] after=[(1431, 1), (1434, 1), (1437, 1), (1440, 1), (1443, 1), (1446, 1), (1449, 1)] frames+18
+ 19 main             service=continued before=[(1458, 1)] after=[(1461, 1), (1464, 1), (1467, 1), (1470, 1), (1473, 1), (1476, 1), (1479, 1), (1482, 1)] frames+21
+ 20 main             service=continued before=[(1509, 1)] after=[(1512, 1), (1515, 1), (1518, 1), (1521, 1), (1524, 1), (1527, 1), (1530, 1), (1533, 1)] frames+21
+ 21 main             service=continued before=[(1545, 1)] after=[(1548, 1), (1551, 1), (1554, 1), (1557, 1), (1560, 1), (1563, 1), (1566, 1)] frames+18
+ 22 main             service=continued before=[(1593, 1)] after=[(1596, 1), (1599, 1), (1602, 1), (1605, 1), (1608, 1), (1611, 1), (1614, 1)] frames+18
+ 23 main             service=continued before=[(1650, 1)] after=[(1653, 1), (1656, 1), (1659, 1), (1662, 1), (1665, 1), (1668, 1), (1671, 1)] frames+18
+ 24 main             service=continued before=[(1683, 1)] after=[(1685, 1), (1688, 1), (1691, 1), (1694, 1), (1697, 1), (1700, 1), (1703, 1), (1706, 1)] frames+21
+ 25 main             service=paused    before=[(1733, 1)] after=[(1736, 0), (1739, 1), (1742, 1), (1745, 1), (1748, 1), (1751, 1), (1754, 1), (1757, 1)] frames+21
+ 26 main             service=paused    before=[(1781, 1)] after=[(1784, 0), (1787, 1), (1790, 1), (1793, 1), (1796, 1), (1799, 1), (1802, 1), (1805, 1)] frames+21
+ 27 main             service=paused    before=[(1838, 1)] after=[(1841, 0), (1844, 1), (1847, 1), (1850, 1), (1853, 1), (1856, 1), (1859, 1), (1862, 1)] frames+21
+ 28 main             service=continued before=[(1883, 1)] after=[(1885, 1), (1888, 1), (1891, 1), (1894, 1), (1897, 1), (1900, 1), (1903, 1)] frames+18
+ 29 main             service=continued before=[(1933, 1)] after=[(1936, 1), (1939, 1), (1942, 1), (1945, 1), (1948, 1), (1951, 1), (1954, 1)] frames+18
+ 30 main             service=continued before=[(1987, 1)] after=[(1990, 1), (1993, 1), (1996, 1), (1999, 1), (2002, 1), (2005, 1), (2008, 1), (2011, 1)] frames+21
+ 31 main             service=continued before=[(2035, 1)] after=[(2038, 1), (2041, 1), (2044, 1), (2047, 1), (2050, 1), (2053, 1), (2056, 1), (2059, 1)] frames+21
+ 32 main             service=paused    before=[(2083, 1)] after=[(2086, 0), (2089, 1), (2092, 1), (2095, 1), (2098, 1), (2101, 1), (2104, 1), (2107, 1)] frames+21
+ 33 main             service=continued before=[(2125, 1)] after=[(2128, 1), (2131, 1), (2134, 1), (2137, 1), (2140, 1), (2143, 1), (2146, 1)] frames+18
+ 34 main             service=continued before=[(2164, 1)] after=[(2167, 1), (2170, 1), (2173, 1), (2176, 1), (2179, 1), (2182, 1), (2185, 1), (2188, 1)] frames+21
+ 35 main             service=continued before=[(2197, 1)] after=[(2200, 1), (2203, 1), (2206, 1), (2209, 1), (2212, 1), (2215, 1), (2218, 1)] frames+18
+ 36 main             service=continued before=[(2233, 1)] after=[(2236, 1), (2239, 1), (2242, 1), (2245, 1), (2247, 1), (2250, 1), (2253, 1), (2256, 1)] frames+20
+ 37 main             service=paused    before=[(2274, 1)] after=[(2277, 0), (2280, 1), (2283, 1), (2286, 1), (2289, 1), (2292, 1), (2295, 1), (2298, 1)] frames+21
+ 38 main             service=continued before=[(2313, 1)] after=[(2316, 1), (2319, 1), (2322, 1), (2325, 1), (2328, 1), (2331, 1), (2334, 1)] frames+18
+ 39 main             service=continued before=[(2364, 1)] after=[(2367, 1), (2370, 1), (2373, 1), (2376, 1), (2379, 1), (2382, 1), (2385, 1)] frames+18
+ 40 main             service=continued before=[(2415, 1)] after=[(2418, 1), (2421, 1), (2424, 1), (2427, 1), (2430, 1), (2433, 1), (2436, 1)] frames+18
+ 41 main             service=continued before=[(2463, 1)] after=[(2466, 1), (2469, 1), (2472, 1), (2475, 1), (2478, 1), (2481, 1), (2484, 1)] frames+18
+ 42 main             service=continued before=[(2493, 1)] after=[(2496, 1), (2499, 1), (2502, 1), (2505, 1), (2508, 1), (2511, 1), (2514, 1), (2517, 1)] frames+21
+ 43 main             service=continued before=[(2550, 1)] after=[(2552, 1), (2555, 1), (2558, 1), (2561, 1), (2564, 1), (2567, 1), (2570, 1), (2573, 1)] frames+21
+ 44 main             service=continued before=[(2603, 1)] after=[(2606, 1), (2609, 1), (2612, 1), (2615, 1), (2618, 1), (2621, 1), (2624, 1), (2627, 1)] frames+21
+ 45 main             service=continued before=[(2654, 1)] after=[(2657, 1), (2660, 1), (2663, 1), (2666, 1), (2669, 1), (2672, 1), (2675, 1)] frames+18
+ 46 main             service=continued before=[(2687, 1)] after=[(2690, 1), (2693, 1), (2696, 1), (2699, 1), (2702, 1), (2705, 1), (2708, 1), (2711, 1)] frames+21
+ 47 main             service=paused    before=[(2723, 1)] after=[(2726, 0), (2729, 1), (2732, 1), (2735, 1), (2738, 1), (2741, 1), (2744, 1), (2747, 1)] frames+21
+ 48 main             service=continued before=[(2762, 1)] after=[(2765, 1), (2768, 1), (2771, 1), (2774, 1), (2777, 1), (2780, 1), (2783, 1)] frames+18
+ 49 main             service=continued before=[(2798, 1)] after=[(2800, 1), (2803, 1), (2806, 1), (2809, 1), (2812, 1), (2815, 1), (2818, 1), (2821, 1)] frames+21
+ 50 main             service=continued before=[(2854, 1)] after=[(2857, 1), (2860, 1), (2863, 1), (2866, 1), (2869, 1), (2872, 1), (2875, 1), (2878, 1)] frames+21
+ 51 main             service=paused    before=[(2899, 1)] after=[(2902, 0), (2905, 1), (2908, 1), (2911, 1), (2914, 1), (2917, 1), (2920, 1), (2923, 1)] frames+21
+ 52 main             service=paused    before=[(2950, 1)] after=[(2953, 0), (2956, 1), (2959, 1), (2962, 1), (2965, 1), (2968, 1), (2971, 1), (2974, 1)] frames+21
+ 53 main             service=continued before=[(2995, 1)] after=[(2998, 1), (3001, 1), (3004, 1), (3007, 1), (3010, 1), (3013, 1), (3016, 1)] frames+18
+ 54 main             service=continued before=[(3040, 1)] after=[(3043, 1), (3046, 1), (3049, 1), (3052, 1), (3055, 1), (3058, 1), (3061, 1)] frames+18
+ 55 main             service=continued before=[(3097, 1)] after=[(3100, 1), (3103, 1), (3106, 1), (3109, 1), (3112, 1), (3115, 1), (3118, 1)] frames+18
+ 56 main             service=continued before=[(3148, 1)] after=[(3151, 1), (3154, 1), (3157, 1), (3160, 1), (3163, 1), (3166, 1), (3169, 1)] frames+18
+ 57 main             service=continued before=[(3181, 1)] after=[(3184, 1), (3187, 1), (3190, 1), (3193, 1), (3196, 1), (3199, 1), (3202, 1), (3205, 1)] frames+21
+ 58 main             service=continued before=[(3223, 1)] after=[(3226, 1), (3229, 1), (3232, 1), (3235, 1), (3238, 1), (3241, 1), (3244, 1)] frames+18
+ 59 main             service=continued before=[(3259, 1)] after=[(3262, 1), (3265, 1), (3268, 1), (3271, 1), (3274, 1), (3277, 1), (3280, 1)] frames+18
+ 60 main             service=continued before=[(3313, 1)] after=[(3316, 1), (3319, 1), (3322, 1), (3325, 1), (3328, 1), (3331, 1), (3334, 1), (3337, 1)] frames+21
+# touch reads with a finger down, during the trials: 1019
+# summary mode=sleep trials=60
+#   main       60  100.0%
+#   double      0    0.0%
+#   driver      0    0.0%
+#   scheduler   0    0.0%
+#   lvgl-cb     0    0.0%
+#   lost        0    0.0%
+#   service continued 51, paused and resumed 9, stopped 0, unknown 0
+# end: 60 1 1749 | S 4663 1 1751 | S 4666 1 1751 | S 4669 1 1751 | S 4672 1 1751 | S 4675 1 1751 | S 4678 1 1751 | S 4681 1 1751 | S 4684 1 1751 | S 4687 1 1751 | S 4690 1 1751 | S 4693 1 1751 | END 60 | >

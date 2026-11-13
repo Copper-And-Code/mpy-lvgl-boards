@@ -15,14 +15,22 @@
 #
 # display_driver.stop() stops the periodic timer_handler, for applications
 # that want their own loop; display_driver.start() restarts it.
+#
+# The names an application may use, and what they promise, are the contract in
+# docs/display-driver.md (CONTRACT). Everything else here is internal.
 
 import esp_rgb
 import gt911
 import lvgl as lv
+import micropython
 import panels
 from machine import PWM, Pin, SoftI2C, Timer
 
+CONTRACT = 1  # version of the contract in docs/display-driver.md
 PERIOD_MS = 5
+# After a Ctrl-C handed on to the program, the next service run waits this long, so
+# that the scheduler run that raises it has no service run queued behind it.
+HOLD_MS = 30
 # LVGL's display refresh period. The binding's lv_conf.h has 33 ms (30 Hz at
 # most); the panels run at about 58 Hz, and the flush no longer blocks for the
 # vertical blanking, so animations can follow the panel.
@@ -60,31 +68,38 @@ _backlight = PWM(Pin(BACKLIGHT_PIN), freq=BACKLIGHT_HZ, duty_u16=0)
 _percent = 0
 
 
-# Ctrl-C while a program runs: lv.timer_handler() takes most of the CPU, so the
-# KeyboardInterrupt usually lands in these callbacks, where it would be lost
-# and the program would never stop. Stop the timer instead: the next Ctrl-C
-# reaches the program. display_driver.start() resumes.
-def _interrupted():
-    stop()
-    print("display_driver: stopped by Ctrl-C (display_driver.start() resumes)")
-
-
+# Ctrl-C: the program gets it, and the screen goes on (docs/display-driver.md).
+# lv.timer_handler() takes most of the CPU, so a Ctrl-C usually becomes pending while it
+# runs, in C. The VM raises it at the next jump; without one inside the try that is
+# after it, where the scheduler prints and drops it. The `if` below is that jump. The
+# KeyboardInterrupt caught here is then scheduled again for the program, and the next
+# service run waits HOLD_MS: run sooner, it would be in the same scheduler run and get
+# it again. A Ctrl-C that lands in the touch read callback is kept by gt911 and handed
+# on here in the same way. One that lands in a Python callback of the application is
+# printed by LVGL and lost (measured: docs/log/ctrlc-probe-*).
 def _task(_):
+    delay = PERIOD_MS
     try:
         lv.timer_handler()
+        if touch is not None and touch.interrupted:
+            touch.interrupted = False
+            raise KeyboardInterrupt
     except KeyboardInterrupt:
-        _interrupted()
+        micropython.schedule(micropython.kbd_intr, None)
+        delay = HOLD_MS
     finally:
         if _timer is not None:
-            _arm()
+            _arm(delay)
 
 
 # One shot, armed again when the work is done, not a periodic timer: with a periodic one, each
 # tick takes a place in MicroPython's schedule queue (8 places). During a time.sleep_ms()
 # the queue drains at 200 callbacks/s, it fills up, and whatever else is scheduled is lost,
 # such as the I2S callback of audio.py.
-def _arm():
-    _timer.init(period=PERIOD_MS, mode=Timer.ONE_SHOT, callback=_task)
+# Deprecated as a public name (examples/shell/ansiterm.py before CONTRACT 1 called it):
+# it goes away with the next contract version, as _task and _timer.
+def _arm(period=PERIOD_MS):
+    _timer.init(period=period, mode=Timer.ONE_SHOT, callback=_task)
 
 
 def backlight(percent=None):
@@ -97,6 +112,7 @@ def backlight(percent=None):
 
 
 def start():
+    """Serve LVGL in the background every PERIOD_MS. Does nothing if it already does."""
     global _timer
     if _timer is None:
         _timer = Timer(TIMER_ID)
@@ -104,10 +120,16 @@ def start():
 
 
 def stop():
+    """Stop serving LVGL; the screen keeps the last image. Does nothing if stopped."""
     global _timer
     if _timer is not None:
         _timer.deinit()
         _timer = None
+
+
+def running():
+    """True while LVGL is served in the background."""
+    return _timer is not None
 
 
 backlight(BACKLIGHT)

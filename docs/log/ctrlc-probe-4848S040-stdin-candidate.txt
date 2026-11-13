@@ -1,0 +1,121 @@
+# SPECIAL ok: KeyboardInterrupt raised in the main program
+# FPS driver 42.3 candidate 42.3
+# 2026-11-13 14:31:01 mode=stdin candidate=True trials=60 window=0.80s seed=1794576646 port=/dev/ttyUSB0
+# board: stdin ESP32-4848S040 with ESP32-S3
+  1 scheduler        service=continued before=[(397, 1)] after=[(423, 1), (431, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 423 1 | S 431 1
+  2 scheduler        service=continued before=[(452, 1)] after=[(478, 1), (486, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 478 1 | S 486 1
+  3 main             service=continued before=[(537, 1)] after=[(562, 1), (571, 1)] frames+9
+  4 scheduler        service=continued before=[(605, 1)] after=[(630, 1), (639, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 630 1 | S 639 1
+  5 scheduler        service=continued before=[(685, 1)] after=[(711, 1), (719, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 711 1 | S 719 1
+  6 main             service=continued before=[(770, 1)] after=[(795, 1), (804, 1)] frames+9
+  7 scheduler        service=continued before=[(855, 1)] after=[(880, 1), (888, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 880 1 | S 888 1
+  8 main             service=continued before=[(931, 1)] after=[(956, 1), (965, 1)] frames+9
+  9 scheduler        service=continued before=[(1020, 1)] after=[(1045, 1), (1054, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1045 1 | S 1054 1
+ 10 main             service=continued before=[(1075, 1)] after=[(1100, 1), (1109, 1)] frames+9
+ 11 scheduler        service=continued before=[(1138, 1)] after=[(1164, 1), (1172, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1164 1 | S 1172 1
+ 12 scheduler        service=continued before=[(1206, 1)] after=[(1232, 1), (1240, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1232 1 | S 1240 1
+ 13 scheduler        service=continued before=[(1261, 1)] after=[(1287, 1), (1295, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1287 1 | S 1295 1
+ 14 scheduler        service=continued before=[(1325, 1)] after=[(1350, 1), (1359, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1350 1 | S 1359 1
+ 15 scheduler        service=continued before=[(1414, 1)] after=[(1439, 1), (1448, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1439 1 | S 1448 1
+ 16 scheduler        service=continued before=[(1494, 1)] after=[(1520, 1), (1528, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1520 1 | S 1528 1
+ 17 scheduler        service=continued before=[(1575, 1)] after=[(1600, 1), (1608, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1600 1 | S 1608 1
+ 18 scheduler        service=continued before=[(1638, 1)] after=[(1664, 1), (1672, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1664 1 | S 1672 1
+ 19 scheduler        service=continued before=[(1702, 1)] after=[(1727, 1), (1736, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1727 1 | S 1736 1
+ 20 main             service=continued before=[(1795, 1)] after=[(1820, 1), (1829, 1)] frames+9
+ 21 scheduler        service=continued before=[(1875, 1)] after=[(1901, 1), (1909, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1901 1 | S 1909 1
+ 22 scheduler        service=continued before=[(1930, 1)] after=[(1956, 1), (1964, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 1956 1 | S 1964 1
+ 23 main             service=continued before=[(2011, 1)] after=[(2036, 1), (2045, 1)] frames+9
+ 24 scheduler        service=continued before=[(2096, 1)] after=[(2121, 1), (2129, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2121 1 | S 2129 1
+ 25 scheduler        service=continued before=[(2168, 1)] after=[(2193, 1), (2201, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2193 1 | S 2201 1
+ 26 scheduler        service=continued before=[(2252, 1)] after=[(2278, 1), (2286, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2278 1 | S 2286 1
+ 27 scheduler        service=continued before=[(2324, 1)] after=[(2350, 1), (2358, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2350 1 | S 2358 1
+ 28 scheduler        service=continued before=[(2401, 1)] after=[(2426, 1), (2434, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2426 1 | S 2434 1
+ 29 scheduler        service=continued before=[(2485, 1)] after=[(2511, 1), (2519, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2511 1 | S 2519 1
+ 30 scheduler        service=continued before=[(2561, 1)] after=[(2587, 1), (2595, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2587 1 | S 2595 1
+ 31 scheduler        service=continued before=[(2638, 1)] after=[(2663, 1), (2672, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2663 1 | S 2672 1
+ 32 scheduler        service=continued before=[(2722, 1)] after=[(2748, 1), (2756, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2748 1 | S 2756 1
+ 33 scheduler        service=continued before=[(2811, 1)] after=[(2837, 1), (2845, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2837 1 | S 2845 1
+ 34 scheduler        service=continued before=[(2905, 1)] after=[(2930, 1), (2938, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2930 1 | S 2938 1
+ 35 scheduler        service=continued before=[(2960, 1)] after=[(2985, 1), (2993, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 2985 1 | S 2993 1
+ 36 main             service=continued before=[(3036, 1)] after=[(3061, 1), (3070, 1)] frames+9
+ 37 main             service=continued before=[(3129, 1)] after=[(3154, 1), (3163, 1)] frames+9
+ 38 main             service=continued before=[(3201, 1)] after=[(3226, 1), (3235, 1)] frames+9
+ 39 scheduler        service=continued before=[(3256, 1)] after=[(3281, 1), (3290, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 3281 1 | S 3290 1
+ 40 scheduler        service=continued before=[(3311, 1)] after=[(3337, 1), (3345, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 3337 1 | S 3345 1
+ 41 main             service=continued before=[(3379, 1)] after=[(3404, 1), (3413, 1)] frames+9
+ 42 scheduler        service=continued before=[(3447, 1)] after=[(3471, 1), (3480, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 3471 1 | S 3480 1
+ 43 main             service=continued before=[(3522, 1)] after=[(3547, 1), (3556, 1)] frames+9
+ 44 scheduler        service=continued before=[(3581, 1)] after=[(3607, 1), (3615, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 3607 1 | S 3615 1
+ 45 scheduler        service=continued before=[(3657, 1)] after=[(3683, 1), (3691, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 3683 1 | S 3691 1
+ 46 scheduler        service=continued before=[(3742, 1)] after=[(3768, 1), (3776, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 3768 1 | S 3776 1
+ 47 scheduler        service=continued before=[(3797, 1)] after=[(3823, 1), (3831, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 3823 1 | S 3831 1
+ 48 scheduler        service=continued before=[(3886, 1)] after=[(3912, 1), (3920, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 3912 1 | S 3920 1
+ 49 scheduler        service=continued before=[(3962, 1)] after=[(3987, 1), (3995, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 3987 1 | S 3995 1
+ 50 scheduler        service=continued before=[(4033, 1)] after=[(4059, 1), (4067, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4059 1 | S 4067 1
+ 51 scheduler        service=continued before=[(4118, 1)] after=[(4143, 1), (4152, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4143 1 | S 4152 1
+ 52 scheduler        service=continued before=[(4190, 1)] after=[(4215, 1), (4224, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4215 1 | S 4224 1
+ 53 scheduler        service=continued before=[(4254, 1)] after=[(4279, 1), (4288, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4279 1 | S 4288 1
+ 54 scheduler        service=continued before=[(4317, 1)] after=[(4343, 1), (4351, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4343 1 | S 4351 1
+ 55 scheduler        service=continued before=[(4398, 1)] after=[(4423, 1), (4432, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4423 1 | S 4432 1
+ 56 main             service=continued before=[(4474, 1)] after=[(4499, 1), (4508, 1)] frames+9
+ 57 scheduler        service=continued before=[(4542, 1)] after=[(4567, 1), (4576, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4567 1 | S 4576 1
+ 58 scheduler        service=continued before=[(4631, 1)] after=[(4656, 1), (4665, 1)] frames+9
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4656 1 | S 4665 1
+ 59 scheduler        service=continued before=[(4698, 1)] after=[(4724, 1), (4732, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4724 1 | S 4732 1
+ 60 scheduler        service=continued before=[(4766, 1)] after=[(4792, 1), (4800, 1)] frames+8
+    text: Traceback (most recent call last): |   File "gt911.py", line 81, in lv_read_cb |   File "gt911.py", line 65, in read | KeyboardInterrupt:  | S 4792 1 | S 4800 1
+# summary mode=stdin trials=60
+#   main       12   20.0%
+#   double      0    0.0%
+#   driver      0    0.0%
+#   scheduler  48   80.0%
+#   lvgl-cb     0    0.0%
+#   lost        0    0.0%
+#   service continued 60, stopped 0, unknown 0
+# end: END 12 | >

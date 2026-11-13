@@ -1,0 +1,154 @@
+# 2026-11-13 19:27:24 ESP32-4848S040 (MAC dc:b4:d9:04:87:c0) flash of dist/ESP32_4848S040-v0.1.6-1-g6de0f40-dirty.bin (branch display-contract, omnipython-lvgl a13f5c7 v9.5.54)
+74c0c4ab9bcf4bbc786e9b6f1741411451981b3f7e990040c0e0c555e269f395  dist/ESP32_4848S040-v0.1.6-1-g6de0f40-dirty.bin
+esptool.py v4.13.0
+Serial port /dev/ttyUSB0
+Connecting....
+Chip is ESP32-S3 (QFN56) (revision v0.2)
+Features: WiFi, BLE, Embedded PSRAM 8MB (AP_3v3)
+Crystal is 40MHz
+MAC: dc:b4:d9:04:87:c0
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00000000 to 0x002a3fff...
+Compressed 2766256 bytes to 1709600...
+Writing at 0x00000000... (0 %)
+Writing at 0x000124cc... (1 %)
+Writing at 0x0001cda8... (2 %)
+Writing at 0x0002a539... (3 %)
+Writing at 0x00036e04... (4 %)
+Writing at 0x00043f74... (5 %)
+Writing at 0x0004e1b5... (6 %)
+Writing at 0x000577c6... (7 %)
+Writing at 0x0006037d... (8 %)
+Writing at 0x0006ce2a... (9 %)
+Writing at 0x00079696... (10 %)
+Writing at 0x0008246a... (11 %)
+Writing at 0x0008af10... (12 %)
+Writing at 0x0008ff35... (13 %)
+Writing at 0x00096438... (14 %)
+Writing at 0x0009c635... (15 %)
+Writing at 0x000a584f... (16 %)
+Writing at 0x000b0879... (17 %)
+Writing at 0x000b8b5d... (18 %)
+Writing at 0x000c0a14... (19 %)
+Writing at 0x000c7dbc... (20 %)
+Writing at 0x000d3f29... (20 %)
+Writing at 0x000dc0d0... (21 %)
+Writing at 0x000e1c83... (22 %)
+Writing at 0x000e7ba1... (23 %)
+Writing at 0x000ecf3e... (24 %)
+Writing at 0x000f2f05... (25 %)
+Writing at 0x000f921d... (26 %)
+Writing at 0x000fed2b... (27 %)
+Writing at 0x001047d3... (28 %)
+Writing at 0x00109ab4... (29 %)
+Writing at 0x0010ed1b... (30 %)
+Writing at 0x00114227... (31 %)
+Writing at 0x001190cd... (32 %)
+Writing at 0x0011e4f0... (33 %)
+Writing at 0x00123ebc... (34 %)
+Writing at 0x0012a494... (35 %)
+Writing at 0x0012f7f0... (36 %)
+Writing at 0x00134c19... (37 %)
+Writing at 0x0013a142... (38 %)
+Writing at 0x0013f57a... (39 %)
+Writing at 0x00145b7e... (40 %)
+Writing at 0x0014c58e... (40 %)
+Writing at 0x00151e1b... (41 %)
+Writing at 0x001570f5... (42 %)
+Writing at 0x0015c4a7... (43 %)
+Writing at 0x00161817... (44 %)
+Writing at 0x00166eb2... (45 %)
+Writing at 0x0016c6f8... (46 %)
+Writing at 0x00171b5c... (47 %)
+Writing at 0x00176ef8... (48 %)
+Writing at 0x0017c105... (49 %)
+Writing at 0x00181387... (50 %)
+Writing at 0x0018685f... (51 %)
+Writing at 0x0018b56b... (52 %)
+Writing at 0x001904df... (53 %)
+Writing at 0x001956b3... (54 %)
+Writing at 0x0019b0d0... (55 %)
+Writing at 0x001a11fc... (56 %)
+Writing at 0x001a646e... (57 %)
+Writing at 0x001abba2... (58 %)
+Writing at 0x001b107d... (59 %)
+Writing at 0x001b7169... (60 %)
+Writing at 0x001bc93b... (60 %)
+Writing at 0x001c1fa5... (61 %)
+Writing at 0x001c7872... (62 %)
+Writing at 0x001cd28e... (63 %)
+Writing at 0x001d28b3... (64 %)
+Writing at 0x001d7b72... (65 %)
+Writing at 0x001de1dd... (66 %)
+Writing at 0x001e4131... (67 %)
+Writing at 0x001e9ea3... (68 %)
+Writing at 0x001ef708... (69 %)
+Writing at 0x001f5263... (70 %)
+Writing at 0x001fb039... (71 %)
+Writing at 0x00200e47... (72 %)
+Writing at 0x002068a7... (73 %)
+Writing at 0x0020b8eb... (74 %)
+Writing at 0x00210e09... (75 %)
+Writing at 0x00216306... (76 %)
+Writing at 0x0021b823... (77 %)
+Writing at 0x0022120a... (78 %)
+Writing at 0x002264e5... (79 %)
+Writing at 0x0022b665... (80 %)
+Writing at 0x002307e6... (80 %)
+Writing at 0x00235fce... (81 %)
+Writing at 0x0023b92d... (82 %)
+Writing at 0x00240d58... (83 %)
+Writing at 0x002463a8... (84 %)
+Writing at 0x0024cba8... (85 %)
+Writing at 0x00251c9a... (86 %)
+Writing at 0x00256dd3... (87 %)
+Writing at 0x0025bfa6... (88 %)
+Writing at 0x00261711... (89 %)
+Writing at 0x0026777d... (90 %)
+Writing at 0x0026cf7b... (91 %)
+Writing at 0x00272c1d... (92 %)
+Writing at 0x002788b8... (93 %)
+Writing at 0x0027da75... (94 %)
+Writing at 0x002836c7... (95 %)
+Writing at 0x00289ed0... (96 %)
+Writing at 0x0028f6b1... (97 %)
+Writing at 0x00294fb3... (98 %)
+Writing at 0x0029ad40... (99 %)
+Writing at 0x002a0fae... (100 %)
+Wrote 2766256 bytes (1709600 compressed) at 0x00000000 in 41.3 seconds (effective 536.1 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...
+rc=0
+
+== /tmp/claude-1000/-opt-devel-lvgl-mpy-lvgl-stm32/737c282d-19c4-4619-bec6-a69676c84dbb/scratchpad/uname_esp.py (1/2)
+(sysname='esp32', nodename='esp32', release='1.29.0', version='0fd6c573ea on 2026-11-13', machine='ESP32-4848S040 with ESP32-S3')
+b'dc:b4:d9:04:87:c0'
+>
+== /tmp/claude-1000/-opt-devel-lvgl-mpy-lvgl-stm32/737c282d-19c4-4619-bec6-a69676c84dbb/scratchpad/contract_board.py (2/2)
+ok   CONTRACT == 1
+ok   has WIDTH
+ok   has HEIGHT
+ok   has BUFFERS
+ok   has PERIOD_MS
+ok   has indev
+ok   has start
+ok   has stop
+ok   has running
+ok   has backlight
+ok   WIDTH, HEIGHT > 0
+ok   BUFFERS 1 or 2
+ok   running after import
+ok   start() when running: still running
+ok   stop(): not running
+ok   stop() twice: not running
+ok   start() again: running
+ok   backlight(50) reads back > 0
+RESULT: OK
+>

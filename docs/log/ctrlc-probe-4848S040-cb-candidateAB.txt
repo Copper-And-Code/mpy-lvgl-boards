@@ -1,0 +1,73 @@
+# SPECIAL ok: KeyboardInterrupt raised in the main program
+# FPS driver 42.3 candidate-AB 42.3
+# 2026-11-13 14:55:35 mode=cb candidate=AB trials=60 window=0.80s seed=1794578120 port=/dev/ttyUSB0
+# board: cb ESP32-4848S040 with ESP32-S3
+  1 main             service=continued before=[(379, 1)] after=[(383, 1), (387, 1), (392, 1), (397, 1), (402, 1), (407, 1), (412, 1)] frames+29
+  2 main             service=continued before=[(432, 1)] after=[(441, 1), (446, 1), (451, 1), (456, 1), (461, 1), (466, 1)] frames+25
+  3 main             service=continued before=[(516, 1)] after=[(525, 1), (530, 1), (535, 1), (540, 1), (545, 1), (550, 1)] frames+25
+  4 main             service=continued before=[(565, 1)] after=[(570, 1), (575, 1), (580, 1), (585, 1), (590, 1), (595, 1)] frames+25
+  5 main             service=continued before=[(650, 1)] after=[(654, 1), (659, 1), (664, 1), (669, 1), (674, 1), (679, 1)] frames+25
+  6 main             service=continued before=[(714, 1)] after=[(718, 1), (722, 1), (727, 1), (732, 1), (737, 1), (742, 1), (747, 1)] frames+29
+  7 main             service=continued before=[(787, 1)] after=[(791, 1), (796, 1), (801, 1), (806, 1), (811, 1), (816, 1), (821, 1)] frames+30
+  8 main             service=continued before=[(836, 1)] after=[(840, 1), (845, 1), (850, 1), (855, 1), (860, 1), (865, 1), (870, 1)] frames+30
+  9 main             service=continued before=[(895, 1)] after=[(899, 1), (904, 1), (909, 1), (914, 1), (919, 1), (924, 1), (929, 1)] frames+30
+ 10 main             service=continued before=[(939, 1)] after=[(944, 1), (949, 1), (954, 1), (959, 1), (964, 1), (969, 1), (974, 1)] frames+30
+ 11 main             service=continued before=[(1004, 1)] after=[(1008, 1), (1013, 1), (1018, 1), (1023, 1), (1028, 1), (1033, 1), (1038, 1)] frames+30
+ 12 main             service=continued before=[(1063, 1)] after=[(1068, 1), (1073, 1), (1078, 1), (1083, 1), (1088, 1), (1093, 1), (1098, 1)] frames+30
+ 13 main             service=continued before=[(1148, 1)] after=[(1157, 1), (1162, 1), (1167, 1), (1172, 1), (1177, 1), (1182, 1)] frames+25
+ 14 main             service=continued before=[(1212, 1)] after=[(1216, 1), (1220, 1), (1225, 1), (1230, 1), (1235, 1), (1240, 1), (1245, 1)] frames+29
+ 15 main             service=continued before=[(1260, 1)] after=[(1265, 1), (1270, 1), (1275, 1), (1280, 1), (1285, 1), (1290, 1), (1295, 1)] frames+30
+ 16 main             service=continued before=[(1330, 1)] after=[(1334, 1), (1339, 1), (1344, 1), (1349, 1), (1354, 1), (1359, 1), (1364, 1)] frames+30
+ 17 main             service=continued before=[(1394, 1)] after=[(1398, 1), (1403, 1), (1408, 1), (1413, 1), (1418, 1), (1423, 1), (1428, 1)] frames+30
+ 18 main             service=continued before=[(1448, 1)] after=[(1452, 1), (1457, 1), (1462, 1), (1467, 1), (1472, 1), (1477, 1), (1482, 1)] frames+30
+ 19 main             service=continued before=[(1522, 1)] after=[(1526, 1), (1531, 1), (1536, 1), (1541, 1), (1546, 1), (1551, 1), (1556, 1)] frames+30
+ 20 main             service=continued before=[(1581, 1)] after=[(1585, 1), (1590, 1), (1595, 1), (1600, 1), (1605, 1), (1610, 1), (1615, 1)] frames+30
+ 21 main             service=continued before=[(1650, 1)] after=[(1654, 1), (1658, 1), (1663, 1), (1668, 1), (1673, 1), (1678, 1), (1683, 1)] frames+29
+ 22 main             service=continued before=[(1723, 1)] after=[(1727, 1), (1732, 1), (1737, 1), (1742, 1), (1747, 1), (1752, 1), (1757, 1)] frames+30
+ 23 main             service=continued before=[(1782, 1)] after=[(1787, 1), (1792, 1), (1797, 1), (1802, 1), (1807, 1), (1812, 1)] frames+25
+ 24 main             service=continued before=[(1842, 1)] after=[(1846, 1), (1851, 1), (1856, 1), (1861, 1), (1866, 1), (1871, 1)] frames+25
+ 25 main             service=continued before=[(1906, 1)] after=[(1911, 1), (1916, 1), (1921, 1), (1926, 1), (1931, 1), (1936, 1), (1941, 1)] frames+30
+ 26 main             service=continued before=[(1991, 1)] after=[(1995, 1), (2000, 1), (2005, 1), (2010, 1), (2015, 1), (2020, 1), (2025, 1)] frames+30
+ 27 main             service=continued before=[(2060, 1)] after=[(2064, 1), (2069, 1), (2074, 1), (2079, 1), (2084, 1), (2089, 1)] frames+25
+ 28 main             service=continued before=[(2109, 1)] after=[(2113, 1), (2118, 1), (2123, 1), (2128, 1), (2133, 1), (2138, 1), (2143, 1)] frames+30
+ 29 main             service=continued before=[(2188, 1)] after=[(2192, 1), (2197, 1), (2202, 1), (2207, 1), (2212, 1), (2217, 1), (2222, 1)] frames+30
+ 30 main             service=continued before=[(2267, 1)] after=[(2271, 1), (2276, 1), (2281, 1), (2286, 1), (2291, 1), (2296, 1), (2301, 1)] frames+30
+ 31 main             service=continued before=[(2341, 1)] after=[(2345, 1), (2349, 1), (2354, 1), (2359, 1), (2364, 1), (2369, 1), (2374, 1)] frames+29
+ 32 main             service=continued before=[(2394, 1)] after=[(2403, 1), (2408, 1), (2413, 1), (2418, 1), (2423, 1), (2428, 1)] frames+25
+ 33 main             service=continued before=[(2463, 1)] after=[(2467, 1), (2472, 1), (2477, 1), (2482, 1), (2487, 1), (2492, 1), (2497, 1)] frames+30
+ 34 main             service=continued before=[(2547, 1)] after=[(2551, 1), (2556, 1), (2561, 1), (2566, 1), (2571, 1), (2576, 1), (2581, 1)] frames+30
+ 35 main             service=continued before=[(2631, 1)] after=[(2635, 1), (2640, 1), (2645, 1), (2650, 1), (2655, 1), (2660, 1), (2665, 1)] frames+30
+ 36 main             service=continued before=[(2695, 1)] after=[(2700, 1), (2705, 1), (2710, 1), (2715, 1), (2720, 1), (2725, 1)] frames+25
+ 37 main             service=continued before=[(2745, 1)] after=[(2750, 1), (2755, 1), (2760, 1), (2765, 1), (2770, 1), (2775, 1)] frames+25
+ 38 main             service=continued before=[(2830, 1)] after=[(2834, 1), (2839, 1), (2844, 1), (2849, 1), (2854, 1), (2859, 1)] frames+25
+ 39 main             service=continued before=[(2904, 1)] after=[(2908, 1), (2913, 1), (2918, 1), (2923, 1), (2928, 1), (2933, 1), (2938, 1)] frames+30
+ 40 main             service=continued before=[(2958, 1)] after=[(2962, 1), (2967, 1), (2972, 1), (2977, 1), (2982, 1), (2987, 1), (2992, 1)] frames+30
+ 41 main             service=continued before=[(3012, 1)] after=[(3016, 1), (3021, 1), (3026, 1), (3031, 1), (3036, 1), (3041, 1), (3046, 1)] frames+30
+ 42 main             service=continued before=[(3081, 1)] after=[(3085, 1), (3089, 1), (3094, 1), (3099, 1), (3104, 1), (3109, 1), (3114, 1)] frames+29
+ 43 main             service=continued before=[(3164, 1)] after=[(3168, 1), (3173, 1), (3178, 1), (3183, 1), (3188, 1), (3193, 1)] frames+25
+ 44 main             service=continued before=[(3208, 1)] after=[(3212, 1), (3217, 1), (3222, 1), (3227, 1), (3232, 1), (3237, 1), (3242, 1)] frames+30
+ 45 main             service=continued before=[(3267, 1)] after=[(3271, 1), (3276, 1), (3281, 1), (3286, 1), (3291, 1), (3296, 1)] frames+25
+ 46 main             service=continued before=[(3351, 1)] after=[(3355, 1), (3360, 1), (3365, 1), (3370, 1), (3375, 1), (3380, 1)] frames+25
+ 47 main             service=continued before=[(3420, 1)] after=[(3424, 1), (3429, 1), (3434, 1), (3439, 1), (3444, 1), (3449, 1), (3454, 1)] frames+30
+ 48 main             service=continued before=[(3489, 1)] after=[(3498, 1), (3503, 1), (3508, 1), (3513, 1), (3518, 1), (3523, 1)] frames+25
+ 49 main             service=continued before=[(3543, 1)] after=[(3552, 1), (3557, 1), (3562, 1), (3567, 1), (3572, 1), (3577, 1)] frames+25
+ 50 main             service=continued before=[(3627, 1)] after=[(3636, 1), (3641, 1), (3646, 1), (3651, 1), (3656, 1), (3661, 1)] frames+25
+ 51 main             service=continued before=[(3706, 1)] after=[(3710, 1), (3715, 1), (3720, 1), (3725, 1), (3730, 1), (3735, 1)] frames+25
+ 52 main             service=continued before=[(3755, 1)] after=[(3759, 1), (3764, 1), (3769, 1), (3774, 1), (3779, 1), (3784, 1), (3789, 1)] frames+30
+ 53 main             service=continued before=[(3834, 1)] after=[(3839, 1), (3844, 1), (3849, 1), (3854, 1), (3859, 1), (3864, 1), (3869, 1)] frames+30
+ 54 main             service=continued before=[(3914, 1)] after=[(3918, 1), (3923, 1), (3928, 1), (3933, 1), (3938, 1), (3943, 1), (3948, 1)] frames+30
+ 55 main             service=continued before=[(3978, 1)] after=[(3983, 1), (3988, 1), (3993, 1), (3998, 1), (4003, 1), (4008, 1)] frames+25
+ 56 main             service=continued before=[(4038, 1)] after=[(4047, 1), (4052, 1), (4057, 1), (4062, 1), (4067, 1), (4072, 1)] frames+25
+ 57 main             service=continued before=[(4087, 1)] after=[(4092, 1), (4097, 1), (4102, 1), (4107, 1), (4112, 1), (4117, 1)] frames+25
+ 58 main             service=continued before=[(4147, 1)] after=[(4156, 1), (4161, 1), (4166, 1), (4171, 1), (4176, 1), (4181, 1)] frames+25
+ 59 main             service=continued before=[(4216, 1)] after=[(4220, 1), (4225, 1), (4230, 1), (4235, 1), (4240, 1), (4245, 1), (4250, 1)] frames+30
+ 60 main             service=continued before=[(4285, 1)] after=[(4294, 1), (4299, 1), (4304, 1), (4309, 1), (4314, 1), (4319, 1)] frames+25
+# summary mode=cb trials=60
+#   main       60  100.0%
+#   double      0    0.0%
+#   driver      0    0.0%
+#   scheduler   0    0.0%
+#   lvgl-cb     0    0.0%
+#   lost        0    0.0%
+#   service continued 60, stopped 0, unknown 0
+# end:  S 6834 1 | S 6839 1 | S 6844 1 | S 6849 1 | S 6854 1 | S 6859 1 | S 6864 1 | S 6869 1 | S 6874 1 | S 6879 1 | S 6884 1 | S 6889 1 | S 6894 1 | S 6899 1 | S 6904 1 | S 6909 1 | S 6914 1 | END 60 | >

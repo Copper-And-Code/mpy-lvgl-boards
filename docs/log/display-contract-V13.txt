@@ -1,0 +1,20 @@
+ok   CONTRACT == 1
+ok   has WIDTH
+ok   has HEIGHT
+ok   has BUFFERS
+ok   has PERIOD_MS
+ok   has indev
+ok   has start
+ok   has stop
+ok   has running
+ok   has backlight
+ok   WIDTH, HEIGHT > 0
+ok   BUFFERS 1 or 2
+ok   running after import
+ok   start() when running: still running
+ok   stop(): not running
+ok   stop() twice: not running
+ok   start() again: running
+ok   backlight(50) reads back > 0
+RESULT: OK
+>
