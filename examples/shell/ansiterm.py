@@ -47,10 +47,12 @@ def palette():
     return array("H", [(c >> 8 & 0xF800) | (c >> 5 & 0x07E0) | (c >> 3 & 0x001F) for c in rgb])
 
 
-# Viper takes four arguments at most: p is [first pixel, stride, ...].
+# Viper takes four arguments at most: p is [first pixel, stride, ...]. It is compiled from a
+# string so that a port without native code (MicroPython in the browser) can use framebuf instead.
+_VIPER = """
 @micropython.viper
 def _paint(fb: ptr16, font: ptr8, p: ptr32):
-    """A glyph: p = [first pixel, stride, offset in the font, fg, bg]."""
+    # A glyph: p = [first pixel, stride, offset in the font, fg, bg].
     o = int(p[0])
     stride = int(p[1])
     g = int(p[2])
@@ -74,7 +76,7 @@ def _paint(fb: ptr16, font: ptr8, p: ptr32):
 
 @micropython.viper
 def _fill(fb: ptr16, p: ptr32):
-    """A rectangle: p = [first pixel, stride, width, height, colour]."""
+    # A rectangle: p = [first pixel, stride, width, height, colour].
     o = int(p[0])
     stride = int(p[1])
     w = int(p[2])
@@ -88,6 +90,35 @@ def _fill(fb: ptr16, p: ptr32):
             i += 1
         o += stride
         h -= 1
+"""
+
+try:
+    exec(_VIPER, globals())
+except SyntaxError:  # no native code here: the same drawing with framebuf, in C as well
+    import framebuf
+
+    _screens = {}
+    _glyphs = {}
+    _palette = framebuf.FrameBuffer(bytearray(4), 2, 1, framebuf.RGB565)
+
+    def _screen(fb, stride):
+        screen = _screens.get(id(fb))
+        if screen is None:
+            screen = _screens[id(fb)] = framebuf.FrameBuffer(fb, stride, len(fb) // (2 * stride), framebuf.RGB565)
+        return screen
+
+    def _paint(fb, font, p):
+        stride = p[1]
+        glyph = _glyphs.get(p[2])
+        if glyph is None:
+            glyph = _glyphs[p[2]] = framebuf.FrameBuffer(bytearray(font[p[2] : p[2] + 16]), 8, 16, framebuf.MONO_HLSB)
+        _palette.pixel(0, 0, p[4])
+        _palette.pixel(1, 0, p[3])
+        _screen(fb, stride).blit(glyph, p[0] % stride, p[0] // stride, -1, _palette)
+
+    def _fill(fb, p):
+        stride = p[1]
+        _screen(fb, stride).fill_rect(p[0] % stride, p[0] // stride, p[2], p[3], p[4])
 
 
 class Terminal(io.IOBase):
@@ -554,8 +585,8 @@ def _task(_):
             pass
     except KeyboardInterrupt:
         term.interrupted = True
-    if display_driver._timer is not None:
-        display_driver._arm()
+    if display_driver._timer is not None and hasattr(display_driver, "_arm"):
+        display_driver._arm()  # the ESP32 driver's timer is one shot; the periodic ones need nothing
 
 
 def start():
@@ -566,7 +597,8 @@ def start():
     term.show()
     display_driver._task = _task
     display_driver.start()
-    display_driver._arm()  # a one shot timer: this also revives one that did not rearm
+    if hasattr(display_driver, "_arm"):
+        display_driver._arm()  # a one shot timer (ESP32): this also revives one that did not rearm
     os.dupterm(term)
     return term
 
