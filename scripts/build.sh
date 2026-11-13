@@ -42,7 +42,7 @@ MPY_REF=v1.29.0
 MPY_SHA=0fd6c573ea815774668bbb16b8e197c8822368b2
 # omnipython-lvgl, the successor of lvgl-micropython, at the commit of build_esp32.sh.
 OPL_URL=https://github.com/PyDevices/omnipython-lvgl.git
-OPL_SHA=665dec523206fc37c583053325b8ed80a96d5504
+OPL_SHA=a13f5c75e25b8ba5133d7bf6b7a5b09971e3f5dc  # tag v9.5.54
 XPACK_VER=15.2.1-1.1
 XPACK_SHA256=da6a49ad4003944b823c6c93702a8787c922ab34bd7e918ec0eaf6933a9b1ff6   # linux-x64
 

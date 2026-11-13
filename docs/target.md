@@ -2,7 +2,8 @@
 
 Recorded 2026-10-29 (Phase 0), for the RP2350 board. Since 2026-11-10 every board uses
 PyDevices/omnipython-lvgl, at `OPL_SHA` in `scripts/build_esp32.sh` and `scripts/build.sh`
-(`665dec523206fc37c583053325b8ed80a96d5504` since 2026-11-11, `c34fbee` before), with its `lvgl` submodule (LVGL 9.5,
+(`a13f5c75e25b8ba5133d7bf6b7a5b09971e3f5dc`, tag v9.5.54, since 2026-11-13: `665dec5` plus the
+release commit, which changes only `VERSION`; `665dec5` since 2026-11-11, `c34fbee` before), with its `lvgl` submodule (LVGL 9.5,
 `85aa60d`, the same LVGL as before); the lvgl-micropython and lvgl-bindings rows below are
 the RP2350 inputs up to v0.1.5.
 
