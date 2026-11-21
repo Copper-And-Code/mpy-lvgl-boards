@@ -1,0 +1,1283 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="MicroPython and LVGL firmware for microcontroller boards with a touch screen">
+      
+      
+      
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-mcu-boards/esp32-4848s040/">
+      
+      
+        <link rel="prev" href="../stm32h743/">
+      
+      
+        <link rel="next" href="../flash-dfu/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>ESP32-4848S040 - copper-and-code-mcu-boards</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/site.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#esp32-4848s040-notes-and-measurements" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="copper-and-code-mcu-boards" class="md-header__button md-logo" aria-label="copper-and-code-mcu-boards" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            copper-and-code-mcu-boards
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ESP32-4848S040
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="copper-and-code-mcu-boards" class="md-nav__button md-logo" aria-label="copper-and-code-mcu-boards" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    copper-and-code-mcu-boards
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boards
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Boards
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../boards/rp2350-touch-lcd-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveshare RP2350-Touch-LCD-4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stm32h743/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STM32H743 boards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP32-4848S040
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP32-4848S040
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#build-and-bench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build and bench
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-board-hides" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What this board hides
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#display-driver-modulesesp_rgb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Display driver (modules/esp_rgb)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measured" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measured
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Measured">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lvgls-memory-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LVGL's memory pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wifi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WiFi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-schedule-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The schedule queue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sound
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flash-dfu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installing with DFU (STM32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../display-driver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The display_driver contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../target/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rp2350-touch-lcd4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RP2350: performance and memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/rp2350-touch-lcd4-box/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware: a box for the RP2350 board
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CREDITS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#build-and-bench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build and bench
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-this-board-hides" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What this board hides
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#display-driver-modulesesp_rgb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Display driver (modules/esp_rgb)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measured" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measured
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Measured">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lvgls-memory-pools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LVGL's memory pools
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wifi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WiFi
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-schedule-queue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The schedule queue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sound" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sound
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="esp32-4848s040-notes-and-measurements">ESP32-4848S040: notes and measurements<a class="headerlink" href="#esp32-4848s040-notes-and-measurements" title="Permanent link">&para;</a></h1>
+<p>ESP32-S3 (240 MHz), 16 MB QIO flash, 8 MB octal PSRAM, 4" 480x480 ST7701 panel on a 16-bit
+RGB bus, GT911 touch, CH340 on UART0. MicroPython 1.29, LVGL 9.5. This is the first board
+of the repo on <a href="https://github.com/PyDevices/omnipython-lvgl">omnipython-lvgl</a>, the
+successor of the archived lvgl-micropython (the STM32 and RP2350 boards followed on
+2026-11-10).</p>
+<h2 id="build-and-bench">Build and bench<a class="headerlink" href="#build-and-bench" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>scripts/build.sh esp32 ESP32_4848S040</code>, which hands over to <code>scripts/build_esp32.sh</code>:
+  pins MicroPython, omnipython-lvgl (official, not a fork) and ESP-IDF v5.5.2. MicroPython
+  1.29 supports the 5.x series only, not ESP-IDF 6.</li>
+<li>Flash, at offset 0 (the image is complete):
+  <code>esptool.py --chip esp32s3 -p /dev/ttyUSB0 -b 460800 write_flash 0x0 dist/&lt;file&gt;.bin</code>.
+  On a board that had other firmware run <code>esptool.py --chip esp32s3 -p /dev/ttyUSB0 erase_flash</code>
+  first, which erases everything: without it the board can stop at boot with "The filesystem
+  appears to be corrupted".</li>
+<li>Run tests through the CH340: <code>scripts/uart_run.py &lt;test&gt; --dtr 0 --boot-wait 5</code>. DTR high
+  would hold IO0 low. No native USB (see below).</li>
+<li>After changing <code>sdkconfig.board</code> or <code>manifest.py</code>, delete
+  <code>.work/esp32/micropython/ports/esp32/build-ESP32_4848S040</code>: an existing build keeps its
+  old <code>sdkconfig</code>, and a failed build its old <code>frozen_content.c</code>, with no warning.</li>
+<li>A global pip index that does not answer makes every ESP-IDF pip install crawl: the
+  script sets <code>PIP_CONFIG_FILE=/dev/null</code> unless told otherwise.</li>
+</ul>
+<h2 id="what-this-board-hides">What this board hides<a class="headerlink" href="#what-this-board-hides" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Native USB must be off.</strong> The USB PHY holds GPIO 19 (touch SDA) and 20 (panel G1).
+  MicroPython turns it on by default on the S3, and the only symptom is an empty I2C scan:
+  the bus has its pull-ups, SCL works, SDA cannot go low. <code>MICROPY_HW_ENABLE_USBDEV=0</code>.</li>
+<li><strong>Red and blue are swapped</strong> against the published pin lists: GPIO 4, 5, 6, 7, 15 are the
+  high bits of the pixel, not the low ones. Checked by eye with colour bars and ramps.</li>
+<li><strong>The panel has no reset line</strong>: it keeps its state across a reset of the ESP32, so a
+  change to its init does not show until the next power cycle unless the sequence starts
+  with a software reset (<code>0x01</code>). It does now.</li>
+<li><strong>Not inverted.</strong> The source of the init sequence sends <code>0x21</code>; here that shows the
+  negative, so the sequence ends with <code>0x20</code>.</li>
+<li>GT911 RST and INT are not wired; <code>gt911.GT911(rst=None)</code>. Coordinates are panel pixels,
+  no rotation or mirroring (5 targets hit, 1-18 px off = finger size). <code>read()</code> 227 us.
+  The page we took the pins from says SCL is 20 in the text, 45 in its JSON: it is 45.</li>
+</ul>
+<h2 id="display-driver-modulesesp_rgb">Display driver (<code>modules/esp_rgb</code>)<a class="headerlink" href="#display-driver-modulesesp_rgb" title="Permanent link">&para;</a></h2>
+<p>Same interface as <code>st_ltdc</code> and <code>rgbpanel</code>, on ESP-IDF's <code>esp_lcd</code>. Two framebuffers in
+PSRAM, outside the GC heap, so the image survives a soft reset. Two bounce buffers of 20
+lines in internal RAM, filled by the CPU in an interrupt: the LCD DMA reading PSRAM directly
+loses pixels when anything else uses that memory. That interrupt copies 24 MB/s and stays on
+the core that creates the panel, so <code>esp_rgb.init()</code> creates it from a task on the other
+core: MicroPython keeps its core (loop speed 137 000 -&gt; 145 000/s of 147 000). <code>CONFIG_LCD_RGB_ISR_IRAM_SAFE</code> and
+<code>CONFIG_SPIRAM_XIP_FROM_PSRAM</code> keep the panel running during flash writes: code and
+constants run from PSRAM (which is why the heap is 5.7 MB, not 8).</p>
+<p><code>esp_lcd</code> does not report FIFO underruns, so unlike the other drivers there is no counter:
+lost pixels only show on the panel.</p>
+<p><strong>Drive strength of the data lines.</strong> At ESP-IDF's default drive (2, about 20 mA) the panel showed
+coloured specks wherever many bits change from one pixel to the next: single-pixel lines at a
+quarter, a half and three quarters of a grey ramp, red and green sparkles along the edges of
+photos. With the data lines at drive 1 (about 10 mA) or 0 the ramp and the photos are clean;
+the pixel clock at 10 MHz instead of 12, or data on the other clock edge, changed nothing.
+<code>esp_rgb.init()</code> sets the 16 data lines to <code>MICROPY_HW_RGB_DATA_DRIVE</code>, drive 1 unless the
+board says otherwise; the pixel clock keeps the default. Checked by eye on one board
+(dcb4d90487c0), with a grey ramp, the primaries and photos, 21 November 2026.</p>
+<p><strong>Soft reset</strong>: this port has no board hook after a soft reset, where the other drivers call
+<code>mp_lv_deinit_gc()</code>, and a later <code>lv.init()</code> panics (LoadProhibited). The board's <code>_boot.py</code>
+calls <code>esp_rgb.lvgl_guard()</code>, which leaves an object whose finaliser does it, run by
+<code>gc_sweep_all()</code>. So no patch to MicroPython. Because a board can freeze only one
+<code>_boot.py</code>, <code>manifest.py</code> lists the port's modules one by one.</p>
+<h2 id="measured">Measured<a class="headerlink" href="#measured" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Panel</td>
+<td>42.20 fps (nominal 42.27 at 12 MHz), the same during 200 KB of flash writes</td>
+</tr>
+<tr>
+<td>Full refresh, 48 buttons</td>
+<td>88 ms after a pause, 94-97 ms back to back</td>
+</tr>
+<tr>
+<td>Small label change</td>
+<td>2.9 ms after a pause</td>
+</tr>
+<tr>
+<td><code>gc.collect()</code> with 2 MB of data</td>
+<td>120 ms</td>
+</tr>
+<tr>
+<td>Soft resets with LVGL left initialised</td>
+<td>3/3</td>
+</tr>
+<tr>
+<td>WiFi</td>
+<td>see below</td>
+</tr>
+</tbody>
+</table>
+<p>Soak of 15 minutes (<code>tests/hil/esp32/t05_soak.py</code>: a full-height bar, a spinner, a label,
+Python allocations, 2 MB of application data, <code>gc.collect()</code> every 10 s): LVGL 39.1
+refreshes/s, panel 42.28 fps, 0 errors, 0 touch errors, memory flat (2.55-2.57 MB free). Log:
+<code>docs/log/esp32-phase5-soak-4848S040.txt</code>. <code>gc.collect()</code> still stops the animation for 120 ms,
+about 5 frames.</p>
+<p><strong>Where the speed came from.</strong> Full refresh, step by step:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>panel interrupt on the same core, 16 KB/32 KB caches</td>
+<td>145 ms</td>
+</tr>
+<tr>
+<td>interrupt on the other core</td>
+<td>133 ms</td>
+</tr>
+<tr>
+<td>instruction cache 32 KB, data cache 64 KB, 64-byte lines</td>
+<td>88 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Everything LVGL touches is behind the cache: code and constants (XIP from PSRAM), the heap
+and the framebuffers. The caches cost 16 KB of internal RAM. The firmware was already <code>-O2</code>.</p>
+<p><strong>Tried and dropped</strong>: PARTIAL mode with render buffers in internal RAM (strips copied to the
+hidden framebuffer, then to the other one). Worse with any height: 112-114 ms at 100 lines
+against 88, 290 ms at 20 before the caches: each strip walks all the objects again, and the
+copies add up. Rendering into PSRAM was not the limit.</p>
+<h3 id="lvgls-memory-pools">LVGL's memory pools<a class="headerlink" href="#lvgls-memory-pools" title="Permanent link">&para;</a></h3>
+<p>The pools of <code>lv_mem_core_micropython.c</code> keep LVGL's allocations in TLSF pools held in GC
+blocks, so they do not walk the GC's allocation table. Since omnipython-lvgl#15 they are
+opt-in on ESP32 as on the other ports; this board turns them on with <code>LVMP_POOL_TLSF</code> in
+<code>mpconfigboard.h</code>. <code>LVMP_POOLS=none scripts/build_esp32.sh ESP32_4848S040</code> builds without
+them, for comparisons (output <code>-nopool</code>). The first pool is 32 KB and each new one doubles,
+up to 256 KB.</p>
+<p>Measured with two builds of one tree (log <code>docs/log/esp32-pools-c34fbee-4848S040.txt</code>), with
+the layout script of omnipython-lvgl PR #6. The states are a fresh heap, one free block below
+2 MB of bytearrays, and many small holes among them:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>no pools</th>
+<th>pools</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>full refresh, median</td>
+<td>70.8-70.9 / 471.0 / 448.7-448.9 ms</td>
+<td>70.8-70.9 / 70.9 / 70.9 ms</td>
+</tr>
+<tr>
+<td>full refresh, worst of 20</td>
+<td>71.5 / 471.3 / 472.7 ms</td>
+<td>71.4-71.8 / 74.9-75.4 / 71.2-71.3 ms</td>
+</tr>
+<tr>
+<td>50 labels created and deleted</td>
+<td>30.5 / 70.2 / 230.5 ms</td>
+<td>29.0-36.2 / 29.4 / 33.0-34.4 ms</td>
+</tr>
+<tr>
+<td><code>gc.collect()</code></td>
+<td>3.1 / 127.1 / 109.9 ms</td>
+<td>6.8 / 123.2 / 111.3-111.4 ms</td>
+</tr>
+<tr>
+<td>GC heap free after <code>display_driver</code></td>
+<td>4.63 MB</td>
+<td>4.61 MB</td>
+</tr>
+</tbody>
+</table>
+<p>On a heap that has been in use, the pools keep the refresh at its fresh-heap time instead of
+6-7x slower. They cost 25 KB of heap and 3.7 ms more per collection on a fresh heap; the
+15 minute soak (no holes) runs at 48.9 LVGL refreshes/s with them and 47.6 without. Audio,
+WiFi and the soak pass with both, 0 errors, memory flat.</p>
+<p>Before #15 (v9.5.53, one 256 KB pool, on multi_heap or TLSF: log
+<code>docs/log/esp32-pools-4848S040.txt</code>) the refresh was the same, but the pools cost 250 KB of
+heap and 13 ms per collection, and the soak ran at 43.3 refreshes/s against 47.7. From
+v9.5.53 to c34fbee the firmware grew by 55 KB (the LVGL assert handler of #13 kept file and
+function names). With <code>CONFIG_SPIRAM_XIP_FROM_PSRAM</code> code and constants are copied to PSRAM,
+each rounded up to 64 KB pages that the heap does not get: here the constants went from 10 to
+11 pages, so the PSRAM region lost 64 KB (the 128 KB written here before was the free GC heap
+on the other board). omnipython-lvgl 665dec5 (#19: the handler gets only the file's base name
+and the line) is 50 KB smaller than c34fbee and back to 10 pages: the region is the v9.5.53
+size again and <code>gc.mem_free()</code> is 64 KB higher (log <code>docs/log/esp32-psram-665dec5.txt</code>).</p>
+<h2 id="wifi">WiFi<a class="headerlink" href="#wifi" title="Permanent link">&para;</a></h2>
+<p><code>network</code> and <code>socket</code> work as shipped. <code>tests/hil/esp32/t06_wifi.py</code>, with LVGL animating
+(RSSI read once, after connecting; it moved between -47 and -82 with nothing touched):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connect</td>
+<td>3.9-5.3 s; reconnect 3.9 s</td>
+</tr>
+<tr>
+<td>HTTP request to the internet, DNS included</td>
+<td>91-211 ms</td>
+</tr>
+<tr>
+<td>Connected, no traffic</td>
+<td>LVGL 39-46 refreshes/s, longest gap 36-59 ms</td>
+</tr>
+<tr>
+<td>Largest internal RAM block</td>
+<td>128 KB before, 80-88 KB after, not given back by <code>active(False)</code></td>
+</tr>
+<tr>
+<td>Panel</td>
+<td>42.2-42.3 fps in every phase</td>
+</tr>
+</tbody>
+</table>
+<p>TCP download for 10 s, the board reading 4 KB at a time. The first table is the periodic timer
+of v0.1.2, the second the one-shot timer (see below), 18 downloads in three runs, alternating:</p>
+<table>
+<thead>
+<tr>
+<th>RSSI</th>
+<th>LVGL</th>
+<th>Longest gap</th>
+<th>Speed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-48</td>
+<td>45.0/s</td>
+<td>163 ms</td>
+<td>6.07 Mbit/s</td>
+</tr>
+<tr>
+<td>-82</td>
+<td>29.8/s</td>
+<td>908 ms</td>
+<td>3.66 Mbit/s</td>
+</tr>
+<tr>
+<td>-45</td>
+<td>21.6/s</td>
+<td>1015 ms</td>
+<td>2.72 Mbit/s</td>
+</tr>
+<tr>
+<td>-67</td>
+<td>11.0/s</td>
+<td>912 ms</td>
+<td>0.95 Mbit/s</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Read</th>
+<th>LVGL</th>
+<th>Longest gap</th>
+<th>Speed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blocking, <code>settimeout(5)</code></td>
+<td>12.8-47.7/s</td>
+<td>113-215 ms</td>
+<td>0.35-5.2 Mbit/s</td>
+</tr>
+<tr>
+<td>non-blocking, <code>sleep_ms(1)</code> when empty</td>
+<td>50.5-54.1/s</td>
+<td>106-206 ms</td>
+<td>0.36-5.7 Mbit/s</td>
+</tr>
+</tbody>
+</table>
+<p>Read sockets non-blocking in an application with a UI: a blocking read can wait up to 100 ms
+in <code>lwip_recvfrom</code> (<code>SOCKET_POLL_US</code> in <code>modsocket.c</code>) without running the scheduler. The gaps
+of 100-200 ms that remain are not explained, and neither is the speed, which changes from one
+download to the next with the same reading mode. HTTPS not tried.</p>
+<h2 id="the-schedule-queue">The schedule queue<a class="headerlink" href="#the-schedule-queue" title="Permanent link">&para;</a></h2>
+<p>MicroPython's schedule queue has 8 places, and a <code>time.sleep_ms()</code> drains it slowly: with a
+periodic 5 ms timer that schedules a second callback, as <code>display_driver</code> had, a 2 s sleep ran
+205 ticks instead of 400. The queue stays full, and whatever else asks for a place is
+dropped with no error. That was the cause of two problems:</p>
+<ul>
+<li>the I2S callback of <code>audio.py</code> was lost, and the sound never ended (20 sounds in 24 during
+  long sleeps, none with polling or with the timer stopped);</li>
+<li>LVGL ran below its rate while sleeping, and the gaps during downloads reached 1 s.</li>
+</ul>
+<p><code>display_driver</code> now uses a one-shot timer, armed again at the end of each <code>lv.timer_handler()</code>,
+so it holds at most one place. 0 lost callbacks in 72 sounds; <code>t05_perf.py</code> animation from 47 to
+55 refreshes/s; soak of 15 minutes 47.6 refreshes/s against 39.1, 42.28 fps, 0 errors, 0 touch
+errors, memory flat (<code>docs/log/esp32-soak-oneshot-timer-4848S040.txt</code>).</p>
+<p>Note: <code>repr()</code> of a <code>machine.Timer</code> on the ESP32 prints the two modes swapped.</p>
+<h2 id="sound">Sound<a class="headerlink" href="#sound" title="Permanent link">&para;</a></h2>
+<p>Speaker connector, through an NS4168 on I2S: BCLK GPIO 1, LRCLK GPIO 2, DIN GPIO 40 (pins from
+a schematic extract on the Home Assistant community, confirmed by ear). These are also the
+<strong>relay pins</strong>: <code>audio.py</code> and <code>buzzer.py</code> must not be used on a board with the relays fitted.</p>
+<p><code>audio.py</code> plays beeps, tones and WAV files (PCM, 16 bit, mono or stereo) in the background;
+<code>buzzer.py</code> goes through it, so the games have sound with no changes. With the bar animating,
+calls return in 2-12 ms and LVGL keeps its rate, longest gap 25 ms.</p>
+<ul>
+<li>A sound comes out about 150 ms after the call, the time to cross the buffers.</li>
+<li>The I2S must keep running until the buffers have played. With one block of silence after
+  the sound, a 60 ms beep was never heard; with two, it is.</li>
+<li>The amplifier plays one channel: a stereo file loses the other one.</li>
+</ul>
+<h2 id="state">State<a class="headerlink" href="#state" title="Permanent link">&para;</a></h2>
+<p>All 10 examples start without exceptions; Breakout played by hand. Again on omnipython-lvgl
+c34fbee with the pools (<code>docs/log/esp32-examples-c34fbee-4848S040.txt</code>). On 665dec5 (2026-11-11,
+second board, <code>docs/log/opl-665dec5-all-boards.txt</code>): panel 42.20 fps, full refresh 93.7 ms on
+average, LVGL 54.2 refreshes/s animating, and <code>display.set_tile_cnt(256)</code> raises <code>RuntimeError:
+LVGL assert failed at lv_display.c:614</code> with LVGL still running. Backlight: PWM on GPIO 38
+at 2 kHz, 70% at start, dims at every step down to 10% by eye; <code>display_driver.backlight()</code> drives
+it from Python, so <code>esp_rgb.backlight()</code> is not the one to use. Below about 30% the panel can no
+longer be read.</p>
+<p>SD card: <code>machine.SDCard(slot=2, sck=48, miso=41, mosi=47, cs=42, freq=10_000_000)</code>, after
+<code>import display_driver</code>: SCK and MOSI are shared with the panel's SPI, which only the start
+uses. Saving the settings of <code>examples/weather.py</code> tested by hand on a board with a card; no
+card on the bench board.</p>
+<p>Not done: the relays (GPIO 40, 2, 1).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "navigation.tracking", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

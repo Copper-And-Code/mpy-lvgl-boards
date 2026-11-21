@@ -1,0 +1,26 @@
+:root {
+  --md-primary-fg-color: #17324d;
+  --md-primary-fg-color--light: #2b587d;
+  --md-primary-fg-color--dark: #102639;
+  --md-accent-fg-color: #2196f3;
+  --md-accent-fg-color--transparent: #2196f31a;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.home-card {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  background: var(--md-default-bg-color);
+}
+
+.home-card p {
+  margin: 0.3rem 0;
+}

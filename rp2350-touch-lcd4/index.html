@@ -1,0 +1,1354 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="MicroPython and LVGL firmware for microcontroller boards with a touch screen">
+      
+      
+      
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-mcu-boards/rp2350-touch-lcd4/">
+      
+      
+        <link rel="prev" href="../target/">
+      
+      
+        <link rel="next" href="../hardware/rp2350-touch-lcd4-box/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>RP2350: performance and memory - copper-and-code-mcu-boards</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/site.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#waveshare-rp2350-touch-lcd-4-performance-and-memory" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="copper-and-code-mcu-boards" class="md-header__button md-logo" aria-label="copper-and-code-mcu-boards" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            copper-and-code-mcu-boards
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              RP2350: performance and memory
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="copper-and-code-mcu-boards" class="md-nav__button md-logo" aria-label="copper-and-code-mcu-boards" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    copper-and-code-mcu-boards
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boards
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Boards
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../boards/rp2350-touch-lcd-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveshare RP2350-Touch-LCD-4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stm32h743/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STM32H743 boards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../esp32-4848s040/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP32-4848S040
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flash-dfu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installing with DFU (STM32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../display-driver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The display_driver contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../target/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RP2350: performance and memory
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RP2350: performance and memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#omnipython-lvgl-and-lvgls-memory-pools-2026-11-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        omnipython-lvgl and LVGL's memory pools (2026-11-10)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scan-out-and-rendering-vs-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scan-out and rendering vs clock
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tearing-and-double-buffering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tearing and double buffering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#was-open-a-full-redraw-sometimes-costs-one-frame-more-with-two-buffers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Was open: a full redraw sometimes costs one frame more with two buffers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robustness-ctrl-c-and-soft-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Robustness: Ctrl-C and soft reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soak-tests-150-mhz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soak tests (150 MHz)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-machinefreq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changing machine.freq()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sram-map-520-kib-firmware-with-lvgl-rgbpanel-display_driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SRAM map (520 KiB, firmware with LVGL + rgbpanel + display_driver)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#psram-2026-11-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PSRAM (2026-11-20)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/rp2350-touch-lcd4-box/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware: a box for the RP2350 board
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CREDITS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#omnipython-lvgl-and-lvgls-memory-pools-2026-11-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        omnipython-lvgl and LVGL's memory pools (2026-11-10)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scan-out-and-rendering-vs-clock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scan-out and rendering vs clock
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tearing-and-double-buffering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tearing and double buffering
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#was-open-a-full-redraw-sometimes-costs-one-frame-more-with-two-buffers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Was open: a full redraw sometimes costs one frame more with two buffers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#robustness-ctrl-c-and-soft-reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Robustness: Ctrl-C and soft reset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soak-tests-150-mhz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soak tests (150 MHz)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-machinefreq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changing machine.freq()
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sram-map-520-kib-firmware-with-lvgl-rgbpanel-display_driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SRAM map (520 KiB, firmware with LVGL + rgbpanel + display_driver)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#psram-2026-11-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PSRAM (2026-11-20)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="waveshare-rp2350-touch-lcd-4-performance-and-memory">Waveshare RP2350-Touch-LCD-4: performance and memory<a class="headerlink" href="#waveshare-rp2350-touch-lcd-4-performance-and-memory" title="Permanent link">&para;</a></h1>
+<p>Measured on the board (RP2350B, 16 MB flash, <strong>no PSRAM</strong>: U9 not fitted), MicroPython
+v1.29.0, <code>MICROPY_HW_RGBPANEL_SCALE = 2</code> (240x240 framebuffer shown as 2x2 pixels). LVGL
+9.5 through PyDevices omnipython-lvgl (<code>c34fbee</code> since 2026-11-10, <code>665dec5</code> since 2026-11-11: the
+same numbers, 46 KB less flash, see the end of the next section) with its memory pools
+(next section); the sections after it were measured before, on lvgl-micropython <code>3e287e7</code>
+/ lvgl-bindings <code>7740c2f</code>, the same LVGL. Raw logs in <code>docs/log/</code>.</p>
+<h2 id="omnipython-lvgl-and-lvgls-memory-pools-2026-11-10">omnipython-lvgl and LVGL's memory pools (2026-11-10)<a class="headerlink" href="#omnipython-lvgl-and-lvgls-memory-pools-2026-11-10" title="Permanent link">&para;</a></h2>
+<p>The board moved from the archived lvgl-micropython to omnipython-lvgl <code>c34fbee</code>, like the
+other boards, with LVGL's memory pools on (<code>LVMP_POOL_TLSF</code> in <code>mpconfigboard.h</code>; the binding's
+TLSF pools, held in GC blocks, from 32 KB doubling up to 256 KB). Measured on board 2,
+whose GT911 does not answer (<code>log/board2-check.txt</code>), so without touch,
+<code>log/rp2350-opl-c34fbee.txt</code>:</p>
+<ul>
+<li>Same image: the 64 tile CRCs of <code>t04_crc.py</code> match the earlier ones (and the unix port).</li>
+<li>Same speed on a clean heap: <code>t06_perf.py</code> 16.6 ms at 150 MHz, 13.1 ms at 200 and
+  240 MHz (two buffers, so frame-bound), 57.67 / 76.67 fps, no underruns.</li>
+<li><code>t02_lvgl_smoke.py</code> across soft resets, <code>t03_panel.py</code> (57.80 fps, 0 underruns, flash
+  writes included), <code>t07_lvgl_oom.py</code> as before (the half-done refresh after a
+  <code>MemoryError</code> is still there, <code>docs/upstream/pydevices-issue-oom-render.md</code>).</li>
+<li>26 KB less free heap: 190 KB after <code>import display_driver</code> instead of 215 KB.</li>
+<li>1 h soak (<code>t06_soak.py</code>, two buffers): 57.73 fps, 0 underruns, 0 errors, lowest free
+  heap 151 KB (84 KB before), 668 800 Python allocations (374 400 before, in the same hour)
+  (<code>log/rp2350-soak-opl.txt</code>).</li>
+<li>The 10 examples start and keep running, 151-189 KB free, 0 underruns; not played, no
+  touch on this board (<code>log/rp2350-examples-opl.txt</code>).</li>
+<li>Board 1 (with touch), the same file: the same figures (CRCs, perf, heap states), LVGL
+  clicks 3/3, the 5 touch targets at the corners and centre, GT911 <code>read()</code> 200 us (236 before),
+  the 10 examples start, Breakout played by hand: touch responsive, no glitches
+  (<code>log/rp2350-board1-opl.txt</code>).</li>
+</ul>
+<p><strong>The pools fix the open issue below.</strong> <code>lv.refr_now()</code> of <code>scene_static</code> after a 60 ms
+pause, median of 15, the same firmware built with and without the pools
+(<code>LVMP_POOLS=none</code>), <code>log/rp2350-heap-states-opl.txt</code>:</p>
+<table>
+<thead>
+<tr>
+<th>heap</th>
+<th>two buffers, no pools</th>
+<th>two buffers, pools</th>
+<th>one buffer, no pools</th>
+<th>one buffer, pools</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clean</td>
+<td>26.5 ms</td>
+<td>26.5 ms</td>
+<td>10.5 ms</td>
+<td>9.6 ms</td>
+</tr>
+<tr>
+<td>30 KB of garbage</td>
+<td>26.0 ms</td>
+<td>26.5 ms</td>
+<td>9.3 ms</td>
+<td>9.6 ms</td>
+</tr>
+<tr>
+<td>60 KB of small live objects</td>
+<td><strong>43.2 ms</strong></td>
+<td>26.5 ms</td>
+<td>9.3 ms</td>
+<td>9.6 ms</td>
+</tr>
+<tr>
+<td>small live objects with holes</td>
+<td><strong>43.8 ms</strong></td>
+<td>26.5 ms</td>
+<td><strong>17.0 ms</strong></td>
+<td>9.6 ms</td>
+</tr>
+</tbody>
+</table>
+<p>With the pools every heap state costs the same. Without them the extra time appears in the
+same kind of heap states as in the table of 2026-11-05 below: so it was LVGL's allocations walking the GC heap
+(<code>gc_alloc()</code> starts from the first free block), as on the STM32H7_CORE
+(<code>docs/stm32h743.md</code>). The two-buffer figures include the wait for the end of the frame.</p>
+<p>The pool layout script of the STM32 boards (24 buttons and 6 sliders, a 2 KB block per
+hole, 80 KB, <code>log/rp2350-pool-layouts-opl.txt</code>) shows the same with two buffers (refresh
+51.8 ms in every layout with the pools, 34.5 ms fresh and 68.9 ms fragmented without);
+with one buffer its scene renders in 35.2 ms with the pools, 33.6-33.9 ms without, so
+here the pools cost 1.6 ms when the heap is not in the way. <code>gc.collect()</code>: 2.3-5.2 ms
+with the pools, 2.0-5.0 ms without.</p>
+<p>omnipython-lvgl 665dec5 (2026-11-11, board 1, <code>log/opl-665dec5-all-boards.txt</code>): its PR #19
+makes an LVGL assert pass only the file's base name and the line, 46,336 B less flash. Same
+64 tile CRCs, the same <code>t06_perf.py</code> figures (57.67 / 76.67 fps, 13.1 ms at 200 MHz), the
+same 350 KB free after boot, and <code>display.set_tile_cnt(256)</code> raises <code>RuntimeError: LVGL
+assert failed at lv_display.c:614</code> with LVGL still running.</p>
+<h2 id="scan-out-and-rendering-vs-clock">Scan-out and rendering vs clock<a class="headerlink" href="#scan-out-and-rendering-vs-clock" title="Permanent link">&para;</a></h2>
+<p>Core voltage untouched (default 1.10 V). <code>machine.freq()</code> then <code>rgbpanel.init(pclk_hz=...)</code>.
+<code>refr_now</code> = full-screen invalidated <code>lv.refr_now()</code> of <code>tests/hil/scene_static.py</code>,
+single buffer (no wait for the buffer swap). Source: <code>log/phase6-perf.txt</code>.</p>
+<table>
+<thead>
+<tr>
+<th>sys clock</th>
+<th>PCLK</th>
+<th>divider</th>
+<th>fps measured (nominal)</th>
+<th><code>refr_now</code> avg</th>
+<th>underruns (3 s / 200 KB flash write)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>150 MHz</td>
+<td>15 MHz</td>
+<td>5</td>
+<td>57.67 (57.73)</td>
+<td>9.23 ms</td>
+<td>0 / 0</td>
+</tr>
+<tr>
+<td>200 MHz</td>
+<td>20 MHz</td>
+<td>5</td>
+<td>76.67 (76.97)</td>
+<td>7.86 ms</td>
+<td>0 / 0</td>
+</tr>
+<tr>
+<td>240 MHz</td>
+<td>20 MHz</td>
+<td>6</td>
+<td>76.67 (76.97)</td>
+<td>7.25 ms</td>
+<td>0 / 0</td>
+</tr>
+</tbody>
+</table>
+<p>Rendering speeds up less than the clock (150 → 240 MHz = x1.6, <code>refr_now</code> x1.27): code runs
+from QSPI flash (XIP), whose clock divider MicroPython raises with the system clock.</p>
+<p>Long flash-write test at 150 MHz: 107 x 200 KB in 90 s, 5219 frames (57.73 fps), 0 underruns,
+no visible glitch (<code>log/phase3-flash-stress.txt</code>).</p>
+<h2 id="tearing-and-double-buffering">Tearing and double buffering<a class="headerlink" href="#tearing-and-double-buffering" title="Permanent link">&para;</a></h2>
+<p>With one framebuffer LVGL (DIRECT mode) draws into the buffer being scanned out: a vertical
+bar sweeping across the screen showed visibly broken/offset (Nunzio, by eye). Waiting for
+VSYNC in the flush callback cannot help in that mode (the drawing is already done when
+flush is called).</p>
+<p>Fix: <strong>double buffering at 240x240</strong>, which fits in SRAM (a second 480x480 buffer would not).
+<code>rgbpanel.init(buffers=2)</code> allocates a second framebuffer and its list of control blocks on
+the GC heap (122 896 B). The DMA block that ends every frame reads the list for the next
+frame from a variable: pointing it at the other list swaps buffers exactly at the end of a
+frame, in hardware, with no ISR. <code>swap()</code> returns once the control DMA channel reads from the
+new list (so the old buffer is no longer read). LVGL draws into the hidden buffer; the flush
+callback (in C) swaps. Result: bar straight, movement smooth (by eye).</p>
+<p><code>display_driver</code> uses two buffers by default (falls back to one on <code>MemoryError</code>).
+Full-screen <code>lv.refr_now()</code> then takes ~17 ms (9.2 ms rendering + wait for the end of the
+frame): LVGL refreshes at most once per panel frame (57.7 Hz at PCLK 15 MHz).
+Pixel check vs the unix port still 64/64 tiles identical (<code>log/phase6-crc-doublebuf.txt</code>).</p>
+<h2 id="was-open-a-full-redraw-sometimes-costs-one-frame-more-with-two-buffers">Was open: a full redraw sometimes costs one frame more with two buffers<a class="headerlink" href="#was-open-a-full-redraw-sometimes-costs-one-frame-more-with-two-buffers" title="Permanent link">&para;</a></h2>
+<p>Solved by LVGL's memory pools: see above. The analysis as it was on 2026-11-05:</p>
+<p><code>tests/hil/t06_perf.py</code> no longer reproduces the table above: <code>display_driver</code> now uses two
+buffers, so <code>refr_now</code> includes the wait for the swap and reads the frame, not the rendering
+(17.2 ms at 57.7 Hz, 12.9 ms at 77 Hz). Back to back, or from a pause that ends early enough,
+it can read two frames (26 and 34 ms). This is no regression: the published firmware and the
+omnipython-lvgl build give the same figures.</p>
+<p>Measured on the 240x240 scene (2026-11-05, 150 MHz), <code>lv.refr_now()</code> after a pause:</p>
+<table>
+<thead>
+<tr>
+<th>heap</th>
+<th>one buffer</th>
+<th>two buffers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clean</td>
+<td>9.5 ms</td>
+<td>11.5 ms</td>
+</tr>
+<tr>
+<td>30 KB of garbage</td>
+<td>8.9 ms</td>
+<td>28.8 ms</td>
+</tr>
+<tr>
+<td>60 KB of small live objects</td>
+<td>8.9 ms</td>
+<td>28.8 ms</td>
+</tr>
+<tr>
+<td>small live objects with holes</td>
+<td>14.7 ms</td>
+<td>28.8 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Timed inside the flush: the wait for the swap stays short (3 ms); LVGL reaches the flush at
+9.4 ms in the first case and 24.7 ms in the slow one. So the extra 15 ms are in LVGL, before
+the flush, and only with two buffers.</p>
+<p>Ruled out, by measurement: free memory (slow with over 200 KB free), <code>gc.collect()</code> as a
+remedy, the flash clock (<code>QMI M0_TIMING</code> unchanged), the XIP cache (same misses), flash writes
+as such, one extra refresh (one <code>REFR_START</code> per <code>refr_now</code>), and the second framebuffer
+being in the GC heap (a static one gives the same figures, and loses 120 KB with one buffer).</p>
+<p>Not known: where the 15 ms go, and why they depend on the heap. They look like a copy of the
+115 KB between the buffers, but <code>refr_sync_areas()</code> should have nothing to copy with the
+whole screen invalidated. Python event callbacks on the display made the slowdown disappear
+for the same garbage, probably by changing the heap, so timing from Python does not settle
+it: the next step is timing inside LVGL, in C, with nothing that allocates.</p>
+<p>Effect: full-screen redraws at about 34 per second instead of 57 in those heap states; the
+image stays correct. Small redraws were not measured in those states.</p>
+<h2 id="robustness-ctrl-c-and-soft-reset">Robustness: Ctrl-C and soft reset<a class="headerlink" href="#robustness-ctrl-c-and-soft-reset" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Flush callback in C</strong> (<code>rgbpanel.lv_display_create()</code>): with a Python <code>flush_cb</code>, a
+  KeyboardInterrupt (Ctrl-C, or the Ctrl-C <code>mpremote</code> sends before every command) landing
+  inside it is printed and swallowed by the binding, <code>flush_ready()</code> is never called, and
+  LVGL's next refresh waits for the flush forever: the board hung (USB up, REPL dead,
+  power cycle needed). With the Python flush + double buffer the board hung in 2 of 3
+  soft-reset sequences (the third passed by timing luck); with the C flush
+  6/6 soft resets with LVGL live were clean (<code>log/phase6-softreset-debug.txt</code>).</li>
+<li><strong>Ctrl-C reaches the program</strong>: <code>lv.timer_handler()</code> takes most of the CPU, so a
+  KeyboardInterrupt usually lands in display_driver's callbacks; there it now stops the
+  timer, and the next Ctrl-C reaches the program (<code>mpremote</code> sends several). 3/3 interrupts
+  of a running LVGL program succeeded at the first mpremote attempt (<code>log/phase6-ctrlc.txt</code>).
+  <code>display_driver.start()</code> resumes.</li>
+<li><strong>Soft reset</strong>: the board hook moves the image to the static framebuffer if the GC one was
+  shown, drops the GC buffer, and clears LVGL's root (binding bug, see
+  <code>upstream/pydevices-issue-soft-reset.md</code>). Scan-out keeps running throughout.</li>
+</ul>
+<h2 id="soak-tests-150-mhz">Soak tests (150 MHz)<a class="headerlink" href="#soak-tests-150-mhz" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Duration</th>
+<th>Frames</th>
+<th>fps</th>
+<th>Underruns</th>
+<th>Errors</th>
+<th>Python allocations</th>
+<th>GC free, per-minute samples (t ≥ 60 s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>single buffer, Python flush</td>
+<td>3600 s</td>
+<td>207 823</td>
+<td>57.73</td>
+<td>0</td>
+<td>0</td>
+<td>668 760</td>
+<td>252 848 .. 270 912 B</td>
+</tr>
+<tr>
+<td>double buffer, C flush</td>
+<td>3600 s</td>
+<td>207 828</td>
+<td>57.73</td>
+<td>0</td>
+<td>0</td>
+<td>374 400</td>
+<td>66 688 .. 147 952 B</td>
+</tr>
+</tbody>
+</table>
+<p>Scene: sweeping bar animation, spinner, label updated 5x/s, list/string churn,
+<code>gc.collect()</code> every 10 s (<code>tests/hil/t06_soak.py</code>, <code>log/phase6-soak.txt</code>,
+<code>log/phase6-soak-doublebuf.txt</code>).</p>
+<ul>
+<li>No leak: GC free has no trend over the hour in either run. The samples are taken
+  between collections, so they include garbage; the single 66 688 B sample in the double
+  buffer run is one such instant (the next minute is back at 139 840 B).</li>
+<li>The <code>min_free</code> column printed by the test is not meaningful: its starting value is
+  <code>gc.mem_free()</code> before the first <code>gc.collect()</code> and no later sample went below it.</li>
+<li>The Python loop ran ~44 % fewer iterations with double buffering (allocation count):
+  most likely because the flush busy-waits for the end of the panel frame on every refresh,
+  which leaves less CPU to the main loop at 150 MHz.</li>
+</ul>
+<h2 id="changing-machinefreq">Changing <code>machine.freq()</code><a class="headerlink" href="#changing-machinefreq" title="Permanent link">&para;</a></h2>
+<p>The scan-out runs from <code>clk_sys</code>: after <code>machine.freq(f)</code> the PCLK scales with it until
+<code>rgbpanel.init(pclk_hz=...)</code> is called. <code>init()</code> notices the new system clock and restarts
+the scan-out with the new divider (panel not re-initialised, framebuffer kept, the shown
+buffer kept). Only integer dividers are accepted: e.g. 200 MHz with 15 MHz PCLK is refused
+with <code>ValueError</code> (no fractional-divider jitter). Decision: the driver does <strong>not</strong> follow
+clock changes by itself (MicroPython has no hook for that); applications call
+<code>rgbpanel.init()</code> after <code>machine.freq()</code>. The GT911 (I2C1, 400 kHz) answers normally at
+240 MHz and back at 150 MHz without re-initialisation (<code>log/phase6-touch-freq.txt</code>).</p>
+<h2 id="sram-map-520-kib-firmware-with-lvgl-rgbpanel-display_driver">SRAM map (520 KiB, firmware with LVGL + rgbpanel + display_driver)<a class="headerlink" href="#sram-map-520-kib-firmware-with-lvgl-rgbpanel-display_driver" title="Permanent link">&para;</a></h2>
+<p>From <code>firmware.elf</code> (<code>arm-none-eabi-size -A</code>, <code>nm</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Region</th>
+<th>Bytes</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vector table + <code>.data</code></td>
+<td>18 808</td>
+<td>includes code copied to RAM</td>
+</tr>
+<tr>
+<td><code>.bss</code> total</td>
+<td>135 900</td>
+<td></td>
+</tr>
+<tr>
+<td>— <code>rgbpanel_fb</code> (240x240 RGB565)</td>
+<td>115 200</td>
+<td>static, scanned out by DMA</td>
+</tr>
+<tr>
+<td>— <code>rgbpanel_cb</code> (481 control blocks)</td>
+<td>7 696</td>
+<td></td>
+</tr>
+<tr>
+<td>— <code>mp_state_ctx</code></td>
+<td>9 076</td>
+<td></td>
+</tr>
+<tr>
+<td>— rest</td>
+<td>3 928</td>
+<td></td>
+</tr>
+<tr>
+<td>C heap (<code>.heap</code>)</td>
+<td>2 048</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>MicroPython GC heap</strong></td>
+<td><strong>365 476</strong></td>
+<td><code>__GcHeapStart</code> 0x20025c5c .. <code>__GcHeapEnd</code> 0x2007f000</td>
+</tr>
+<tr>
+<td>core 1 stack</td>
+<td>4 096</td>
+<td>0x2007f000 .. 0x20080000</td>
+</tr>
+<tr>
+<td>core 0 stack (SCRATCH_X/Y)</td>
+<td>8 192</td>
+<td>0x20080000 .. 0x20082000</td>
+</tr>
+</tbody>
+</table>
+<p>GC heap free (<code>gc.mem_free()</code>): 345 056 B with rgbpanel only; 331 968 B right after
+<code>import display_driver</code>; ~274 000 B with a small LVGL scene and touch.</p>
+<p>With a second framebuffer for double buffering (<code>init(buffers=2)</code>, GC heap): 115 200 + 7 696 B more:
+<code>gc.mem_free()</code> ~211 000 B right after <code>import display_driver</code> with two buffers and touch.</p>
+<p><strong>480x480 is not possible without PSRAM</strong>: a 460 800 B framebuffer leaves ~27 KiB of SRAM
+heap for everything else. With PSRAM the GC heap moves to PSRAM and the framebuffer takes
+the SRAM heap area instead (next section).</p>
+<h2 id="psram-2026-11-20">PSRAM (2026-11-20)<a class="headerlink" href="#psram-2026-11-20" title="Permanent link">&para;</a></h2>
+<p>Board 1 with an 8 MB PSRAM (APS6404L) fitted on U9 by the owner. Full log:
+<code>log/rp2350-psram-probe-2026-11-20.txt</code>, soak <code>log/rp2350-psram480-soak-2026-11-20.txt</code>.</p>
+<p><strong>The memory.</strong> Detected at boot on CS GPIO47 by v0.1.7 as is: GC heap 8 553 280 B. 8 patterns
+over 8 192 000 B, 0 errors, at the QMI's 75 MHz (150 MHz system clock) and at 120 MHz
+(240 MHz). The Ctrl-C contract (4 x 60) passed with the heap in PSRAM, 28.3 fps as before.</p>
+<p><strong>Bandwidth.</strong> DMA read of one 480x480 frame: 26.7 / 28.1 MB/s (cached / uncached alias) at
+150 MHz, 42.8 / 45.6 MB/s at 240 MHz, the same with the CPU reading or writing PSRAM. A
+480x480 scan-out needs 26.6 MB/s on average, 30 MB/s within a line at PCLK 15 MHz.</p>
+<p><strong>Why the framebuffer cannot be in PSRAM.</strong> Bandwidth is not the problem; the PIO FIFO
+holds 16 pixels (1.1 us at 15 MHz) and <strong>any DMA access to XIP holds the DMA engine up
+for 2-4 us</strong>, also for channels that only read SRAM. Measured on v0.1.7 (240x240 from SRAM),
+underruns in 20 s while a second DMA channel copies in a loop:</p>
+<table>
+<thead>
+<tr>
+<th>Second channel</th>
+<th>Underruns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>none</td>
+<td>0</td>
+</tr>
+<tr>
+<td>PSRAM to SRAM</td>
+<td>401 (every poll)</td>
+</tr>
+<tr>
+<td>SRAM to SRAM</td>
+<td>0</td>
+</tr>
+<tr>
+<td>XIP stream FIFO (PSRAM, paced by DREQ_XIP_STREAM)</td>
+<td>399</td>
+</tr>
+</tbody>
+</table>
+<p>With the PSRAM copy running, the scan-out is clean from PCLK 7.5 MHz on (x2: the FIFO
+covers 4.3 us), not at 15 MHz (2.1 us); a 480x480 scan-out would need ~3.75 MHz (14 Hz).
+The CPU reading PSRAM does not disturb the DMA (0 underruns).</p>
+<p>Tried and dropped:
+- Framebuffer in PSRAM, read by the panel DMA: the PIO stalls and stays late (the
+  line-start IRQ is already pending), the picture shifts right with stray pixels.
+- An 8-line ring in SRAM filled by two more DMA channels from PSRAM: the same stalls,
+  through the shared DMA engine.
+- Core 1 copying lines into the ring: clean when idle (38.5 Hz at PCLK 10 MHz; one core
+  copies ~20 MB/s at 240 MHz), but core 0 writing PSRAM (LVGL drawing) starves it: 94 % of
+  the lines late, i.e. shown 8 lines off.</p>
+<p><strong>What the firmware does</strong> (<code>modules/rgbpanel</code>, <code>patches/micropython</code>): at boot, before
+<code>gc_init()</code>, the board hook <code>MICROPY_BOARD_SRAM_HEAP</code> takes the framebuffer from the end of
+the SRAM heap area: 480x480 with PSRAM (the GC heap is then PSRAM only), 240x240 without.
+With PSRAM the system clock goes to 240 MHz before the flash and PSRAM timing is set.
+Measured (<code>docs/log/rp2350-psram-probe-2026-11-20.txt</code>):
+- 57.70 fps at PCLK 15 MHz, 0 underruns, also with core 0 writing or reading 1 MB of PSRAM;
+- <code>t03_panel.py</code>: 57.80 fps, 0 underruns, 0 during 200 KB of flash writes;
+- Ctrl-C contract 60/60 in all four cases (sleep, stdin, cb, touch), LVGL 28.7 fps with one
+  buffer (<code>log/ctrlc-contract-RP2350-psram480-*.txt</code>);
+- touch at 1:1: five targets (corners, centre) all hit;
+- GC heap 8 215 616 B, 8.2 MB free;
+- soak (<code>t06_soak.py</code>, one buffer, stopped at 30 min instead of 1 h): 57.74 fps, 0 underruns,
+  0 errors, 240 640 Python allocations, lowest free heap 8 132 576 B, steady at ~8.14 MB
+  (<code>log/rp2350-psram480-soak-2026-11-20.txt</code>).</p>
+<p>One buffer only: a second 480x480 buffer would be on the GC heap in PSRAM, which the panel
+DMA must not read, so <code>init(buffers=2)</code> raises <code>MemoryError</code>. Applications must also keep
+<code>rp2.DMA</code> off PSRAM and flash addresses while the panel runs, at either scale.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "navigation.tracking", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

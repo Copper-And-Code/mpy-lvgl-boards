@@ -1,0 +1,1076 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="MicroPython and LVGL firmware for microcontroller boards with a touch screen">
+      
+      
+      
+        <link rel="canonical" href="https://copper-and-code.github.io/copper-and-code-mcu-boards/display-driver/">
+      
+      
+        <link rel="prev" href="../flash-dfu/">
+      
+      
+        <link rel="next" href="../examples/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../images/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>The display_driver contract - copper-and-code-mcu-boards</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/site.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-display_driver-contract" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="copper-and-code-mcu-boards" class="md-header__button md-logo" aria-label="copper-and-code-mcu-boards" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            copper-and-code-mcu-boards
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              The display_driver contract
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="copper-and-code-mcu-boards" class="md-nav__button md-logo" aria-label="copper-and-code-mcu-boards" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    copper-and-code-mcu-boards
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Boards
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Boards
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../boards/rp2350-touch-lcd-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Waveshare RP2350-Touch-LCD-4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stm32h743/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    STM32H743 boards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../esp32-4848s040/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP32-4848S040
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../flash-dfu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installing with DFU (STM32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The display_driver contract
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The display_driver contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ctrl-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ctrl-C
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ctrl-C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-driver-has-to-do-something" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the driver has to do something
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-driver-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the driver does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-not-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is not covered
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deprecated-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deprecated names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../target/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Building
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rp2350-touch-lcd4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RP2350: performance and memory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/rp2350-touch-lcd4-box/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware: a box for the RP2350 board
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CREDITS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credits
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ctrl-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ctrl-C
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ctrl-C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-driver-has-to-do-something" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the driver has to do something
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-driver-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the driver does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-not-covered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is not covered
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deprecated-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deprecated names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="the-display_driver-contract">The <code>display_driver</code> contract<a class="headerlink" href="#the-display_driver-contract" title="Permanent link">&para;</a></h1>
+<p>Every board has a frozen <code>display_driver.py</code>:
+- <code>python/display_driver.py</code> on the RP2350;
+- <code>python/stm32/display_driver.py</code> on the STM32H743 boards;
+- <code>python/esp32/display_driver.py</code> on the ESP32-S3.</p>
+<p>The names below are what an application, a test or Copper and Code Studio may rely on, on
+every board. Everything else in the drivers is internal and may change between
+releases.</p>
+<p><strong>Version 1</strong> (<code>CONTRACT = 1</code>), from firmware v0.1.7. Before it, firmware v0.1.6 and
+older, there is no <code>CONTRACT</code>.</p>
+<h2 id="names">Names<a class="headerlink" href="#names" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>What it promises</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>import display_driver</code></td>
+<td>Display, touch and LVGL are on. LVGL is served in the background, <code>lv.timer_handler()</code> every <code>PERIOD_MS</code>, so the application needs no main loop. Importing again is safe.</td>
+</tr>
+<tr>
+<td><code>CONTRACT</code></td>
+<td><code>1</code>, the version of this contract. A program can test <code>hasattr(display_driver, "CONTRACT")</code> to tell older firmware apart.</td>
+</tr>
+<tr>
+<td><code>WIDTH</code>, <code>HEIGHT</code></td>
+<td>The logical resolution LVGL draws at. On the RP2350 without PSRAM it is 240x240, shown as 2x2 pixels; with PSRAM 480x480.</td>
+</tr>
+<tr>
+<td><code>BUFFERS</code></td>
+<td>How many framebuffers the driver uses: 2, or 1 when there was no room for two.</td>
+</tr>
+<tr>
+<td><code>PERIOD_MS</code></td>
+<td>The period of the background service.</td>
+</tr>
+<tr>
+<td><code>indev</code></td>
+<td>The touch input device, or <code>None</code> if no touch controller answered.</td>
+</tr>
+<tr>
+<td><code>start()</code></td>
+<td>Resumes the background service. Calling it while LVGL is being served does nothing.</td>
+</tr>
+<tr>
+<td><code>stop()</code></td>
+<td>Suspends the background service, and the screen keeps the last image. Calling it twice does nothing. For programs that want their own loop.</td>
+</tr>
+<tr>
+<td><code>running()</code></td>
+<td><code>True</code> while LVGL is served in the background, including the short pause after a Ctrl-C (see below).</td>
+</tr>
+<tr>
+<td><code>backlight(percent=None)</code></td>
+<td>Sets the backlight, from 0 to 100. With no argument it returns the current level. On the STM32H743 boards the backlight is a GPIO for now, so any value above 0 is full brightness; on the STM32F769I-DISCO it is the panel's own brightness (DCS command 0x51).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ctrl-c">Ctrl-C<a class="headerlink" href="#ctrl-c" title="Permanent link">&para;</a></h2>
+<p><strong>A Ctrl-C reaches the program, and the screen goes on.</strong> That is true whether the program
+is in a Python loop, for example <code>while True: time.sleep_ms(10)</code>, or waits in
+<code>sys.stdin.read()</code>, as the shell in <code>examples/shell</code> does. The driver is not stopped and
+does not need <code>start()</code> afterwards.</p>
+<h3 id="why-the-driver-has-to-do-something">Why the driver has to do something<a class="headerlink" href="#why-the-driver-has-to-do-something" title="Permanent link">&para;</a></h3>
+<p><code>lv.timer_handler()</code> takes most of the CPU, so a Ctrl-C usually arrives while it runs. It
+arrives in C, inside a callback that MicroPython's scheduler runs. MicroPython raises a
+pending Ctrl-C only at a jump in the bytecode. On the ports with threads (ESP32, RP2350)
+it is raised in whatever Python code runs next. Without help from the driver, that is
+right after the driver's own <code>try</code>, where the scheduler prints the exception and drops it.</p>
+<p>The v0.1.6 drivers did catch the exception, but in the wrong place, so their "stopped by
+Ctrl-C" path never ran. What happened instead (60 attempts each case, firmware v0.1.6):</p>
+<table>
+<thead>
+<tr>
+<th>Board</th>
+<th>Program in a Python loop</th>
+<th>Program in <code>stdin.read()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>STM32H743</td>
+<td>100% reach the program</td>
+<td>100% reach the program</td>
+</tr>
+<tr>
+<td>ESP32-S3</td>
+<td>22% (the rest printed and dropped)</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>RP2350</td>
+<td>48%</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table>
+<p>On the STM32H743 MicroPython has no threads. A pending Ctrl-C is never raised inside a
+scheduled callback there: it waits for the program. So the STM32 drivers already behaved
+as the contract says, and the code below costs nothing on them.</p>
+<h3 id="what-the-driver-does">What the driver does<a class="headerlink" href="#what-the-driver-does" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>A jump inside the <code>try</code> of each service callback.</strong> This covers <code>_task</code> everywhere, and
+  <code>_tick</code>, the timer callback, on the periodic timers of STM32 and RP2350. A Ctrl-C raised
+  there lands in the driver's <code>except</code>.</li>
+<li><strong>The <code>KeyboardInterrupt</code> goes back to the program.</strong> The driver schedules it again
+  with <code>micropython.schedule(micropython.kbd_intr, None)</code>, which is documented MicroPython
+  and needs <code>MICROPY_SCHEDULER_STATIC_NODES</code>, on in all three ports.</li>
+<li><strong>Then a pause of <code>HOLD_MS</code> (30 ms).</strong> Any service run scheduled right behind would get
+  the exception again, so the driver waits before serving LVGL again:</li>
+<li>on the ESP32, the next one shot run is armed after <code>HOLD_MS</code>;</li>
+<li>on the periodic timers, the service stops and a one shot timer resumes it.
+  The pause is the cost: the screen stops for about 30 ms on every Ctrl-C. The frame rate
+  is otherwise unchanged (58.3, 42.3 and 28.3 fps, before and after).</li>
+<li><strong>The touch read callback</strong> (<code>gt911.GT911.lv_read_cb</code>) is a Python callback that LVGL
+  calls from inside <code>lv.timer_handler()</code>. It keeps a Ctrl-C that lands in it in
+  <code>touch.interrupted</code>. The driver hands it on after <code>lv.timer_handler()</code> in the same way.</li>
+</ul>
+<h3 id="what-is-not-covered">What is not covered<a class="headerlink" href="#what-is-not-covered" title="Permanent link">&para;</a></h3>
+<p><strong>A Ctrl-C that lands in a Python callback of the application.</strong> This means an
+<code>lv.timer</code>, or an event or animation callback, that LVGL calls from inside
+<code>lv.timer_handler()</code>. LVGL prints such a Ctrl-C as a traceback and it does not reach the
+program. It is rare: on the ESP32-S3 it was 2 of 60 attempts, with an <code>lv.timer</code> running
+a Python loop every 20 ms. It was none of 60 on the RP2350, and it cannot happen on the
+STM32H743, where a Ctrl-C always waits for the program. An application that needs every
+Ctrl-C can catch <code>KeyboardInterrupt</code> in its own callbacks.</p>
+<p><strong>Measured on the firmware with these drivers frozen in</strong>, 2026-11-13, on all three
+boards: 60 attempts in each of <code>sleep</code>, <code>stdin</code>, <code>cb</code> and <code>sleep</code> with a finger moving
+on the screen.
+- STM32H743 (V1.3): every Ctrl-C reached the program once, in all four. 58.3 fps.
+- RP2350: the same. 28.3 fps.
+- ESP32-S3: the same, except 2 of 60 in <code>cb</code>, which landed in the application's own
+  <code>lv.timer</code> (see above). 42.3 fps.
+- The shell in <code>examples/shell</code> stopped <code>sleep 2</code> and a long <code>cat</code> every time, on all
+  three boards, and <code>vi</code> and <code>edit</code> take Ctrl-C as a key.
+- The display terminal of the shell, <code>examples/shell/ansiterm.py</code>, needs the same care
+  as the driver. MicroPython calls its <code>write()</code> through <code>os.dupterm</code>, and drops the
+  terminal for good if a <code>KeyboardInterrupt</code> leaves it. On the STM32H743 the serial port
+  is a blocking UART, so a Ctrl-C usually arrives while the same text is being sent, in
+  C, and is raised at the first jump in <code>write()</code>. That jump was before the <code>try</code>: half
+  the Ctrl-C during a long <code>cat</code> were lost there, and the display stopped showing the
+  output. Now the whole of <code>write()</code> is inside the <code>try</code>
+  (<code>docs/log/shell-ctrlc-V13-contract-output*.txt</code>, before and after).
+- Logs: <code>docs/log/ctrlc-contract-*</code>, <code>docs/log/shell-ctrlc-*-contract.txt</code>,
+  <code>docs/log/editor-ctrlc-4848S040-contract.txt</code>; the measurements before the change,
+  with candidate callbacks in RAM on firmware v0.1.6, are in <code>docs/log/ctrlc-probe-*</code>.
+- The test: <code>tests/hil/t10_ctrlc_probe.py</code>, run by <code>tests/hil/ctrlc_probe_host.py</code>.
+  - Modes: <code>--mode sleep|stdin|cb</code>.
+  - <code>--expect contract</code> fails unless every Ctrl-C reached the program once and the
+    service never stopped.</p>
+<h2 id="deprecated-names">Deprecated names<a class="headerlink" href="#deprecated-names" title="Permanent link">&para;</a></h2>
+<p><code>_task</code> and <code>_timer</code> on every board, and <code>_arm()</code> on the ESP32, were used by
+<code>examples/shell/ansiterm.py</code> before contract 1:
+- they stay for this version, so programs written for v0.1.6 keep working;
+- they go away with contract 2;
+- a program that replaces <code>display_driver._task</code> still works, but then it also takes over
+  the Ctrl-C handling described above.</p>
+<h2 id="tests">Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>tests/host/display_driver.py</code> is the unix stand-in with the same names, and
+  <code>tests/host/test_display_contract.py</code> checks them. Both run on the unix port with LVGL:
+  <code>cd tests/host &amp;&amp; micropython test_display_contract.py</code>.</li>
+<li>The same test also runs on a board, against the real driver.</li>
+<li><code>tests/host/test_driver_ctrlc.py</code> runs the real RP2350 driver on the unix port, with
+  <code>rgbpanel</code>, <code>machine.Timer</code>, the touch and <code>micropython.schedule</code> stubbed. It checks the
+  hand-on and the pause, the resume, <code>stop()</code> and <code>start()</code> during the pause, and a Ctrl-C
+  while resuming or inside <code>_tick</code>. The STM32 driver has the same code. The ESP32 one is
+  checked only on the board.</li>
+<li><code>tests/hil/t10_ctrlc_probe.py</code> is the regression test for the Ctrl-C behaviour above.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "navigation.tracking", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
